@@ -1,0 +1,84 @@
+tournament:
+  tournamentInfo:
+    title: Tenpai Summer Championship 2022
+    location: Lautapelikahvila Taverna
+    start: 2022-06-02T11:00:00Z
+    end: 2022-06-03T18:00:00Z
+    oka: 0
+    uma: [15, 5]
+  players:
+    - Aaro Laine
+    - Olli Karppinen
+    - Marjatta Virtanen
+    - Eemeli Rinne
+    - Helge Jokinen
+    - Kari Jokinen
+    - Armo Lahti
+    - Senja Niemi
+    - Jarmo Heikkinen
+    - Joel Salminen
+    - Taneli Lehtonen
+    - Tiina Mäkelä
+    - Lotta Aaltonen
+    - Kimmo Heikkilä
+    - Antti Lehtonen
+    - Mikko Ruoho
+    - Lempi Toivonen
+    - Sulo Laine
+    - Erika Linna
+    - Hilma Heinonen
+    - Ellen Peura
+    - Tiitus Laitinen
+    - Marje Saarinen
+    - Tea Partanen
+  tables:
+    - setOwner: Joni V.
+      matOwner: Joni V.
+      notes: Nopat Villen setistä
+      10k: 1
+      5k: 3
+      1k: 4
+      500c: 1
+      100c: 5
+    - setOwner: Pauli
+      matOwner: Pauli
+      notes: pistelaput Tommin setistä
+      10k: 1
+      5k: 2
+      1k: 9
+      500c: 1
+      100c: 5
+    - setOwner: Pauli
+      matOwner: Pauli
+      notes:
+      10k: 1
+      5k: 2
+      1k: 9
+      500c: 1
+      100c: 5
+    - setOwner: Pauli
+      matOwner: Pauli
+      notes: 
+      10k: 1
+      5k: 2
+      1k: 9
+      500c: 1
+      100c: 5
+    - setOwner: Pauli
+      matOwner: Pauli
+      notes: 
+      10k: 1
+      5k: 2
+      1k: 9
+      500c: 1
+      100c: 5
+    - setOwner: Pauli
+      matOwner: Pauli
+      notes: 
+      10k: 1
+      5k: 2
+      1k: 9
+      500c: 1
+      100c: 5
+  games:
+    
