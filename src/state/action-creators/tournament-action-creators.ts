@@ -4,7 +4,7 @@ import { GeneralInfo, Player, Table, Game } from "../../types/tournament-types";
 import ActionTypes from "../action-types/tournament-action-types";
 import {
   EditTournamentInfoAction,
-  AddPlayerAction,
+  AddPlayersAction,
   EditPlayerAction,
   RemovePlayerAction,
   AddTableAction,
@@ -22,11 +22,11 @@ export const editTournamentInfo = (newInfo: GeneralInfo) => {
   };
 };
 
-export const addPlayer = (player: Player) => {
-  return (dispatch: Dispatch<AddPlayerAction>) => {
+export const addPlayers = (players: Player[]) => {
+  return (dispatch: Dispatch<AddPlayersAction>) => {
     dispatch({
-      type: ActionTypes.AddPlayer,
-      payload: player
+      type: ActionTypes.AddPlayers,
+      payload: players
     });
   };
 };

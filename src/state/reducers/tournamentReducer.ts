@@ -24,7 +24,7 @@ const reducer = (state: Tournament = initialState, action: Action) => {
         ...state,
         tournamentInfo: action.payload
       };
-    case ActionTypes.AddPlayer:
+    case ActionTypes.AddPlayers:
       return {
         ...state,
         players: [...state.players, action.payload]

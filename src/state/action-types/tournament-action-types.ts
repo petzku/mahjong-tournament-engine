@@ -1,6 +1,6 @@
 enum ActionTypes {
   EditTournamentInfo,
-  AddPlayer,
+  AddPlayers,
   EditPlayer,
   RemovePlayer,
   AddTable,

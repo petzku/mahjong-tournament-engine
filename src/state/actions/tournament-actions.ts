@@ -9,9 +9,9 @@ export type EditTournamentInfoAction = {
   payload: GeneralInfo
 };
 
-export type AddPlayerAction = {
-  type: ActionTypes.AddPlayer,
-  payload: Player
+export type AddPlayersAction = {
+  type: ActionTypes.AddPlayers,
+  payload: Player[]
 };
 
 export type EditPlayerAction = {
@@ -49,7 +49,7 @@ export type EditGameAction = {
 
 type Action =
  EditTournamentInfoAction |
- AddPlayerAction | 
+ AddPlayersAction | 
  EditPlayerAction | 
  RemovePlayerAction | 
  AddTableAction | 
