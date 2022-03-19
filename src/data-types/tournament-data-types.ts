@@ -3,6 +3,7 @@ export type GeneralInfo = {
   location: string,
   start: string,
   end: string,
+  rounds: number,
   oka: number,
   uma: [number, number]
 };

@@ -8,16 +8,10 @@ import { tournamentActionCreators, State, appActionCreators } from "./../../stat
 import TextInput from "../../components/TextInput";
 import NumberInput from "../../components/NumberInput";
 import { Views } from "../../data-types/app-data-types";
+import { initialState } from "../../state/reducers/tournamentReducer";
 
 const TournamentInfoView = () => {
-  const [generalInfo, setGeneralInfo] = useState<GeneralInfo>({
-    title: "",
-    location: "",
-    start: "",
-    end: "",
-    oka: 0,
-    uma: [15, 5]
-  });
+  const [currentInfo, setCurrentInfo] = useState<GeneralInfo>(initialState.info);
   const dispatch = useDispatch();
   const appState = useSelector((state: State) => state.app);
 
@@ -25,8 +19,8 @@ const TournamentInfoView = () => {
   const {changeView} = bindActionCreators(appActionCreators, dispatch);
   
   const onSave = (): void => {
-    editTournamentInfo(generalInfo);
-    changeView(Views.PlayerEntry);
+    editTournamentInfo(currentInfo);
+    changeView(Views.Hub);
   };
 
   return (
@@ -34,44 +28,50 @@ const TournamentInfoView = () => {
       <TextInput
         className={"asd"}
         label={"Tournament title"}
-        value={generalInfo.title}
-        onChange={(newTitle: string): void => setGeneralInfo({...generalInfo, title: newTitle})}
+        value={currentInfo.title}
+        onChange={(newValue: string): void => setCurrentInfo({...currentInfo, title: newValue})}
       />
       <TextInput
         className={"asd"}
         label={"Tournament location"}
-        value={generalInfo.location}
-        onChange={(newLocation: string): void => setGeneralInfo({...generalInfo, location: newLocation})}
+        value={currentInfo.location}
+        onChange={(newValue: string): void => setCurrentInfo({...currentInfo, location: newValue})}
       />
       <TextInput
         className={"asd"}
         label={"Tournament start"}
-        value={generalInfo.start}
-        onChange={(newStart: string): void => setGeneralInfo({...generalInfo, start: newStart})}
+        value={currentInfo.start}
+        onChange={(newValue: string): void => setCurrentInfo({...currentInfo, start: newValue})}
       />
       <TextInput
         className={"asd"}
         label={"Tournament end"}
-        value={generalInfo.end}
-        onChange={(newEnd: string): void => setGeneralInfo({...generalInfo, end: newEnd})}
+        value={currentInfo.end}
+        onChange={(newValue: string): void => setCurrentInfo({...currentInfo, end: newValue})}
+      />
+      <NumberInput
+        className={"asd"}
+        label={"Rounds"}
+        value={currentInfo.rounds}
+        onChange={(newValue: number): void => setCurrentInfo({...currentInfo, rounds: newValue})}
       />
       <NumberInput
         className={"asd"}
         label={"Oka"}
-        value={generalInfo.oka}
-        onChange={(newOka: number): void => setGeneralInfo({...generalInfo, oka: newOka})}
+        value={currentInfo.oka}
+        onChange={(newValue: number): void => setCurrentInfo({...currentInfo, oka: newValue})}
       />
       <NumberInput
         className={"asd"}
         label={"Uma (high)"}
-        value={generalInfo.uma[0]}
-        onChange={(newHighUma: number): void => setGeneralInfo({...generalInfo, uma: [newHighUma, generalInfo.uma[1]]})}
+        value={currentInfo.uma[0]}
+        onChange={(newValue: number): void => setCurrentInfo({...currentInfo, uma: [newValue, currentInfo.uma[1]]})}
       />
       <NumberInput
         className={"asd"}
         label={"Uma (low)"}
-        value={generalInfo.uma[1]}
-        onChange={(newLowUma: number): void => setGeneralInfo({...generalInfo, uma: [generalInfo.uma[0], newLowUma]})}
+        value={currentInfo.uma[1]}
+        onChange={(newValue: number): void => setCurrentInfo({...currentInfo, uma: [currentInfo.uma[0], newValue]})}
       />
       <button onClick={() => onSave()}>Ready</button>
     </div>

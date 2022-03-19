@@ -2,12 +2,13 @@ import {Game, Player, Table, Tournament} from "../../data-types/tournament-data-
 import Action from "../actions/tournament-actions";
 import ActionTypes from "../action-types/tournament-action-types";
 
-const initialState: Tournament = {
+export const initialState: Tournament = {
   info: {
     title: "",
     location: "",
     start: "",
     end: "",
+    rounds: 8,
     oka: 0,
     uma: [15, 5]
   },
