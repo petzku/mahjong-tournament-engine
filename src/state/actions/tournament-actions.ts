@@ -14,31 +14,9 @@ export type AddPlayersAction = {
   payload: Player[]
 };
 
-export type EditPlayerAction = {
-  type: ActionTypes.EditPlayer,
-  index: number,
-  payload: Player
-};
-
-export type RemovePlayerAction = {
-  type: ActionTypes.RemovePlayer,
-  index: number
-};
-
 export type AddTablesAction = {
   type: ActionTypes.AddTables,
   payload: Table[]
-};
-
-export type EditTableAction = {
-  type: ActionTypes.EditTable,
-  index: number,
-  payload: Table
-};
-
-export type RemoveTableAction = {
-  type: ActionTypes.RemoveTable,
-  index: number
 };
 
 export type EditGameAction = {
@@ -50,11 +28,7 @@ export type EditGameAction = {
 type Action =
  EditTournamentInfoAction |
  AddPlayersAction | 
- EditPlayerAction | 
- RemovePlayerAction | 
  AddTablesAction | 
- EditTableAction | 
- RemoveTableAction | 
  EditGameAction;
 
 export default Action;

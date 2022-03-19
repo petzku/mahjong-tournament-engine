@@ -5,11 +5,7 @@ import ActionTypes from "../action-types/tournament-action-types";
 import {
   EditTournamentInfoAction,
   AddPlayersAction,
-  EditPlayerAction,
-  RemovePlayerAction,
   AddTablesAction,
-  EditTableAction,
-  RemoveTableAction,
   EditGameAction
 } from "../actions/tournament-actions";
 
@@ -31,49 +27,11 @@ export const addPlayers = (players: Player[]) => {
   };
 };
 
-export const editPlayer = (index: number, player: Player) => {
-  return (dispatch: Dispatch<EditPlayerAction>) => {
-    dispatch({
-      type: ActionTypes.EditPlayer,
-      index: index,
-      payload: player
-    });
-  };
-};
-
-export const removePlayer = (index: number) => {
-  return (dispatch: Dispatch<RemovePlayerAction>) => {
-    dispatch({
-      type: ActionTypes.RemovePlayer,
-      index: index
-    });
-  };
-};
-
 export const addTables = (tables: Table[]) => {
   return (dispatch: Dispatch<AddTablesAction>) => {
     dispatch({
       type: ActionTypes.AddTables,
       payload: tables
-    });
-  };
-};
-
-export const editTable = (index: number, table: Table) => {
-  return (dispatch: Dispatch<EditTableAction>) => {
-    dispatch({
-      type: ActionTypes.EditTable,
-      index: index,
-      payload: table
-    });
-  };
-};
-
-export const removeTable = (index: number) => {
-  return (dispatch: Dispatch<RemoveTableAction>) => {
-    dispatch({
-      type: ActionTypes.RemoveTable,
-      index: index
     });
   };
 };

@@ -6,7 +6,7 @@ const initialState: App = {
   view: Views.TournamentInfoEntry
 };
 
-const reducer = (state: App = initialState, action: Action) => {
+const reducer = (state: App = initialState, action: Action): App => {
   switch (action.type)
   {
     case ActionTypes.ChangeView:

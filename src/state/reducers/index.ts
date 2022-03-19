@@ -3,8 +3,8 @@ import tournamentReducer from "./tournamentReducer";
 import appReducer from "./appReducer";
 
 const reducers = combineReducers({
-  app: appReducer,
-  tournament: tournamentReducer
+  tournament: tournamentReducer,
+  app: appReducer
 });
 
 export default reducers;
