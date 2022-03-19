@@ -4,6 +4,7 @@ tournament:
     location: Lautapelikahvila Taverna
     start: 2022-06-02T11:00:00Z
     end: 2022-06-03T18:00:00Z
+    rounds: 8
     oka: 0
     uma: [15, 5]
   players:
