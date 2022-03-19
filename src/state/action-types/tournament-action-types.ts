@@ -3,7 +3,7 @@ enum ActionTypes {
   AddPlayers,
   EditPlayer,
   RemovePlayer,
-  AddTable,
+  AddTables,
   EditTable,
   RemoveTable,
   EditGame

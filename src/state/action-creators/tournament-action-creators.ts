@@ -1,13 +1,13 @@
 import {Dispatch} from "redux";
 
-import { GeneralInfo, Player, Table, Game } from "../../types/tournament-types";
+import { GeneralInfo, Player, Table, Game } from "../../data-types/tournament-data-types";
 import ActionTypes from "../action-types/tournament-action-types";
 import {
   EditTournamentInfoAction,
   AddPlayersAction,
   EditPlayerAction,
   RemovePlayerAction,
-  AddTableAction,
+  AddTablesAction,
   EditTableAction,
   RemoveTableAction,
   EditGameAction
@@ -50,11 +50,11 @@ export const removePlayer = (index: number) => {
   };
 };
 
-export const addTable = (table: Table) => {
-  return (dispatch: Dispatch<AddTableAction>) => {
+export const addTables = (tables: Table[]) => {
+  return (dispatch: Dispatch<AddTablesAction>) => {
     dispatch({
-      type: ActionTypes.AddTable,
-      payload: table
+      type: ActionTypes.AddTables,
+      payload: tables
     });
   };
 };

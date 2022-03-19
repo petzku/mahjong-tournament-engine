@@ -2,7 +2,7 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tournamentActionCreators, State, appActionCreators } from "./state"; 
-import { Views } from "./types/app-types";
+import { Views } from "./data-types/app-data-types";
 
 import TournamentInfoView from "./views/tournament-info/TournamentInfoView";
 import PlayerEntryView from "./views/player-entry/PlayerEntryView";

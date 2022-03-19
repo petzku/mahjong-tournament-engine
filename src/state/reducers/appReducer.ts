@@ -1,4 +1,4 @@
-import { Views, App } from "../../types/app-types";
+import { Views, App } from "../../data-types/app-data-types";
 import Action from "../actions/app-actions";
 import ActionTypes from "../action-types/app-action-types";
 

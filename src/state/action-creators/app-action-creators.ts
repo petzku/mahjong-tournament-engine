@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 
 import ActionTypes from "../action-types/app-action-types";
-import { View } from "../../types/app-types";
+import { View } from "../../data-types/app-data-types";
 import { ChangeView } from "../actions/app-actions";
 
 export const changeView = (newView: View) => {

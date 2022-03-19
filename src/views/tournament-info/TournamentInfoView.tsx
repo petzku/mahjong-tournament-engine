@@ -1,5 +1,5 @@
 import {useState} from "react";
-import { GeneralInfo } from "../../types/tournament-types";
+import { GeneralInfo } from "../../data-types/tournament-data-types";
 
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -7,7 +7,7 @@ import { tournamentActionCreators, State, appActionCreators } from "./../../stat
 
 import TextInput from "../../components/TextInput";
 import NumberInput from "../../components/NumberInput";
-import { Views } from "../../types/app-types";
+import { Views } from "../../data-types/app-data-types";
 
 const TournamentInfoView = () => {
   const [generalInfo, setGeneralInfo] = useState<GeneralInfo>({

@@ -1,4 +1,4 @@
-import {Player, Table, Tournament} from "../../types/tournament-types";
+import {Player, Table, Tournament} from "../../data-types/tournament-data-types";
 import Action from "../actions/tournament-actions";
 import ActionTypes from "../action-types/tournament-action-types";
 
@@ -39,10 +39,10 @@ const reducer = (state: Tournament = initialState, action: Action) => {
         ...state,
         players: state.players.splice(action.index, 1)
       };
-    case ActionTypes.AddTable:
+    case ActionTypes.AddTables:
       return {
         ...state,
-        tables: [...state.tables, action.payload]
+        tables: action.payload
       };
     case ActionTypes.EditTable:
       return {

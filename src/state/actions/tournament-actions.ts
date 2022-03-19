@@ -1,8 +1,8 @@
 import ActionTypes from "../action-types/tournament-action-types";
-import {GeneralInfo} from "../../types/tournament-types";
-import {Player} from "../../types/tournament-types";
-import {Table} from "../../types/tournament-types";
-import {Game} from "../../types/tournament-types";
+import {GeneralInfo} from "../../data-types/tournament-data-types";
+import {Player} from "../../data-types/tournament-data-types";
+import {Table} from "../../data-types/tournament-data-types";
+import {Game} from "../../data-types/tournament-data-types";
 
 export type EditTournamentInfoAction = {
   type: ActionTypes.EditTournamentInfo,
@@ -25,9 +25,9 @@ export type RemovePlayerAction = {
   index: number
 };
 
-export type AddTableAction = {
-  type: ActionTypes.AddTable,
-  payload: Table
+export type AddTablesAction = {
+  type: ActionTypes.AddTables,
+  payload: Table[]
 };
 
 export type EditTableAction = {
@@ -52,7 +52,7 @@ type Action =
  AddPlayersAction | 
  EditPlayerAction | 
  RemovePlayerAction | 
- AddTableAction | 
+ AddTablesAction | 
  EditTableAction | 
  RemoveTableAction | 
  EditGameAction;

@@ -2,31 +2,31 @@ import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Views } from "../../types/app-types";
+import { Views } from "../../data-types/app-data-types";
 import { tournamentActionCreators, State, appActionCreators } from "./../../state";
 
+import { Player } from "../../data-types/tournament-data-types";
+
 const PlayerEntryView = () => {
-  const [players, setPlayers] = useState("");
+  const [players, setPlayers] = useState<Player[]>([]);
   const dispatch = useDispatch();
   
   const {addPlayers} = bindActionCreators(tournamentActionCreators, dispatch)
   const {changeView} = bindActionCreators(appActionCreators, dispatch);
   
-  const playerList = players.split("\n").filter(name => name !== "");
-  const playerCount = playerList.length;
-  const rightAmount = playerCount > 0 && playerCount%4 === 0;
+  const rightAmount = players.length > 0 && players.length % 4 === 0;
 
-  const onSave = (): void => {
-    addPlayers(playerList);
+  const saveAndContinue = (): void => {
+    addPlayers(players);
     changeView(Views.TableEntry);
   };
 
   return (
     <div>
-      <p>Enter players, one per line. Currently {playerCount} players.</p>
+      <p>Enter players, one per line. Currently {players.length} players.</p>
       <textarea
         value={players}
-        onChange={(e) => setPlayers(e.target.value)}
+        onChange={(e) => setPlayers(e.target.value.split("\n").filter(name => name !== ""))}
       />
       {
         !rightAmount &&
@@ -34,7 +34,7 @@ const PlayerEntryView = () => {
       }
       <button
         disabled={!rightAmount}
-        onClick={() => onSave()}>
+        onClick={() => saveAndContinue()}>
         Save
       </button>
     </div>
