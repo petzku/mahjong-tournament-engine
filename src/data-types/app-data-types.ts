@@ -2,7 +2,8 @@ export enum Views {
   TournamentInfoEntry,
   PlayerEntry,
   TableEntry,
-  Hub
+  InTournament,
+  PostTournament
 };
 
 export type View = Views;

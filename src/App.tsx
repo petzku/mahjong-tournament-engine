@@ -32,9 +32,15 @@ const App = () => {
         </div>
       }
       {
-        appState.view === Views.Hub &&
+        appState.view === Views.InTournament &&
         <div>
           <p>tournament hub</p>
+        </div>
+      }
+      {
+        appState.view === Views.PostTournament &&
+        <div>
+          <p>final results and shit</p>
         </div>
       }
     </div>

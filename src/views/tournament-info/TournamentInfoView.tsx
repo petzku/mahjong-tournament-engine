@@ -20,7 +20,7 @@ const TournamentInfoView = () => {
   
   const onSave = (): void => {
     editTournamentInfo(currentInfo);
-    changeView(Views.Hub);
+    changeView(Views.InTournament);
   };
 
   return (

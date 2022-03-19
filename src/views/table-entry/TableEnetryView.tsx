@@ -47,7 +47,7 @@ const PlayerEntryView = () => {
 
   const saveAndContinue = (): void => {
     addTables(tables);
-    changeView(Views.Hub);
+    changeView(Views.InTournament);
   };
 
   return (
