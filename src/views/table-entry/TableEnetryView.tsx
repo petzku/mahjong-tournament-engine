@@ -43,7 +43,7 @@ const PlayerEntryView = () => {
 
   const correctPointSticks = totalPoints === 30 - tournamentState.info.oka;
 
-  const enoughTables = tables.length === tournamentState.players.length / 4;
+  const enoughTables = tables.length === tournamentState.playerNames.length / 4;
 
   const saveAndContinue = (): void => {
     addTables(tables);

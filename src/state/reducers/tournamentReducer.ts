@@ -12,7 +12,7 @@ export const initialState: Tournament = {
     oka: 0,
     uma: [15, 5]
   },
-  players: [],
+  playerNames: [],
   tables: [],
   games: []
 };
@@ -28,7 +28,7 @@ const reducer = (state: Tournament = initialState, action: Action): Tournament =
     case ActionTypes.AddPlayers:
       return {
         ...state,
-        players: action.payload
+        playerNames: action.payload
       };
     case ActionTypes.AddTables:
       return {
