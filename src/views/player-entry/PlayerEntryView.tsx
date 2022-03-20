@@ -5,10 +5,10 @@ import { bindActionCreators } from "redux";
 import { Views } from "../../data-types/app-data-types";
 import { tournamentActionCreators, State, appActionCreators } from "./../../state";
 
-import { Player } from "../../data-types/tournament-data-types";
+import { PlayerName } from "../../data-types/tournament-data-types";
 
 const PlayerEntryView = () => {
-  const [players, setPlayers] = useState<Player[]>([]);
+  const [players, setPlayers] = useState<PlayerName[]>([]);
   const dispatch = useDispatch();
   
   const {addPlayers} = bindActionCreators(tournamentActionCreators, dispatch)

@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 
-import { GeneralInfo, Player, Table, Game } from "../../data-types/tournament-data-types";
+import { GeneralInfo, PlayerName, Table, Game } from "../../data-types/tournament-data-types";
 import ActionTypes from "../action-types/tournament-action-types";
 import {
   EditTournamentInfoAction,
@@ -18,7 +18,7 @@ export const editTournamentInfo = (newInfo: GeneralInfo) => {
   };
 };
 
-export const addPlayers = (players: Player[]) => {
+export const addPlayers = (players: PlayerName[]) => {
   return (dispatch: Dispatch<AddPlayersAction>) => {
     dispatch({
       type: ActionTypes.AddPlayers,

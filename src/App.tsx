@@ -6,6 +6,7 @@ import { Views } from "./data-types/app-data-types";
 
 import TournamentInfoView from "./views/tournament-info/TournamentInfoView";
 import PlayerEntryView from "./views/player-entry/PlayerEntryView";
+import TableEntryView from "./views/table-entry/TableEnetryView";
 
 const App = () => {
   /* const dispatch = useDispatch(); */
@@ -26,10 +27,7 @@ const App = () => {
       }
       {
         appState.view === Views.TableEntry &&
-        <div>
-          <p>input tables</p>
-          {/* <button onClick={() => changeView(Views.Hub)}>go forth</button> */}
-        </div>
+        <TableEntryView/>
       }
       {
         appState.view === Views.InTournament &&

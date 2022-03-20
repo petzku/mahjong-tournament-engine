@@ -34,11 +34,11 @@ const PlayerEntryView = () => {
     })
   }, [currentPointSticks]);
 
-  const {addTables} = bindActionCreators(tournamentActionCreators, dispatch)
+  const {addTables} = bindActionCreators(tournamentActionCreators, dispatch);
   const {changeView} = bindActionCreators(appActionCreators, dispatch);
 
   const totalPoints = (({tenThousand, fiveThousand, oneThousand, fiveHundred, oneHundred}) => {
-    return tenThousand*10 + fiveThousand*50 + oneThousand + fiveHundred*0.5 + oneHundred*0.1;
+    return tenThousand*10 + fiveThousand*5 + oneThousand + fiveHundred*0.5 + oneHundred*0.1;
   })(currentTable.pointSticks);
 
   const correctPointSticks = totalPoints === 30 - tournamentState.info.oka;
@@ -127,24 +127,8 @@ const PlayerEntryView = () => {
                   <td>{table.notes}</td>
                 </tr>
                 <tr>
-                  <td>10k sticks</td>
-                  <td>{table.pointSticks.tenThousand}</td>
-                </tr>
-                <tr>
-                  <td>5k sticks</td>
-                  <td>{table.pointSticks.fiveThousand}</td>
-                </tr>
-                <tr>
-                  <td>1k sticks</td>
-                  <td>{table.pointSticks.oneThousand}</td>
-                </tr>
-                <tr>
-                  <td>500 sticks</td>
-                  <td>{table.pointSticks.fiveHundred}</td>
-                </tr>
-                <tr>
-                  <td>100 sticks</td>
-                  <td>{table.pointSticks.oneHundred}</td>
+                  <td>Point sticks</td>
+                  <td>{table.pointSticks.tenThousand} - {table.pointSticks.fiveThousand} - {table.pointSticks.oneThousand} - {table.pointSticks.fiveHundred} - {table.pointSticks.oneHundred}</td>
                 </tr>
               </tbody>
             </table>

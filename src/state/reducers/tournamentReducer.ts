@@ -1,4 +1,4 @@
-import {Game, Player, Table, Tournament} from "../../data-types/tournament-data-types";
+import {Game, PlayerName, Table, Tournament} from "../../data-types/tournament-data-types";
 import Action from "../actions/tournament-actions";
 import ActionTypes from "../action-types/tournament-action-types";
 

@@ -8,7 +8,14 @@ export type GeneralInfo = {
   uma: [number, number]
 };
 
-export type Player = string;
+export type PlayerName = string;
+
+export type PlayerId = number;
+
+/* export type PlayerPoints = {
+  player: Player,
+  points: number
+}; */
 
 export type PointSticks = {
   tenThousand: number,
@@ -26,7 +33,7 @@ export type Table = {
 };
 
 export type Seat = {
-  player: number,
+  playerId: PlayerId,
   points: number
 };
 
@@ -46,7 +53,12 @@ export type Game = {
 
 export type Tournament = {
   info: GeneralInfo,
-  players: Player[],
+  playerNames: PlayerName[],
   tables: Table[],
   games: Game[]
+};
+
+export type Standing = {
+  playerId: PlayerId,
+  points: number
 };
