@@ -3,26 +3,30 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Views } from "../../data-types/app-data-types";
-import { tournamentActionCreators, State, appActionCreators } from "./../../state";
+import { tournamentActionCreators, State, appActionCreators } from "../../state";
 
 import { PointSticks, Table } from "../../data-types/tournament-data-types";
 import TextInput from "../../components/TextInput";
 import NumberInput from "../../components/NumberInput";
 
 const PlayerEntryView = () => {
-  const [currentPointSticks, setCurrentPointSticks] = useState<PointSticks>({
+  const defaultPointSticks: PointSticks = {
     tenThousand: 1,
     fiveThousand: 2,
     oneThousand: 9,
     fiveHundred: 1,
     oneHundred: 5
-  });
-  const [currentTable, setCurrentTable] = useState<Table>({
+  };
+
+  const defaultTable: Table = {
     setOwner: "",
     matOwner: "",
     notes: "",
-    pointSticks: currentPointSticks
-  });
+    pointSticks: defaultPointSticks
+  };
+
+  const [currentPointSticks, setCurrentPointSticks] = useState<PointSticks>(defaultPointSticks);
+  const [currentTable, setCurrentTable] = useState<Table>(defaultTable);
   const [tables, setTables] = useState<Table[]>([]);
   const dispatch = useDispatch();
   const tournamentState = useSelector((state: State) => state.tournament);
@@ -44,6 +48,12 @@ const PlayerEntryView = () => {
   const correctPointSticks = totalPoints === 30 - tournamentState.info.oka;
 
   const enoughTables = tables.length === tournamentState.playerNames.length / 4;
+
+  const storeTable = (): void => {
+    setTables([...tables, currentTable]);
+    setCurrentPointSticks(defaultPointSticks);
+    setCurrentTable(defaultTable);
+  };
 
   const saveAndContinue = (): void => {
     addTables(tables);
@@ -96,7 +106,7 @@ const PlayerEntryView = () => {
       <p>Total points {totalPoints}.</p>
       <button
         disabled={!correctPointSticks || enoughTables}
-        onClick={() => setTables([...tables, currentTable])}>
+        onClick={() => storeTable()}>
         Store table
       </button>
       <button

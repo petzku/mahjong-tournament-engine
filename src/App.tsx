@@ -6,7 +6,8 @@ import { Views } from "./data-types/app-data-types";
 
 import TournamentInfoView from "./views/tournament-info/TournamentInfoView";
 import PlayerEntryView from "./views/player-entry/PlayerEntryView";
-import TableEntryView from "./views/table-entry/TableEnetryView";
+import TableEntryView from "./views/table-entry/TableEntryView";
+import InTournamentView from "./views/in-tournament/InTournamentView";
 
 const App = () => {
   /* const dispatch = useDispatch(); */
@@ -31,9 +32,7 @@ const App = () => {
       }
       {
         appState.view === Views.InTournament &&
-        <div>
-          <p>tournament hub</p>
-        </div>
+        <InTournamentView/>
       }
       {
         appState.view === Views.PostTournament &&

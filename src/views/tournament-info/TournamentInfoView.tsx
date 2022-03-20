@@ -20,8 +20,8 @@ const TournamentInfoView = () => {
   
   const onSave = (): void => {
     editTournamentInfo(currentInfo);
-    changeView(Views.InTournament);
-  };/*git bug force edit*/
+    changeView(Views.PlayerEntry);
+  };
 
   return (
     <div className={"tournament-info-view"}>

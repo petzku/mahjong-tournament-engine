@@ -57,7 +57,7 @@ const InTournamentView = () => {
         <tbody>
           {
             getStandings().map((standing: Standing) => (
-              <tr>
+              <tr key={`player-standing-${standing.playerId}`}>
                 <td>{tournamentState.playerNames[standing.playerId]}</td>
                 <td>{standing.points}</td>
               </tr>

@@ -1,5 +1,5 @@
 enum ActionTypes {
-  ChangeView
+  ChangeView = "App.ChangeView"
 };
 
 export default ActionTypes;
