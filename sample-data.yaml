@@ -88,4 +88,19 @@ tournament:
         fiveHundred: 1
         oneHundred: 5
   games:
-    
+    - round: 1
+      table: 0
+      finished: true
+      score:
+        east:
+          playerId: 0
+          points: -10
+        south:
+          playerId: 1
+          points: -20
+        west:
+          playerId: 2
+          points: 10
+        north:
+          playerId: 3
+          points: 20
