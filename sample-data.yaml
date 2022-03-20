@@ -36,50 +36,56 @@ tournament:
     - setOwner: Joni V.
       matOwner: Joni V.
       notes: Nopat Villen setistä
-      10k: 1
-      5k: 3
-      1k: 4
-      500c: 1
-      100c: 5
+      pointSticks:
+        tenThousand: 1
+        fiveThousand: 3
+        oneThousand: 4
+        fiveHundred: 1
+        oneHundred: 5
     - setOwner: Pauli
       matOwner: Pauli
       notes: pistelaput Tommin setistä
-      10k: 1
-      5k: 2
-      1k: 9
-      500c: 1
-      100c: 5
+      pointSticks:
+        tenThousand: 1
+        fiveThousand: 2
+        oneThousand: 9
+        fiveHundred: 1
+        oneHundred: 5
     - setOwner: Pauli
       matOwner: Pauli
       notes:
-      10k: 1
-      5k: 2
-      1k: 9
-      500c: 1
-      100c: 5
+      pointSticks:
+        tenThousand: 1
+        fiveThousand: 2
+        oneThousand: 9
+        fiveHundred: 1
+        oneHundred: 5
     - setOwner: Pauli
       matOwner: Pauli
       notes: 
-      10k: 1
-      5k: 2
-      1k: 9
-      500c: 1
-      100c: 5
+      pointSticks:
+        tenThousand: 1
+        fiveThousand: 2
+        oneThousand: 9
+        fiveHundred: 1
+        oneHundred: 5
     - setOwner: Pauli
       matOwner: Pauli
       notes: 
-      10k: 1
-      5k: 2
-      1k: 9
-      500c: 1
-      100c: 5
+      pointSticks:
+        tenThousand: 1
+        fiveThousand: 2
+        oneThousand: 9
+        fiveHundred: 1
+        oneHundred: 5
     - setOwner: Pauli
       matOwner: Pauli
       notes: 
-      10k: 1
-      5k: 2
-      1k: 9
-      500c: 1
-      100c: 5
+      pointSticks:
+        tenThousand: 1
+        fiveThousand: 2
+        oneThousand: 9
+        fiveHundred: 1
+        oneHundred: 5
   games:
     
