@@ -35,10 +35,10 @@ const reducer = (state: Tournament = initialState, action: Action): Tournament =
         ...state,
         tables: action.payload
       };
-    case ActionTypes.EditGame:
+    case ActionTypes.AddGames:
       return {
         ...state,
-        games: state.games.map((game: Game, index: number): Game => index === action.index ? action.payload : game)
+        games: action.payload
       };
     default:
       return state;

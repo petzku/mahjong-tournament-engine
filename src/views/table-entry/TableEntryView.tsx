@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import { Views } from "../../data-types/app-data-types";
 import { tournamentActionCreators, State, appActionCreators } from "../../state";
 
-import { PointSticks, Table } from "../../data-types/tournament-data-types";
+import { Game, PointSticks, Table } from "../../data-types/tournament-data-types";
 import TextInput from "../../components/TextInput";
 import NumberInput from "../../components/NumberInput";
 
@@ -38,7 +38,7 @@ const PlayerEntryView = () => {
     })
   }, [currentPointSticks]);
 
-  const {addTables} = bindActionCreators(tournamentActionCreators, dispatch);
+  const {addTables, addGames} = bindActionCreators(tournamentActionCreators, dispatch);
   const {changeView} = bindActionCreators(appActionCreators, dispatch);
 
   const totalPoints = (({tenThousand, fiveThousand, oneThousand, fiveHundred, oneHundred}) => {
@@ -55,8 +55,62 @@ const PlayerEntryView = () => {
     setCurrentTable(defaultTable);
   };
 
+  const createGamesData = (): Game[] => {
+    //Generate seating plan. Bad algorithm. TODO: Make a better one.
+    const generateArray = (itemCount: number): number[] => Array(itemCount).fill(0).map((_: number, i: number): number => i);
+
+    const rounds = generateArray(tournamentState.info.rounds);
+    const tables = generateArray(tournamentState.playerNames.length/4);
+
+    const easts: number[][] = rounds.map((round: number): number[] => 
+      tables.map((table: number): number => (4*table+round)%tournamentState.playerNames.length)
+    );
+
+    const souths: number[][] = rounds.map((round: number): number[] => 
+      tables.map((table: number): number => (4*table+round+1)%tournamentState.playerNames.length)
+    );
+
+    const wests: number[][] = rounds.map((round: number): number[] => 
+      tables.map((table: number): number => (4*table+round+2)%tournamentState.playerNames.length)
+    );
+
+    const norths: number[][] = rounds.map((round: number): number[] => 
+      tables.map((table: number): number => (4*table+round+4)%tournamentState.playerNames.length)
+    );
+
+    return rounds.map((round: number): Game[] => 
+      tables.map((table: number): Game => ({
+        round: round,
+        table: table,
+        finished: false,
+        score: {
+          east: {
+            playerId: easts[round][table],
+            points: 0
+          },
+          south: {
+            playerId: souths[round][table],
+            points: 0
+          },
+          west: {
+            playerId: wests[round][table],
+            points: 0
+          },
+          north: {
+            playerId: norths[round][table],
+            points: 0
+          }
+        }
+      }))
+    ).reduce((combined: Game[], round: Game[]): Game[] => {
+      return [...combined, ...round];
+    }, []);
+  };
+
+
   const saveAndContinue = (): void => {
     addTables(tables);
+    addGames(createGamesData());
     changeView(Views.InTournament);
   };
 

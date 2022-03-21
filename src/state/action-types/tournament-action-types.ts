@@ -2,7 +2,7 @@ enum ActionTypes {
   EditTournamentInfo = "Tournament.EditTournamentInfo",
   AddPlayers = "Tournament.AddPlayers",
   AddTables = "TournamentAddTables",
-  EditGame = "Tournament.EditGame"
+  AddGames = "Tournament.AddGames"
 };
 
 export default ActionTypes;

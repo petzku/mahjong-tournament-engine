@@ -6,7 +6,7 @@ import {
   EditTournamentInfoAction,
   AddPlayersAction,
   AddTablesAction,
-  EditGameAction
+  AddGamesAction
 } from "../actions/tournament-actions";
 
 export const editTournamentInfo = (newInfo: GeneralInfo) => {
@@ -36,12 +36,11 @@ export const addTables = (tables: Table[]) => {
   };
 };
 
-export const editGame = (index: number, game: Game) => {
-  return (dispatch: Dispatch<EditGameAction>) => {
+export const addGames = (games: Game[]) => {
+  return (dispatch: Dispatch<AddGamesAction>) => {
     dispatch({
-      type: ActionTypes.EditGame,
-      index: index,
-      payload: game
+      type: ActionTypes.AddGames,
+      payload: games
     });
   };
 };

@@ -1,11 +1,17 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Views } from "../../data-types/app-data-types";
 import { tournamentActionCreators, State, appActionCreators } from "./../../state";
 
 import { PlayerName, PlayerId, Game, Standing } from "../../data-types/tournament-data-types";
 
+enum Views {
+  Standings,
+  SeatingPlan
+};
+
 const InTournamentView = () => {
+  const [view, setView] = useState<Views>(Views.SeatingPlan);
   const dispatch = useDispatch();
   const tournamentState = useSelector((state: State) => state.tournament);
 
@@ -46,25 +52,32 @@ const InTournamentView = () => {
         <button>Edit players</button>
         <button>Edit tables</button>
       </div>
-      <table
-        className={"standings"}>
-        <thead>
-          <tr>
-            <th>Player</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            getStandings().map((standing: Standing) => (
-              <tr key={`player-standing-${standing.playerId}`}>
-                <td>{tournamentState.playerNames[standing.playerId]}</td>
-                <td>{standing.points}</td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
+      <div className={"view"}>
+        <button onClick={() => setView(Views.Standings)}>View standings</button>
+        <button onClick={() => setView(Views.SeatingPlan)}>View seating plan</button>
+      </div>
+      {
+        view === Views.Standings &&
+        <table
+          className={"standings"}>
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              getStandings().map((standing: Standing) => (
+                <tr key={`player-standing-${standing.playerId}`}>
+                  <td>{tournamentState.playerNames[standing.playerId]}</td>
+                  <td>{standing.points}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      }
     </div>
   )
 };

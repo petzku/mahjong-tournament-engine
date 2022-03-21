@@ -19,16 +19,15 @@ export type AddTablesAction = {
   payload: Table[]
 };
 
-export type EditGameAction = {
-  type: ActionTypes.EditGame,
-  index: number,
-  payload: Game
+export type AddGamesAction = {
+  type: ActionTypes.AddGames,
+  payload: Game[]
 };
 
 type Action =
  EditTournamentInfoAction |
  AddPlayersAction | 
  AddTablesAction | 
- EditGameAction;
+ AddGamesAction;
 
 export default Action;
