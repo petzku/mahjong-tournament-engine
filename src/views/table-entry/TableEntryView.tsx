@@ -9,6 +9,8 @@ import { Game, PointSticks, Table } from "../../data-types/tournament-data-types
 import TextInput from "../../components/TextInput";
 import NumberInput from "../../components/NumberInput";
 
+import { generateArray } from "../../utils/generateArray";
+
 const PlayerEntryView = () => {
   const defaultPointSticks: PointSticks = {
     tenThousand: 1,
@@ -57,8 +59,6 @@ const PlayerEntryView = () => {
 
   const createGamesData = (): Game[] => {
     //Generate seating plan. Bad algorithm. TODO: Make a better one.
-    const generateArray = (itemCount: number): number[] => Array(itemCount).fill(0).map((_: number, i: number): number => i);
-
     const rounds = generateArray(tournamentState.info.rounds);
     const tables = generateArray(tournamentState.playerNames.length/4);
 
@@ -75,7 +75,7 @@ const PlayerEntryView = () => {
     );
 
     const norths: number[][] = rounds.map((round: number): number[] => 
-      tables.map((table: number): number => (4*table+round+4)%tournamentState.playerNames.length)
+      tables.map((table: number): number => (4*table+round+3)%tournamentState.playerNames.length)
     );
 
     return rounds.map((round: number): Game[] => 
@@ -102,11 +102,8 @@ const PlayerEntryView = () => {
           }
         }
       }))
-    ).reduce((combined: Game[], round: Game[]): Game[] => {
-      return [...combined, ...round];
-    }, []);
+    ).reduce((combined: Game[], round: Game[]): Game[] => [...combined, ...round], []);
   };
-
 
   const saveAndContinue = (): void => {
     addTables(tables);

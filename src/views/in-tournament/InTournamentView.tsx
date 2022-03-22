@@ -5,6 +5,9 @@ import { tournamentActionCreators, State, appActionCreators } from "./../../stat
 
 import { PlayerName, PlayerId, Game, Standing } from "../../data-types/tournament-data-types";
 
+import Standings from "../../components/Standings";
+import SeatingPlan from "../../components/SeatingPlan";
+
 enum Views {
   Standings,
   SeatingPlan
@@ -14,36 +17,6 @@ const InTournamentView = () => {
   const [view, setView] = useState<Views>(Views.SeatingPlan);
   const dispatch = useDispatch();
   const tournamentState = useSelector((state: State) => state.tournament);
-
-  //const {addTables} = bindActionCreators(tournamentActionCreators, dispatch);
-
-  const getStandings = (): Standing[] => {
-    return tournamentState.playerNames.map((playerName: PlayerName, playerId: PlayerId): Standing => ({
-      playerId: playerId,
-      points: tournamentState.games.reduce((subTotal: number, game: Game) => {
-        if (game.finished)
-        {
-          if (game.score.east.playerId === playerId)
-          {
-            return subTotal + game.score.east.points;
-          }
-          if (game.score.south.playerId === playerId)
-          {
-            return subTotal + game.score.south.points;
-          }
-          if (game.score.west.playerId === playerId)
-          {
-            return subTotal + game.score.west.points;
-          }
-          if (game.score.north.playerId === playerId)
-          {
-            return subTotal + game.score.north.points;
-          }
-        }
-        return subTotal;
-      }, 0)
-    })).sort((a: Standing, b: Standing): number => (a.points > b.points) ? 1 : -1);
-  };
 
   return (
     <div className={"in-tournament"}>
@@ -58,25 +31,11 @@ const InTournamentView = () => {
       </div>
       {
         view === Views.Standings &&
-        <table
-          className={"standings"}>
-          <thead>
-            <tr>
-              <th>Player</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              getStandings().map((standing: Standing) => (
-                <tr key={`player-standing-${standing.playerId}`}>
-                  <td>{tournamentState.playerNames[standing.playerId]}</td>
-                  <td>{standing.points}</td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
+        <Standings/>
+      }
+      {
+        view === Views.SeatingPlan &&
+        <SeatingPlan/>
       }
     </div>
   )
