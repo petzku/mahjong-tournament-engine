@@ -74,7 +74,7 @@ const SeatingPlan = () => {
                 </th>
                 {
                   tables.map((tableId: number) => {
-                    const game = tournamentState.games.find((game: Game) => game.round === roundId && game.table === tableId);
+                    const game = tournamentState.games.find((game: Game): boolean => game.round === roundId && game.table === tableId);
                     
                     return (
                       game

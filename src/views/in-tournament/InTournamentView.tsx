@@ -7,8 +7,10 @@ import { PlayerName, PlayerId, Game, Standing } from "../../data-types/tournamen
 
 import Standings from "../../components/Standings";
 import SeatingPlan from "../../components/SeatingPlan";
+import AddFinishedGame from "./AddFinishedGame/AddFinishedGame";
 
 enum Views {
+  AddFinishedGame,
   Standings,
   SeatingPlan
 };
@@ -21,7 +23,7 @@ const InTournamentView = () => {
   return (
     <div className={"in-tournament"}>
       <div className={"controls"}>
-        <button>Add finished game</button>
+        <button onClick={() => setView(Views.AddFinishedGame)}>Add finished game</button>
         <button>Edit players</button>
         <button>Edit tables</button>
       </div>
@@ -29,6 +31,10 @@ const InTournamentView = () => {
         <button onClick={() => setView(Views.Standings)}>View standings</button>
         <button onClick={() => setView(Views.SeatingPlan)}>View seating plan</button>
       </div>
+      {
+        view === Views.AddFinishedGame &&
+        <AddFinishedGame/>
+      }
       {
         view === Views.Standings &&
         <Standings/>
