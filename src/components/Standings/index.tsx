@@ -30,7 +30,7 @@ const Standings = () => {
         }
         return subTotal;
       }, 0)
-    })).sort((a: Standing, b: Standing): number => (a.points > b.points) ? 1 : -1);
+    })).sort((a: Standing, b: Standing): number => (a.points < b.points) ? 1 : -1);
   };
 
   return (

@@ -9,8 +9,7 @@ export const initialState: Tournament = {
     start: "",
     end: "",
     rounds: 8,
-    oka: 0,
-    uma: [15000, 5000]
+    oka: 0
   },
   playerNames: [],
   tables: [],

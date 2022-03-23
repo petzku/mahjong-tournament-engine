@@ -15,7 +15,7 @@ const TournamentInfoView = () => {
   const dispatch = useDispatch();
   const appState = useSelector((state: State) => state.app);
 
-  const {editTournamentInfo} = bindActionCreators(tournamentActionCreators, dispatch)
+  const {editTournamentInfo} = bindActionCreators(tournamentActionCreators, dispatch);
   const {changeView} = bindActionCreators(appActionCreators, dispatch);
   
   const onSave = (): void => {
@@ -61,21 +61,7 @@ const TournamentInfoView = () => {
         label={"Oka"}
         value={currentInfo.oka}
         onChange={(newValue: number): void => setCurrentInfo({...currentInfo, oka: newValue})}
-        steps={[1000]}
-      />
-      <NumberInput
-        className={"asd"}
-        label={"Uma (high)"}
-        value={currentInfo.uma[0]}
-        onChange={(newValue: number): void => setCurrentInfo({...currentInfo, uma: [newValue, currentInfo.uma[1]]})}
-        steps={[1000]}
-      />
-      <NumberInput
-        className={"asd"}
-        label={"Uma (low)"}
-        value={currentInfo.uma[1]}
-        onChange={(newValue: number): void => setCurrentInfo({...currentInfo, uma: [currentInfo.uma[0], newValue]})}
-        steps={[1000]}
+        steps={[1]}
       />
       <button onClick={() => onSave()}>Ready</button>
     </div>

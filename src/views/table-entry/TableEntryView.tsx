@@ -44,10 +44,10 @@ const PlayerEntryView = () => {
   const {changeView} = bindActionCreators(appActionCreators, dispatch);
 
   const totalPoints = (({tenThousand, fiveThousand, oneThousand, fiveHundred, oneHundred}) => {
-    return 1000*(tenThousand*10 + fiveThousand*5 + oneThousand + fiveHundred*0.5 + oneHundred*0.1);
+    return tenThousand*10 + fiveThousand*5 + oneThousand + fiveHundred*0.5 + oneHundred*0.1;
   })(currentTable.pointSticks);
 
-  const correctPointSticks = totalPoints === 30000 - tournamentState.info.oka;
+  const correctPointSticks = totalPoints === 30 - tournamentState.info.oka;
 
   const enoughTables = tables.length === tournamentState.playerNames.length / 4;
 

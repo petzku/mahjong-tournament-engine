@@ -4,8 +4,7 @@ export type GeneralInfo = {
   start: string,
   end: string,
   rounds: number,
-  oka: number,
-  uma: [number, number]
+  oka: number
 };
 
 export type PlayerName = string;

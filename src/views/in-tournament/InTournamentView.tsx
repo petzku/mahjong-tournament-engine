@@ -33,7 +33,9 @@ const InTournamentView = () => {
       </div>
       {
         view === Views.AddFinishedGame &&
-        <AddFinishedGame/>
+        <AddFinishedGame
+          onFinish={() => setView(Views.Standings)}
+        />
       }
       {
         view === Views.Standings &&
