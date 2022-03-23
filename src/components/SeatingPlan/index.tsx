@@ -16,10 +16,10 @@ type PlayersProps = {
 
 const Players = (props: PlayersProps) => {
   const isHilighted = (name: PlayerName) => props.hilight.length > 0 && name.toLowerCase().indexOf(props.hilight.toLowerCase()) >= 0;
-  const eastClassName = `${isHilighted(props.east) ? "hilight" : ""}`;
-  const southClassName = `${isHilighted(props.south) ? "hilight" : ""}`;
-  const westClassName = `${isHilighted(props.west) ? "hilight" : ""}`;
-  const northClassName = `${isHilighted(props.north) ? "hilight" : ""}`;
+  const eastClassName = isHilighted(props.east) ? "hilight" : "";
+  const southClassName = isHilighted(props.south) ? "hilight" : "";
+  const westClassName = isHilighted(props.west) ? "hilight" : "";
+  const northClassName = isHilighted(props.north) ? "hilight" : "";
 
   return (
     <table>

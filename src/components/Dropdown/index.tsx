@@ -4,6 +4,7 @@ export type DropdownItem = {
 };
 
 type DropdownProps = {
+  className?: string,
   label: string,
   value: number,
   items: DropdownItem[],
@@ -12,17 +13,16 @@ type DropdownProps = {
 
 const Dropdown = (props: DropdownProps) => {
   return (
-    <div>
+    <div className={`${props.className ? props.className : ""}`}>
       <label>{props.label}</label>
       <select
+        value={props.value}
         onChange={(e) => props.onChange(+e.target.value)}>
         {
           props.items.map((item: DropdownItem, index: number) => (
           <option
             key={`dropdown-${props.label}-option-${index}`}
-            value={item.value}
-            selected={props.value === index}
-            onSelect={() => props.onChange(index)}>
+            value={item.value}>
             {item.text}
             </option>
           ))

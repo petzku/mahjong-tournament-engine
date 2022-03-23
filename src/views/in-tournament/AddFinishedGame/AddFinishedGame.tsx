@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import Dropdown, {DropdownItem} from "../../../components/Dropdown/Dropdown";
+import Dropdown, {DropdownItem} from "../../../components/Dropdown";
 import { generateArray } from "../../../utils/generateArray";
 import { tournamentActionCreators, State } from "./../../../state";
 import { Game, PlayerName } from "../../../data-types/tournament-data-types";

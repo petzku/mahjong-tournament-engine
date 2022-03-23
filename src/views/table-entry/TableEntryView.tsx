@@ -44,10 +44,10 @@ const PlayerEntryView = () => {
   const {changeView} = bindActionCreators(appActionCreators, dispatch);
 
   const totalPoints = (({tenThousand, fiveThousand, oneThousand, fiveHundred, oneHundred}) => {
-    return tenThousand*10 + fiveThousand*5 + oneThousand + fiveHundred*0.5 + oneHundred*0.1;
+    return 1000*(tenThousand*10 + fiveThousand*5 + oneThousand + fiveHundred*0.5 + oneHundred*0.1);
   })(currentTable.pointSticks);
 
-  const correctPointSticks = totalPoints === 30 - tournamentState.info.oka;
+  const correctPointSticks = totalPoints === 30000 - tournamentState.info.oka;
 
   const enoughTables = tables.length === tournamentState.playerNames.length / 4;
 
@@ -114,6 +114,7 @@ const PlayerEntryView = () => {
   return (
     <div>
       <p>Enter information for table {tables.length + 1}.</p>
+      <p>{tournamentState.playerNames.length/4} tables are needed.</p>
       <TextInput
         label={"Set owner"}
         value={currentTable.setOwner}
@@ -133,26 +134,31 @@ const PlayerEntryView = () => {
         label={"10k sticks"}
         value={currentTable.pointSticks.tenThousand}
         onChange={(newValue: number): void => setCurrentPointSticks({...currentPointSticks, tenThousand: newValue})}
+        steps={[1]}
       />
       <NumberInput
         label={"5k sticks"}
         value={currentTable.pointSticks.fiveThousand}
         onChange={(newValue: number): void => setCurrentPointSticks({...currentPointSticks, fiveThousand: newValue})}
+        steps={[1]}
       />
       <NumberInput
         label={"1k sticks"}
         value={currentTable.pointSticks.oneThousand}
         onChange={(newValue: number): void => setCurrentPointSticks({...currentPointSticks, oneThousand: newValue})}
+        steps={[1]}
       />
       <NumberInput
         label={"500 sticks"}
         value={currentTable.pointSticks.fiveHundred}
         onChange={(newValue: number): void => setCurrentPointSticks({...currentPointSticks, fiveHundred: newValue})}
+        steps={[1]}
       />
       <NumberInput
         label={"100 sticks"}
         value={currentTable.pointSticks.oneHundred}
         onChange={(newValue: number): void => setCurrentPointSticks({...currentPointSticks, oneHundred: newValue})}
+        steps={[1]}
       />
       <p>Total points {totalPoints}.</p>
       <button
