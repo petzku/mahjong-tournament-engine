@@ -113,52 +113,66 @@ const PlayerEntryView = () => {
 
   return (
     <div>
-      <p>Enter information for table {tables.length + 1}.</p>
-      <p>{tournamentState.playerNames.length/4} tables are needed.</p>
+      <h1>Enter Table Information</h1>
+      {
+        !enoughTables &&
+        <div>
+          <p>Enter information for table {tables.length + 1}.</p>
+          <p>{tournamentState.playerNames.length/4} tables are needed.</p>
+        </div>
+      }
       <TextInput
         label={"Set owner"}
         value={currentTable.setOwner}
         onChange={(newValue: string): void => setCurrentTable({...currentTable, setOwner: newValue})}
+        disabled={enoughTables}
       />
       <TextInput
         label={"Mat owner"}
         value={currentTable.matOwner}
         onChange={(newValue: string): void => setCurrentTable({...currentTable, matOwner: newValue})}
+        disabled={enoughTables}
       />
       <TextInput
         label={"Notes"}
         value={currentTable.notes}
         onChange={(newValue: string): void => setCurrentTable({...currentTable, notes: newValue})}
+        disabled={enoughTables}
       />
       <NumberInput
         label={"10k sticks"}
         value={currentTable.pointSticks.tenThousand}
         onChange={(newValue: number): void => setCurrentPointSticks({...currentPointSticks, tenThousand: newValue})}
         steps={[1]}
+        disabled={enoughTables}
       />
       <NumberInput
         label={"5k sticks"}
         value={currentTable.pointSticks.fiveThousand}
         onChange={(newValue: number): void => setCurrentPointSticks({...currentPointSticks, fiveThousand: newValue})}
         steps={[1]}
+        disabled={enoughTables}
       />
       <NumberInput
         label={"1k sticks"}
         value={currentTable.pointSticks.oneThousand}
         onChange={(newValue: number): void => setCurrentPointSticks({...currentPointSticks, oneThousand: newValue})}
         steps={[1]}
+        disabled={enoughTables}
       />
       <NumberInput
         label={"500 sticks"}
         value={currentTable.pointSticks.fiveHundred}
         onChange={(newValue: number): void => setCurrentPointSticks({...currentPointSticks, fiveHundred: newValue})}
         steps={[1]}
+        disabled={enoughTables}
       />
       <NumberInput
         label={"100 sticks"}
         value={currentTable.pointSticks.oneHundred}
         onChange={(newValue: number): void => setCurrentPointSticks({...currentPointSticks, oneHundred: newValue})}
         steps={[1]}
+        disabled={enoughTables}
       />
       <p>Total points {totalPoints}.</p>
       <button
@@ -171,37 +185,40 @@ const PlayerEntryView = () => {
         onClick={() => saveAndContinue()}>
         Save tables and continue
       </button>
-      {
-        tables.map((table, index) => {
-          return (
-            <table key={`table-${index}`}>
-              <thead>
-                <tr>
-                  <th colSpan={2}>Table {index + 1}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Set owner</td>
-                  <td>{table.setOwner}</td>
-                </tr>
-                <tr>
-                  <td>Mat owner</td>
-                  <td>{table.matOwner}</td>
-                </tr>
-                <tr>
-                  <td>Notes</td>
-                  <td>{table.notes}</td>
-                </tr>
-                <tr>
-                  <td>Point sticks</td>
-                  <td>{table.pointSticks.tenThousand} - {table.pointSticks.fiveThousand} - {table.pointSticks.oneThousand} - {table.pointSticks.fiveHundred} - {table.pointSticks.oneHundred}</td>
-                </tr>
-              </tbody>
-            </table>
-          );
-        })
-      }
+      <table>
+        <thead>
+          <tr>
+            <th>Table</th>
+            <th>Set owner</th>
+            <th>Mat owner</th>
+            <th>Notes</th>
+            <th>Point sticks</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            tables.map((table: Table, index: number) => (
+              <tr key={`table-tr-${index}`}>
+                <td>
+                  Table {index + 1}
+                </td>
+                <td>
+                  {table.setOwner}
+                </td>
+                <td>
+                  {table.matOwner}
+                </td>
+                <td>
+                  {table.notes}
+                </td>
+                <td>
+                  {table.pointSticks.tenThousand} - {table.pointSticks.fiveThousand} - {table.pointSticks.oneThousand} - {table.pointSticks.fiveHundred} - {table.pointSticks.oneHundred}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
     </div>
   );
 };

@@ -5,7 +5,9 @@ import { bindActionCreators } from "redux";
 import { Views } from "../../data-types/app-data-types";
 import { tournamentActionCreators, State, appActionCreators } from "./../../state";
 
-import { PlayerName } from "../../data-types/tournament-data-types";
+import { PlayerId, PlayerName } from "../../data-types/tournament-data-types";
+import TextInput from "../../components/TextInput";
+import { generateArray } from "../../utils/generateArray";
 
 const PlayerEntryView = () => {
   const [players, setPlayers] = useState<PlayerName[]>([]);

@@ -3,16 +3,18 @@ type TextInputProps = {
   label: string,
   value: number,
   onChange: Function,
-  steps: number[]
+  steps: number[],
+  disabled?: boolean
 };
 
-const TextInput = (props: TextInputProps) => {
+const NumberInput = (props: TextInputProps) => {
   return (
-    <div className={`text-input ${props.className ? props.className : ""}`}>
+    <div className={`text-input ${props.className ? props.className : ""} ${props.disabled ? "disabled" : ""}`}>
       <label>{props.label}</label>
       {
         props.steps.map((step: number, index: number) => (
           <button
+            disabled={props.disabled}
             key={`numberinput-${props.label}-minus-${index}`}
             onClick={() => props.onChange(props.value - props.steps[props.steps.length - 1 - index])}>
             -{props.steps[props.steps.length - 1 - index]}
@@ -20,6 +22,7 @@ const TextInput = (props: TextInputProps) => {
         ))
       }
       <input
+        disabled={props.disabled}
         type={"text"}
         value={props.value.toString()}
         readOnly={true}
@@ -27,6 +30,7 @@ const TextInput = (props: TextInputProps) => {
       {
         props.steps.map((step: number, index: number) => (
           <button
+            disabled={props.disabled}
             key={`numberinput-${props.label}-plus-${index}`}
             onClick={() => props.onChange(props.value + step)}>
             +{step}
@@ -38,4 +42,4 @@ const TextInput = (props: TextInputProps) => {
   );
 };
 
-export default TextInput;
+export default NumberInput;
