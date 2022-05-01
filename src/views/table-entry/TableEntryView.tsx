@@ -10,6 +10,7 @@ import TextInput from "../../components/TextInput";
 import NumberInput from "../../components/NumberInput";
 
 import { generateArray } from "../../utils/generateArray";
+import { allMeetings, generateSeating, violations } from "../../utils/generateSeating";
 
 const PlayerEntryView = () => {
   const defaultPointSticks: PointSticks = {
@@ -62,7 +63,7 @@ const PlayerEntryView = () => {
     const rounds = generateArray(tournamentState.info.rounds);
     const tables = generateArray(tournamentState.playerNames.length/4);
 
-    const easts: number[][] = rounds.map((round: number): number[] => 
+    /*const easts: number[][] = rounds.map((round: number): number[] => 
       tables.map((table: number): number => (4*table+round)%tournamentState.playerNames.length)
     );
 
@@ -76,7 +77,13 @@ const PlayerEntryView = () => {
 
     const norths: number[][] = rounds.map((round: number): number[] => 
       tables.map((table: number): number => (4*table+round+3)%tournamentState.playerNames.length)
-    );
+    );*/
+
+    const seating = generateSeating(tournamentState.playerNames.length/4, tournamentState.info.rounds);
+
+    const meetings = allMeetings(seating);
+    console.log(meetings);
+    console.log(violations(meetings));
 
     return rounds.map((round: number): Game[] => 
       tables.map((table: number): Game => ({
@@ -85,19 +92,19 @@ const PlayerEntryView = () => {
         finished: false,
         score: {
           east: {
-            playerId: easts[round][table],
+            playerId: seating[round][table][0],
             points: 0
           },
           south: {
-            playerId: souths[round][table],
+            playerId: seating[round][table][1],
             points: 0
           },
           west: {
-            playerId: wests[round][table],
+            playerId: seating[round][table][2],
             points: 0
           },
           north: {
-            playerId: norths[round][table],
+            playerId: seating[round][table][3],
             points: 0
           }
         }
