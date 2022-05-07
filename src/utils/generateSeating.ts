@@ -122,16 +122,26 @@ function pick<T>(choices: T[]) {
     return choices[getRandomInt(choices.length)];
 }
 
+// Mysteriously missing function of arrays
+// Put array elements to bins by some key mapping
+const groupBy = <T, K extends keyof any>(list: T[], getKey: (item: T) => K) =>
+  list.reduce((previous, currentItem) => {
+    const group = getKey(currentItem);
+    if (!previous[group]) previous[group] = [];
+    previous[group].push(currentItem);
+    return previous;
+  }, {} as Record<K, T[]>);
+
 // All swaps that can be done
 const potentialSwaps = (
     iteration: number,
     tabus: {[meeting: string]: number}[],
     meetings: Meetings, // Conflicting meetings only
     seating: number[][][]
-): Meeting[] => {
+): Record<number, Meeting[]> => {
     const conflictList = Object.keys(meetings).map(x => meetings[x]).filter(x => x.length > 1).flat();
 
-    return conflictList.map((meeting: Meeting): Meeting[] => {
+    const swaps = conflictList.map((meeting: Meeting): Meeting[] => {
         // Get round and table
         const round = meeting.player1.round;
         const table = meeting.player1.table;
@@ -153,34 +163,45 @@ const potentialSwaps = (
                     return {player1: seat(round, table, seat2), player2: seat(round, tableIndex, seatIndex)};
                 }));
         }).flat()
-        .filter(swap => {
+        .filter( swap => {
             // Verify that the swap is not tabu
             const player1 = bySeat(swap.player1, seating);
             const player2 = bySeat(swap.player2, seating);
             const key = makeKey(player1, player2);
             const isTabu = (key in tabus[round]) && (tabus[round][key] >= iteration);
 
-            // Verify that the swap does not increase the number of violations
-            const removedKeys = uniquePairs(seating[round][swap.player1.table])
-                .filter(pair => pair.includes(player1))
-                .map(pair => makeKey(pair[0], pair[1]))
-                .concat(uniquePairs(seating[round][swap.player2.table])
-                .filter(pair => pair.includes(player2))
-                .map(pair => makeKey(pair[0], pair[1])));
-
-            const addedKeys = uniquePairs(seating[round][swap.player1.table]
-                .filter(plr => plr !== player1).concat([player2]))
-                .filter(pair => pair.includes(player2)).map(pair => makeKey(pair[0], pair[1]))
-                .concat(uniquePairs(seating[round][swap.player2.table]
-                    .filter(plr => plr !== player2).concat([player1]))
-                    .filter(pair => pair.includes(player1)).map(pair => makeKey(pair[0], pair[1])));
-    
-            const removes = removedKeys.map<number>(key => meetings[key].length > 1 ? 1 : 0).reduce((sum, cur) => sum + cur, 0);
-            const additions = addedKeys.map<number>(key => key in meetings ? 1 : 0).reduce((sum, cur) => sum + cur, 0);
-
-            return !isTabu && (additions - removes) < 0;
+            return !isTabu;
         });
     }).flat();
+
+    return groupBy(swaps, swap => {
+        // Verify that the swap is not tabu
+        const round = swap.player1.round;
+        const player1 = bySeat(swap.player1, seating);
+        const player2 = bySeat(swap.player2, seating);
+        const key = makeKey(player1, player2);
+
+        // Verify that the swap does not increase the number of violations
+        const removedKeys = uniquePairs(seating[round][swap.player1.table])
+            .filter(pair => pair.includes(player1))
+            .map(pair => makeKey(pair[0], pair[1]))
+            .concat(uniquePairs(seating[round][swap.player2.table])
+            .filter(pair => pair.includes(player2))
+            .map(pair => makeKey(pair[0], pair[1])));
+
+        const addedKeys = uniquePairs(seating[round][swap.player1.table]
+            .filter(plr => plr !== player1).concat([player2]))
+            .filter(pair => pair.includes(player2)).map(pair => makeKey(pair[0], pair[1]))
+            .concat(uniquePairs(seating[round][swap.player2.table]
+                .filter(plr => plr !== player2).concat([player1]))
+                .filter(pair => pair.includes(player1)).map(pair => makeKey(pair[0], pair[1])));
+
+        const removes = removedKeys.map<number>(key => meetings[key].length > 1 ? 1 : 0).reduce((sum, cur) => sum + cur, 0);
+        const additions = addedKeys.map<number>(key => key in meetings ? 1 : 0).reduce((sum, cur) => sum + cur, 0);
+
+        // +1 Makes the best tier contain only swaps that improve the solution instead of lumping them together with neutral swaps
+        return Math.max(additions - removes + 1, 0);
+    });
 }
 
 // Perform a swap
@@ -202,22 +223,21 @@ const pickASwap = (
     var copyOfSeating = seating; // Don't copy yet
 
     const swaps = potentialSwaps(iteration, tabu, meetings, seating);
-    if(swaps.length > 0)
+    for(var i = 0; i <= 10; i++)
     {
-        copyOfSeating = seating.map(x => x.map(y => y.map(z => z)));
-        const theSwap = pick(swaps);
-        const player1 = bySeat(theSwap.player1, seating)
-        const player2 = bySeat(theSwap.player2, seating)
-        //console.log('swapping ' + player1.toString() + ' and ' + player2.toString() + '...');
-        //console.log(theSwap);
-        tabu[theSwap.player1.round][makeKey(player1, player2)] = iteration + tabuUntil;
-        performSwap(theSwap, copyOfSeating);
+        if(i in swaps && swaps[i].length > 0)
+        {
+            copyOfSeating = seating.map(x => x.map(y => y.map(z => z)));
+            const theSwap = pick(swaps[i]);
+            const player1 = bySeat(theSwap.player1, seating)
+            const player2 = bySeat(theSwap.player2, seating)
+            tabu[theSwap.player1.round][makeKey(player1, player2)] = iteration + tabuUntil;
+            performSwap(theSwap, copyOfSeating);
+            return copyOfSeating;
+        }
     }
-    else
-    {
-        console.log('no swaps');
-    }
-
+    console.log('no swaps');
+    
     return copyOfSeating;
 }
 
@@ -233,54 +253,54 @@ const tabuSeating = (
     nRounds: number  // Total number of rounds
 ): number[][][] => {
     // Generate a starting point using a heuristic
-    var seating = initialSeating(nTables, nRounds);
+    var currentSeating = initialSeating(nTables, nRounds);
+    var bestSeating = currentSeating;
     // Initialize tabu table:
     // For every week, the tabu table contains restrictions for which players are allowed to be swapped
     var tabu: {[meeting: string]: number}[] = generateArray(nRounds).map(_ => {return {}});
-    var currentMeetings = allMeetings(seating);
-    var currentViolations = violations(currentMeetings);
+    var currentMeetings = allMeetings(currentSeating);
+    var leastViolations = violations(currentMeetings);
 
     // Optimize using tabu search until reached max iterations or no more conflicts exist
     var i: number,s: number; // Iteration; stable iteration
-    for(i = 0, s = 0; i < maxIterations && currentViolations > 0; i++)
+    for(i = 0, s = 0; i < maxIterations && leastViolations > 0; i++)
     {
-        const newSeating = pickASwap(i, getRandomInt(maxTabu + 1) + minTabu, seating, tabu, currentMeetings);
+        currentSeating = pickASwap(i, getRandomInt(maxTabu + 1) + minTabu, currentSeating, tabu, currentMeetings);
         // Calculate and store stats
-        const newMeetings = allMeetings(newSeating);
-        const newViolations = violations(newMeetings);
+        currentMeetings = allMeetings(currentSeating);
+        const currentViolations = violations(currentMeetings);
 
-        if(newViolations < currentViolations)
+        if(currentViolations < leastViolations)
         {   // Solution has improved -> use the new solution
-            console.log('solution improved: ' + currentViolations + ' vs ' + newViolations);
-            seating = newSeating;
-            currentMeetings = newMeetings;
-            currentViolations = newViolations;
+            console.log('solution improved: ' + leastViolations + ' vs ' + currentViolations);
+            bestSeating = currentSeating;
+            leastViolations = currentViolations;
             s = 0; // Reset stability counter
         }
         else if(s > maxStable)
         {   // Too many iterations without improvement
             // Do something a little different from the paper to avoid a state machine
-            const reSeating = tabuSeating(minTabu, maxTabu, maxIterations - i, maxStable, nTables, nRounds);
             console.log('resetting');
-            if(currentViolations < violations(allMeetings(reSeating)))
+            const reSeating = tabuSeating(minTabu, maxTabu, maxIterations - i, maxStable, nTables, nRounds);
+            if(leastViolations < violations(allMeetings(reSeating)))
             {   // Everything was better back in the day
-                return seating;
+                return bestSeating;
             }
             // If the restarted seating is better; use it
             return reSeating;
         }
         else
         {   // No improvement, but still going to try
-            console.log('no improvement: ' + currentViolations + ' vs ' + newViolations);
+            console.log('no improvement: ' + leastViolations + ' vs ' + currentViolations);
             s++;
         }
     }
 
     // Iterated till maximum or found a solution, return solution
-    return seating;
+    return bestSeating;
 }
 
-const generateSeating = (nTables: number, nRounds: number): number[][][] => tabuSeating(1, 1, 1000, 100, nTables, nRounds);
+const generateSeating = (nTables: number, nRounds: number): number[][][] => tabuSeating(4, 10, 2000, 400, nTables, nRounds);
 
 export {
     generateSeating,
