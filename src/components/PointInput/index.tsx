@@ -14,6 +14,7 @@ type PointInputProps = {
   label: string,
   value: PointInputType,
   onChange: Function,
+  unflippable?: boolean;
   tabIndex?: number
 };
 
@@ -22,9 +23,17 @@ const PointInput = (props: PointInputProps) => {
     switch (e.key)
     {
       case "+":
+        if (props.unflippable)
+        {
+          break;
+        }
         props.onChange({positive: true, value: props.value.value});
         break;
       case "-":
+        if (props.unflippable)
+        {
+          break;
+        }
         props.onChange({positive: false, value: props.value.value});
         break;
       case "Backspace":

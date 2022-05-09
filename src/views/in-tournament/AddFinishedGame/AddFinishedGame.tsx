@@ -35,12 +35,31 @@ const initialPointState: PointState = [
   }
 ];
 
+const initialChomboState: PointState = [
+  {
+    positive: false,
+    value: 0
+  },
+  {
+    positive: false,
+    value: 0
+  },
+  {
+    positive: false,
+    value: 0
+  },
+  {
+    positive: false,
+    value: 0
+  }
+];
+
 const AddFinishedGame = (props: AddFinishedGameProps) => {
   const [round, setRound] = useState<number>(0);
   const [table, setTable] = useState<number>(0);
   const [score, setScore] = useState<PointState>(initialPointState);
   const [uma, setUma] = useState<PointState>(initialPointState);
-  const [chombo, setChombo] = useState<PointState>(initialPointState);
+  const [chombo, setChombo] = useState<PointState>(initialChomboState);
 
   const dispatch = useDispatch();
   const {addGames} = bindActionCreators(tournamentActionCreators, dispatch);
@@ -177,6 +196,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                     value={chombo[0]}
                     onChange={(newValue: PointInputType) => setChombo([newValue, chombo[1], chombo[2], chombo[3]])}
                     tabIndex={9}
+                    unflippable={true}
                   />
                 </td>
                 <td>{formatPoints(getFinalForPlayer(0))}</td>
@@ -209,6 +229,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                     value={chombo[1]}
                     onChange={(newValue: PointInputType) => setChombo([chombo[0], newValue, chombo[2], chombo[3]])}
                     tabIndex={10}
+                    unflippable={true}
                   />
                 </td>
                 <td>{formatPoints(getFinalForPlayer(1))}</td>
@@ -241,6 +262,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                     value={chombo[2]}
                     onChange={(newValue: PointInputType) => setChombo([chombo[0], chombo[1], newValue, chombo[3]])}
                     tabIndex={11}
+                    unflippable={true}
                   />
                 </td>
                 <td>{formatPoints(getFinalForPlayer(2))}</td>
@@ -273,6 +295,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                     value={chombo[3]}
                     onChange={(newValue: PointInputType) => setChombo([chombo[0], chombo[1], uma[3], newValue])}
                     tabIndex={12}
+                    unflippable={true}
                   />
                 </td>
                 <td>{formatPoints(getFinalForPlayer(3))}</td>
@@ -299,7 +322,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
         <p>This particular game is missing from tournament data for some reason.</p>
       }
       <button
-        disabled={getScoreSum() !== 0}
+        disabled={!totalsOk}
         onClick={() => storeGame()}>
         Store game
       </button>
