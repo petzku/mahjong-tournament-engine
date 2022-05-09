@@ -1,3 +1,5 @@
+import "./TextInput.scss";
+
 type TextInputProps = {
   className?: string,
   label?: string,

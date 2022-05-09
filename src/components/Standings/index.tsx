@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { State } from "../../state";
 import { Standing, PlayerName, PlayerId, Game } from "../../data-types/tournament-data-types";
 
+import { formatPoints } from "../../utils/formatPoints";
+
 const Standings = () => {
   const tournamentState = useSelector((state: State) => state.tournament);
 
@@ -47,7 +49,7 @@ const Standings = () => {
           getStandings().map((standing: Standing) => (
             <tr key={`player-standing-${standing.playerId}`}>
               <td>{tournamentState.playerNames[standing.playerId]}</td>
-              <td>{standing.points}</td>
+              <td>{formatPoints(standing.points)}</td>
             </tr>
           ))
         }

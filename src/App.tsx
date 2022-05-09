@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tournamentActionCreators, State, appActionCreators } from "./state"; 
