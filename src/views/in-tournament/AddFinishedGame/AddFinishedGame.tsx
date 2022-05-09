@@ -6,7 +6,6 @@ import PointInput, {PointInputType, getNumericValue} from "../../../components/P
 import { generateArray } from "../../../utils/generateArray";
 import { tournamentActionCreators, State } from "./../../../state";
 import { Game, PlayerName } from "../../../data-types/tournament-data-types";
-import ManualNumberInput from "../../../components/ManualNumberInput";
 import {formatPoints} from "../../../utils/formatPoints";
 
 import "./AddFinishedGame.scss";

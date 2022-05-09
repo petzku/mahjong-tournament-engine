@@ -17,7 +17,7 @@ type PointInputProps = {
   tabIndex?: number
 };
 
-const ManualNumberInput = (props: PointInputProps) => {
+const PointInput = (props: PointInputProps) => {
   const onKeyDown = (e: any) => {
     switch (e.key)
     {
@@ -55,6 +55,7 @@ const ManualNumberInput = (props: PointInputProps) => {
     <div className={`text-input ${props.className ? props.className : ""}`}>
       <label>{props.label}</label>
       <input
+        className={props.className}
         type={"text"}
         value={displayValue}
         onKeyDown={(e) => onKeyDown(e)}
@@ -65,4 +66,4 @@ const ManualNumberInput = (props: PointInputProps) => {
   );
 };
 
-export default ManualNumberInput;
+export default PointInput;
