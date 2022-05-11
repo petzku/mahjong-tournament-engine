@@ -11,7 +11,7 @@ import {formatPoints} from "../../../utils/formatPoints";
 import "./AddFinishedGame.scss";
 
 type AddFinishedGameProps = {
-  onFinish: Function
+  onFinish: () => void
 };
 
 type PointState = [PointInputType, PointInputType, PointInputType, PointInputType];
@@ -335,7 +335,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
       {
         !totalsOk &&
         <p>Game cannot be saved because the raw points and/or uma do not total 0.</p>
-      }7
+      }
     </div>
   );
 };

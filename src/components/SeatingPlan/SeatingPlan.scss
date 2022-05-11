@@ -1,0 +1,18 @@
+.player
+{
+  &.hilight
+  {
+    background: yellow;
+  }
+  
+  &:not(.selected)
+  {
+    border: 1px solid white;
+  }
+
+  &.selected
+  {
+    border: 1px solid black;
+    border-radius: 2px;
+  }
+}

@@ -1,13 +1,13 @@
-type TextInputProps = {
+type NumberInputProps = {
   className?: string,
   label: string,
   value: number,
-  onChange: Function,
+  onChange: (newValue: number) => void,
   steps: number[],
   disabled?: boolean
 };
 
-const NumberInput = (props: TextInputProps) => {
+const NumberInput = (props: NumberInputProps) => {
   return (
     <div className={`text-input ${props.className ? props.className : ""} ${props.disabled ? "disabled" : ""}`}>
       <label>{props.label}</label>

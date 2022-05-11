@@ -4,7 +4,7 @@ type TextInputProps = {
   className?: string,
   label?: string,
   value: string,
-  onChange: Function,
+  onChange: (newValue: string) => void,
   disabled?: boolean
 };
 
