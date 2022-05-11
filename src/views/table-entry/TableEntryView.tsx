@@ -63,22 +63,6 @@ const PlayerEntryView = () => {
     const rounds = generateArray(tournamentState.info.rounds);
     const tables = generateArray(tournamentState.playerNames.length/4);
 
-    /*const easts: number[][] = rounds.map((round: number): number[] => 
-      tables.map((table: number): number => (4*table+round)%tournamentState.playerNames.length)
-    );
-
-    const souths: number[][] = rounds.map((round: number): number[] => 
-      tables.map((table: number): number => (4*table+round+1)%tournamentState.playerNames.length)
-    );
-
-    const wests: number[][] = rounds.map((round: number): number[] => 
-      tables.map((table: number): number => (4*table+round+2)%tournamentState.playerNames.length)
-    );
-
-    const norths: number[][] = rounds.map((round: number): number[] => 
-      tables.map((table: number): number => (4*table+round+3)%tournamentState.playerNames.length)
-    );*/
-
     const seating = generateSeating(tournamentState.playerNames.length/4, tournamentState.info.rounds);
 
     const meetings = allMeetings(seating);
