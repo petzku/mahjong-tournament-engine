@@ -11,6 +11,7 @@ import NumberInput from "../../components/NumberInput";
 
 import { generateArray } from "../../utils/generateArray";
 import { allMeetings, generateSeating, violations } from "../../utils/generateSeating";
+import { formatPoints } from "../../utils/formatPoints";
 
 const PlayerEntryView = () => {
   const defaultPointSticks: PointSticks = {
@@ -38,17 +39,17 @@ const PlayerEntryView = () => {
     setCurrentTable({
       ...currentTable,
       pointSticks: currentPointSticks
-    })
+    });
   }, [currentPointSticks]);
 
   const {addTables, addGames} = bindActionCreators(tournamentActionCreators, dispatch);
   const {changeView} = bindActionCreators(appActionCreators, dispatch);
 
   const totalPoints = (({tenThousand, fiveThousand, oneThousand, fiveHundred, oneHundred}) => {
-    return tenThousand*10 + fiveThousand*5 + oneThousand + fiveHundred*0.5 + oneHundred*0.1;
+    return tenThousand*10000 + fiveThousand*5000 + oneThousand*1000 + fiveHundred*500 + oneHundred*100;
   })(currentTable.pointSticks);
 
-  const correctPointSticks = totalPoints === 30 - tournamentState.info.oka;
+  const correctPointSticks = totalPoints === 30000 - tournamentState.info.oka;
 
   const enoughTables = tables.length === tournamentState.playerNames.length / 4;
 
@@ -108,8 +109,8 @@ const PlayerEntryView = () => {
       {
         !enoughTables &&
         <div>
+          <p>{tournamentState.playerNames.length/4} tables are needed for a tournament of {tournamentState.playerNames.length} players.</p>
           <p>Enter information for table {tables.length + 1}.</p>
-          <p>{tournamentState.playerNames.length/4} tables are needed.</p>
         </div>
       }
       <TextInput
@@ -165,7 +166,7 @@ const PlayerEntryView = () => {
         steps={[1]}
         disabled={enoughTables}
       />
-      <p>Total points {totalPoints}.</p>
+      <p>Total points {formatPoints(totalPoints)}.</p>
       <button
         disabled={!correctPointSticks || enoughTables}
         onClick={() => storeTable()}>
@@ -183,7 +184,7 @@ const PlayerEntryView = () => {
             <th>Set owner</th>
             <th>Mat owner</th>
             <th>Notes</th>
-            <th>Point sticks</th>
+            <th>Point sticks (10k-5k-1k-500-100)</th>
           </tr>
         </thead>
         <tbody>

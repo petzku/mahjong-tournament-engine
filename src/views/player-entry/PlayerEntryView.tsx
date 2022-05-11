@@ -9,13 +9,17 @@ import { PlayerId, PlayerName } from "../../data-types/tournament-data-types";
 import TextInput from "../../components/TextInput";
 import { generateArray } from "../../utils/generateArray";
 
+import "./PlayerEntryView.scss";
+
 const PlayerEntryView = () => {
-  const [players, setPlayers] = useState<PlayerName[]>([]);
+  const [playersInput, setPlayersInput] = useState<string>("");
   const dispatch = useDispatch();
   
   const {addPlayers} = bindActionCreators(tournamentActionCreators, dispatch)
   const {changeView} = bindActionCreators(appActionCreators, dispatch);
   
+  const players = playersInput.split("\n").filter(name => name !== "");
+
   const rightAmount = players.length > 0 && players.length % 4 === 0;
 
   const saveAndContinue = (): void => {
@@ -27,18 +31,20 @@ const PlayerEntryView = () => {
     <div>
       <p>Enter players, one per line. Currently {players.length} players.</p>
       <textarea
-        value={players}
-        onChange={(e) => setPlayers(e.target.value.split("\n").filter(name => name !== ""))}
+        value={playersInput}
+        onChange={(e) => setPlayersInput(e.target.value)}
       />
       {
         !rightAmount &&
         <p>Must have a number of players that is divisible by 4.</p>
       }
-      <button
-        disabled={!rightAmount}
-        onClick={() => saveAndContinue()}>
-        Save
-      </button>
+      <p>
+        <button
+          disabled={!rightAmount}
+          onClick={() => saveAndContinue()}>
+          Save
+        </button>
+      </p>
     </div>
   );
 };
