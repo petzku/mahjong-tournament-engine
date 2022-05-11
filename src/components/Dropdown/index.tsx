@@ -8,7 +8,7 @@ type DropdownProps = {
   label: string,
   value: number,
   items: DropdownItem[],
-  onChange: Function
+  onChange: (newValue: number) => void
 };
 
 const Dropdown = (props: DropdownProps) => {

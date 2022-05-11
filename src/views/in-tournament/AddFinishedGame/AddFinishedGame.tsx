@@ -90,15 +90,21 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
     return playerScore + playerUma + playerChombo;
   };
 
-  const roundSelectionItems: DropdownItem[] = generateArray(tournamentState.info.rounds).map((roundId: number): DropdownItem => ({
-    value: roundId,
-    text: `Round ${roundId + 1}`
-  }));
+  const roundSelectionItems: DropdownItem[] = generateArray(tournamentState.info.rounds).map((roundId: number): DropdownItem => {
+    const finished = !tournamentState.games.filter((game: Game): boolean => game.round === roundId).some((game: Game): boolean => !game.finished);
+    return {
+      value: roundId,
+      text: `Round ${roundId + 1} ${finished ? "(finished)" : ""}`
+    };
+  });
 
-  const tableSelectionItems: DropdownItem[] = generateArray(tournamentState.playerNames.length/4).map((tableId: number): DropdownItem => ({
-    value: tableId,
-    text: `Table ${tableId + 1}`
-  }));
+  const tableSelectionItems: DropdownItem[] = generateArray(tournamentState.playerNames.length/4).map((tableId: number): DropdownItem => {
+    const finished = !tournamentState.games.filter((game: Game): boolean => game.round === round && game.table === tableId).some((game: Game): boolean => !game.finished);
+    return {
+      value: tableId,
+      text: `Table ${tableId + 1} ${finished ? "(finished)" : ""}`
+    };
+  });
 
   const selectedGame = tournamentState.games.find((game: Game): boolean => (game.round === round && game.table === table));
 
@@ -315,7 +321,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
       }
       {
         selectedGame && selectedGame.finished &&
-        <p>This particular game has already been flagged as finished.</p>
+        <p>This particular game has already been flagged as finished. If you enter this score</p>
       }
       {
         !selectedGame &&
@@ -329,7 +335,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
       {
         !totalsOk &&
         <p>Game cannot be saved because the raw points and/or uma do not total 0.</p>
-      }
+      }7
     </div>
   );
 };
