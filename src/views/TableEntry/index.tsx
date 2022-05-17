@@ -120,12 +120,6 @@ const PlayerEntryView = () => {
     ).reduce((combined: Game[], round: Game[]): Game[] => [...combined, ...round], []));
   };
 
-  /*const saveAndContinue = (): void => {
-    addTables(tables);
-    addGames(createGamesData());
-    changeView(Views.InTournament);
-  }; */
-
   return (
     <div>
       {

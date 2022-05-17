@@ -1,20 +1,15 @@
 import "./App.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from "redux";
-import { tournamentActionCreators, State, appActionCreators } from "./state"; 
+import { useSelector } from "react-redux";
+import { State} from "./state"; 
 import { Views } from "./data-types/app-data-types";
 
-import TournamentInfoView from "./views/TournamentInfoEntry/TournamentInfoEntry";
-import PlayerEntryView from "./views/PlayerEntry/PlayerEntryView";
-import TableEntryView from "./views/TableEntry/TableEntry";
-import EditSeatingPlan from "./views/EditSeatingPlan/EditSeatingPlan";
-import InTournamentView from "./views/TournamentHub/TournamentHub";
+import TournamentInfoView from "./views/TournamentInfoEntry";
+import PlayerEntryView from "./views/PlayerEntry";
+import TableEntryView from "./views/TableEntry";
+import EditSeatingPlan from "./views/EditSeatingPlan";
+import TournamentHub from "./views/TournamentHub";
 
 const App = () => {
-  /* const dispatch = useDispatch(); */
-
-  //const {editTournamentInfo} = bindActionCreators(tournamentActionCreators, dispatch)
-  /* const {changeView} = bindActionCreators(appActionCreators, dispatch); */
   const appState = useSelector((state: State) => state.app);
 
   return (
@@ -37,7 +32,7 @@ const App = () => {
       }
       {
         appState.view === Views.InTournament &&
-        <InTournamentView/>
+        <TournamentHub/>
       }
       {
         appState.view === Views.PostTournament &&

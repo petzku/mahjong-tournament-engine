@@ -1,13 +1,8 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from "redux";
-import { tournamentActionCreators, State, appActionCreators } from "../../state";
-
-import { PlayerName, PlayerId, Game, Standing } from "../../data-types/tournament-data-types";
 
 import Standings from "../../components/Standings";
 import FinalSeatingPlan from "./FinalSeatingPlan";
-import AddFinishedGame from "./AddFinishedGame/AddFinishedGame";
+import AddFinishedGame from "./AddFinishedGame";
 
 enum Views {
   AddFinishedGame,
@@ -15,10 +10,8 @@ enum Views {
   SeatingPlan
 };
 
-const InTournamentView = () => {
+const TournamentHub = () => {
   const [view, setView] = useState<Views>(Views.SeatingPlan);
-  //const dispatch = useDispatch();
-  //const tournamentState = useSelector((state: State) => state.tournament);
 
   return (
     <div className={"in-tournament"}>
@@ -49,4 +42,4 @@ const InTournamentView = () => {
   )
 };
 
-export default InTournamentView;
+export default TournamentHub;

@@ -11,11 +11,6 @@ export type PlayerName = string;
 
 export type PlayerId = number;
 
-/* export type PlayerPoints = {
-  player: Player,
-  points: number
-}; */
-
 export type PointSticks = {
   tenThousand: number,
   fiveThousand: number,
@@ -41,13 +36,6 @@ export type Seat = {
   playerId: PlayerId,
   score: Score
 };
-
-/* export type Participants = {
-  east: Seat,
-  south: Seat,
-  west: Seat,
-  north: Seat
-}; */
 
 export type Participants = [Seat, Seat, Seat, Seat];
 

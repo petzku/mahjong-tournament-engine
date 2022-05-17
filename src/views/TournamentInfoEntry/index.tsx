@@ -1,9 +1,9 @@
 import {useState} from "react";
 import { GeneralInfo } from "../../data-types/tournament-data-types";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { tournamentActionCreators, State, appActionCreators } from "../../state";
+import { tournamentActionCreators, appActionCreators } from "../../state";
 
 import TextInput from "../../components/TextInput";
 import NumberInput from "../../components/NumberInput";
@@ -13,7 +13,6 @@ import { initialState } from "../../state/reducers/tournamentReducer";
 const TournamentInfoView = () => {
   const [currentInfo, setCurrentInfo] = useState<GeneralInfo>(initialState.info);
   const dispatch = useDispatch();
-  const appState = useSelector((state: State) => state.app);
 
   const {editTournamentInfo} = bindActionCreators(tournamentActionCreators, dispatch);
   const {changeView} = bindActionCreators(appActionCreators, dispatch);

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { State } from "../../../state";
-import { Standing, PlayerName, PlayerId, Game, Participants } from "../../../data-types/tournament-data-types";
+import { Game } from "../../../data-types/tournament-data-types";
 
 import TextInput from "../../../components/TextInput";
 import Hanchan from "./Hanchan";

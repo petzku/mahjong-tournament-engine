@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tournamentActionCreators, State, appActionCreators} from "../../state";
@@ -7,9 +6,6 @@ import { Game } from "../../data-types/tournament-data-types";
 import { Views } from "../../data-types/app-data-types";
 
 import EditableSeatingPlan from "./EditableSeatingPlan";
-import { addGames } from "../../state/action-creators/tournament-action-creators";
-import { changeView } from "../../state/action-creators/app-action-creators";
-
 
 const EditSeatingPlan = () => {
   const dispatch = useDispatch();

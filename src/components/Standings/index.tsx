@@ -18,22 +18,6 @@ const Standings = () => {
         if (game.finished && playerSeat)
         {
           return subTotal + getTotal(playerSeat.score)
-          /* if (game.participants.east.playerId === playerId)
-          {
-            return subTotal + getTotal(game.participants.east.score);
-          }
-          if (game.participants.south.playerId === playerId)
-          {
-            return subTotal + getTotal(game.participants.south.score);
-          }
-          if (game.participants.west.playerId === playerId)
-          {
-            return subTotal + getTotal(game.participants.west.score);
-          }
-          if (game.participants.north.playerId === playerId)
-          {
-            return subTotal + getTotal(game.participants.north.score);
-          } */
         }
         return subTotal;
       }, 0)
