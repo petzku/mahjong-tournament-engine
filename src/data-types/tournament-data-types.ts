@@ -31,23 +31,31 @@ export type Table = {
   pointSticks: PointSticks
 };
 
-export type Seat = {
-  playerId: PlayerId,
-  points: number
+export type Score = {
+  raw: number,
+  uma: number,
+  penalty: number
 };
 
-export type GameScore = {
+export type Seat = {
+  playerId: PlayerId,
+  score: Score
+};
+
+/* export type Participants = {
   east: Seat,
   south: Seat,
   west: Seat,
   north: Seat
-};
+}; */
+
+export type Participants = [Seat, Seat, Seat, Seat];
 
 export type Game = {
   round: number,
   table: number,
   finished: boolean,
-  score: GameScore
+  participants: Participants
 };
 
 export type Tournament = {

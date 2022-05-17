@@ -5,35 +5,54 @@ import { bindActionCreators } from "redux";
 import { Views } from "../../data-types/app-data-types";
 import { tournamentActionCreators, State, appActionCreators } from "../../state";
 
-import { Game, PointSticks, Table } from "../../data-types/tournament-data-types";
+import { Game, PointSticks, Score, Table } from "../../data-types/tournament-data-types";
 import TextInput from "../../components/TextInput";
 import NumberInput from "../../components/NumberInput";
 
 import { generateArray } from "../../utils/generateArray";
 import { allMeetings, generateSeating, violations } from "../../utils/generateSeating";
 import { formatPoints } from "../../utils/formatPoints";
+import ConfirmationPopup from "../../components/ConfirmationPopup";
+
+const defaultPointSticks: PointSticks = {
+  tenThousand: 1,
+  fiveThousand: 2,
+  oneThousand: 9,
+  fiveHundred: 1,
+  oneHundred: 5
+};
+
+const defaultTable: Table = {
+  setOwner: "",
+  matOwner: "",
+  notes: "",
+  pointSticks: defaultPointSticks
+};
+
+const defaultScore: Score = {
+  raw: 0,
+  uma: 0,
+  penalty: 0
+}
 
 const PlayerEntryView = () => {
-  const defaultPointSticks: PointSticks = {
-    tenThousand: 1,
-    fiveThousand: 2,
-    oneThousand: 9,
-    fiveHundred: 1,
-    oneHundred: 5
-  };
-
-  const defaultTable: Table = {
-    setOwner: "",
-    matOwner: "",
-    notes: "",
-    pointSticks: defaultPointSticks
-  };
-
   const [currentPointSticks, setCurrentPointSticks] = useState<PointSticks>(defaultPointSticks);
   const [currentTable, setCurrentTable] = useState<Table>(defaultTable);
   const [tables, setTables] = useState<Table[]>([]);
+  const [creatingSeatingPlan, setCreatingSeatingPlan] = useState<boolean>(false);
   const dispatch = useDispatch();
   const tournamentState = useSelector((state: State) => state.tournament);
+
+  const {addTables, addGames} = bindActionCreators(tournamentActionCreators, dispatch);
+  const {changeView} = bindActionCreators(appActionCreators, dispatch);
+
+  const saveAndContinue = async (): Promise<void> => {
+    await createGamesData().then((games: Game[]) => {
+      addTables(tables);
+      addGames(games);
+      changeView(Views.InTournament);
+    });
+  };
 
   useEffect(() => {
     setCurrentTable({
@@ -42,8 +61,12 @@ const PlayerEntryView = () => {
     });
   }, [currentPointSticks]);
 
-  const {addTables, addGames} = bindActionCreators(tournamentActionCreators, dispatch);
-  const {changeView} = bindActionCreators(appActionCreators, dispatch);
+  useEffect(() => {
+    if (creatingSeatingPlan)
+    {
+      saveAndContinue();
+    }
+  }, [creatingSeatingPlan]);
 
   const totalPoints = (({tenThousand, fiveThousand, oneThousand, fiveHundred, oneHundred}) => {
     return tenThousand*10000 + fiveThousand*5000 + oneThousand*1000 + fiveHundred*500 + oneHundred*100;
@@ -59,7 +82,7 @@ const PlayerEntryView = () => {
     setCurrentTable(defaultTable);
   };
 
-  const createGamesData = (): Game[] => {
+  const createGamesData = (): Promise<Array<Game>> => {
     //Generate seating plan. Bad algorithm. TODO: Make a better one.
     const rounds = generateArray(tournamentState.info.rounds);
     const tables = generateArray(tournamentState.playerNames.length/4);
@@ -70,41 +93,54 @@ const PlayerEntryView = () => {
     console.log(meetings);
     console.log(violations(meetings));
 
-    return rounds.map((round: number): Game[] => 
+    return Promise.resolve(rounds.map((round: number): Game[] => 
       tables.map((table: number): Game => ({
         round: round,
         table: table,
         finished: false,
-        score: {
-          east: {
+        participants: [
+          {
             playerId: seating[round][table][0],
-            points: 0
+            score: defaultScore
           },
-          south: {
+          {
             playerId: seating[round][table][1],
-            points: 0
+            score: defaultScore
           },
-          west: {
+          {
             playerId: seating[round][table][2],
-            points: 0
+            score: defaultScore
           },
-          north: {
+          {
             playerId: seating[round][table][3],
-            points: 0
+            score: defaultScore
           }
-        }
+        ]
       }))
-    ).reduce((combined: Game[], round: Game[]): Game[] => [...combined, ...round], []);
+    ).reduce((combined: Game[], round: Game[]): Game[] => [...combined, ...round], []));
   };
 
-  const saveAndContinue = (): void => {
+  /*const saveAndContinue = (): void => {
     addTables(tables);
     addGames(createGamesData());
     changeView(Views.InTournament);
-  };
+  }; */
 
   return (
     <div>
+      {
+        creatingSeatingPlan &&
+        <ConfirmationPopup
+          title={"Generating seating plan"}
+          cancelText={""}
+          confirmText={""}
+          onCancel={() => {}}
+          onConfirm={() => {}}
+          cancelHidden={true}
+          confirmHidden={true}>
+          <p>This will take about 10-20 seconds.</p>
+        </ConfirmationPopup>
+      }
       <h1>Enter Table Information</h1>
       {
         !enoughTables &&
@@ -174,7 +210,7 @@ const PlayerEntryView = () => {
       </button>
       <button
         disabled={!enoughTables}
-        onClick={() => saveAndContinue()}>
+        onClick={() => setCreatingSeatingPlan(true)}>
         Save tables and continue
       </button>
       <table>

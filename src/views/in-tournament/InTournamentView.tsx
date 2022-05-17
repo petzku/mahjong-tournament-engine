@@ -6,7 +6,7 @@ import { tournamentActionCreators, State, appActionCreators } from "./../../stat
 import { PlayerName, PlayerId, Game, Standing } from "../../data-types/tournament-data-types";
 
 import Standings from "../../components/Standings";
-import SeatingPlan from "../../components/SeatingPlan";
+import FinalSeatingPlan from "../../components/FinalSeatingPlan";
 import AddFinishedGame from "./AddFinishedGame/AddFinishedGame";
 
 enum Views {
@@ -17,8 +17,8 @@ enum Views {
 
 const InTournamentView = () => {
   const [view, setView] = useState<Views>(Views.SeatingPlan);
-  const dispatch = useDispatch();
-  const tournamentState = useSelector((state: State) => state.tournament);
+  //const dispatch = useDispatch();
+  //const tournamentState = useSelector((state: State) => state.tournament);
 
   return (
     <div className={"in-tournament"}>
@@ -43,7 +43,7 @@ const InTournamentView = () => {
       }
       {
         view === Views.SeatingPlan &&
-        <SeatingPlan/>
+        <FinalSeatingPlan/>
       }
     </div>
   )

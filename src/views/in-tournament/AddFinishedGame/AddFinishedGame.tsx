@@ -5,7 +5,7 @@ import Dropdown, {DropdownItem} from "../../../components/Dropdown";
 import PointInput, {PointInputType, getNumericValue} from "../../../components/PointInput";
 import { generateArray } from "../../../utils/generateArray";
 import { tournamentActionCreators, State } from "./../../../state";
-import { Game, PlayerName } from "../../../data-types/tournament-data-types";
+import { Game, PlayerName, Score } from "../../../data-types/tournament-data-types";
 import {formatPoints} from "../../../utils/formatPoints";
 
 import "./AddFinishedGame.scss";
@@ -35,7 +35,7 @@ const initialPointState: PointState = [
   }
 ];
 
-const initialChomboState: PointState = [
+const initialPenaltyState: PointState = [
   {
     positive: false,
     value: 0
@@ -59,7 +59,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
   const [table, setTable] = useState<number>(0);
   const [score, setScore] = useState<PointState>(initialPointState);
   const [uma, setUma] = useState<PointState>(initialPointState);
-  const [chombo, setChombo] = useState<PointState>(initialChomboState);
+  const [penalty, setPenalty] = useState<PointState>(initialPenaltyState);
 
   const dispatch = useDispatch();
   const {addGames} = bindActionCreators(tournamentActionCreators, dispatch);
@@ -83,11 +83,15 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
     return east+south+west+north;
   };
 
+  const getScoreForPlayer = (seatId: number): Score => ({
+    raw: getNumericValue(score[seatId]),
+    uma: getNumericValue(uma[seatId]),
+    penalty: getNumericValue(penalty[seatId])
+  });
+
   const getFinalForPlayer = (seatId: number): number => {
-    const playerScore = getNumericValue(score[seatId]);
-    const playerUma = getNumericValue(uma[seatId]);
-    const playerChombo = getNumericValue(chombo[seatId]);
-    return playerScore + playerUma + playerChombo;
+    const score = getScoreForPlayer(seatId);
+    return score.raw + score.uma + score.penalty;
   };
 
   const roundSelectionItems: DropdownItem[] = generateArray(tournamentState.info.rounds).map((roundId: number): DropdownItem => {
@@ -99,10 +103,10 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
   });
 
   const tableSelectionItems: DropdownItem[] = generateArray(tournamentState.playerNames.length/4).map((tableId: number): DropdownItem => {
-    const finished = !tournamentState.games.filter((game: Game): boolean => game.round === round && game.table === tableId).some((game: Game): boolean => !game.finished);
+    const game = tournamentState.games.find((game: Game): boolean => game.round === round && game.table === tableId);
     return {
       value: tableId,
-      text: `Table ${tableId + 1} ${finished ? "(finished)" : ""}`
+      text: `Table ${tableId + 1} ${game?.finished ? "(finished)" : ""}`
     };
   });
 
@@ -115,24 +119,24 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
         round: round,
         table: table,
         finished: true,
-        score: {
-          east: {
-            playerId: selectedGame.score.east.playerId,
-            points: getFinalForPlayer(0)
+        participants: [
+          {
+            playerId: selectedGame.participants[0].playerId,
+            score: getScoreForPlayer(0)
           },
-          south: {
-            playerId: selectedGame.score.south.playerId,
-            points: getFinalForPlayer(1)
+          {
+            playerId: selectedGame.participants[1].playerId,
+            score: getScoreForPlayer(1)
           },
-          west: {
-            playerId: selectedGame.score.west.playerId,
-            points: getFinalForPlayer(2)
+          {
+            playerId: selectedGame.participants[2].playerId,
+            score: getScoreForPlayer(2)
           },
-          north: {
-            playerId: selectedGame.score.north.playerId,
-            points: getFinalForPlayer(3)
+          {
+            playerId: selectedGame.participants[3].playerId,
+            score: getScoreForPlayer(3)
           }
-        }
+        ]
       };
 
       const updatedGames = tournamentState.games.map((game: Game) => (
@@ -171,12 +175,12 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                 <th colSpan={2}>Player</th>
                 <th>Raw points</th>
                 <th>Uma</th>
-                <th>Chombo</th>
+                <th>Penalty</th>
                 <th>Final</th>
               </tr>
               <tr>
                 <td>East</td>
-                <td>{getPlayerName(selectedGame?.score.east.playerId)}</td>
+                <td>{getPlayerName(selectedGame?.participants[0].playerId)}</td>
                 <td>
                   <PointInput
                     className={"finished-game-score-input"}
@@ -199,8 +203,8 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                   <PointInput
                     className={"finished-game-score-input"}
                     label={""}
-                    value={chombo[0]}
-                    onChange={(newValue: PointInputType) => setChombo([newValue, chombo[1], chombo[2], chombo[3]])}
+                    value={penalty[0]}
+                    onChange={(newValue: PointInputType) => setPenalty([newValue, penalty[1], penalty[2], penalty[3]])}
                     tabIndex={9}
                     unflippable={true}
                   />
@@ -209,7 +213,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
               </tr>
               <tr>
                 <td>South</td>
-                <td>{getPlayerName(selectedGame?.score.south.playerId)}</td>
+                <td>{getPlayerName(selectedGame?.participants[1].playerId)}</td>
                 <td>
                   <PointInput
                     className={"finished-game-score-input"}
@@ -232,8 +236,8 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                   <PointInput
                     className={"finished-game-score-input"}
                     label={""}
-                    value={chombo[1]}
-                    onChange={(newValue: PointInputType) => setChombo([chombo[0], newValue, chombo[2], chombo[3]])}
+                    value={penalty[1]}
+                    onChange={(newValue: PointInputType) => setPenalty([penalty[0], newValue, penalty[2], penalty[3]])}
                     tabIndex={10}
                     unflippable={true}
                   />
@@ -242,7 +246,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
               </tr>
               <tr>
                 <td>West</td>
-                <td>{getPlayerName(selectedGame?.score.west.playerId)}</td>
+                <td>{getPlayerName(selectedGame?.participants[2].playerId)}</td>
                 <td>
                   <PointInput
                     className={"finished-game-score-input"}
@@ -265,8 +269,8 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                   <PointInput
                     className={"finished-game-score-input"}
                     label={""}
-                    value={chombo[2]}
-                    onChange={(newValue: PointInputType) => setChombo([chombo[0], chombo[1], newValue, chombo[3]])}
+                    value={penalty[2]}
+                    onChange={(newValue: PointInputType) => setPenalty([penalty[0], penalty[1], newValue, penalty[3]])}
                     tabIndex={11}
                     unflippable={true}
                   />
@@ -275,7 +279,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
               </tr>
               <tr>
                 <td>North</td>
-                <td>{getPlayerName(selectedGame?.score.north.playerId)}</td>
+                <td>{getPlayerName(selectedGame?.participants[3].playerId)}</td>
                 <td>
                   <PointInput
                     className={"finished-game-score-input"}
@@ -298,8 +302,8 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                   <PointInput
                     className={"finished-game-score-input"}
                     label={""}
-                    value={chombo[3]}
-                    onChange={(newValue: PointInputType) => setChombo([chombo[0], chombo[1], uma[3], newValue])}
+                    value={penalty[3]}
+                    onChange={(newValue: PointInputType) => setPenalty([penalty[0], penalty[1], uma[3], newValue])}
                     tabIndex={12}
                     unflippable={true}
                   />
@@ -321,7 +325,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
       }
       {
         selectedGame && selectedGame.finished &&
-        <p>This particular game has already been flagged as finished. If you enter this score</p>
+        <p>This particular game has already been flagged as finished.</p>
       }
       {
         !selectedGame &&

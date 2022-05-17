@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { State } from "../../state";
-import { Standing, PlayerName, PlayerId, Game } from "../../data-types/tournament-data-types";
+import { Seat, Standing, PlayerName, PlayerId, Game, Score } from "../../data-types/tournament-data-types";
 
 import { formatPoints } from "../../utils/formatPoints";
 
@@ -8,27 +8,32 @@ const Standings = () => {
   const tournamentState = useSelector((state: State) => state.tournament);
 
   const getStandings = (): Standing[] => {
+    const getTotal = (score: Score): number => score.raw + score.uma + score.penalty;
+
     return tournamentState.playerNames.map((playerName: PlayerName, playerId: PlayerId): Standing => ({
       playerId: playerId,
       points: tournamentState.games.reduce((subTotal: number, game: Game) => {
-        if (game.finished)
+        const playerSeat = game.participants.find((seat: Seat): boolean => seat.playerId === playerId);
+
+        if (game.finished && playerSeat)
         {
-          if (game.score.east.playerId === playerId)
+          return subTotal + getTotal(playerSeat.score)
+          /* if (game.participants.east.playerId === playerId)
           {
-            return subTotal + game.score.east.points;
+            return subTotal + getTotal(game.participants.east.score);
           }
-          if (game.score.south.playerId === playerId)
+          if (game.participants.south.playerId === playerId)
           {
-            return subTotal + game.score.south.points;
+            return subTotal + getTotal(game.participants.south.score);
           }
-          if (game.score.west.playerId === playerId)
+          if (game.participants.west.playerId === playerId)
           {
-            return subTotal + game.score.west.points;
+            return subTotal + getTotal(game.participants.west.score);
           }
-          if (game.score.north.playerId === playerId)
+          if (game.participants.north.playerId === playerId)
           {
-            return subTotal + game.score.north.points;
-          }
+            return subTotal + getTotal(game.participants.north.score);
+          } */
         }
         return subTotal;
       }, 0)
