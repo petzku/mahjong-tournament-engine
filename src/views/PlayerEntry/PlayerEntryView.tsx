@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Views } from "../../data-types/app-data-types";
-import { tournamentActionCreators, State, appActionCreators } from "./../../state";
+import { tournamentActionCreators, State, appActionCreators } from "../../state";
 
 import { PlayerId, PlayerName } from "../../data-types/tournament-data-types";
 import TextInput from "../../components/TextInput";

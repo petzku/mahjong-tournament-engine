@@ -4,11 +4,11 @@ import { bindActionCreators } from "redux";
 import { tournamentActionCreators, State, appActionCreators } from "./state"; 
 import { Views } from "./data-types/app-data-types";
 
-import TournamentInfoView from "./views/tournament-info/TournamentInfoView";
-import PlayerEntryView from "./views/player-entry/PlayerEntryView";
-import TableEntryView from "./views/table-entry/TableEntryView";
-import EditSeatingPlan from "./views/edit-seating-plan/EditSeatingPlan";
-import InTournamentView from "./views/in-tournament/InTournamentView";
+import TournamentInfoView from "./views/TournamentInfoEntry/TournamentInfoEntry";
+import PlayerEntryView from "./views/PlayerEntry/PlayerEntryView";
+import TableEntryView from "./views/TableEntry/TableEntry";
+import EditSeatingPlan from "./views/EditSeatingPlan/EditSeatingPlan";
+import InTournamentView from "./views/TournamentHub/TournamentHub";
 
 const App = () => {
   /* const dispatch = useDispatch(); */

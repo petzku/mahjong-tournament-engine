@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import Dropdown, {DropdownItem} from "../../../components/Dropdown";
 import PointInput, {PointInputType, getNumericValue} from "../../../components/PointInput";
 import { generateArray } from "../../../utils/generateArray";
-import { tournamentActionCreators, State } from "./../../../state";
+import { tournamentActionCreators, State } from "../../../state";
 import { Game, PlayerName, Score } from "../../../data-types/tournament-data-types";
 import {formatPoints} from "../../../utils/formatPoints";
 

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { State } from "../../state";
-import { PlayerName, Game } from "../../data-types/tournament-data-types";
+import { State } from "../../../state";
+import { PlayerName, Game } from "../../../data-types/tournament-data-types";
 
-import TextInput from "../TextInput";
+import TextInput from "../../../components/TextInput";
 
-import { generateArray } from "../../utils/generateArray";
+import { generateArray } from "../../../utils/generateArray";
 
 import "./EditableSeatingPlan.scss";
 

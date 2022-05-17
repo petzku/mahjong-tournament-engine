@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import { tournamentActionCreators, State, appActionCreators } from "./../../state";
+import { tournamentActionCreators, State, appActionCreators } from "../../state";
 
 import { PlayerName, PlayerId, Game, Standing } from "../../data-types/tournament-data-types";
 
 import Standings from "../../components/Standings";
-import FinalSeatingPlan from "../../components/FinalSeatingPlan";
+import FinalSeatingPlan from "./FinalSeatingPlan";
 import AddFinishedGame from "./AddFinishedGame/AddFinishedGame";
 
 enum Views {
