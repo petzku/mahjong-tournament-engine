@@ -10,7 +10,6 @@ import TextInput from "../../components/TextInput";
 import NumberInput from "../../components/NumberInput";
 
 import { generateArray } from "../../utils/generateArray";
-import { allMeetings, generateSeating, violations } from "../../utils/generateSeating";
 import { formatPoints } from "../../utils/formatPoints";
 import ConfirmationPopup from "../../components/ConfirmationPopup";
 
@@ -39,19 +38,16 @@ const PlayerEntryView = () => {
   const [currentPointSticks, setCurrentPointSticks] = useState<PointSticks>(defaultPointSticks);
   const [currentTable, setCurrentTable] = useState<Table>(defaultTable);
   const [tables, setTables] = useState<Table[]>([]);
-  const [creatingSeatingPlan, setCreatingSeatingPlan] = useState<boolean>(false);
   const dispatch = useDispatch();
   const tournamentState = useSelector((state: State) => state.tournament);
 
   const {addTables, addGames} = bindActionCreators(tournamentActionCreators, dispatch);
   const {changeView} = bindActionCreators(appActionCreators, dispatch);
 
-  const saveAndContinue = async (): Promise<void> => {
-    await createGamesData().then((games: Game[]) => {
-      addTables(tables);
-      addGames(games);
-      changeView(Views.InTournament);
-    });
+  const saveAndContinue = (): void => {
+    addTables(tables);
+    addGames(createGamesData());
+    changeView(Views.InTournament);
   };
 
   useEffect(() => {
@@ -60,13 +56,6 @@ const PlayerEntryView = () => {
       pointSticks: currentPointSticks
     });
   }, [currentPointSticks]);
-
-  useEffect(() => {
-    if (creatingSeatingPlan)
-    {
-      saveAndContinue();
-    }
-  }, [creatingSeatingPlan]);
 
   const totalPoints = (({tenThousand, fiveThousand, oneThousand, fiveHundred, oneHundred}) => {
     return tenThousand*10000 + fiveThousand*5000 + oneThousand*1000 + fiveHundred*500 + oneHundred*100;
@@ -82,59 +71,53 @@ const PlayerEntryView = () => {
     setCurrentTable(defaultTable);
   };
 
-  const createGamesData = (): Promise<Array<Game>> => {
-    //Generate seating plan. Bad algorithm. TODO: Make a better one.
+  const createGamesData = (): Game[] => {
+    //Generate seating plan. Bad algorithm. TODO: To be replaced with templates.
     const rounds = generateArray(tournamentState.info.rounds);
     const tables = generateArray(tournamentState.playerNames.length/4);
 
-    const seating = generateSeating(tournamentState.playerNames.length/4, tournamentState.info.rounds);
+    const easts: number[][] = rounds.map((round: number): number[] => 
+      tables.map((table: number): number => (4*table+round)%tournamentState.playerNames.length)
+    );
+    const souths: number[][] = rounds.map((round: number): number[] => 
+      tables.map((table: number): number => (4*table+round+1)%tournamentState.playerNames.length)
+    );
+    const wests: number[][] = rounds.map((round: number): number[] => 
+      tables.map((table: number): number => (4*table+round+2)%tournamentState.playerNames.length)
+    );
+    const norths: number[][] = rounds.map((round: number): number[] => 
+      tables.map((table: number): number => (4*table+round+3)%tournamentState.playerNames.length)
+    );
 
-    const meetings = allMeetings(seating);
-    console.log(meetings);
-    console.log(violations(meetings));
-
-    return Promise.resolve(rounds.map((round: number): Game[] => 
+    return rounds.map((round: number): Game[] => 
       tables.map((table: number): Game => ({
         round: round,
         table: table,
         finished: false,
         participants: [
           {
-            playerId: seating[round][table][0],
+            playerId: easts[round][table],
             score: defaultScore
           },
           {
-            playerId: seating[round][table][1],
+            playerId: souths[round][table],
             score: defaultScore
           },
           {
-            playerId: seating[round][table][2],
+            playerId: wests[round][table],
             score: defaultScore
           },
           {
-            playerId: seating[round][table][3],
+            playerId: norths[round][table],
             score: defaultScore
           }
         ]
       }))
-    ).reduce((combined: Game[], round: Game[]): Game[] => [...combined, ...round], []));
+    ).reduce((combined: Game[], round: Game[]): Game[] => [...combined, ...round], []);
   };
 
   return (
     <div>
-      {
-        creatingSeatingPlan &&
-        <ConfirmationPopup
-          title={"Generating seating plan"}
-          cancelText={""}
-          confirmText={""}
-          onCancel={() => {}}
-          onConfirm={() => {}}
-          cancelHidden={true}
-          confirmHidden={true}>
-          <p>This will take about 10-20 seconds.</p>
-        </ConfirmationPopup>
-      }
       <h1>Enter Table Information</h1>
       {
         !enoughTables &&
@@ -204,7 +187,7 @@ const PlayerEntryView = () => {
       </button>
       <button
         disabled={!enoughTables}
-        onClick={() => setCreatingSeatingPlan(true)}>
+        onClick={() => saveAndContinue()}>
         Save tables and continue
       </button>
       <table>

@@ -6,7 +6,6 @@ import { Views } from "./data-types/app-data-types";
 import TournamentInfoView from "./views/TournamentInfoEntry";
 import PlayerEntryView from "./views/PlayerEntry";
 import TableEntryView from "./views/TableEntry";
-import EditSeatingPlan from "./views/EditSeatingPlan";
 import TournamentHub from "./views/TournamentHub";
 
 const App = () => {
@@ -25,10 +24,6 @@ const App = () => {
       {
         appState.view === Views.TableEntry &&
         <TableEntryView/>
-      }
-      {
-        appState.view === Views.EditSeatingPlan &&
-        <EditSeatingPlan/>
       }
       {
         appState.view === Views.InTournament &&

@@ -2,7 +2,6 @@ export enum Views {
   TournamentInfoEntry,
   PlayerEntry,
   TableEntry,
-  EditSeatingPlan,
   InTournament,
   PostTournament
 };

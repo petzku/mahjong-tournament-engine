@@ -22,26 +22,28 @@ const Hanchan = (props: HanchanProps) => {
   const northClassName = `player ${northHilight}`;
 
   return (
-    <table>
-      <tbody>
-        <tr>
-          <td>East</td>
-          <td className={eastClassName}>{props.east}</td>
-        </tr>
-        <tr>
-          <td>South</td>
-          <td className={southClassName}>{props.south}</td>
-        </tr>
-        <tr>
-          <td>West</td>
-          <td className={westClassName}>{props.west}</td>
-        </tr>
-        <tr>
-          <td>North</td>
-          <td className={northClassName}>{props.north}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div className={"hanchan"}>
+      <table className={"players"}>
+        <tbody>
+          <tr>
+            <td>East</td>
+            <td className={eastClassName}>{props.east}</td>
+          </tr>
+          <tr>
+            <td>South</td>
+            <td className={southClassName}>{props.south}</td>
+          </tr>
+          <tr>
+            <td>West</td>
+            <td className={westClassName}>{props.west}</td>
+          </tr>
+          <tr>
+            <td>North</td>
+            <td className={northClassName}>{props.north}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 };
 
