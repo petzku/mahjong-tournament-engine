@@ -1,5 +1,7 @@
 import { PlayerName } from "../../../../data-types/tournament-data-types";
 
+import styles from "./Hanchan.module.css";
+
 type HanchanProps = {
   east: PlayerName,
   south: PlayerName,
@@ -11,10 +13,10 @@ type HanchanProps = {
 const Hanchan = (props: HanchanProps) => {
   const isHilighted = (name: PlayerName) => props.hilight.length > 0 && name.toLowerCase().indexOf(props.hilight.toLowerCase()) >= 0;
 
-  const eastHilight = isHilighted(props.east) ? "hilight" : "";
-  const southHilight = isHilighted(props.south) ? "hilight" : "";
-  const westHilight = isHilighted(props.west) ? "hilight" : "";
-  const northHilight = isHilighted(props.north) ? "hilight" : "";
+  const eastHilight = isHilighted(props.east) ? styles.hilightedPlayer : "";
+  const southHilight = isHilighted(props.south) ? styles.hilightedPlayer : "";
+  const westHilight = isHilighted(props.west) ? styles.hilightedPlayer : "";
+  const northHilight = isHilighted(props.north) ? styles.hilightedPlayer : "";
 
   const eastClassName = `player ${eastHilight}`;
   const southClassName = `player ${southHilight}`;

@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import { Views } from "../../data-types/app-data-types";
 import { tournamentActionCreators, State, appActionCreators } from "../../state";
 
-import "./PlayerEntryView.scss";
+import styles from "./PlayerEntryView.module.css";
 
 const PlayerEntryView = () => {
   const [playersInput, setPlayersInput] = useState<string>("");
@@ -27,6 +27,7 @@ const PlayerEntryView = () => {
     <div>
       <p>Enter players, one per line. Currently {players.length} players.</p>
       <textarea
+        className={styles.playerEntry}
         value={playersInput}
         onChange={(e) => setPlayersInput(e.target.value)}
       />

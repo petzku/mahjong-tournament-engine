@@ -1,4 +1,3 @@
-import "./App.scss";
 import { useSelector } from "react-redux";
 import { State} from "./state"; 
 import { Views } from "./data-types/app-data-types";

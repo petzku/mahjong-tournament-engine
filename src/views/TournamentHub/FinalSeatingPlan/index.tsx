@@ -8,9 +8,6 @@ import Hanchan from "./Hanchan";
 
 import { generateArray } from "../../../utils/generateArray";
 
-import "./FinalSeatingPlan.scss";
-
-
 const FinalSeatingPlan = () => {
   const [hilight, setHilight] = useState<string>("");
 

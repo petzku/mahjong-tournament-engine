@@ -1,4 +1,4 @@
-import "./ConfirmationPopup.scss";
+import styles from "./ConfirmationPopup.module.css";
 
 type ConfirmationPopupProps = {
   title: string,
@@ -13,15 +13,15 @@ type ConfirmationPopupProps = {
 
 const ConfirmationPopup = (props: ConfirmationPopupProps) => {
   return (
-    <div className={"popup-backdrop"}>
-      <div className={"popup"}>
-        <div className={"title"}>
+    <div className={styles.backdrop}>
+      <div className={styles.popup}>
+        <div className={styles.title}>
           {props.title}
         </div>
-        <div className={"content"}>
+        <div className={styles.content}>
           {props.children}
         </div>
-        <div className={"buttons"}>
+        <div className={styles.buttons}>
           {
             !props.cancelHidden &&
             <button onClick={() => props.onCancel()}>{props.cancelText}</button>
