@@ -16,7 +16,7 @@ type PointInputProps = {
   label: string,
   value: PointInputType,
   onChange: Function,
-  unflippable?: boolean;
+  unflippable?: boolean,
   tabIndex?: number
 };
 

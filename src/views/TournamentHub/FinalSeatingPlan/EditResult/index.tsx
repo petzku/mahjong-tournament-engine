@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 
 import PointInput, {PointInputType, getNumericValue} from "../../../../components/PointInput";
 import Popup from "../../../../components/Popup";
+import Toggle from "../../../../components/Toggle";
 
 import { tournamentActionCreators, State } from "../../../../state";
 import { Game, PlayerName, Score } from "../../../../data-types/tournament-data-types";
@@ -113,6 +114,7 @@ const EditResult = (props: AddFinishedGameProps) => {
       value: Math.abs(editedGame ? editedGame.participants[3].score.penalty : 0)
     }
   ]);
+  const [controlledMode, setControlledMode] = useState<boolean>(true);
 
   const dispatch = useDispatch();
   const {addGames} = bindActionCreators(tournamentActionCreators, dispatch);
@@ -193,6 +195,12 @@ const EditResult = (props: AddFinishedGameProps) => {
       onCancel={() => props.onFinish()}
       onConfirm={() => storeGame()}
       confirmDisabled={!totalsOk}>
+      <Toggle
+        false={"Danger mode"}
+        true={"Controlled mode"}
+        value={controlledMode}
+        onSwitch={() => setControlledMode(!controlledMode)}
+      />
       <p>Editing results for Round {props.round + 1} Table {props.table + 1}.</p>
       {
         editedGame && editedGame.finished &&
