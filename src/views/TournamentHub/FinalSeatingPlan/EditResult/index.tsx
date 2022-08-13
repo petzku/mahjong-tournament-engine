@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import Dropdown, {DropdownItem} from "../../../components/Dropdown";
-import PointInput, {PointInputType, getNumericValue} from "../../../components/PointInput";
-import { generateArray } from "../../../utils/generateArray";
-import { tournamentActionCreators, State } from "../../../state";
-import { Game, PlayerName, Score } from "../../../data-types/tournament-data-types";
-import {formatPoints} from "../../../utils/formatPoints";
+
+import PointInput, {PointInputType, getNumericValue} from "../../../../components/PointInput";
+import Popup from "../../../../components/Popup";
+
+import { tournamentActionCreators, State } from "../../../../state";
+import { Game, PlayerName, Score } from "../../../../data-types/tournament-data-types";
+import {formatPoints} from "../../../../utils/formatPoints";
 
 type AddFinishedGameProps = {
+  round: number,
+  table: number,
   onFinish: () => void
 };
 
@@ -52,16 +55,67 @@ const initialPenaltyState: PointState = [
   }
 ];
 
-const AddFinishedGame = (props: AddFinishedGameProps) => {
-  const [round, setRound] = useState<number>(0);
-  const [table, setTable] = useState<number>(0);
-  const [score, setScore] = useState<PointState>(initialPointState);
-  const [uma, setUma] = useState<PointState>(initialPointState);
-  const [penalty, setPenalty] = useState<PointState>(initialPenaltyState);
+const EditResult = (props: AddFinishedGameProps) => {
+  const tournamentState = useSelector((state: State) => state.tournament);
+  const editedGame = tournamentState.games.find((game: Game): boolean => (game.round === props.round && game.table === props.table));
+
+  const [score, setScore] = useState<PointState>([
+    {
+      positive: editedGame ? editedGame.participants[0].score.raw >= 0 : true,
+      value: Math.abs(editedGame ? editedGame.participants[0].score.raw : 0)
+    },
+    {
+      positive: editedGame ? editedGame.participants[1].score.raw >= 0 : true,
+      value: Math.abs(editedGame ? editedGame.participants[1].score.raw : 0)
+    },
+    {
+      positive: editedGame ? editedGame.participants[2].score.raw >= 0 : true,
+      value: Math.abs(editedGame ? editedGame.participants[2].score.raw : 0)
+    },
+    {
+      positive: editedGame ? editedGame.participants[3].score.raw >= 0 : true,
+      value: Math.abs(editedGame ? editedGame.participants[3].score.raw : 0)
+    }
+  ]);
+  const [uma, setUma] = useState<PointState>([
+    {
+      positive: editedGame ? editedGame.participants[0].score.uma >= 0 : true,
+      value: Math.abs(editedGame ? editedGame.participants[0].score.uma : 0)
+    },
+    {
+      positive: editedGame ? editedGame.participants[1].score.uma >= 0 : true,
+      value: Math.abs(editedGame ? editedGame.participants[1].score.uma : 0)
+    },
+    {
+      positive: editedGame ? editedGame.participants[2].score.uma >= 0 : true,
+      value: Math.abs(editedGame ? editedGame.participants[2].score.uma : 0)
+    },
+    {
+      positive: editedGame ? editedGame.participants[3].score.uma >= 0 : true,
+      value: Math.abs(editedGame ? editedGame.participants[3].score.uma : 0)
+    }
+  ]);
+  const [penalty, setPenalty] = useState<PointState>([
+    {
+      positive: false,
+      value: Math.abs(editedGame ? editedGame.participants[0].score.penalty : 0)
+    },
+    {
+      positive: false,
+      value: Math.abs(editedGame ? editedGame.participants[1].score.penalty : 0)
+    },
+    {
+      positive: false,
+      value: Math.abs(editedGame ? editedGame.participants[2].score.penalty : 0)
+    },
+    {
+      positive: false,
+      value: Math.abs(editedGame ? editedGame.participants[3].score.penalty : 0)
+    }
+  ]);
 
   const dispatch = useDispatch();
   const {addGames} = bindActionCreators(tournamentActionCreators, dispatch);
-  const tournamentState = useSelector((state: State) => state.tournament);
 
   const getPlayerName = (playerId: number): PlayerName => tournamentState.playerNames[playerId];
 
@@ -70,7 +124,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
     const south = getNumericValue(score[1]);
     const west = getNumericValue(score[2]);
     const north = getNumericValue(score[3]);
-    return east+south+west+north;
+    return east + south + west + north;
   };
 
   const getUmaSum = (): number => {
@@ -78,7 +132,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
     const south = getNumericValue(uma[1]);
     const west = getNumericValue(uma[2]);
     const north = getNumericValue(uma[3]);
-    return east+south+west+north;
+    return east + south + west + north;
   };
 
   const getScoreForPlayer = (seatId: number): Score => ({
@@ -92,53 +146,35 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
     return score.raw + score.uma + score.penalty;
   };
 
-  const roundSelectionItems: DropdownItem[] = generateArray(tournamentState.info.rounds).map((roundId: number): DropdownItem => {
-    const finished = !tournamentState.games.filter((game: Game): boolean => game.round === roundId).some((game: Game): boolean => !game.finished);
-    return {
-      value: roundId,
-      text: `Round ${roundId + 1} ${finished ? "(finished)" : ""}`
-    };
-  });
-
-  const tableSelectionItems: DropdownItem[] = generateArray(tournamentState.playerNames.length/4).map((tableId: number): DropdownItem => {
-    const game = tournamentState.games.find((game: Game): boolean => game.round === round && game.table === tableId);
-    return {
-      value: tableId,
-      text: `Table ${tableId + 1} ${game?.finished ? "(finished)" : ""}`
-    };
-  });
-
-  const selectedGame = tournamentState.games.find((game: Game): boolean => (game.round === round && game.table === table));
-
   const storeGame = () => {
-    if (selectedGame)
+    if (editedGame)
     {
       const gameData: Game = {
-        round: round,
-        table: table,
+        round: props.round,
+        table: props.table,
         finished: true,
         participants: [
           {
-            playerId: selectedGame.participants[0].playerId,
+            playerId: editedGame.participants[0].playerId,
             score: getScoreForPlayer(0)
           },
           {
-            playerId: selectedGame.participants[1].playerId,
+            playerId: editedGame.participants[1].playerId,
             score: getScoreForPlayer(1)
           },
           {
-            playerId: selectedGame.participants[2].playerId,
+            playerId: editedGame.participants[2].playerId,
             score: getScoreForPlayer(2)
           },
           {
-            playerId: selectedGame.participants[3].playerId,
+            playerId: editedGame.participants[3].playerId,
             score: getScoreForPlayer(3)
           }
         ]
       };
 
       const updatedGames = tournamentState.games.map((game: Game) => (
-        game.round === round && game.table === table ? gameData : game
+        game.round === props.round && game.table === props.table ? gameData : game
       ));
 
       addGames(updatedGames);
@@ -150,22 +186,20 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
   const totalsOk = getScoreSum() === 0 && getUmaSum() === 0;
 
   return (
-    <div>
-      <h1>Add Finished Game</h1>
-      <Dropdown
-        label={"Round"}
-        items={roundSelectionItems}
-        value={round}
-        onChange={(newRound: number): void => setRound(newRound)}
-      />
-      <Dropdown
-        label={"Table"}
-        items={tableSelectionItems}
-        value={table}
-        onChange={(newTable: number): void => setTable(newTable)}
-      />
+    <Popup
+      title={"Add Finished Game"}
+      cancelText={"Discard"}
+      confirmText={"Store results"}
+      onCancel={() => props.onFinish()}
+      onConfirm={() => storeGame()}
+      confirmDisabled={!totalsOk}>
+      <p>Editing results for Round {props.round + 1} Table {props.table + 1}.</p>
       {
-        selectedGame && !selectedGame.finished &&
+        editedGame && editedGame.finished &&
+        <p><strong>This game is already stored. Score can still be edited.</strong></p>
+      }
+      {
+        editedGame &&
         <div>
           <table className={"final-score-input-table"}>
             <tbody>
@@ -178,7 +212,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
               </tr>
               <tr>
                 <td>East</td>
-                <td>{getPlayerName(selectedGame?.participants[0].playerId)}</td>
+                <td>{getPlayerName(editedGame?.participants[0].playerId)}</td>
                 <td>
                   <PointInput
                     label={""}
@@ -208,7 +242,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
               </tr>
               <tr>
                 <td>South</td>
-                <td>{getPlayerName(selectedGame?.participants[1].playerId)}</td>
+                <td>{getPlayerName(editedGame?.participants[1].playerId)}</td>
                 <td>
                   <PointInput
                     label={""}
@@ -238,7 +272,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
               </tr>
               <tr>
                 <td>West</td>
-                <td>{getPlayerName(selectedGame?.participants[2].playerId)}</td>
+                <td>{getPlayerName(editedGame?.participants[2].playerId)}</td>
                 <td>
                   <PointInput
                     label={""}
@@ -268,7 +302,7 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
               </tr>
               <tr>
                 <td>North</td>
-                <td>{getPlayerName(selectedGame?.participants[3].playerId)}</td>
+                <td>{getPlayerName(editedGame?.participants[3].playerId)}</td>
                 <td>
                   <PointInput
                     label={""}
@@ -310,24 +344,19 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
         </div>
       }
       {
-        selectedGame && selectedGame.finished &&
+        editedGame && editedGame.finished &&
         <p>This particular game has already been flagged as finished.</p>
       }
       {
-        !selectedGame &&
+        !editedGame &&
         <p>This particular game is missing from tournament data for some reason.</p>
       }
-      <button
-        disabled={!totalsOk}
-        onClick={() => storeGame()}>
-        Store game
-      </button>
       {
         !totalsOk &&
         <p>Game cannot be saved because the raw points and/or uma do not total 0.</p>
       }
-    </div>
+    </Popup>
   );
 };
 
-export default AddFinishedGame;
+export default EditResult;

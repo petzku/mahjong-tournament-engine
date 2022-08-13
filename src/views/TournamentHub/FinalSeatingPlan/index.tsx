@@ -4,18 +4,26 @@ import { State } from "../../../state";
 import { Game } from "../../../data-types/tournament-data-types";
 
 import TextInput from "../../../components/TextInput";
+import EditResult from "./EditResult";
 import Hanchan from "./Hanchan";
 
 import { generateArray } from "../../../utils/generateArray";
 
+type ResultsCoordinate = {
+  round: number,
+  table: number
+};
+
+const notEditingResults: ResultsCoordinate = {
+  round: -1,
+  table: -1
+};
+
 const FinalSeatingPlan = () => {
+  const [editingResults, setEditingResults] = useState<ResultsCoordinate>(notEditingResults);
   const [hilight, setHilight] = useState<string>("");
 
   const tournamentState = useSelector((state: State) => state.tournament);
-
-  const openResultsPopup = (round: number, table: number) => {
-    console.log(`open results popup for round ${round} table ${table}`);
-  };
 
   const rounds = generateArray(tournamentState.info.rounds);
   const tables = generateArray(tournamentState.playerNames.length/4);
@@ -55,7 +63,7 @@ const FinalSeatingPlan = () => {
                           west={tournamentState.playerNames[game.participants[2].playerId]}
                           north={tournamentState.playerNames[game.participants[3].playerId]}
                           hilight={hilight}
-                          onClick={() => openResultsPopup(roundId, tableId)}
+                          onClick={() => setEditingResults({round: roundId, table: tableId})}
                         />
                       </td>
                       :
@@ -68,6 +76,14 @@ const FinalSeatingPlan = () => {
           }
         </tbody>
       </table>
+      {
+        editingResults.round !== -1 &&
+        <EditResult
+          round={editingResults.round}
+          table={editingResults.table}
+          onFinish={() => setEditingResults(notEditingResults)}
+        />
+      }
     </div>
   );
 };

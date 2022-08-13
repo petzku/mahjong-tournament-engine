@@ -1,4 +1,4 @@
-import styles from "./ConfirmationPopup.module.css";
+import styles from "./Popup.module.css";
 
 type PopupProps = {
   title: string,
@@ -8,7 +8,8 @@ type PopupProps = {
   onCancel: () => void,
   onConfirm: () => void
   cancelHidden?: boolean,
-  confirmHidden?: boolean
+  confirmHidden?: boolean,
+  confirmDisabled?: boolean
 }
 
 const Popup = (props: PopupProps) => {
@@ -24,11 +25,18 @@ const Popup = (props: PopupProps) => {
         <div className={styles.buttons}>
           {
             !props.cancelHidden &&
-            <button onClick={() => props.onCancel()}>{props.cancelText}</button>
+            <button
+              onClick={() => props.onCancel()}>
+              {props.cancelText}
+            </button>
           }
           {
             !props.confirmHidden &&
-            <button onClick={() => props.onConfirm()}>{props.confirmText}</button>
+            <button
+              disabled={props.confirmDisabled}
+              onClick={() => props.onConfirm()}>
+              {props.confirmText}
+            </button>
           }
         </div>
       </div>
