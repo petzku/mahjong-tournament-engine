@@ -12,7 +12,11 @@ const FinalSeatingPlan = () => {
   const [hilight, setHilight] = useState<string>("");
 
   const tournamentState = useSelector((state: State) => state.tournament);
-  
+
+  const openResultsPopup = (round: number, table: number) => {
+    console.log(`open results popup for round ${round} table ${table}`);
+  };
+
   const rounds = generateArray(tournamentState.info.rounds);
   const tables = generateArray(tournamentState.playerNames.length/4);
 
@@ -51,6 +55,7 @@ const FinalSeatingPlan = () => {
                           west={tournamentState.playerNames[game.participants[2].playerId]}
                           north={tournamentState.playerNames[game.participants[3].playerId]}
                           hilight={hilight}
+                          onClick={() => openResultsPopup(roundId, tableId)}
                         />
                       </td>
                       :

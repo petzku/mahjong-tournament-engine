@@ -7,6 +7,7 @@ type HanchanProps = {
   south: PlayerName,
   west: PlayerName,
   north: PlayerName,
+  onClick: () => void,
   hilight: string
 };
 
@@ -24,8 +25,9 @@ const Hanchan = (props: HanchanProps) => {
   const northClassName = `player ${northHilight}`;
 
   return (
-    <div className={"hanchan"}>
-      <table className={"players"}>
+    <div className={styles.hanchan}>
+      <div className={styles.clickable} onClick={() => props.onClick()}>{null}</div>
+      <table>
         <tbody>
           <tr>
             <td>East</td>

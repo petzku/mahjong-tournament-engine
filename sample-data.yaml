@@ -1,12 +1,11 @@
 tournament:
   info:
-    title: Tenpai Summer Championship 2022
-    location: Lautapelikahvila Taverna
+    title: Mahjong Pompeii Summer Championship 2022
+    location: PompeINN
     start: 2022-06-02T11:00:00Z
     end: 2022-06-03T18:00:00Z
     rounds: 8
     oka: 0
-    uma: [15, 5]
   players:
     - Aaro Laine
     - Olli Karppinen
@@ -33,9 +32,9 @@ tournament:
     - Marje Saarinen
     - Tea Partanen
   tables:
-    - setOwner: Joni V.
-      matOwner: Joni V.
-      notes: Nopat Villen setistä
+    - setOwner: Senja N.
+      matOwner: Senja N.
+      notes: Nopat Erikan setistä
       pointSticks:
         tenThousand: 1
         fiveThousand: 3
@@ -44,15 +43,15 @@ tournament:
         oneHundred: 5
     - setOwner: Pauli
       matOwner: Pauli
-      notes: pistelaput Tommin setistä
+      notes: pistelaput Joelin setistä
       pointSticks:
         tenThousand: 1
         fiveThousand: 2
         oneThousand: 9
         fiveHundred: 1
         oneHundred: 5
-    - setOwner: Pauli
-      matOwner: Pauli
+    - setOwner: Aaro
+      matOwner: Aaro
       notes:
       pointSticks:
         tenThousand: 1
@@ -60,8 +59,8 @@ tournament:
         oneThousand: 9
         fiveHundred: 1
         oneHundred: 5
-    - setOwner: Pauli
-      matOwner: Pauli
+    - setOwner: Aaro
+      matOwner: Aaro
       notes: 
       pointSticks:
         tenThousand: 1
@@ -69,8 +68,8 @@ tournament:
         oneThousand: 9
         fiveHundred: 1
         oneHundred: 5
-    - setOwner: Pauli
-      matOwner: Pauli
+    - setOwner: Aaro
+      matOwner: Aaro
       notes: 
       pointSticks:
         tenThousand: 1
@@ -78,8 +77,8 @@ tournament:
         oneThousand: 9
         fiveHundred: 1
         oneHundred: 5
-    - setOwner: Pauli
-      matOwner: Pauli
+    - setOwner: Aaro
+      matOwner: Aaro
       notes: 
       pointSticks:
         tenThousand: 1
@@ -91,16 +90,24 @@ tournament:
     - round: 1
       table: 0
       finished: true
-      score:
-        east:
-          playerId: 0
-          points: -10
-        south:
-          playerId: 1
-          points: -20
-        west:
-          playerId: 2
-          points: 10
-        north:
-          playerId: 3
-          points: 20
+      participants:
+        - playerId: 0
+          score:
+            raw: -10000
+            uma: -5000
+            penalty: 0
+        - playerId: 1
+          score:
+            raw: -20000
+            uma: -15000
+            penalty: 0
+        - playerId: 2
+          score:
+            raw: 10000
+            uma: 5000
+            penalty: 0
+        - playerId: 3
+          score:
+            raw: 20000
+            uma: 150000
+            penalty: 0
