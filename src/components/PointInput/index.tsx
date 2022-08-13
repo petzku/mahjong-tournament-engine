@@ -1,5 +1,7 @@
 import { formatPoints } from "../../utils/formatPoints";
 
+import styles from "./PointInput.module.css";
+
 export type PointInputType = {
   positive: boolean,
   value: number
@@ -64,7 +66,7 @@ const PointInput = (props: PointInputProps) => {
     <div className={`text-input ${props.className ? props.className : ""}`}>
       <label>{props.label}</label>
       <input
-        className={props.className}
+        className={styles.pointInput}
         type={"text"}
         value={displayValue}
         onKeyDown={(e) => onKeyDown(e)}

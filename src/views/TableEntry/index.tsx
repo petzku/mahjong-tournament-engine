@@ -11,7 +11,6 @@ import NumberInput from "../../components/NumberInput";
 
 import { generateArray } from "../../utils/generateArray";
 import { formatPoints } from "../../utils/formatPoints";
-import ConfirmationPopup from "../../components/ConfirmationPopup";
 
 const defaultPointSticks: PointSticks = {
   tenThousand: 1,

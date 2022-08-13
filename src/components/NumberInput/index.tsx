@@ -1,3 +1,5 @@
+import styles from "./NumberInput.module.css";
+
 type NumberInputProps = {
   className?: string,
   label: string,
@@ -9,11 +11,12 @@ type NumberInputProps = {
 
 const NumberInput = (props: NumberInputProps) => {
   return (
-    <div className={`text-input ${props.className ? props.className : ""} ${props.disabled ? "disabled" : ""}`}>
-      <label>{props.label}</label>
+    <div className={`${props.className ? props.className : ""} ${props.disabled ? "disabled" : ""}`}>
+      <label className={styles.label}>{props.label}</label>
       {
         props.steps.map((step: number, index: number) => (
           <button
+            className={styles.button}
             disabled={props.disabled}
             key={`numberinput-${props.label}-minus-${index}`}
             onClick={() => props.onChange(props.value - props.steps[props.steps.length - 1 - index])}>
@@ -22,6 +25,7 @@ const NumberInput = (props: NumberInputProps) => {
         ))
       }
       <input
+        className={styles.input}
         disabled={props.disabled}
         type={"text"}
         value={props.value.toString()}
@@ -30,6 +34,7 @@ const NumberInput = (props: NumberInputProps) => {
       {
         props.steps.map((step: number, index: number) => (
           <button
+          className={styles.button}
             disabled={props.disabled}
             key={`numberinput-${props.label}-plus-${index}`}
             onClick={() => props.onChange(props.value + step)}>
@@ -37,7 +42,6 @@ const NumberInput = (props: NumberInputProps) => {
           </button>
         ))
       }
-      {/* <button onClick={() => props.onChange(props.value + 1)}>+</button> */}
     </div>
   );
 };

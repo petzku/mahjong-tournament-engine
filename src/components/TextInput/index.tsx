@@ -1,4 +1,4 @@
-import "./TextInput.scss";
+import styles from "./TextInput.module.css";
 
 type TextInputProps = {
   className?: string,
@@ -10,12 +10,13 @@ type TextInputProps = {
 
 const TextInput = (props: TextInputProps) => {
   return (
-    <div className={`text-input ${props.className ? props.className : ""} ${props.disabled ? "disabled" : ""}`}>
+    <div className={`${props.className ? props.className : ""} ${props.disabled ? "disabled" : ""}`}>
       {
         props.label &&
-        <label>{props.label}</label>
+        <label className={styles.label}>{props.label}</label>
       }
       <input
+        className={styles.input}
         disabled={props.disabled}
         type={"text"}
         value={props.value}

@@ -8,8 +8,6 @@ import { tournamentActionCreators, State } from "../../../state";
 import { Game, PlayerName, Score } from "../../../data-types/tournament-data-types";
 import {formatPoints} from "../../../utils/formatPoints";
 
-import "./AddFinishedGame.scss";
-
 type AddFinishedGameProps = {
   onFinish: () => void
 };
@@ -183,7 +181,6 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                 <td>{getPlayerName(selectedGame?.participants[0].playerId)}</td>
                 <td>
                   <PointInput
-                    className={"finished-game-score-input"}
                     label={""}
                     value={score[0]}
                     onChange={(newValue: PointInputType) => setScore([newValue, score[1], score[2], score[3]])}
@@ -192,7 +189,6 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                 </td>
                 <td>
                   <PointInput
-                    className={"finished-game-score-input"}
                     label={""}
                     value={uma[0]}
                     onChange={(newValue: PointInputType) => setUma([newValue, uma[1], uma[2], uma[3]])}
@@ -201,7 +197,6 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                 </td>
                 <td>
                   <PointInput
-                    className={"finished-game-score-input"}
                     label={""}
                     value={penalty[0]}
                     onChange={(newValue: PointInputType) => setPenalty([newValue, penalty[1], penalty[2], penalty[3]])}
@@ -216,7 +211,6 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                 <td>{getPlayerName(selectedGame?.participants[1].playerId)}</td>
                 <td>
                   <PointInput
-                    className={"finished-game-score-input"}
                     label={""}
                     value={score[1]}
                     onChange={(newValue: PointInputType) => setScore([score[0], newValue, score[2], score[3]])}
@@ -225,7 +219,6 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                 </td>
                 <td>
                   <PointInput
-                    className={"finished-game-score-input"}
                     label={""}
                     value={uma[1]}
                     onChange={(newValue: PointInputType) => setUma([uma[0], newValue, uma[2], uma[3]])}
@@ -234,7 +227,6 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                 </td>
                 <td>
                   <PointInput
-                    className={"finished-game-score-input"}
                     label={""}
                     value={penalty[1]}
                     onChange={(newValue: PointInputType) => setPenalty([penalty[0], newValue, penalty[2], penalty[3]])}
@@ -249,7 +241,6 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                 <td>{getPlayerName(selectedGame?.participants[2].playerId)}</td>
                 <td>
                   <PointInput
-                    className={"finished-game-score-input"}
                     label={""}
                     value={score[2]}
                     onChange={(newValue: PointInputType) => setScore([score[0], score[1], newValue, score[3]])}
@@ -258,7 +249,6 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                 </td>
                 <td>
                   <PointInput
-                    className={"finished-game-score-input"}
                     label={""}
                     value={uma[2]}
                     onChange={(newValue: PointInputType) => setUma([uma[0], uma[1], newValue, uma[3]])}
@@ -267,7 +257,6 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                 </td>
                 <td>
                   <PointInput
-                    className={"finished-game-score-input"}
                     label={""}
                     value={penalty[2]}
                     onChange={(newValue: PointInputType) => setPenalty([penalty[0], penalty[1], newValue, penalty[3]])}
@@ -282,7 +271,6 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                 <td>{getPlayerName(selectedGame?.participants[3].playerId)}</td>
                 <td>
                   <PointInput
-                    className={"finished-game-score-input"}
                     label={""}
                     value={score[3]}
                     onChange={(newValue: PointInputType) => setScore([score[0], score[1], score[2], newValue])}
@@ -291,7 +279,6 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                 </td>
                 <td>
                   <PointInput
-                    className={"finished-game-score-input"}
                     label={""}
                     value={uma[3]}
                     onChange={(newValue: PointInputType) => setUma([uma[0], uma[1], uma[2], newValue])}
@@ -300,7 +287,6 @@ const AddFinishedGame = (props: AddFinishedGameProps) => {
                 </td>
                 <td>
                   <PointInput
-                    className={"finished-game-score-input"}
                     label={""}
                     value={penalty[3]}
                     onChange={(newValue: PointInputType) => setPenalty([penalty[0], penalty[1], uma[3], newValue])}

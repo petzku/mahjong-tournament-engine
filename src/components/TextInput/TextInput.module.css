@@ -1,0 +1,12 @@
+.label
+{
+  display: block;
+  font-weight: bold;
+}
+
+.input
+{
+  border-radius: 3px;
+  font-size: 125%;
+  width: 15em;
+}

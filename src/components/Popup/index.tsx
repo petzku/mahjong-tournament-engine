@@ -1,6 +1,6 @@
 import styles from "./ConfirmationPopup.module.css";
 
-type ConfirmationPopupProps = {
+type PopupProps = {
   title: string,
   children: React.ReactNode,
   cancelText: string,
@@ -11,7 +11,7 @@ type ConfirmationPopupProps = {
   confirmHidden?: boolean
 }
 
-const ConfirmationPopup = (props: ConfirmationPopupProps) => {
+const Popup = (props: PopupProps) => {
   return (
     <div className={styles.backdrop}>
       <div className={styles.popup}>
@@ -36,4 +36,4 @@ const ConfirmationPopup = (props: ConfirmationPopupProps) => {
   );
 }
 
-export default ConfirmationPopup;
+export default Popup;
