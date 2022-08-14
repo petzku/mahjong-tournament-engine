@@ -62,6 +62,7 @@ const FinalSeatingPlan = () => {
                           south={tournamentState.playerNames[game.participants[1].playerId]}
                           west={tournamentState.playerNames[game.participants[2].playerId]}
                           north={tournamentState.playerNames[game.participants[3].playerId]}
+                          finished={game.finished}
                           hilight={hilight}
                           onClick={() => setEditingResults({round: roundId, table: tableId})}
                         />

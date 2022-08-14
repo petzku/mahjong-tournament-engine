@@ -1,6 +1,13 @@
 .hanchan
 {
+  padding: 0 10px;
   position: relative;
+}
+
+.finished
+{
+  border-radius: 5px;
+  background: rgba(0, 255, 0, 0.2);
 }
 
 .hilightedPlayer

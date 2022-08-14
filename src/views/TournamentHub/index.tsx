@@ -12,12 +12,8 @@ const TournamentHub = () => {
   const [view, setView] = useState<Views>(Views.SeatingPlan);
 
   return (
-    <div className={"in-tournament"}>
-      <div className={"controls"}>
-        <button>Edit players</button>
-        <button>Edit tables</button>
-      </div>
-      <div className={"view"}>
+    <div>
+      <div>
         <button onClick={() => setView(Views.Standings)}>View standings</button>
         <button onClick={() => setView(Views.SeatingPlan)}>View seating plan</button>
       </div>
