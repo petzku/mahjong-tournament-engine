@@ -56,9 +56,7 @@ const PointInput = (props: PointInputProps) => {
     }
   };
 
-  const sign: string = ((): string => {
-    return props.value.positive ? "+" : "-";
-  })();
+  const sign = props.value.positive ? "+" : "-";
 
   const displayValue = `${sign}${formatPoints(Math.abs(getNumericValue(props.value)))}`;
 
