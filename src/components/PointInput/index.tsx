@@ -12,12 +12,11 @@ export const getNumericValue = (value: PointInputType): number => {
 };
 
 type PointInputProps = {
-  className?: string,
-  label: string,
   value: PointInputType,
   onChange: Function,
   unflippable?: boolean,
   tabIndex?: number
+  short: boolean
 };
 
 const PointInput = (props: PointInputProps) => {
@@ -39,7 +38,12 @@ const PointInput = (props: PointInputProps) => {
         props.onChange({positive: false, value: props.value.value});
         break;
       case "Backspace":
-        props.onChange({positive: props.value.positive, value: Math.floor(props.value.value/1000)*100})
+        if (props.short)
+        {
+          props.onChange({positive: props.value.positive, value: Math.floor(props.value.value/1000)*100});
+          break;
+        }
+        props.onChange({positive: props.value.positive, value: Math.floor(props.value.value/10)});
         break;
       case "0":
       case "1":
@@ -51,18 +55,27 @@ const PointInput = (props: PointInputProps) => {
       case "7":
       case "8":
       case "9":
-        props.onChange({positive: props.value.positive, value: props.value.value*10+(+e.key*100)})
+        if (props.short)
+        {
+          props.onChange({positive: props.value.positive, value: props.value.value*10+(+e.key*100)});
+          break;
+        }
+        props.onChange({positive: props.value.positive, value: props.value.value*10+(+e.key)});
         break;
     }
   };
 
   const sign = props.value.positive ? "+" : "-";
 
-  const displayValue = `${sign}${formatPoints(Math.abs(getNumericValue(props.value)))}`;
+  const displayValue =
+    props.short
+    ?
+    `${sign}${formatPoints(Math.abs(getNumericValue(props.value)))}`
+    :
+    `${sign}${Math.abs(getNumericValue(props.value))}`;
 
   return (
-    <div className={`text-input ${props.className ? props.className : ""}`}>
-      <label>{props.label}</label>
+    <div>
       <input
         className={styles.pointInput}
         type={"text"}

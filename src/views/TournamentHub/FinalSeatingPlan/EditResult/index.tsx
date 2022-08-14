@@ -18,44 +18,6 @@ type AddFinishedGameProps = {
 
 type PointState = [PointInputType, PointInputType, PointInputType, PointInputType];
 
-const initialPointState: PointState = [
-  {
-    positive: true,
-    value: 0
-  },
-  {
-    positive: true,
-    value: 0
-  },
-  {
-    positive: true,
-    value: 0
-  },
-  {
-    positive: true,
-    value: 0
-  }
-];
-
-const initialPenaltyState: PointState = [
-  {
-    positive: false,
-    value: 0
-  },
-  {
-    positive: false,
-    value: 0
-  },
-  {
-    positive: false,
-    value: 0
-  },
-  {
-    positive: false,
-    value: 0
-  }
-];
-
 const EditResult = (props: AddFinishedGameProps) => {
   const tournamentState = useSelector((state: State) => state.tournament);
   const editedGame = tournamentState.games.find((game: Game): boolean => (game.round === props.round && game.table === props.table));
@@ -114,7 +76,7 @@ const EditResult = (props: AddFinishedGameProps) => {
       value: Math.abs(editedGame ? editedGame.participants[3].score.penalty : 0)
     }
   ]);
-  const [controlledMode, setControlledMode] = useState<boolean>(true);
+  const [safeMode, setSafeMode] = useState<boolean>(true);
 
   const dispatch = useDispatch();
   const {addGames} = bindActionCreators(tournamentActionCreators, dispatch);
@@ -185,11 +147,11 @@ const EditResult = (props: AddFinishedGameProps) => {
     }
   };
 
-  const totalsOk = getScoreSum() === 0 && getUmaSum() === 0;
+  const totalsOk = !safeMode || (getScoreSum() === 0 && getUmaSum() === 0);
 
   return (
     <Popup
-      title={"Add Finished Game"}
+      title={"Edit Results"}
       cancelText={"Discard"}
       confirmText={"Store results"}
       onCancel={() => props.onFinish()}
@@ -197,9 +159,9 @@ const EditResult = (props: AddFinishedGameProps) => {
       confirmDisabled={!totalsOk}>
       <Toggle
         false={"Danger mode"}
-        true={"Controlled mode"}
-        value={controlledMode}
-        onSwitch={() => setControlledMode(!controlledMode)}
+        true={"Safe mode"}
+        value={safeMode}
+        onSwitch={() => setSafeMode(!safeMode)}
       />
       <p>Editing results for Round {props.round + 1} Table {props.table + 1}.</p>
       {
@@ -209,7 +171,7 @@ const EditResult = (props: AddFinishedGameProps) => {
       {
         editedGame &&
         <div>
-          <table className={"final-score-input-table"}>
+          <table>
             <tbody>
               <tr>
                 <th colSpan={2}>Player</th>
@@ -223,137 +185,139 @@ const EditResult = (props: AddFinishedGameProps) => {
                 <td>{getPlayerName(editedGame?.participants[0].playerId)}</td>
                 <td>
                   <PointInput
-                    label={""}
                     value={score[0]}
                     onChange={(newValue: PointInputType) => setScore([newValue, score[1], score[2], score[3]])}
                     tabIndex={1}
+                    short={safeMode}
                   />
                 </td>
                 <td>
                   <PointInput
-                    label={""}
                     value={uma[0]}
                     onChange={(newValue: PointInputType) => setUma([newValue, uma[1], uma[2], uma[3]])}
                     tabIndex={5}
+                    short={safeMode}
                   />
                 </td>
                 <td>
                   <PointInput
-                    label={""}
                     value={penalty[0]}
                     onChange={(newValue: PointInputType) => setPenalty([newValue, penalty[1], penalty[2], penalty[3]])}
                     tabIndex={9}
                     unflippable={true}
+                    short={safeMode}
                   />
                 </td>
-                <td>{formatPoints(getFinalForPlayer(0))}</td>
+                <td>{safeMode ? formatPoints(getFinalForPlayer(0)) : getFinalForPlayer(0)}</td>
               </tr>
               <tr>
                 <td>South</td>
                 <td>{getPlayerName(editedGame?.participants[1].playerId)}</td>
                 <td>
                   <PointInput
-                    label={""}
                     value={score[1]}
                     onChange={(newValue: PointInputType) => setScore([score[0], newValue, score[2], score[3]])}
                     tabIndex={2}
+                    short={safeMode}
                   />
                 </td>
                 <td>
                   <PointInput
-                    label={""}
                     value={uma[1]}
                     onChange={(newValue: PointInputType) => setUma([uma[0], newValue, uma[2], uma[3]])}
                     tabIndex={6}
+                    short={safeMode}
                   />
                 </td>
                 <td>
                   <PointInput
-                    label={""}
                     value={penalty[1]}
                     onChange={(newValue: PointInputType) => setPenalty([penalty[0], newValue, penalty[2], penalty[3]])}
                     tabIndex={10}
                     unflippable={true}
+                    short={safeMode}
                   />
                 </td>
-                <td>{formatPoints(getFinalForPlayer(1))}</td>
+                <td>{safeMode ? formatPoints(getFinalForPlayer(1)) : getFinalForPlayer(1)}</td>
               </tr>
               <tr>
                 <td>West</td>
                 <td>{getPlayerName(editedGame?.participants[2].playerId)}</td>
                 <td>
                   <PointInput
-                    label={""}
                     value={score[2]}
                     onChange={(newValue: PointInputType) => setScore([score[0], score[1], newValue, score[3]])}
                     tabIndex={3}
+                    short={safeMode}
                   />
                 </td>
                 <td>
                   <PointInput
-                    label={""}
                     value={uma[2]}
                     onChange={(newValue: PointInputType) => setUma([uma[0], uma[1], newValue, uma[3]])}
                     tabIndex={7}
+                    short={safeMode}
                   />
                 </td>
                 <td>
                   <PointInput
-                    label={""}
                     value={penalty[2]}
                     onChange={(newValue: PointInputType) => setPenalty([penalty[0], penalty[1], newValue, penalty[3]])}
                     tabIndex={11}
                     unflippable={true}
+                    short={safeMode}
                   />
                 </td>
-                <td>{formatPoints(getFinalForPlayer(2))}</td>
+                <td>{safeMode ? formatPoints(getFinalForPlayer(2)) : getFinalForPlayer(2)}</td>
               </tr>
               <tr>
                 <td>North</td>
                 <td>{getPlayerName(editedGame?.participants[3].playerId)}</td>
                 <td>
                   <PointInput
-                    label={""}
                     value={score[3]}
                     onChange={(newValue: PointInputType) => setScore([score[0], score[1], score[2], newValue])}
                     tabIndex={4}
+                    short={safeMode}
                   />
                 </td>
                 <td>
                   <PointInput
-                    label={""}
                     value={uma[3]}
                     onChange={(newValue: PointInputType) => setUma([uma[0], uma[1], uma[2], newValue])}
                     tabIndex={8}
+                    short={safeMode}
                   />
                 </td>
                 <td>
                   <PointInput
-                    label={""}
                     value={penalty[3]}
                     onChange={(newValue: PointInputType) => setPenalty([penalty[0], penalty[1], uma[3], newValue])}
                     tabIndex={12}
                     unflippable={true}
+                    short={safeMode}
                   />
                 </td>
-                <td>{formatPoints(getFinalForPlayer(3))}</td>
+                <td>{safeMode ? formatPoints(getFinalForPlayer(3)) : getFinalForPlayer(3)}</td>
               </tr>
             </tbody>
             <tfoot>
               <tr>
                 <td colSpan={2}>{null}</td>
-                <td>Sum: {formatPoints(getScoreSum())}</td>
-                <td>Sum: {formatPoints(getUmaSum())}</td>
+                <td>Sum: {safeMode ? formatPoints(getScoreSum()) : getScoreSum()}</td>
+                <td>Sum: {safeMode ? formatPoints(getUmaSum()) : getUmaSum()}</td>
                 <td colSpan={2}>{null}</td>
               </tr>
             </tfoot>
           </table>
-          <p>Enter points in short form, i.e. "12.3" instead of "12300".</p>
+          {
+            safeMode
+            ?
+            <p>Enter points in short form, i.e. "12.3" instead of "12300".</p>
+            :
+            <p>Enter points in long form, i.e. "12300" instead of "12.3".</p>
+          }
         </div>
-      }
-      {
-        editedGame && editedGame.finished &&
-        <p>This particular game has already been flagged as finished.</p>
       }
       {
         !editedGame &&
