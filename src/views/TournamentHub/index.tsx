@@ -5,7 +5,7 @@ import { State } from "../../state";
 import download from "../../utils/download";
 
 import Standings from "../../components/Standings";
-import FinalSeatingPlan from "./FinalSeatingPlan";
+import Schedule from "./Schedule";
 
 enum Views {
   Standings,
@@ -29,7 +29,7 @@ const TournamentHub = () => {
       }
       {
         view === Views.SeatingPlan &&
-        <FinalSeatingPlan/>
+        <Schedule/>
       }
     </div>
   )

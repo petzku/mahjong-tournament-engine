@@ -1,7 +1,6 @@
-import {Game, PlayerName, Table, Tournament} from "../../data-types/tournament-data-types";
+import { Tournament } from "../../data-types/tournament-data-types";
 import Action from "../actions/tournament-actions";
 import ActionTypes from "../action-types/tournament-action-types";
-import yaml from "js-yaml";
 
 export const initialState: Tournament = {
   info: {
@@ -26,7 +25,7 @@ const reducer = (state: Tournament = initialState, action: Action): Tournament =
         ...state,
         info: action.payload
       };
-      localStorage.setItem("mahjong-tournament", yaml.dump(newState));
+      localStorage.setItem("mahjong-tournament", JSON.stringify(newState));
       return newState;
     }
     case ActionTypes.AddPlayers:
@@ -35,7 +34,7 @@ const reducer = (state: Tournament = initialState, action: Action): Tournament =
         ...state,
         playerNames: action.payload
       };
-      localStorage.setItem("mahjong-tournament", yaml.dump(newState));
+      localStorage.setItem("mahjong-tournament", JSON.stringify(newState));
       return newState;
     }
     case ActionTypes.AddTables:
@@ -44,7 +43,7 @@ const reducer = (state: Tournament = initialState, action: Action): Tournament =
         ...state,
         tables: action.payload
       };
-      localStorage.setItem("mahjong-tournament", yaml.dump(newState));
+      localStorage.setItem("mahjong-tournament", JSON.stringify(newState));
       return newState;
     }
     case ActionTypes.AddGames:
@@ -53,11 +52,13 @@ const reducer = (state: Tournament = initialState, action: Action): Tournament =
         ...state,
         games: action.payload
       };
-      localStorage.setItem("mahjong-tournament", yaml.dump(newState));
+      localStorage.setItem("mahjong-tournament", JSON.stringify(newState));
       return newState;
     }
+    case ActionTypes.SetTournament:
+      localStorage.setItem("mahjong-tournament", JSON.stringify(action.payload));
+      return action.payload;
     default:
-      localStorage.setItem("mahjong-tournament", yaml.dump(state));
       return state;
   }
 };

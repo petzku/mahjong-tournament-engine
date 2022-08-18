@@ -19,7 +19,7 @@ const notEditingResults: ResultsCoordinate = {
   table: -1
 };
 
-const FinalSeatingPlan = () => {
+const Schedule = () => {
   const [editingResults, setEditingResults] = useState<ResultsCoordinate>(notEditingResults);
   const [hilight, setHilight] = useState<string>("");
 
@@ -89,4 +89,4 @@ const FinalSeatingPlan = () => {
   );
 };
 
-export default FinalSeatingPlan;
+export default Schedule;

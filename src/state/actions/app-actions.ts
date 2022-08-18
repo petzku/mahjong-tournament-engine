@@ -6,6 +6,11 @@ export type ChangeView = {
   payload: View
 };
 
-type Action = ChangeView;
+export type MarkTournamentLoaded = {
+  type: ActionTypes.MarkTournamentLoaded,
+  payload: boolean
+};
+
+type Action = ChangeView | MarkTournamentLoaded;
 
 export default Action;

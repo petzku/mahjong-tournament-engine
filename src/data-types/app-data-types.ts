@@ -9,5 +9,6 @@ export enum Views {
 export type View = Views;
 
 export type App = {
-  view: View
+  view: View,
+  tournamentLoaded: boolean
 };

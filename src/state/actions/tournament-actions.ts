@@ -1,5 +1,5 @@
 import ActionTypes from "../action-types/tournament-action-types";
-import {GeneralInfo} from "../../data-types/tournament-data-types";
+import {GeneralInfo, Tournament} from "../../data-types/tournament-data-types";
 import {PlayerName} from "../../data-types/tournament-data-types";
 import {Table} from "../../data-types/tournament-data-types";
 import {Game} from "../../data-types/tournament-data-types";
@@ -24,10 +24,16 @@ export type AddGamesAction = {
   payload: Game[]
 };
 
+export type SetTournament = {
+  type: ActionTypes.SetTournament,
+  payload: Tournament
+};
+
 type Action =
  EditTournamentInfoAction |
  AddPlayersAction | 
  AddTablesAction | 
- AddGamesAction;
+ AddGamesAction |
+ SetTournament;
 
 export default Action;

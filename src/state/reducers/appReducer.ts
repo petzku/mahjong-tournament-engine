@@ -3,7 +3,8 @@ import Action from "../actions/app-actions";
 import ActionTypes from "../action-types/app-action-types";
 
 const initialState: App = {
-  view: Views.TournamentInfoEntry
+  view: Views.TournamentInfoEntry,
+  tournamentLoaded: false
 };
 
 const reducer = (state: App = initialState, action: Action): App => {
@@ -13,6 +14,11 @@ const reducer = (state: App = initialState, action: Action): App => {
       return {
         ...state,
         view: action.payload
+      };
+    case ActionTypes.MarkTournamentLoaded:
+      return {
+        ...state,
+        tournamentLoaded: action.payload
       };
     default:
       return state;

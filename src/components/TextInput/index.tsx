@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import styles from "./TextInput.module.css";
 
 type TextInputProps = {
@@ -20,7 +21,7 @@ const TextInput = (props: TextInputProps) => {
         disabled={props.disabled}
         type={"text"}
         value={props.value}
-        onChange={(e): void => props.onChange(e.target.value)}
+        onChange={(e: ChangeEvent<HTMLInputElement>): void => props.onChange(e.target.value)}
       />
     </div>
   );
