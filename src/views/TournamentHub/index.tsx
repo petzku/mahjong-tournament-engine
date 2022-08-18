@@ -1,35 +1,49 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import { State } from "../../state";
+import { appActionCreators, State } from "../../state";
 import download from "../../utils/download";
 
 import Standings from "../../components/Standings";
 import Schedule from "./Schedule";
+import { Game } from "../../data-types/tournament-data-types";
+import { Views } from "../../data-types/app-data-types";
 
-enum Views {
+enum Tabs {
   Standings,
   SeatingPlan
 };
 
 const TournamentHub = () => {
+  const dispatch = useDispatch();
   const tournamentState = useSelector((state: State) => state.tournament);
-  const [view, setView] = useState<Views>(Views.SeatingPlan);
+  const [tab, setTab] = useState<Tabs>(Tabs.SeatingPlan);
+
+  const { changeView } = bindActionCreators(appActionCreators, dispatch);
+
+  const allFinished = !tournamentState.games.some((game: Game) => !game.finished);
 
   return (
     <div>
       <div>
-        <button onClick={() => setView(Views.Standings)}>View standings</button>
-        <button onClick={() => setView(Views.SeatingPlan)}>View seating plan</button>
+        <button onClick={() => setTab(Tabs.Standings)}>View standings</button>
+        <button onClick={() => setTab(Tabs.SeatingPlan)}>View schedule</button>
         <button onClick={() => download(tournamentState)}>Download data file</button>
       </div>
       {
-        view === Views.Standings &&
+        tab === Tabs.Standings &&
         <Standings/>
       }
       {
-        view === Views.SeatingPlan &&
+        tab === Tabs.SeatingPlan &&
         <Schedule/>
+      }
+      {
+        allFinished &&
+        <div>
+          <button onClick={() => changeView(Views.PostTournament)}>Enter post-tournament ceremony</button>
+        </div>
       }
     </div>
   )
