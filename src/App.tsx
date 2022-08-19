@@ -8,7 +8,8 @@ import TournamentInfoView from "./views/TournamentInfoEntry";
 import PlayerEntryView from "./views/PlayerEntry";
 import TableEntryView from "./views/TableEntry";
 import TournamentHub from "./views/TournamentHub";
-import OfferStoredGame from "./views/OfferStoredGame/OfferStoredGame";
+import OfferStoredGame from "./views/OfferStoredGame";
+import PostTournament from "./views/PostTournament";
 
 const App = () => {
   const appState = useSelector((state: State) => state.app);
@@ -66,9 +67,7 @@ const App = () => {
       }
       {
         appState.view === Views.PostTournament &&
-        <div>
-          <p>final results and shit</p>
-        </div>
+        <PostTournament/>
       }
     </div>
   );

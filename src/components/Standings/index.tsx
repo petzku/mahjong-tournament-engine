@@ -1,28 +1,12 @@
 import { useSelector } from "react-redux";
 import { State } from "../../state";
-import { Seat, Standing, PlayerName, PlayerId, Game, Score } from "../../data-types/tournament-data-types";
+import { Standing } from "../../data-types/tournament-data-types";
 
 import { formatPoints } from "../../utils/formatPoints";
+import { getStandings } from "../../utils/getStandings";
 
 const Standings = () => {
   const tournamentState = useSelector((state: State) => state.tournament);
-
-  const getStandings = (): Standing[] => {
-    const getTotal = (score: Score): number => score.raw + score.uma + score.penalty;
-
-    return tournamentState.playerNames.map((playerName: PlayerName, playerId: PlayerId): Standing => ({
-      playerId: playerId,
-      points: tournamentState.games.reduce((subTotal: number, game: Game) => {
-        const playerSeat = game.participants.find((seat: Seat): boolean => seat.playerId === playerId);
-
-        if (game.finished && playerSeat)
-        {
-          return subTotal + getTotal(playerSeat.score)
-        }
-        return subTotal;
-      }, 0)
-    })).sort((a: Standing, b: Standing): number => (a.points < b.points) ? 1 : -1);
-  };
 
   return (
     <table
@@ -35,7 +19,7 @@ const Standings = () => {
       </thead>
       <tbody>
         {
-          getStandings().map((standing: Standing) => (
+          getStandings(tournamentState).map((standing: Standing) => (
             <tr key={`player-standing-${standing.playerId}`}>
               <td>{tournamentState.playerNames[standing.playerId]}</td>
               <td>{formatPoints(standing.points)}</td>
