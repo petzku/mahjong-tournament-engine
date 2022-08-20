@@ -5,20 +5,22 @@ import { bindActionCreators } from "redux";
 import { appActionCreators, State } from "../../state";
 import download from "../../utils/download";
 
-import Standings from "../../components/Standings";
+import Standings from "./Standings";
 import Schedule from "./Schedule";
+import PlayerSchedules from "./PlayerSchedules";
 import { Game } from "../../data-types/tournament-data-types";
 import { Views } from "../../data-types/app-data-types";
 
 enum Tabs {
   Standings,
-  SeatingPlan
+  TournamentSchedule,
+  PlayerSchedules
 };
 
 const TournamentHub = () => {
   const dispatch = useDispatch();
   const tournamentState = useSelector((state: State) => state.tournament);
-  const [tab, setTab] = useState<Tabs>(Tabs.SeatingPlan);
+  const [tab, setTab] = useState<Tabs>(Tabs.TournamentSchedule);
 
   const { changeView } = bindActionCreators(appActionCreators, dispatch);
 
@@ -28,7 +30,10 @@ const TournamentHub = () => {
     <div>
       <div>
         <button onClick={() => setTab(Tabs.Standings)}>View standings</button>
-        <button onClick={() => setTab(Tabs.SeatingPlan)}>View schedule</button>
+        <button onClick={() => setTab(Tabs.TournamentSchedule)}>Tournament schedule</button>
+        <button onClick={() => setTab(Tabs.PlayerSchedules)}>Player schedules</button>
+      </div>
+      <div>
         <button onClick={() => download(tournamentState)}>Download data file</button>
       </div>
       {
@@ -36,8 +41,12 @@ const TournamentHub = () => {
         <Standings/>
       }
       {
-        tab === Tabs.SeatingPlan &&
+        tab === Tabs.TournamentSchedule &&
         <Schedule/>
+      }
+      {
+        tab === Tabs.PlayerSchedules &&
+        <PlayerSchedules/>
       }
       {
         allFinished &&

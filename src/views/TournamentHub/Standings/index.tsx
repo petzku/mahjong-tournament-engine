@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import { State } from "../../state";
-import { Standing } from "../../data-types/tournament-data-types";
+import { State } from "../../../state";
+import { Standing } from "../../../data-types/tournament-data-types";
 
-import { formatPoints } from "../../utils/formatPoints";
-import { getStandings } from "../../utils/getStandings";
+import { formatPoints } from "../../../utils/formatPoints";
+import { getStandings } from "../../../utils/getStandings";
 
 const Standings = () => {
   const tournamentState = useSelector((state: State) => state.tournament);
