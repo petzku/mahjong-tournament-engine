@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import Dropdown, { DropdownItem } from "../../../components/Dropdown";
-import { Game, PlayerId, PlayerName, Seat, Table } from "../../../data-types/tournament-data-types";
+import { Game, Table } from "../../../data-types/tournament-data-types";
 import { State } from "../../../state";
+import HubTabs from "../HubTabs";
 
 const TableSchedules = () => {
   const [table, setTable] = useState<number>(0);
@@ -18,6 +19,7 @@ const TableSchedules = () => {
 
   return (
     <div>
+      <HubTabs/>
       <Dropdown
         label={"Table"}
         value={table}
@@ -35,28 +37,30 @@ const TableSchedules = () => {
         <tbody>
           {
             schedule.map((game: Game, round: number) => (
-              <tr>
+              <tr key={`table-${table}-schedule-${round}`}>
                 <td>Round {round + 1}</td>
-                <table key={`table-${table}-schedule-${round}`}>
-                  <tbody>
-                    <tr>
-                      <td>East</td>
-                      <td>{tournamentState.playerNames[schedule[round].participants[0].playerId]}</td>
-                    </tr>
-                    <tr>
-                      <td>South</td>
-                      <td>{tournamentState.playerNames[schedule[round].participants[1].playerId]}</td>
-                    </tr>
-                    <tr>
-                      <td>West</td>
-                      <td>{tournamentState.playerNames[schedule[round].participants[2].playerId]}</td>
-                    </tr>
-                    <tr>
-                      <td>North</td>
-                      <td>{tournamentState.playerNames[schedule[round].participants[3].playerId]}</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <td>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>East</td>
+                        <td>{tournamentState.playerNames[schedule[round].participants[0].playerId]}</td>
+                      </tr>
+                      <tr>
+                        <td>South</td>
+                        <td>{tournamentState.playerNames[schedule[round].participants[1].playerId]}</td>
+                      </tr>
+                      <tr>
+                        <td>West</td>
+                        <td>{tournamentState.playerNames[schedule[round].participants[2].playerId]}</td>
+                      </tr>
+                      <tr>
+                        <td>North</td>
+                        <td>{tournamentState.playerNames[schedule[round].participants[3].playerId]}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
               </tr>
             ))
           }

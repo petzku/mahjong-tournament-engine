@@ -2,15 +2,16 @@ import { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Views } from "../../data-types/app-data-types";
-import { tournamentActionCreators, State, appActionCreators } from "../../state";
+import { tournamentActionCreators, State } from "../../../state";
 
-import { Game, PointSticks, Score, Table } from "../../data-types/tournament-data-types";
-import TextInput from "../../components/TextInput";
-import NumberInput from "../../components/NumberInput";
+import { Game, PointSticks, Score, Table } from "../../../data-types/tournament-data-types";
+import TextInput from "../../../components/TextInput";
+import NumberInput from "../../../components/NumberInput";
 
-import { generateArray } from "../../utils/generateArray";
-import { formatPoints } from "../../utils/formatPoints";
+import { generateArray } from "../../../utils/generateArray";
+import { formatPoints } from "../../../utils/formatPoints";
+import { useNavigate } from "react-router-dom";
+import { Routes } from "../../../utils/findRoute";
 
 const defaultPointSticks: PointSticks = {
   tenThousand: 1,
@@ -38,15 +39,15 @@ const PlayerEntryView = () => {
   const [currentTable, setCurrentTable] = useState<Table>(defaultTable);
   const [tables, setTables] = useState<Table[]>([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const tournamentState = useSelector((state: State) => state.tournament);
 
   const {addTables, addGames} = bindActionCreators(tournamentActionCreators, dispatch);
-  const {changeView} = bindActionCreators(appActionCreators, dispatch);
 
   const saveAndContinue = (): void => {
     addTables(tables);
     addGames(createGamesData());
-    changeView(Views.InTournament);
+    navigate(Routes.Schedule);
   };
 
   useEffect(() => {

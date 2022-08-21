@@ -1,12 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Views } from "../../data-types/app-data-types";
-import { appActionCreators, State } from "../../state";
+import { Routes } from "../../utils/findRoute";
+import { useNavigate } from "react-router-dom";
 
 const PostTournament = () => {
-  const dispatch = useDispatch();
-  const tournamentState = useSelector((state: State) => state.tournament);
-  const { changeView } = bindActionCreators(appActionCreators, dispatch);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -23,7 +19,7 @@ const PostTournament = () => {
         <button>Open final results window.</button>
       </div>
       <div>
-        <button onClick={() => changeView(Views.InTournament)}>Return to tournament.</button>
+        <button onClick={() => navigate(Routes.Schedule)}>Return to tournament.</button>
       </div>
     </div>
   );

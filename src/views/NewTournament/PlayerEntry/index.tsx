@@ -1,18 +1,19 @@
 import { useState } from "react";
 
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import { Views } from "../../data-types/app-data-types";
-import { tournamentActionCreators, State, appActionCreators } from "../../state";
+import { tournamentActionCreators } from "../../../state";
+import { Routes } from "../../../utils/findRoute";
 
 import styles from "./PlayerEntryView.module.css";
 
 const PlayerEntryView = () => {
   const [playersInput, setPlayersInput] = useState<string>("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   
   const {addPlayers} = bindActionCreators(tournamentActionCreators, dispatch)
-  const {changeView} = bindActionCreators(appActionCreators, dispatch);
   
   const players = playersInput.split("\n").filter(name => name !== "");
 
@@ -20,7 +21,7 @@ const PlayerEntryView = () => {
 
   const saveAndContinue = (): void => {
     addPlayers(players);
-    changeView(Views.TableEntry);
+    navigate(Routes.TableEntry);
   };
 
   return (

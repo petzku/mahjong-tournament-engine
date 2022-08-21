@@ -3,13 +3,15 @@ import Popup from "../../components/Popup";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tournamentActionCreators, appActionCreators } from "../../state";
-import { loadTournament } from "../../utils/loadTournament";
+import { findRoute } from "../../utils/findRoute";
 import { Tournament } from "../../data-types/tournament-data-types";
+import { useNavigate } from "react-router-dom";
 
 const OfferStoredGame = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { changeView, markTournamentLoaded } = bindActionCreators(appActionCreators, dispatch);
+  const { markTournamentLoaded } = bindActionCreators(appActionCreators, dispatch);
   const { setTournament } = bindActionCreators(tournamentActionCreators, dispatch);
 
   const cancel = () => {
@@ -19,10 +21,10 @@ const OfferStoredGame = () => {
 
   const load = () => {
     const tournament: Tournament = JSON.parse(localStorage.getItem("mahjong-tournament") as string);
-    const view = loadTournament(tournament);
+    const view = findRoute(tournament);
     markTournamentLoaded(true);
     setTournament(tournament);
-    changeView(view);
+    navigate(view);
   };
 
   return (

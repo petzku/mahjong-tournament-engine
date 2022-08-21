@@ -1,74 +1,35 @@
-import { useSelector } from "react-redux";
-import { State } from "./state"; 
-
-import { Views } from "./data-types/app-data-types";
-import { Tournament, isTournamentDataValid } from "./data-types/tournament-data-types";
-
-import TournamentInfoView from "./views/TournamentInfoEntry";
-import PlayerEntryView from "./views/PlayerEntry";
-import TableEntryView from "./views/TableEntry";
-import TournamentHub from "./views/TournamentHub";
-import OfferStoredGame from "./views/OfferStoredGame";
+import TournamentInfoView from "./views/NewTournament/TournamentInfoEntry";
+import PlayerEntryView from "./views/NewTournament/PlayerEntry";
+import TableEntryView from "./views/NewTournament/TableEntry";
 import PostTournament from "./views/PostTournament";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Schedule from "./views/TournamentHub/Schedule";
+import Standings from "./views/TournamentHub/Standings";
+import PlayerSchedules from "./views/TournamentHub/PlayerSchedules";
+import TableSchedules from "./views/TournamentHub/TableSchedules";
 
 const App = () => {
-  const appState = useSelector((state: State) => state.app);
-
-  const offerStoredGame = (() => {
-    if (!appState.tournamentLoaded && localStorage.getItem("mahjong-tournament") !== null)
-    {
-      const readFromLocalStorage: string = localStorage.getItem("mahjong-tournament") as string;
-
-      try
-      {
-        const possibleTournamentState: Tournament = JSON.parse(readFromLocalStorage);
-
-        return isTournamentDataValid(possibleTournamentState);
-      }
-      catch (e)
-      {
-        console.log("error", e);
-        return false;
-      }
-    }
-
-    return false;
-  })();
-
-  if (offerStoredGame)
-  {
-    return (
-      <div className={"mahjong-tournament-engine"}>
-        {
-          offerStoredGame &&
-          <OfferStoredGame/>
-        }
-      </div>
-    );
-  }
-
   return (
     <div className={"mahjong-tournament-engine"}>
-      {
-        appState.view === Views.TournamentInfoEntry &&
-        <TournamentInfoView/>
-      }
-      {
-        appState.view === Views.PlayerEntry &&
-        <PlayerEntryView/>
-      }
-      {
-        appState.view === Views.TableEntry &&
-        <TableEntryView/>
-      }
-      {
-        appState.view === Views.InTournament &&
-        <TournamentHub/>
-      }
-      {
-        appState.view === Views.PostTournament &&
-        <PostTournament/>
-      }
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<TournamentInfoView/>}/>
+          <Route path={"/new"}>
+            <Route index element={<TournamentInfoView/>}/>
+            <Route path={"basic"} element={<TournamentInfoView/>}/>
+            <Route path={"players"} element={<PlayerEntryView/>}/>
+            <Route path={"tables"} element={<TableEntryView/>}/>
+          </Route>
+          <Route path={"/hub"}>
+            <Route index element={<Schedule/>}/>
+            <Route path={"schedule"} element={<Schedule/>}/>
+            <Route path={"standings"} element={<Standings/>}/>
+            <Route path={"playerschedules"} element={<PlayerSchedules/>}/>
+            <Route path={"tableschedules"} element={<TableSchedules/>}/>
+          </Route>
+          <Route path={"/post"} element={<PostTournament/>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

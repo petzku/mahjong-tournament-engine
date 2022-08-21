@@ -1,4 +1,4 @@
-import { PlayerName } from "../../../../data-types/tournament-data-types";
+import { PlayerName } from "../../data-types/tournament-data-types";
 
 import styles from "./Hanchan.module.css";
 

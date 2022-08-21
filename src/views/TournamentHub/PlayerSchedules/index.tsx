@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Dropdown, { DropdownItem } from "../../../components/Dropdown";
 import { Game, PlayerId, PlayerName, Seat } from "../../../data-types/tournament-data-types";
 import { State } from "../../../state";
+import HubTabs from "../HubTabs";
 
 type Placement = {
   round: number,
@@ -29,6 +30,7 @@ const PlayerSchedules = () => {
 
   return (
     <div>
+      <HubTabs/>
       <Dropdown
         label={"Player"}
         value={player}

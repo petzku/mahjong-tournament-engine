@@ -5,9 +5,12 @@ import { Game } from "../../../data-types/tournament-data-types";
 
 import TextInput from "../../../components/TextInput";
 import EditResult from "./EditResult";
-import Hanchan from "./Hanchan";
+import Hanchan from "../../../components/Hanchan";
 
 import { generateArray } from "../../../utils/generateArray";
+import HubTabs from "../HubTabs";
+import { useNavigate } from "react-router-dom";
+import { Routes } from "../../../utils/findRoute";
 
 type ResultsCoordinate = {
   round: number,
@@ -23,13 +26,16 @@ const Schedule = () => {
   const [editingResults, setEditingResults] = useState<ResultsCoordinate>(notEditingResults);
   const [hilight, setHilight] = useState<string>("");
 
+  const navigate = useNavigate();
   const tournamentState = useSelector((state: State) => state.tournament);
 
   const rounds = generateArray(tournamentState.info.rounds);
   const tables = generateArray(tournamentState.playerNames.length/4);
+  const tournamentFinished = !tournamentState.games.some((game: Game): boolean => !game.finished);
 
   return (
     <div>
+      <HubTabs/>
       <TextInput
         label={"Hilight"}
         value={hilight}
@@ -84,6 +90,10 @@ const Schedule = () => {
           table={editingResults.table}
           onFinish={() => setEditingResults(notEditingResults)}
         />
+      }
+      {
+        tournamentFinished &&
+        <button onClick={() => navigate(Routes.PostTournament)}>Enter post-tournament ceremony</button>
       }
     </div>
   );
