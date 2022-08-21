@@ -8,13 +8,15 @@ import download from "../../utils/download";
 import Standings from "./Standings";
 import Schedule from "./Schedule";
 import PlayerSchedules from "./PlayerSchedules";
+import TableSchedules from "./TableSchedules";
 import { Game } from "../../data-types/tournament-data-types";
 import { Views } from "../../data-types/app-data-types";
 
 enum Tabs {
   Standings,
   TournamentSchedule,
-  PlayerSchedules
+  PlayerSchedules,
+  TableSchedules
 };
 
 const TournamentHub = () => {
@@ -32,6 +34,7 @@ const TournamentHub = () => {
         <button onClick={() => setTab(Tabs.Standings)}>View standings</button>
         <button onClick={() => setTab(Tabs.TournamentSchedule)}>Tournament schedule</button>
         <button onClick={() => setTab(Tabs.PlayerSchedules)}>Player schedules</button>
+        <button onClick={() => setTab(Tabs.TableSchedules)}>Table schedules</button>
       </div>
       <div>
         <button onClick={() => download(tournamentState)}>Download data file</button>
@@ -47,6 +50,10 @@ const TournamentHub = () => {
       {
         tab === Tabs.PlayerSchedules &&
         <PlayerSchedules/>
+      }
+      {
+        tab === Tabs.TableSchedules &&
+        <TableSchedules/>
       }
       {
         allFinished &&
