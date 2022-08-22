@@ -12,7 +12,6 @@ import { findRoute, Routes } from "../../../utils/findRoute";
 import { useNavigate } from "react-router-dom";
 
 const TournamentInfoView = () => {
-  const appState = useSelector((state: State) => state.app);
   const navigate = useNavigate();
   const [currentInfo, setCurrentInfo] = useState<GeneralInfo>(initialState.info);
   const dispatch = useDispatch();

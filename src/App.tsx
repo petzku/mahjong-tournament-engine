@@ -9,38 +9,17 @@ import PlayerSchedules from "./views/TournamentHub/PlayerSchedules";
 import TableSchedules from "./views/TournamentHub/TableSchedules";
 import { useSelector } from "react-redux";
 import { State } from "./state";
-import { isTournamentDataValid, Tournament } from "./data-types/tournament-data-types";
 import OfferStoredGame from "./views/OfferStoredGame";
 
 const App = () => {
   const appState = useSelector((state: State) => state.app);
-  const offerStoredGame = (() => {
-    if (!appState.tournamentLoaded && localStorage.getItem("mahjong-tournament") !== null)
-    {
-      const readFromLocalStorage: string = localStorage.getItem("mahjong-tournament") as string;
-
-      try
-      {
-        const possibleTournamentState: Tournament = JSON.parse(readFromLocalStorage);
-
-        return isTournamentDataValid(possibleTournamentState);
-      }
-      catch (e)
-      {
-        console.log("error", e);
-        return false;
-      }
-    }
-
-    return false;
-  })();
 
   return (
     <div className={"mahjong-tournament-engine"}>
       <BrowserRouter>
         <Routes>
           {
-            offerStoredGame
+            !appState.tournamentLoaded
             ?
             <Route path={"*"} element={<OfferStoredGame/>}/>
             :
