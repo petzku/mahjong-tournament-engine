@@ -3,7 +3,7 @@ import Popup from "../../components/Popup";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tournamentActionCreators, appActionCreators } from "../../state";
-import { findRoute } from "../../utils/findRoute";
+import { findRoute, Routes } from "../../utils/findRoute";
 import { Tournament } from "../../data-types/tournament-data-types";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +17,7 @@ const OfferStoredGame = () => {
   const cancel = () => {
     localStorage.removeItem("mahjong-tournament");
     markTournamentLoaded(true);
+    navigate(Routes.TournamentInfoEntry);
   };
 
   const load = () => {

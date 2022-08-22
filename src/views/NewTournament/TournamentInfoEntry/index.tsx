@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { GeneralInfo, isTournamentDataValid, Tournament } from "../../../data-types/tournament-data-types";
+import { GeneralInfo, Tournament } from "../../../data-types/tournament-data-types";
 
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -8,9 +8,8 @@ import { tournamentActionCreators, appActionCreators, State } from "../../../sta
 import TextInput from "../../../components/TextInput";
 import NumberInput from "../../../components/NumberInput";
 import { initialState } from "../../../state/reducers/tournamentReducer";
-import { findRoute } from "../../../utils/findRoute";
+import { findRoute, Routes } from "../../../utils/findRoute";
 import { useNavigate } from "react-router-dom";
-import OfferStoredGame from "../../OfferStoredGame";
 
 const TournamentInfoView = () => {
   const appState = useSelector((state: State) => state.app);
@@ -23,29 +22,8 @@ const TournamentInfoView = () => {
   
   const onSave = (): void => {
     editTournamentInfo(currentInfo);
-    navigate("/new/players");
+    navigate(Routes.PlayerEntry);
   };
-
-  const offerStoredGame = (() => {
-    if (!appState.tournamentLoaded && localStorage.getItem("mahjong-tournament") !== null)
-    {
-      const readFromLocalStorage: string = localStorage.getItem("mahjong-tournament") as string;
-
-      try
-      {
-        const possibleTournamentState: Tournament = JSON.parse(readFromLocalStorage);
-
-        return isTournamentDataValid(possibleTournamentState);
-      }
-      catch (e)
-      {
-        console.log("error", e);
-        return false;
-      }
-    }
-
-    return false;
-  })();
 
   const readFile = (files: FileList | null): void => {
     if (files === null || files.length === 0)
@@ -66,10 +44,6 @@ const TournamentInfoView = () => {
 
   return (
     <div>
-      {
-        offerStoredGame &&
-        <OfferStoredGame/>
-      }
       <div>
         <p>Start new tournament</p>
         <TextInput
