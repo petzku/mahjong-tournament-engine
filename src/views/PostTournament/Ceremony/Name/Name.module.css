@@ -1,0 +1,15 @@
+.standing
+{
+  position: relative;
+  transition: opacity 0.5s, left 0.5s;
+}
+
+.hidden
+{
+  opacity: 0;
+}
+
+.visible
+{
+  opacity: 1;
+}

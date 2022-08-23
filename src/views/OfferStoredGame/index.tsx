@@ -51,6 +51,7 @@ const OfferStoredGame = () => {
 
   if (!offerStoredGame)
   {
+    markTournamentLoaded(true);
     return <Navigate to={Routes.TournamentInfoEntry}/>
   }
 

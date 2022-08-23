@@ -10,6 +10,7 @@ import TableSchedules from "./views/TournamentHub/TableSchedules";
 import { useSelector } from "react-redux";
 import { State } from "./state";
 import OfferStoredGame from "./views/OfferStoredGame";
+import Ceremony from "./views/PostTournament/Ceremony";
 
 const App = () => {
   const appState = useSelector((state: State) => state.app);
@@ -21,7 +22,10 @@ const App = () => {
           {
             !appState.tournamentLoaded
             ?
-            <Route path={"*"} element={<OfferStoredGame/>}/>
+            <>
+              <Route path={"/post/ceremony"} element={<Ceremony/>}/>
+              <Route path={"*"} element={<OfferStoredGame/>}/>
+            </>
             :
             <>
               <Route index element={<TournamentInfoView/>}/>

@@ -1,8 +1,5 @@
 export type GeneralInfo = {
   title: string,
-  location: string,
-  start: string,
-  end: string,
   rounds: number,
   oka: number
 };
@@ -64,9 +61,6 @@ export const isTournamentDataValid = (data: Tournament): boolean => {
     //Check that general tournament info is intact
     "info" in data &&
     "title" in data.info && typeof data.info.title === "string" &&
-    "location" in data.info && typeof data.info.location === "string" &&
-    "start" in data.info && typeof data.info.location === "string" &&
-    "end" in data.info && typeof data.info.end === "string" &&
     "rounds" in data.info && typeof data.info.rounds === "number" &&
     "oka" in data.info && typeof data.info.oka === "number" &&
     Object.keys(data.info).length === 6 &&

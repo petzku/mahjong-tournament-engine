@@ -1,9 +1,9 @@
 import { ChangeEvent, useState } from "react";
 import { GeneralInfo, Tournament } from "../../../data-types/tournament-data-types";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { tournamentActionCreators, appActionCreators, State } from "../../../state";
+import { tournamentActionCreators, appActionCreators } from "../../../state";
 
 import TextInput from "../../../components/TextInput";
 import NumberInput from "../../../components/NumberInput";
@@ -49,21 +49,6 @@ const TournamentInfoView = () => {
           label={"Tournament title"}
           value={currentInfo.title}
           onChange={(newValue: string): void => setCurrentInfo({...currentInfo, title: newValue})}
-        />
-        <TextInput
-          label={"Tournament location"}
-          value={currentInfo.location}
-          onChange={(newValue: string): void => setCurrentInfo({...currentInfo, location: newValue})}
-        />
-        <TextInput
-          label={"Tournament start"}
-          value={currentInfo.start}
-          onChange={(newValue: string): void => setCurrentInfo({...currentInfo, start: newValue})}
-        />
-        <TextInput
-          label={"Tournament end"}
-          value={currentInfo.end}
-          onChange={(newValue: string): void => setCurrentInfo({...currentInfo, end: newValue})}
         />
         <NumberInput
           label={"Rounds"}

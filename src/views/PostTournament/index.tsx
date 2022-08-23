@@ -1,8 +1,18 @@
 import { Routes } from "../../utils/findRoute";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const PostTournament = () => {
   const navigate = useNavigate();
+  const [ceremonyWindow, setCeremonyWindow] = useState<WindowProxy | null>(null);
+
+  const openWindow = () => {
+    setCeremonyWindow(window.open(
+      "/post/ceremony",
+      "ceremonyWindow",
+      "width=500,height=500"
+    ));
+  };
 
   return (
     <div>
@@ -16,7 +26,7 @@ const PostTournament = () => {
       </ul>
 
       <div>
-        <button>Open final results window.</button>
+        <button onClick={() => openWindow()}>Open final results window.</button>
       </div>
       <div>
         <button onClick={() => navigate(Routes.Schedule)}>Return to tournament.</button>
