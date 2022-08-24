@@ -9,7 +9,11 @@ import Name from "./Name";
 
 const Ceremony = () => {
   const tournament: Tournament = JSON.parse(localStorage.getItem("mahjong-tournament") as string);
-  
+
+  const [windowSize, setWindowSize] = useState<{width: number, height: number}>({
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
   const [shouldRevealNext, setShouldRevealNext] = useState<boolean>(false);
   const [revealed, setRevealed] = useState<boolean[]>(Array(tournament.playerNames.length).fill(false));
 
@@ -45,6 +49,13 @@ const Ceremony = () => {
     });
   }, []);
 
+  useEffect(() => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
+  }, [window.innerWidth, window.innerHeight]);
+
   const topName = (id: number) => (
     <table>
       <tbody>
@@ -67,7 +78,11 @@ const Ceremony = () => {
     <div className={styles.backdrop}>
       {
         !revealed.some((item: boolean): boolean => !item) &&
-        <Confetti gravity={0.05}/>
+        <Confetti
+          width={windowSize.width}
+          height={windowSize.height}
+          gravity={0.05}
+        />
       }
       <div className={styles.topPlayers}>
         <div className={`${styles.columns} ${styles.gold}`}>
