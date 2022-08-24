@@ -8,3 +8,30 @@
   background: rgb(41, 1, 41);
   color: white;
 }
+
+.columns
+{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 5vh;
+}
+
+.bottomPlayers
+{
+  font-size: 250%;
+}
+
+.fourthFifth
+{
+  font-size: 400%;
+}
+
+.silverBronze
+{
+  font-size: 500%;
+}
+
+.gold
+{
+  font-size: 750%;
+}

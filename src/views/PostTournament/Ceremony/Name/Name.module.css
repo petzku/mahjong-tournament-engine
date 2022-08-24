@@ -13,3 +13,9 @@
 {
   opacity: 1;
 }
+
+.points
+{
+  text-align: right;
+  padding-left: 1em;
+}

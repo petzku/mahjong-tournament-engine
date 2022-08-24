@@ -14,6 +14,13 @@ const PostTournament = () => {
     ));
   };
 
+  const send = () => {
+    if (ceremonyWindow !== null)
+    {
+      ceremonyWindow.postMessage("next reveal", "http://localhost:3000");
+    }
+  };
+
   return (
     <div>
       <p>The tournament is finished. Click the button below to open a new video that will display the standings in a cool way, so you can display the final results on a big screen.</p>
@@ -27,6 +34,9 @@ const PostTournament = () => {
 
       <div>
         <button onClick={() => openWindow()}>Open final results window.</button>
+      </div>
+      <div>
+        <button onClick={() => send()}>Reveal</button>
       </div>
       <div>
         <button onClick={() => navigate(Routes.Schedule)}>Return to tournament.</button>

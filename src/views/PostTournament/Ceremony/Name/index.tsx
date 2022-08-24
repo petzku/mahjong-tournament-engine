@@ -7,22 +7,36 @@ type NameProps = {
   position: number,
   name: PlayerName,
   points: number,
-  hidden: boolean
+  revealed: boolean
 };
 
 const Name = (props: NameProps) => {
-  const trClassName = `${styles.standing} ${props.hidden ? styles.hidden : styles.visible}`;
+  const trClassName = `${styles.standing} ${props.revealed ? styles.visible : styles.hidden}`;
+
+  const position = ((): string => {
+    switch (props.position)
+    {
+      case 3:
+        return "🥉";
+      case 2:
+        return "🥈";
+      case 1: 
+        return "🥇";
+      default:
+        return `${props.position}.`;
+    }
+  })();
 
   return (
-    <tr className={trClassName} style={{left: props.hidden ? "5em" : "0"}}>
+    <tr className={trClassName} style={{left: props.revealed ? "0" : "5em"}}>
       <td>
-        {props.position}.
+        {position}
       </td>
       <td>
         {props.name}
       </td>
-      <td>
-        {formatPoints(props.points)}
+      <td className={styles.points}>
+        {props.points > 0 && "+"}{formatPoints(props.points)}
       </td>
     </tr>
   );
