@@ -8,7 +8,9 @@ export enum Routes {
   Standings = "/hub/standings",
   PlayerSchedules = "/hub/playerschedules",
   TableSchedules = "/hub/tableschedules",
-  PostTournament = "/post"
+  PostTournament = "/post",
+  Ceremony = "/post/ceremony",
+  ReportCards = "/post/reportcards"
 };
 
 export type Route = Routes;

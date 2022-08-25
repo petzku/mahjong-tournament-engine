@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { State } from "./state";
 import OfferStoredGame from "./views/OfferStoredGame";
 import Ceremony from "./views/PostTournament/Ceremony";
+import ReportCards from "./views/PostTournament/ReportCards";
 
 const App = () => {
   const appState = useSelector((state: State) => state.app);
@@ -42,7 +43,10 @@ const App = () => {
                 <Route path={"playerschedules"} element={<PlayerSchedules/>}/>
                 <Route path={"tableschedules"} element={<TableSchedules/>}/>
               </Route>
-              <Route path={"/post"} element={<PostTournament/>}/>
+              <Route path={"/post"}>
+                <Route index element={<PostTournament/>}/>
+                <Route path={"reportcards"} element={<ReportCards/>}/>
+              </Route>
             </>
           }
         </Routes>

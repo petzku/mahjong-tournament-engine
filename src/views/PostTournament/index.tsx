@@ -1,6 +1,7 @@
 import { Routes } from "../../utils/findRoute";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import PostTabs from "./PostTabs";
 
 const PostTournament = () => {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ const PostTournament = () => {
 
   return (
     <div>
+      <PostTabs/>
+      <h1>Post-tournament</h1>
       <p>The tournament is finished. Click the button below to open a new video that will display the standings in a cool way, so you can display the final results on a big screen.</p>
 
       <p>Instructions:</p>
@@ -29,7 +32,7 @@ const PostTournament = () => {
         <button onClick={() => openWindow()}>Open final results window.</button>
       </div>
       <div>
-        <button onClick={() => navigate(Routes.Schedule)}>Return to tournament.</button>
+        <button onClick={() => navigate(Routes.Schedule)}>Return to tournament hub.</button>
       </div>
     </div>
   );

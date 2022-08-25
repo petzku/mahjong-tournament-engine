@@ -70,7 +70,7 @@ const Ceremony = () => {
     </table>
   );
 
-  const standings = getStandings(tournament);
+  const standings = getStandings({tournament: tournament, atRound: tournament.info.rounds});
 
   const topHalfCount = Math.round((standings.length - 5) / 2);
 
@@ -141,7 +141,6 @@ const Ceremony = () => {
           </table>
         </div>
       </div>
-      {/* <button onClick={() => setRevealPhase(true)}>Reveal all except top 5</button> */}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { Routes } from "../../utils/findRoute";
+import { Routes } from "../../../utils/findRoute";
 import { Link } from "react-router-dom";
 
 const HubTabs = () => {

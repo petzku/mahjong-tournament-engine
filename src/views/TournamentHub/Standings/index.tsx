@@ -22,7 +22,7 @@ const Standings = () => {
         </thead>
         <tbody>
           {
-            getStandings(tournamentState).map((standing: Standing) => (
+            getStandings({tournament: tournamentState, atRound: tournamentState.info.rounds}).map((standing: Standing) => (
               <tr key={`player-standing-${standing.playerId}`}>
                 <td>{tournamentState.playerNames[standing.playerId]}</td>
                 <td>{formatPoints(standing.points)}</td>
