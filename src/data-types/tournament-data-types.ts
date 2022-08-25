@@ -1,7 +1,6 @@
 export type GeneralInfo = {
   title: string,
-  rounds: number,
-  oka: number
+  rounds: number
 };
 
 export type PlayerName = string;
@@ -62,7 +61,6 @@ export const isTournamentDataValid = (data: Tournament): boolean => {
     "info" in data &&
     "title" in data.info && typeof data.info.title === "string" &&
     "rounds" in data.info && typeof data.info.rounds === "number" &&
-    "oka" in data.info && typeof data.info.oka === "number" &&
     Object.keys(data.info).length === 6 &&
 
     //Check that player names are ok

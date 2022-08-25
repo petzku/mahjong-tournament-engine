@@ -61,7 +61,7 @@ const PlayerEntryView = () => {
     return tenThousand*10000 + fiveThousand*5000 + oneThousand*1000 + fiveHundred*500 + oneHundred*100;
   })(currentTable.pointSticks);
 
-  const correctPointSticks = totalPoints === 30000 - tournamentState.info.oka;
+  const correctPointSticks = totalPoints === 30000;
 
   const enoughTables = tables.length === tournamentState.playerNames.length / 4;
 

@@ -5,8 +5,7 @@ import ActionTypes from "../action-types/tournament-action-types";
 export const initialState: Tournament = {
   info: {
     title: "",
-    rounds: 8,
-    oka: 0
+    rounds: 8
   },
   playerNames: [],
   tables: [],

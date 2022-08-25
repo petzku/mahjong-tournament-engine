@@ -56,12 +56,6 @@ const TournamentInfoView = () => {
           onChange={(newValue: number): void => setCurrentInfo({...currentInfo, rounds: newValue})}
           steps={[1]}
         />
-        <NumberInput
-          label={"Oka"}
-          value={currentInfo.oka}
-          onChange={(newValue: number): void => setCurrentInfo({...currentInfo, oka: newValue})}
-          steps={[1]}
-        />
         <button onClick={() => onSave()}>Ready</button>
       </div>
       <p>or</p>
