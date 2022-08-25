@@ -41,8 +41,8 @@ const Ceremony = () => {
   }, [shouldRevealNext, revealed]);
 
   useEffect(() => {
-    window.addEventListener("message", (e) => {
-      if (e.data === "next reveal")
+    window.addEventListener("keyup", (e: KeyboardEvent) => {
+      if (e.code === "Space")
       {
         setShouldRevealNext(true);
       }

@@ -1,6 +1,6 @@
 .backdrop
 {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -18,20 +18,20 @@
 
 .bottomPlayers
 {
-  font-size: 250%;
+  font-size: 200%;
 }
 
 .fourthFifth
 {
-  font-size: 400%;
+  font-size: 350%;
 }
 
 .silverBronze
 {
-  font-size: 500%;
+  font-size: 450%;
 }
 
 .gold
 {
-  font-size: 750%;
+  font-size: 700%;
 }
