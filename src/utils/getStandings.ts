@@ -11,7 +11,7 @@ export const getStandings = (params: GetStandingsParams): Standing[] => {
     points: params.tournament.games.reduce((subTotal: number, game: Game) => {
       const playerSeat = game.participants.find((seat: Seat): boolean => seat.playerId === playerId);
 
-      if (game.finished && playerSeat && game.round < params.atRound)
+      if (game.finished && playerSeat && game.round <= params.atRound)
       {
         return subTotal + playerSeat.score.raw + playerSeat.score.uma + playerSeat.score.penalty;
       }
