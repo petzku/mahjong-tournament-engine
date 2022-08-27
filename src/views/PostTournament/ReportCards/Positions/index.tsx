@@ -41,7 +41,7 @@ const Positions = (props: PositionsProps) => {
         //Get the game of current round that the selected player played in
         .filter((game: Game): boolean => game.round === round && game.participants.some((seat: Seat): boolean => seat.playerId === props.playerId))[0]
         //Sort participants of that game
-        .participants.sort((a: Seat, b: Seat) => (b.score.raw + b.score.uma + b.score.penalty) - (a.score.raw + a.score.uma + a.score.penalty))
+        .participants.slice().sort((a: Seat, b: Seat) => (b.score.raw + b.score.uma + b.score.penalty) - (a.score.raw + a.score.uma + a.score.penalty))
         //Find position of the selected player
         .findIndex((seat: Seat) => seat.playerId === props.playerId)
     }));

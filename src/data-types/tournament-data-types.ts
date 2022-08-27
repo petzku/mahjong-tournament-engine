@@ -55,7 +55,6 @@ export type Standing = {
 };
 
 export const isTournamentDataValid = (data: Tournament): boolean => {
-  console.log("data", data)
   return (
     //Check that general tournament info is intact
     "info" in data &&

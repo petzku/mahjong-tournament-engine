@@ -11,7 +11,7 @@ import Games from "./Games";
 const ReportCards = () => {
   const tournamentState = useSelector((state: State) => state.tournament);
   
-  const selectedPlayerId = 23;
+  const selectedPlayerId = 5;
   const playerName = tournamentState.playerNames[selectedPlayerId];
 
   //TODO:
