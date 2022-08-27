@@ -63,30 +63,6 @@ const CumulativePoints = (props: CumulativePointsProps) => {
         <Line dataKey={"penalty"} stroke={"#000000"} dot={true} />
         <Line dataKey={"total"} stroke={"#ff0000"} dot={true} />
       </LineChart>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>{null}</th>
-            <th className={styles.cell}>Raw</th>
-            <th className={styles.cell}>Uma</th>
-            <th className={styles.cell}>Penalty</th>
-            <th className={styles.cell}>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            cumulativePoints.map((current) => (
-              <tr key={`cumulativePoints-${current.name}`}>
-                <th>Round {current.name}</th>
-                <td className={styles.cell}>{formatPoints({points: current.raw, sign: true})}</td>
-                <td className={styles.cell}>{formatPoints({points: current.uma, sign: true})}</td>
-                <td className={styles.cell}>{formatPoints({points: current.penalty, sign: true})}</td>
-                <td className={styles.cell}>{formatPoints({points: current.total, sign: true})}</td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
     </div>
   );
 };

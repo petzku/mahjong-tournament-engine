@@ -61,7 +61,7 @@ export const isTournamentDataValid = (data: Tournament): boolean => {
     "info" in data &&
     "title" in data.info && typeof data.info.title === "string" &&
     "rounds" in data.info && typeof data.info.rounds === "number" &&
-    Object.keys(data.info).length === 6 &&
+    Object.keys(data.info).length === 2 &&
 
     //Check that player names are ok
     "playerNames" in data &&

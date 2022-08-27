@@ -50,7 +50,7 @@ const Games = (props: GamesProps) => {
       <table className={styles.table}>
       {
         games.map((game: Game, round: number) => (
-          <tbody>
+          <tbody key={`games-round-${round}`}>
             <tr>
               <th className={styles.roundHeader} colSpan={4}>Round {round + 1}</th>
             </tr>
