@@ -1,4 +1,14 @@
+.table
+{
+  min-width: 15em;
+}
+
 .roundHeader
 {
   text-align: left;
+}
+
+.anonymized
+{
+  font-variant:small-caps;
 }

@@ -13,17 +13,41 @@ type GamesProps = {
 const Games = (props: GamesProps) => {
   const tournamentState = useSelector((state: State) => state.tournament);
 
-  const getTotal = (score: Score) => formatPoints({points: score.raw + score.uma + score.penalty, sign: true});
-
   const games = useMemo(() => tournamentState.games
     //Find the games where the selected player was in.
     .filter((game: Game): boolean => game.participants.some((seat: Seat): boolean => seat.playerId === props.playerId))
     //Make sure they're sorted in round order
     .sort((a: Game, b: Game) => a.round - b.round), [props.playerId]);
 
+  const getTotal = (score: Score): string => formatPoints({points: score.raw + score.uma + score.penalty, sign: true});
+
+  //Function for anonymizing the other players.
+  const getName = (params: {game: Game, seatNumber: number}) => {
+    //If fetching name for the selected player's seat, return player's name.
+    if (params.game.participants[params.seatNumber].playerId === props.playerId)
+    {
+      return <span>{tournamentState.playerNames[props.playerId]}</span>;
+    }
+
+    //Otherwise return "shimocha", "toimen" or "kamicha" for the other seats appropriately.
+    const playerSeat = params.game.participants.findIndex((seat: Seat): boolean => seat.playerId === props.playerId);
+
+    if (params.seatNumber === (playerSeat + 1) % 4)
+    {
+      return <span className={styles.anonymized}>shimocha</span>;
+    }
+
+    if (params.seatNumber === (playerSeat + 2) % 4)
+    {
+      return <span className={styles.anonymized}>toimen</span>;
+    }
+
+    return <span className={styles.anonymized}>kamicha</span>;
+  };
+
   return (
     <div>
-      <table>
+      <table className={styles.table}>
       {
         games.map((game: Game, round: number) => (
           <tbody>
@@ -32,22 +56,22 @@ const Games = (props: GamesProps) => {
             </tr>
             <tr>
               <td>East</td>
-              <td>{tournamentState.playerNames[game.participants[0].playerId]}</td>
+              <td>{getName({game, seatNumber: 0})}</td>
               <td>{getTotal(game.participants[0].score)}</td>
             </tr>
             <tr>
               <td>South</td>
-              <td>{tournamentState.playerNames[game.participants[1].playerId]}</td>
+              <td>{getName({game, seatNumber: 1})}</td>
               <td>{getTotal(game.participants[1].score)}</td>
             </tr>
             <tr>
               <td>West</td>
-              <td>{tournamentState.playerNames[game.participants[2].playerId]}</td>
+              <td>{getName({game, seatNumber: 2})}</td>
               <td>{getTotal(game.participants[2].score)}</td>
             </tr>
             <tr>
               <td>North</td>
-              <td>{tournamentState.playerNames[game.participants[3].playerId]}</td>
+              <td>{getName({game, seatNumber: 3})}</td>
               <td>{getTotal(game.participants[3].score)}</td>
             </tr>
           </tbody>
