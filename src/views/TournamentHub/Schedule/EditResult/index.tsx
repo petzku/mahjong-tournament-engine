@@ -208,7 +208,7 @@ const EditResult = (props: AddFinishedGameProps) => {
                     short={safeMode}
                   />
                 </td>
-                <td>{safeMode ? formatPoints(getFinalForPlayer(0)) : getFinalForPlayer(0)}</td>
+                <td>{safeMode ? formatPoints({points: getFinalForPlayer(0), sign: true}) : getFinalForPlayer(0)}</td>
               </tr>
               <tr>
                 <td>South</td>
@@ -238,7 +238,7 @@ const EditResult = (props: AddFinishedGameProps) => {
                     short={safeMode}
                   />
                 </td>
-                <td>{safeMode ? formatPoints(getFinalForPlayer(1)) : getFinalForPlayer(1)}</td>
+                <td>{safeMode ? formatPoints({points: getFinalForPlayer(1), sign: true}) : getFinalForPlayer(1)}</td>
               </tr>
               <tr>
                 <td>West</td>
@@ -268,7 +268,7 @@ const EditResult = (props: AddFinishedGameProps) => {
                     short={safeMode}
                   />
                 </td>
-                <td>{safeMode ? formatPoints(getFinalForPlayer(2)) : getFinalForPlayer(2)}</td>
+                <td>{safeMode ? formatPoints({points: getFinalForPlayer(2), sign: true}) : getFinalForPlayer(2)}</td>
               </tr>
               <tr>
                 <td>North</td>
@@ -298,14 +298,14 @@ const EditResult = (props: AddFinishedGameProps) => {
                     short={safeMode}
                   />
                 </td>
-                <td>{safeMode ? formatPoints(getFinalForPlayer(3)) : getFinalForPlayer(3)}</td>
+                <td>{safeMode ? formatPoints({points: getFinalForPlayer(3), sign: true}) : getFinalForPlayer(3)}</td>
               </tr>
             </tbody>
             <tfoot>
               <tr>
                 <td colSpan={2}>{null}</td>
-                <td>Sum: {safeMode ? formatPoints(getScoreSum()) : getScoreSum()}</td>
-                <td>Sum: {safeMode ? formatPoints(getUmaSum()) : getUmaSum()}</td>
+                <td>Sum: {safeMode ? formatPoints({points: getScoreSum(), sign: true}) : getScoreSum()}</td>
+                <td>Sum: {safeMode ? formatPoints({points: getUmaSum(), sign: true}) : getUmaSum()}</td>
                 <td colSpan={2}>{null}</td>
               </tr>
             </tfoot>

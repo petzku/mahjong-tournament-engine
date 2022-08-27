@@ -1,0 +1,10 @@
+.columns
+{
+  display: flex;
+  /* justify-content: space-evenly; */
+}
+
+.games
+{
+  margin-left: 2em;
+}

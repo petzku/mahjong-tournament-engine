@@ -6,11 +6,12 @@ import styles from "./ReportCards.module.css";
 import RankingEvolution from "./RankingEvolution";
 import Positions from "./Positions";
 import CumulativePoints from "./CumulativePoints";
+import Games from "./Games";
 
 const ReportCards = () => {
   const tournamentState = useSelector((state: State) => state.tournament);
   
-  const selectedPlayerId = 0;
+  const selectedPlayerId = 23;
   const playerName = tournamentState.playerNames[selectedPlayerId];
 
   //TODO:
@@ -23,9 +24,16 @@ const ReportCards = () => {
       <PostTabs/>
       <h1>Player report cards</h1>
       <h2>Report for player {playerName}</h2>
-      <RankingEvolution playerId={selectedPlayerId} />
-      <Positions playerId={selectedPlayerId} />
-      <CumulativePoints playerId={selectedPlayerId} />
+      <div className={styles.columns}>
+        <div>
+          <RankingEvolution playerId={selectedPlayerId} />
+          <Positions playerId={selectedPlayerId} />
+          <CumulativePoints playerId={selectedPlayerId} />
+        </div>
+        <div className={styles.games}>
+          <Games playerId={selectedPlayerId} />
+        </div>
+      </div>
     </div>
   );
 };

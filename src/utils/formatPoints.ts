@@ -1,4 +1,4 @@
-export const formatPoints = (points: number): string => {
-  const toString = (points/1000).toString();
-  return toString.indexOf(".") === -1 ? `${toString}.0` : toString;
+export const formatPoints = (params: {points: number, sign: boolean}): string => {
+  const toString = (params.points/1000).toString();
+  return `${params.sign && params.points > 0 ? "+" : ""}${toString}${toString.indexOf(".") == -1 ? ".0" : ""}`;
 };

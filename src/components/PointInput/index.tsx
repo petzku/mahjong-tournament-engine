@@ -70,7 +70,7 @@ const PointInput = (props: PointInputProps) => {
   const displayValue =
     props.short
     ?
-    `${sign}${formatPoints(Math.abs(getNumericValue(props.value)))}`
+    `${sign}${formatPoints({points: Math.abs(getNumericValue(props.value)), sign: false})}`
     :
     `${sign}${Math.abs(getNumericValue(props.value))}`;
 

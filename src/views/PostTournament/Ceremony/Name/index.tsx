@@ -36,7 +36,7 @@ const Name = (props: NameProps) => {
         {props.name}
       </td>
       <td className={styles.points}>
-        {props.points > 0 && "+"}{formatPoints(props.points)}
+        {formatPoints({points: props.points, sign: true})}
       </td>
     </tr>
   );

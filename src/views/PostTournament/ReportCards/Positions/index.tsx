@@ -52,7 +52,7 @@ const Positions = (props: PositionsProps) => {
       evolution,
       mean
     };
-  }, []);
+  }, [props.playerId]);
 
   return (
     <div>
