@@ -5,14 +5,15 @@ import PostTournament from "./views/PostTournament";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Schedule from "./views/TournamentHub/Schedule";
 import Standings from "./views/TournamentHub/Standings";
-import PlayerSchedules from "./views/TournamentHub/PlayerSchedules";
-import TableSchedules from "./views/TournamentHub/TableSchedules";
+import PrintOuts from "./views/TournamentHub/PrintOuts";
 import { useSelector } from "react-redux";
 import { State } from "./state";
 import OfferStoredGame from "./views/OfferStoredGame";
 import Ceremony from "./views/PostTournament/Ceremony";
 import ReportCards from "./views/PostTournament/ReportCards";
 import EditPlayers from "./views/TournamentHub/EditPlayers";
+import PrintPersonalSchedules from "./views/Print/PrintPersonalSchedules";
+import PrintTableSigns from "./views/Print/PrintTableSigns";
 
 const App = () => {
   const appState = useSelector((state: State) => state.app);
@@ -26,6 +27,10 @@ const App = () => {
             ?
             <>
               <Route path={"/post/ceremony"} element={<Ceremony/>}/>
+              <Route path={"/print"}>
+                <Route path={"tablesigns"} element={<PrintTableSigns/>}/>
+                <Route path={"personalschedules"} element={<PrintPersonalSchedules/>}/>
+              </Route>
               <Route path={"*"} element={<OfferStoredGame/>}/>
             </>
             :
@@ -41,8 +46,7 @@ const App = () => {
                 <Route index element={<Schedule/>}/>
                 <Route path={"schedule"} element={<Schedule/>}/>
                 <Route path={"standings"} element={<Standings/>}/>
-                <Route path={"playerschedules"} element={<PlayerSchedules/>}/>
-                <Route path={"tableschedules"} element={<TableSchedules/>}/>
+                <Route path={"printouts"} element={<PrintOuts/>}/>
                 <Route path={"editplayers"} element={<EditPlayers/>}/>
               </Route>
               <Route path={"/post"}>
