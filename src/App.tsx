@@ -12,6 +12,7 @@ import { State } from "./state";
 import OfferStoredGame from "./views/OfferStoredGame";
 import Ceremony from "./views/PostTournament/Ceremony";
 import ReportCards from "./views/PostTournament/ReportCards";
+import EditPlayers from "./views/TournamentHub/EditPlayers";
 
 const App = () => {
   const appState = useSelector((state: State) => state.app);
@@ -42,6 +43,7 @@ const App = () => {
                 <Route path={"standings"} element={<Standings/>}/>
                 <Route path={"playerschedules"} element={<PlayerSchedules/>}/>
                 <Route path={"tableschedules"} element={<TableSchedules/>}/>
+                <Route path={"editplayers"} element={<EditPlayers/>}/>
               </Route>
               <Route path={"/post"}>
                 <Route index element={<PostTournament/>}/>

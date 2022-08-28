@@ -8,6 +8,7 @@ const HubTabs = () => {
       <Link to={Routes.Standings}>Standings</Link>
       <Link to={Routes.PlayerSchedules}>Player schedules</Link>
       <Link to={Routes.TableSchedules}>Table schedules</Link>
+      <Link to={Routes.EditPlayers}>Edit players</Link>
     </div>
   );
 };

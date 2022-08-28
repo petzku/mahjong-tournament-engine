@@ -8,6 +8,7 @@ export enum Routes {
   Standings = "/hub/standings",
   PlayerSchedules = "/hub/playerschedules",
   TableSchedules = "/hub/tableschedules",
+  EditPlayers = "/hub/editplayers",
   PostTournament = "/post",
   Ceremony = "/post/ceremony",
   ReportCards = "/post/reportcards"
