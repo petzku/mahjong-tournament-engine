@@ -11,7 +11,7 @@ import NumberInput from "../../../components/NumberInput";
 import { generateArray } from "../../../utils/generateArray";
 import { formatPoints } from "../../../utils/formatPoints";
 import { useNavigate } from "react-router-dom";
-import { Routes } from "../../../utils/findRoute";
+import { Routes } from "../../../utils/routeUtils";
 
 const defaultPointSticks: PointSticks = {
   tenThousand: 1,
@@ -119,6 +119,7 @@ const PlayerEntryView = () => {
   return (
     <div>
       <h1>Enter Table Information</h1>
+      <p>In case table information is yet unknown, you can just enter tables with empty information and edit it later.</p>
       {
         !enoughTables &&
         <div>

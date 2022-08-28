@@ -8,6 +8,7 @@ export enum Routes {
   Standings = "/hub/standings",
   PrintOuts = "/hub/printouts",
   EditPlayers = "/hub/editplayers",
+  EditTables = "/hub/edittables",
   FullSchedule = "/print/fullschedule",
   PrintPersonalSchedules = "/print/personalschedules",
   PrintTableSigns = "/print/tablesigns",

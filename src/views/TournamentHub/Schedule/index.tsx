@@ -10,7 +10,7 @@ import Hanchan from "../../../components/Hanchan";
 import { generateArray } from "../../../utils/generateArray";
 import HubTabs from "../HubTabs";
 import { useNavigate } from "react-router-dom";
-import { Routes } from "../../../utils/findRoute";
+import { Routes } from "../../../utils/routeUtils";
 
 type ResultsCoordinate = {
   round: number,

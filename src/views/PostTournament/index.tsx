@@ -1,4 +1,4 @@
-import { Routes } from "../../utils/findRoute";
+import { Routes } from "../../utils/routeUtils";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PostTabs from "./PostTabs";

@@ -8,7 +8,7 @@ import { tournamentActionCreators, appActionCreators } from "../../../state";
 import TextInput from "../../../components/TextInput";
 import NumberInput from "../../../components/NumberInput";
 import { initialState } from "../../../state/reducers/tournamentReducer";
-import { findRoute, Routes } from "../../../utils/findRoute";
+import { findRoute, Routes } from "../../../utils/routeUtils";
 import { useNavigate } from "react-router-dom";
 
 const TournamentInfoView = () => {

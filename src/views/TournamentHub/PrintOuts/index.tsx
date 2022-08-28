@@ -1,5 +1,5 @@
 import PrintableIframe from "../../../components/PrintableIframe";
-import { Routes } from "../../../utils/findRoute";
+import { Routes } from "../../../utils/routeUtils";
 import HubTabs from "../HubTabs";
 
 const PlayerSchedules = () => {

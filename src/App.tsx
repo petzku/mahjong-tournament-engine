@@ -14,6 +14,7 @@ import ReportCards from "./views/PostTournament/ReportCards";
 import EditPlayers from "./views/TournamentHub/EditPlayers";
 import PrintPersonalSchedules from "./views/Print/PrintPersonalSchedules";
 import PrintTableSigns from "./views/Print/PrintTableSigns";
+import EditTables from "./views/TournamentHub/EditTables";
 
 const App = () => {
   const appState = useSelector((state: State) => state.app);
@@ -48,6 +49,7 @@ const App = () => {
                 <Route path={"standings"} element={<Standings/>}/>
                 <Route path={"printouts"} element={<PrintOuts/>}/>
                 <Route path={"editplayers"} element={<EditPlayers/>}/>
+                <Route path={"edittables"} element={<EditTables/>}/>
               </Route>
               <Route path={"/post"}>
                 <Route index element={<PostTournament/>}/>

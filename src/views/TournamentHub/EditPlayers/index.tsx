@@ -17,9 +17,9 @@ const EditPlayers = () => {
   const [newNames, setNewNames] = useState<PlayerName[]>([...tournamentState.playerNames])
   const [duplicates, setDuplicates] = useState<PlayerName[]>([]);
 
-  const changeName = (newName: PlayerName, id: number): void => {
+  const changeName = (params: {newName: PlayerName, playerId: number}): void => {
     const newNewNames = [...newNames];
-    newNewNames[id] = newName;
+    newNewNames[params.playerId] = params.newName;
     setNewNames(newNewNames);
   };
 
@@ -63,16 +63,16 @@ const EditPlayers = () => {
             <th>New name</th>
           </tr>
           {
-            tournamentState.playerNames.map((name: PlayerName, id: PlayerId) => (
-              <tr key={`editname-${id}`}>
+            tournamentState.playerNames.map((name: PlayerName, playerId: PlayerId) => (
+              <tr key={`editname-${playerId}`}>
                 <td>
                   {name}
                 </td>
                 <td>
                   <TextInput
                     label={""}
-                    value={newNames[id]}
-                    onChange={(newValue: string) => changeName(newValue, id)}
+                    value={newNames[playerId]}
+                    onChange={(newValue: string) => changeName({newName: newValue, playerId: playerId})}
                   />
                 </td>
               </tr>

@@ -6,7 +6,7 @@ import { bindActionCreators } from "redux";
 import Popup from "../../../components/Popup";
 import { PlayerName } from "../../../data-types/tournament-data-types";
 import { tournamentActionCreators } from "../../../state";
-import { Routes } from "../../../utils/findRoute";
+import { Routes } from "../../../utils/routeUtils";
 
 import styles from "./PlayerEntryView.module.css";
 

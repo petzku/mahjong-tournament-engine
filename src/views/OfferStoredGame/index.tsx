@@ -3,7 +3,7 @@ import Popup from "../../components/Popup";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tournamentActionCreators, appActionCreators } from "../../state";
-import { findRoute, Routes } from "../../utils/findRoute";
+import { findRoute, Routes } from "../../utils/routeUtils";
 import { isTournamentDataValid, Tournament } from "../../data-types/tournament-data-types";
 import { Navigate, useNavigate } from "react-router-dom";
 
