@@ -31,7 +31,7 @@ const PlayerEntryView = () => {
       return;
     }
 
-    addPlayers(players);
+    addPlayers(players.sort((a: PlayerName, b: PlayerName) => Math.random() - 0.5));
     navigate(Routes.TableEntry);
   };
 
