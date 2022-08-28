@@ -51,6 +51,7 @@ const RankingEvolution = (props: RankingEvolutionProps) => {
               dataKey={`player${playerId}`}
               stroke={playerId === props.playerId ? "#ff0000" : "#ffcccc"}
               dot={playerId === props.playerId}
+              isAnimationActive={false}
             />
           ))
         }

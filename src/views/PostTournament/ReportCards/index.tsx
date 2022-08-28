@@ -7,17 +7,13 @@ import RankingEvolution from "./RankingEvolution";
 import Positions from "./Positions";
 import CumulativePoints from "./CumulativePoints";
 import Games from "./Games";
+import Statistics from "./Statistics";
 
 const ReportCards = () => {
   const tournamentState = useSelector((state: State) => state.tournament);
   
-  const selectedPlayerId = 0;
+  const selectedPlayerId = 9;
   const playerName = tournamentState.playerNames[selectedPlayerId];
-
-  //TODO:
-  //- highest and lowest single
-  //- mean and distribution
-  //- list of all the player's hanchans and points
 
   return (
     <div>
@@ -33,6 +29,12 @@ const ReportCards = () => {
         <div className={styles.games}>
           <Games playerId={selectedPlayerId} />
         </div>
+      </div>
+      <div>
+        <Statistics
+          playerId={selectedPlayerId}
+          games={tournamentState.games}
+        />
       </div>
     </div>
   );

@@ -180,7 +180,7 @@ const PlayerEntryView = () => {
         steps={[1]}
         disabled={enoughTables}
       />
-      <p>Total points {formatPoints({points: totalPoints, sign: true})}.</p>
+      <p>Total points {formatPoints({points: totalPoints, sign: false})}.</p>
       <button
         disabled={!correctPointSticks || enoughTables}
         onClick={() => storeTable()}>

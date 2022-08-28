@@ -63,12 +63,13 @@ const Positions = (props: PositionsProps) => {
         data={positions.evolution}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
-        <YAxis reversed={true}/>
+        <YAxis reversed={true} domain={[0, 4]}/>
         <ReferenceLine y={positions.mean} stroke="#7777ff" />
         <Line
           dataKey={"position"}
           stroke={"#ff0000"}
           dot={true}
+          isAnimationActive={false}
         />
       </LineChart>
     </div>

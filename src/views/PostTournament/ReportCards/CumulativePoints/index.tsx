@@ -3,9 +3,6 @@ import { useSelector } from "react-redux";
 import { Game, PlayerId, Score, Seat } from "../../../../data-types/tournament-data-types";
 import { State } from "../../../../state";
 import { generateArray } from "../../../../utils/generateArray";
-import { formatPoints } from "../../../../utils/formatPoints";
-
-import styles from "./CumulativePoints.module.css";
 
 import {
   LineChart,
@@ -58,10 +55,30 @@ const CumulativePoints = (props: CumulativePointsProps) => {
         <XAxis dataKey="name" />
         <YAxis/>
         <Legend/>
-        <Line dataKey={"raw"} stroke={"#00aa00"} dot={true} />
-        <Line dataKey={"uma"} stroke={"#0000ff"} dot={true} />
-        <Line dataKey={"penalty"} stroke={"#000000"} dot={true} />
-        <Line dataKey={"total"} stroke={"#ff0000"} dot={true} />
+        <Line
+          dataKey={"raw"}
+          stroke={"#00aa00"}
+          dot={true}
+          isAnimationActive={false}
+        />
+        <Line
+          dataKey={"uma"}
+          stroke={"#0000ff"}
+          dot={true}
+          isAnimationActive={false}
+        />
+        <Line
+          dataKey={"penalty"}
+          stroke={"#000000"}
+          dot={true}
+          isAnimationActive={false}
+        />
+        <Line
+          dataKey={"total"}
+          stroke={"#ff0000"}
+          dot={true}
+          isAnimationActive={false}
+        />
       </LineChart>
     </div>
   );
