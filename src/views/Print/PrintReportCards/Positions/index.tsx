@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { Game, PlayerId, Seat } from "../../../../data-types/tournament-data-types";
+import { Game, PlayerId, Seat, Tournament } from "../../../../data-types/tournament-data-types";
 import { State } from "../../../../state";
 import { generateArray } from "../../../../utils/generateArray";
 
@@ -24,20 +24,20 @@ type PositionData = {
 };
 
 type PositionsProps = {
+  tournament: Tournament,
   playerId: PlayerId
 };
 
 const Positions = (props: PositionsProps) => {
-  const tournamentState = useSelector((state: State) => state.tournament);
 
   // Data format for recharts: Array of objects for each round. Object contains round label ("name") and 
   //  properties of each line's value for that line.
 
   //For position graph, get position evolution and mean position.
   const positions: PositionData = useMemo(() => {
-    const evolution: PositionDataPoint[] = generateArray(tournamentState.info.rounds).map((round: number): PositionDataPoint => ({
+    const evolution: PositionDataPoint[] = generateArray(props.tournament.info.rounds).map((round: number): PositionDataPoint => ({
       name: `${round + 1}`,
-      position: 1 + tournamentState.games
+      position: 1 + props.tournament.games
         //Get the game of current round that the selected player played in
         .filter((game: Game): boolean => game.round === round && game.participants.some((seat: Seat): boolean => seat.playerId === props.playerId))[0]
         //Sort participants of that game
@@ -46,7 +46,7 @@ const Positions = (props: PositionsProps) => {
         .findIndex((seat: Seat) => seat.playerId === props.playerId)
     }));
 
-    const mean = evolution.reduce((carry: number, point: PositionDataPoint): number => carry+point.position, 0) / tournamentState.info.rounds;
+    const mean = evolution.reduce((carry: number, point: PositionDataPoint): number => carry+point.position, 0) / props.tournament.info.rounds;
 
     return {
       evolution,

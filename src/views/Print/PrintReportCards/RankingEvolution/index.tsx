@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { PlayerId, Standing } from "../../../../data-types/tournament-data-types";
+import { PlayerId, Standing, Tournament } from "../../../../data-types/tournament-data-types";
 import { State } from "../../../../state";
 import { generateArray } from "../../../../utils/generateArray";
 import { getStandings } from "../../../../utils/getStandings";
@@ -14,20 +14,19 @@ import {
 } from "recharts";
 
 type RankingEvolutionProps = {
+  tournament: Tournament,
   playerId: PlayerId
 };
 
 const RankingEvolution = (props: RankingEvolutionProps) => {
-  const tournamentState = useSelector((state: State) => state.tournament);
-
   // Data format for recharts: Array of objects for each round. Object contains round label ("name") and 
   //  properties of each line's value for that line.
  
   //For ranking evolution, generate array of all standings from all rounds. 1) Loop through all rounds.
-  const ranking = useMemo(() => generateArray(tournamentState.info.rounds).map((round: number) => (
+  const ranking = useMemo(() => generateArray(props.tournament.info.rounds).map((round: number) => (
     // 2) Get standings for current round.
     // 3) Reformat standings into recharts data format.
-    getStandings({tournament: tournamentState, atRound: round}).reduce((carry: any, current: Standing, _: number, array: Standing[]) => ({
+    getStandings({tournament: props.tournament, atRound: round}).reduce((carry: any, current: Standing, _: number, array: Standing[]) => ({
         ...carry,
         [`player${current.playerId}`]: 1 + array.findIndex((standing: Standing): boolean => standing.playerId === current.playerId)
       }
@@ -45,7 +44,7 @@ const RankingEvolution = (props: RankingEvolutionProps) => {
         <XAxis dataKey="name" />
         <YAxis reversed={true}/>
         {
-          generateArray(tournamentState.playerNames.length).map((playerId: number) => (
+          generateArray(props.tournament.playerNames.length).map((playerId: number) => (
             <Line
               key={`rankingEvolution-player-${playerId}`}
               dataKey={`player${playerId}`}

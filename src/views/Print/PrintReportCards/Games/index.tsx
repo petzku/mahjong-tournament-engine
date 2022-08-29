@@ -1,19 +1,18 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { Game, PlayerId, Score, Seat } from "../../../../data-types/tournament-data-types";
+import { Game, PlayerId, Score, Seat, Tournament } from "../../../../data-types/tournament-data-types";
 import { State } from "../../../../state";
 import { formatPoints } from "../../../../utils/formatPoints";
 
 import styles from "./Games.module.css";
 
 type GamesProps = {
+  tournament: Tournament,
   playerId: PlayerId
 };
 
 const Games = (props: GamesProps) => {
-  const tournamentState = useSelector((state: State) => state.tournament);
-
-  const games = useMemo(() => tournamentState.games
+  const games = useMemo(() => props.tournament.games
     //Find the games where the selected player was in.
     .filter((game: Game): boolean => game.participants.some((seat: Seat): boolean => seat.playerId === props.playerId))
     //Make sure they're sorted in round order
@@ -26,7 +25,7 @@ const Games = (props: GamesProps) => {
     //If fetching name for the selected player's seat, return player's name.
     if (params.game.participants[params.seatNumber].playerId === props.playerId)
     {
-      return <span>{tournamentState.playerNames[props.playerId]}</span>;
+      return <span>{props.tournament.playerNames[props.playerId]}</span>;
     }
 
     //Otherwise return "shimocha", "toimen" or "kamicha" for the other seats appropriately.
