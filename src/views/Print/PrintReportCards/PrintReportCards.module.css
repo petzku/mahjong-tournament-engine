@@ -1,0 +1,29 @@
+@media print
+{
+  .card
+  {
+    break-after: page;
+    margin: 0 auto;
+  }
+}
+
+.title
+{
+  text-align: center;
+}
+
+.columns
+{
+  display: flex;
+}
+
+.games
+{
+  margin-left: 2em;
+}
+
+.subtitle
+{
+  font-variant: small-caps;
+  text-align: center;
+}

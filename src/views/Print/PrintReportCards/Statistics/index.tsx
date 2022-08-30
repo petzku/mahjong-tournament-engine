@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { Game, Score, Seat } from "../../../../data-types/tournament-data-types";
 import { formatPoints } from "../../../../utils/formatPoints";
+import styles from "./Statistics.module.css";
 
 type PointStatistics = {
   highestSingle: number,
@@ -89,38 +90,38 @@ const Statistics = (props: StatisticsProps) => {
         <tbody>
           <tr>
             <td>{null}</td>
-            <th>Sum</th>
-            <th>Highest</th>
-            <th>Lowest</th>
-            <th>Mean</th>
+            <th className={styles.columnHeader}>Sum</th>
+            <th className={styles.columnHeader}>Highest</th>
+            <th className={styles.columnHeader}>Lowest</th>
+            <th className={styles.columnHeader}>Mean</th>
           </tr>
           <tr>
-            <th>Raw</th>
-            <td>{formatPoints({points: statistics.raw.sum, sign: true})}</td>
-            <td>{formatPoints({points: statistics.raw.highestSingle, sign: true})}</td>
-            <td>{formatPoints({points: statistics.raw.lowestSingle, sign: true})}</td>
-            <td>{formatPoints({points: statistics.raw.sum / statistics.gamesPlayed, sign: true})}</td>
+            <th className={styles.rowHeader}>Raw</th>
+            <td className={styles.cell}>{formatPoints({points: statistics.raw.sum, sign: true})}</td>
+            <td className={styles.cell}>{formatPoints({points: statistics.raw.highestSingle, sign: true})}</td>
+            <td className={styles.cell}>{formatPoints({points: statistics.raw.lowestSingle, sign: true})}</td>
+            <td className={styles.cell}>{formatPoints({points: statistics.raw.sum / statistics.gamesPlayed, sign: true})}</td>
           </tr>
           <tr>
-            <th>Uma</th>
-            <td>{formatPoints({points: statistics.uma.sum, sign: true})}</td>
-            <td>{formatPoints({points: statistics.uma.highestSingle, sign: true})}</td>
-            <td>{formatPoints({points: statistics.uma.lowestSingle, sign: true})}</td>
-            <td>{formatPoints({points: statistics.uma.sum / statistics.gamesPlayed, sign: true})}</td>
+            <th className={styles.rowHeader}>Uma</th>
+            <td className={styles.cell}>{formatPoints({points: statistics.uma.sum, sign: true})}</td>
+            <td className={styles.cell}>{formatPoints({points: statistics.uma.highestSingle, sign: true})}</td>
+            <td className={styles.cell}>{formatPoints({points: statistics.uma.lowestSingle, sign: true})}</td>
+            <td className={styles.cell}>{formatPoints({points: statistics.uma.sum / statistics.gamesPlayed, sign: true})}</td>
           </tr>
           <tr>
-            <th>Penalty</th>
-            <td>{formatPoints({points: statistics.penalty.sum, sign: true})}</td>
-            <td>{formatPoints({points: statistics.penalty.highestSingle, sign: true})}</td>
-            <td>{formatPoints({points: statistics.penalty.lowestSingle, sign: true})}</td>
-            <td>{formatPoints({points: statistics.penalty.sum / statistics.gamesPlayed, sign: true})}</td>
+            <th className={styles.rowHeader}>Penalty</th>
+            <td className={styles.cell}>{formatPoints({points: statistics.penalty.sum, sign: true})}</td>
+            <td className={styles.cell}>{formatPoints({points: statistics.penalty.highestSingle, sign: true})}</td>
+            <td className={styles.cell}>{formatPoints({points: statistics.penalty.lowestSingle, sign: true})}</td>
+            <td className={styles.cell}>{formatPoints({points: statistics.penalty.sum / statistics.gamesPlayed, sign: true})}</td>
           </tr>
           <tr>
-            <th>Total</th>
-            <td>{formatPoints({points: statistics.total.sum, sign: true})}</td>
-            <td>{formatPoints({points: statistics.total.highestSingle, sign: true})}</td>
-            <td>{formatPoints({points: statistics.total.lowestSingle, sign: true})}</td>
-            <td>{formatPoints({points: statistics.total.sum / statistics.gamesPlayed, sign: true})}</td>
+            <th className={styles.rowHeader}>Total</th>
+            <td className={styles.cell}>{formatPoints({points: statistics.total.sum, sign: true})}</td>
+            <td className={styles.cell}>{formatPoints({points: statistics.total.highestSingle, sign: true})}</td>
+            <td className={styles.cell}>{formatPoints({points: statistics.total.lowestSingle, sign: true})}</td>
+            <td className={styles.cell}>{formatPoints({points: statistics.total.sum / statistics.gamesPlayed, sign: true})}</td>
           </tr>
         </tbody>
       </table>

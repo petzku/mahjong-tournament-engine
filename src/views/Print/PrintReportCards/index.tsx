@@ -1,4 +1,4 @@
-import styles from "./ReportCards.module.css";
+import styles from "./PrintReportCards.module.css";
 import RankingEvolution from "./RankingEvolution";
 import Positions from "./Positions";
 import CumulativePoints from "./CumulativePoints";
@@ -30,9 +30,10 @@ const PrintReportCards = () => {
     <div>
       {
         players.map((player: Player) => (
-          <div key={`reportcard-${player.playerId}`}>
-            <h1>{tournament.info.title}</h1>
-            <h2>Report card for player {player.playerName}</h2>
+          <div className={styles.card} key={`reportcard-${player.playerId}`}>
+            <h1 className={styles.title}>{tournament.info.title}</h1>
+            <h2 className={styles.title}>Report card for player {player.playerName}</h2>
+            <p className={styles.subtitle}>Created with mahjong-tournament-engine 0.1 by Pauli Marttinen</p>
             <div className={styles.columns}>
               <div>
                 <RankingEvolution
