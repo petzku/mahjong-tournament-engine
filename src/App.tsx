@@ -16,6 +16,8 @@ import PrintPersonalSchedules from "./views/Print/PrintPersonalSchedules";
 import PrintTableSigns from "./views/Print/PrintTableSigns";
 import EditTables from "./views/TournamentHub/EditTables";
 import PrintReportCards from "./views/Print/PrintReportCards";
+import PrintScoreForms from "./views/Print/PrintScoreForms";
+import PrintFullSchedule from "./views/Print/PrintFullSchedule";
 
 const App = () => {
   const appState = useSelector((state: State) => state.app);
@@ -33,6 +35,8 @@ const App = () => {
                 <Route path={"tablesigns"} element={<PrintTableSigns/>}/>
                 <Route path={"personalschedules"} element={<PrintPersonalSchedules/>}/>
                 <Route path={"reportcards"} element={<PrintReportCards/>}/>
+                <Route path={"scoreforms"} element={<PrintScoreForms/>}/>
+                <Route path={"fullschedule"} element={<PrintFullSchedule/>}/>
               </Route>
               <Route path={"*"} element={<OfferStoredGame/>}/>
             </>

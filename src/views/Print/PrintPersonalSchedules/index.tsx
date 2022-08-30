@@ -1,4 +1,4 @@
-import { Game, PlayerId, PlayerName, Seat, Tournament } from "../../../data-types/tournament-data-types";
+import { Game, Seat, Tournament } from "../../../data-types/tournament-data-types";
 import { generateArray } from "../../../utils/generateArray";
 
 import styles from "./PrintPersonalSchedules.module.css";

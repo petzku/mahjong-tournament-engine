@@ -13,6 +13,7 @@ export enum Routes {
   PrintPersonalSchedules = "/print/personalschedules",
   PrintTableSigns = "/print/tablesigns",
   PrintReportCards = "/print/reportcards",
+  PrintScoreForms = "/print/scoreforms",
   PostTournament = "/post",
   Ceremony = "/post/ceremony",
   ReportCards = "/post/reportcards"

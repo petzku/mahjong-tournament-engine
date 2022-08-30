@@ -34,6 +34,13 @@ const PlayerSchedules = () => {
         id={"tablesigns"}
         src={Routes.PrintTableSigns}
       />
+      <h2>Table score forms</h2>
+      <p>Hint: if your printer supports printing on both sides, select that option. Otherwise print odd-numbered pages first, then flip the sheets, and print even-numbered pages.</p>
+      <button onClick={(): void => print("scoreforms")}>Print score forms</button>
+      <PrintableIframe
+        id={"scoreforms"}
+        src={Routes.PrintScoreForms}
+      />
     </div>
   );
 };
