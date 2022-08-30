@@ -63,7 +63,7 @@ const ReportCards = () => {
           </div>
         ))
       }
-      <button onClick={() => print()}>Print</button>
+      <button onClick={() => print()} disabled={playerIds.length === 0}>Print</button>
       <PrintableIframe
         id={"reportcards"}
         src={`${Routes.PrintReportCards}?players=${playerIds.join(",")}`}
