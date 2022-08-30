@@ -12,7 +12,7 @@ export enum Routes {
   FullSchedule = "/print/fullschedule",
   PrintPersonalSchedules = "/print/personalschedules",
   PrintTableSigns = "/print/tablesigns",
-  PrintPlayerReport = "/print/playerreport",
+  PrintReportCards = "/print/reportcards",
   PostTournament = "/post",
   Ceremony = "/post/ceremony",
   ReportCards = "/post/reportcards"

@@ -15,7 +15,6 @@ type Player = {
 const PrintReportCards = () => {
   const tournament: Tournament = JSON.parse(localStorage.getItem("mahjong-tournament") as string);
   
-  //const selectedPlayerId = 23;
   const [searchParams, setSearchParams] = useSearchParams();
 
   const playerIdsParam = searchParams.get("players");
