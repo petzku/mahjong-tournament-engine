@@ -1,5 +1,19 @@
-.allSchedules
+.page
 {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+  break-after: always;
+}
+
+.schedule
+{
+  width: calc(100% * (1/3));
+  box-sizing: border-box;
+  margin-bottom: 3em;
+}
+
+.cell
+{
+  text-align: center;
 }

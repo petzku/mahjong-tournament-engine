@@ -1,10 +1,7 @@
-@media print
+.card
 {
-  .card
-  {
-    break-after: page;
-    margin: 0 auto;
-  }
+  break-after: page;
+  margin: 0 auto;
 }
 
 .title
