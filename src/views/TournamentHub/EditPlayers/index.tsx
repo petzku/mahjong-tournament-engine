@@ -60,6 +60,7 @@ const EditPlayers = () => {
           <tr>
             <th>Previous name</th>
             <th>New name</th>
+            <th>{null}</th>
           </tr>
           {
             tournamentState.playerNames.map((name: string, playerId: number) => (
@@ -73,6 +74,12 @@ const EditPlayers = () => {
                     value={newNames[playerId]}
                     onChange={(newValue: string) => changeName({newName: newValue, playerId: playerId})}
                   />
+                </td>
+                <td>
+                  {
+                    name !== newNames[playerId] &&
+                    "*"
+                  }
                 </td>
               </tr>
             ))

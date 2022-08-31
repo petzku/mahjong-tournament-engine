@@ -34,13 +34,24 @@ const EditTables = () => {
     addTables(newTables);
   };
 
+  const isTableModified = (tableId: number) => {
+    return tournamentState.tables[openTable].setOwner !== newTables[tableId].setOwner ||
+           tournamentState.tables[openTable].matOwner !== newTables[tableId].matOwner ||
+           tournamentState.tables[openTable].notes !== newTables[tableId].notes ||
+           tournamentState.tables[openTable].pointSticks.tenThousand !== newTables[tableId].pointSticks.tenThousand ||
+           tournamentState.tables[openTable].pointSticks.fiveThousand !== newTables[tableId].pointSticks.fiveThousand ||
+           tournamentState.tables[openTable].pointSticks.oneThousand !== newTables[tableId].pointSticks.oneThousand ||
+           tournamentState.tables[openTable].pointSticks.fiveHundred !== newTables[tableId].pointSticks.fiveHundred ||
+           tournamentState.tables[openTable].pointSticks.oneHundred !== newTables[tableId].pointSticks.oneHundred;
+  };
+
   const totalPoints = (({tenThousand, fiveThousand, oneThousand, fiveHundred, oneHundred}) => {
     return tenThousand*10000 + fiveThousand*5000 + oneThousand*1000 + fiveHundred*500 + oneHundred*100;
   })(newTables[openTable].pointSticks);
 
   const tableOptions: DropdownItem[] = newTables.map((_: Table, tableId: number) => ({
     value: tableId,
-    text: `Table ${1 + tableId}`
+    text: `Table ${1 + tableId} ${isTableModified(tableId) ? "*" : ""}`
   }))
 
   return (
@@ -59,6 +70,7 @@ const EditTables = () => {
             <th>{null}</th>
             <th>Previous info</th>
             <th>New info</th>
+            <th>{null}</th>
           </tr>
           <tr>
             <th>Set owner</th>
@@ -71,6 +83,12 @@ const EditTables = () => {
                 value={newTables[openTable].setOwner}
                 onChange={(newValue: string): void => updateTable({...newTables[openTable], setOwner: newValue})}
               />
+            </td>
+            <td>
+              {
+                tournamentState.tables[openTable].setOwner !== newTables[openTable].setOwner &&
+                "*"
+              }
             </td>
           </tr>
           <tr>
@@ -85,6 +103,12 @@ const EditTables = () => {
                 onChange={(newValue: string): void => updateTable({...newTables[openTable], matOwner: newValue})}
               />
             </td>
+            <td>
+              {
+                tournamentState.tables[openTable].matOwner !== newTables[openTable].matOwner &&
+                "*"
+              }
+            </td>
           </tr>
           <tr>
             <th>Notes</th>
@@ -97,6 +121,12 @@ const EditTables = () => {
                 value={newTables[openTable].notes}
                 onChange={(newValue: string): void => updateTable({...newTables[openTable], notes: newValue})}
               />
+            </td>
+            <td>
+              {
+                tournamentState.tables[openTable].notes !== newTables[openTable].notes &&
+                "*"
+              }
             </td>
           </tr>
           <tr>
@@ -112,6 +142,12 @@ const EditTables = () => {
                 steps={[1]}
               />
             </td>
+            <td>
+              {
+                tournamentState.tables[openTable].pointSticks.tenThousand !== newTables[openTable].pointSticks.tenThousand &&
+                "*"
+              }
+            </td>
           </tr>
           <tr>
             <th>5k sticks</th>
@@ -125,6 +161,12 @@ const EditTables = () => {
                 onChange={(newValue: number): void => updatePointSticks({...newTables[openTable].pointSticks, fiveThousand: newValue})}
                 steps={[1]}
               />
+            </td>
+            <td>
+              {
+                tournamentState.tables[openTable].pointSticks.fiveThousand !== newTables[openTable].pointSticks.fiveThousand &&
+                "*"
+              }
             </td>
           </tr>
           <tr>
@@ -140,6 +182,12 @@ const EditTables = () => {
                 steps={[1]}
               />
             </td>
+            <td>
+              {
+                tournamentState.tables[openTable].pointSticks.oneThousand !== newTables[openTable].pointSticks.oneThousand &&
+                "*"
+              }
+            </td>
           </tr>
           <tr>
             <th>500 sticks</th>
@@ -154,6 +202,12 @@ const EditTables = () => {
                 steps={[1]}
               />
             </td>
+            <td>
+              {
+                tournamentState.tables[openTable].pointSticks.fiveHundred !== newTables[openTable].pointSticks.fiveHundred &&
+                "*"
+              }
+            </td>
           </tr>
           <tr>
             <th>100 sticks</th>
@@ -167,6 +221,12 @@ const EditTables = () => {
                 onChange={(newValue: number): void => updatePointSticks({...newTables[openTable].pointSticks, oneHundred: newValue})}
                 steps={[1]}
               />
+            </td>
+            <td>
+              {
+                tournamentState.tables[openTable].pointSticks.oneHundred !== newTables[openTable].pointSticks.oneHundred &&
+                "*"
+              }
             </td>
           </tr>
           <tr>
