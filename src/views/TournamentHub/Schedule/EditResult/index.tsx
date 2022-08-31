@@ -7,7 +7,7 @@ import Popup from "../../../../components/Popup";
 import Toggle from "../../../../components/Toggle";
 
 import { tournamentActionCreators, State } from "../../../../state";
-import { Game, PlayerName, Score } from "../../../../data-types/tournament-data-types";
+import { Game, Score } from "../../../../data-types/tournament-data-types";
 import {formatPoints} from "../../../../utils/formatPoints";
 
 type AddFinishedGameProps = {
@@ -81,7 +81,7 @@ const EditResult = (props: AddFinishedGameProps) => {
   const dispatch = useDispatch();
   const {addGames} = bindActionCreators(tournamentActionCreators, dispatch);
 
-  const getPlayerName = (playerId: number): PlayerName => tournamentState.playerNames[playerId];
+  const getPlayerName = (playerId: number): string => tournamentState.playerNames[playerId];
 
   const getScoreSum = (): number => {
     const east = getNumericValue(score[0]);

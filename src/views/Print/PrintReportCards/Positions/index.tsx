@@ -1,7 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { Game, PlayerId, Seat, Tournament } from "../../../../data-types/tournament-data-types";
-import { State } from "../../../../state";
+import { Game, Seat, Tournament } from "../../../../data-types/tournament-data-types";
 import { generateArray } from "../../../../utils/generateArray";
 
 import {
@@ -25,7 +23,7 @@ type PositionData = {
 
 type PositionsProps = {
   tournament: Tournament,
-  playerId: PlayerId
+  playerId: number
 };
 
 const Positions = (props: PositionsProps) => {

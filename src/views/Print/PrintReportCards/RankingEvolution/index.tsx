@@ -1,7 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { PlayerId, Standing, Tournament } from "../../../../data-types/tournament-data-types";
-import { State } from "../../../../state";
+import { Standing, Tournament } from "../../../../data-types/tournament-data-types";
 import { generateArray } from "../../../../utils/generateArray";
 import { getStandings } from "../../../../utils/getStandings";
 
@@ -15,7 +13,7 @@ import {
 
 type RankingEvolutionProps = {
   tournament: Tournament,
-  playerId: PlayerId
+  playerId: number
 };
 
 const RankingEvolution = (props: RankingEvolutionProps) => {

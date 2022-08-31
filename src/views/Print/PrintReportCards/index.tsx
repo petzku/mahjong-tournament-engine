@@ -4,12 +4,12 @@ import Positions from "./Positions";
 import CumulativePoints from "./CumulativePoints";
 import Games from "./Games";
 import Statistics from "./Statistics";
-import { PlayerName, Tournament } from "../../../data-types/tournament-data-types";
+import { Tournament } from "../../../data-types/tournament-data-types";
 import { useSearchParams } from "react-router-dom";
 
 type Player = {
   playerId: number,
-  playerName: PlayerName
+  playerName: string
 };
 
 const PrintReportCards = () => {

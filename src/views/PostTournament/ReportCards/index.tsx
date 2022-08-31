@@ -1,14 +1,13 @@
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import PrintableIframe from "../../../components/PrintableIframe";
-import { PlayerName } from "../../../data-types/tournament-data-types";
 import { State } from "../../../state";
 import { generateArray } from "../../../utils/generateArray";
 import { Routes } from "../../../utils/routeUtils";
 import PostTabs from "../PostTabs";
 
 type Player = {
-  playerName: PlayerName,
+  playerName: string,
   playerId: number
 };
 
@@ -16,7 +15,7 @@ const ReportCards = () => {
   const tournamentState = useSelector((state: State) => state.tournament);
   
   const [playerIds, setPlayerIds] = useState<number[]>([]);
-  const alphabetizedPlayers: Player[] = useMemo(() => tournamentState.playerNames.map((playerName: PlayerName, playerId: number): Player => ({
+  const alphabetizedPlayers: Player[] = useMemo(() => tournamentState.playerNames.map((playerName: string, playerId: number): Player => ({
     playerName: playerName,
     playerId: playerId
   })).sort((a: Player, b: Player) => a.playerName > b.playerName ? 1 : -1), [])

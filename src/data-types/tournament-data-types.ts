@@ -3,10 +3,6 @@ export type GeneralInfo = {
   rounds: number
 };
 
-export type PlayerName = string;
-
-export type PlayerId = number;
-
 export type PointSticks = {
   tenThousand: number,
   fiveThousand: number,
@@ -29,7 +25,7 @@ export type Score = {
 };
 
 export type Seat = {
-  playerId: PlayerId,
+  playerId: number,
   score: Score
 };
 
@@ -44,13 +40,13 @@ export type Game = {
 
 export type Tournament = {
   info: GeneralInfo,
-  playerNames: PlayerName[],
+  playerNames: string[],
   tables: Table[],
   games: Game[]
 };
 
 export type Standing = {
-  playerId: PlayerId,
+  playerId: number,
   points: number
 };
 
@@ -64,7 +60,7 @@ export const isTournamentDataValid = (data: Tournament): boolean => {
 
     //Check that player names are ok
     "playerNames" in data &&
-    !data.playerNames.some((name: PlayerName): boolean => typeof name !== "string") &&
+    !data.playerNames.some((name: string): boolean => typeof name !== "string") &&
 
     //Check that table data is ok
     "tables" in data &&

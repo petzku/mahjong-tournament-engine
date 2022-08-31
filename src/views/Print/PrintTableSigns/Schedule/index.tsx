@@ -1,11 +1,11 @@
-import { Game, PlayerName } from "../../../../data-types/tournament-data-types";
+import { Game } from "../../../../data-types/tournament-data-types";
 import { generateArray } from "../../../../utils/generateArray";
 
 import styles from "./Schedule.module.css";
 
 type SchedulesProps = {
   games: Game[],
-  playerNames: PlayerName[]
+  playerNames: string[]
 };
 
 const Schedule = (props: SchedulesProps) => {

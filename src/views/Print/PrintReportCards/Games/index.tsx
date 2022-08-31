@@ -1,14 +1,12 @@
 import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { Game, PlayerId, Score, Seat, Tournament } from "../../../../data-types/tournament-data-types";
-import { State } from "../../../../state";
+import { Game, Score, Seat, Tournament } from "../../../../data-types/tournament-data-types";
 import { formatPoints } from "../../../../utils/formatPoints";
 
 import styles from "./Games.module.css";
 
 type GamesProps = {
   tournament: Tournament,
-  playerId: PlayerId
+  playerId: number
 };
 
 const Games = (props: GamesProps) => {

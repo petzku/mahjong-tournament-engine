@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Game, PlayerId, Score, Seat, Tournament } from "../../../../data-types/tournament-data-types";
+import { Game, Score, Seat, Tournament } from "../../../../data-types/tournament-data-types";
 import { generateArray } from "../../../../utils/generateArray";
 
 import {
@@ -13,7 +13,7 @@ import {
 
 type CumulativePointsProps = {
   tournament: Tournament,
-  playerId: PlayerId
+  playerId: number
 };
 
 const CumulativePoints = (props: CumulativePointsProps) => {

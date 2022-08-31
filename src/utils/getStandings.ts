@@ -1,4 +1,4 @@
-import { Game, PlayerId, PlayerName, Seat, Standing, Tournament } from "../data-types/tournament-data-types";
+import { Game, Seat, Standing, Tournament } from "../data-types/tournament-data-types";
 
 type GetStandingsParams = {
   tournament: Tournament,
@@ -6,7 +6,7 @@ type GetStandingsParams = {
 };
 
 export const getStandings = (params: GetStandingsParams): Standing[] => {
-  return params.tournament.playerNames.map((playerName: PlayerName, playerId: PlayerId): Standing => ({
+  return params.tournament.playerNames.map((playerName: string, playerId: number): Standing => ({
     playerId: playerId,
     points: params.tournament.games.reduce((subTotal: number, game: Game) => {
       const playerSeat = game.participants.find((seat: Seat): boolean => seat.playerId === playerId);

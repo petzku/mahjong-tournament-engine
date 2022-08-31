@@ -1,11 +1,10 @@
-import { PlayerName } from "../../../../data-types/tournament-data-types";
 import { formatPoints } from "../../../../utils/formatPoints";
 
 import styles from "./Name.module.css";
 
 type NameProps = {
   position: number,
-  name: PlayerName,
+  name: string,
   points: number,
   revealed: boolean
 };
