@@ -110,13 +110,13 @@ const Ceremony = () => {
           <table>
             <tbody>
               {
-                standings.filter((_: Standing, id: number): boolean => id >= 5 && id < 5+topHalfCount).map((standing: Standing, id: number) => (
+                standings.filter((_: Standing, rank: number): boolean => rank >= 5 && rank < 5+topHalfCount).map((standing: Standing, rank: number) => (
                   <Name
-                    key={`standing-${id}`}
-                    position={id + 6}
+                    key={`standing-${rank}`}
+                    position={rank + 6}
                     name={tournament.playerNames[standing.playerId]}
                     points={standing.points}
-                    revealed={revealed[id + 5]}
+                    revealed={revealed[rank + 5]}
                   />
                 ))
               }
@@ -127,13 +127,13 @@ const Ceremony = () => {
         <table>
             <tbody>
               {
-                standings.filter((_: Standing, id: number): boolean => id >= 5+topHalfCount).map((standing: Standing, id: number) => (
+                standings.filter((_: Standing, rank: number): boolean => rank >= 5+topHalfCount).map((standing: Standing, rank: number) => (
                   <Name
-                    key={`standing-${id}`}
-                    position={id + 6 + Math.round((standings.length - 5)/2)}
+                    key={`standing-${rank}`}
+                    position={rank + 6 + Math.round((standings.length - 5)/2)}
                     name={tournament.playerNames[standing.playerId]}
                     points={standing.points}
-                    revealed={revealed[id + 5 + Math.round((standings.length - 5)/2)]}
+                    revealed={revealed[rank + 5 + Math.round((standings.length - 5)/2)]}
                   />
                 ))
               }
