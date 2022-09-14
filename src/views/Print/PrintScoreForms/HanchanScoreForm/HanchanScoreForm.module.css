@@ -1,0 +1,12 @@
+.form
+{
+  table-layout: fixed;
+  width: 100%;
+}
+
+.cell
+{
+  border: 1px solid black;
+  border-radius: 2px;
+  height: 2em;
+}

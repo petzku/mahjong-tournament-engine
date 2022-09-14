@@ -1,25 +1,12 @@
-.columns
-{
-  display: flex;
-  justify-content: space-between;
-}
-
 .sign
 {
-
+  break-after: page;
+  display: flex;
+  justify-content: space-around;
 }
 
 .number
 {
-
-}
-
-.information
-{
-
-}
-
-.schedule
-{
-
+  font-size: 1000%;
+  font-weight: bold;
 }

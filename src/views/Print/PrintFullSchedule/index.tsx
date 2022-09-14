@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Hanchan from "../../../components/Hanchan";
 import { Game, Tournament } from "../../../data-types/tournament-data-types";
 import { generateArray } from "../../../utils/generateArray";
+import { landscapeLayout } from "../../../utils/landscapeLayout";
 
 import styles from "./PrintFullSchedule.module.css";
 
@@ -11,17 +12,7 @@ const PrintFullSchedule = () => {
   const rounds = generateArray(tournament.info.rounds);
   const tables = generateArray(tournament.playerNames.length/4);
 
-  useEffect(() => {
-    const style = document.createElement("style");
-    style.innerHTML = "@page {size: landscape} body { margin: 0; }";
-    style.id = "page-orientation";
-    document.head.appendChild(style);
-
-    return () => {
-      const child = document.getElementById("page-orientation");
-      child?.parentNode?.removeChild(child);
-    };
-  }, [])
+  useEffect(landscapeLayout, []);
 
   return (
     <table className={styles.fullSchedule}>
