@@ -35,14 +35,14 @@ const EditTables = () => {
   };
 
   const isTableModified = (tableId: number) => {
-    return tournamentState.tables[openTable].setOwner !== newTables[tableId].setOwner ||
-           tournamentState.tables[openTable].matOwner !== newTables[tableId].matOwner ||
-           tournamentState.tables[openTable].notes !== newTables[tableId].notes ||
-           tournamentState.tables[openTable].pointSticks.tenThousand !== newTables[tableId].pointSticks.tenThousand ||
-           tournamentState.tables[openTable].pointSticks.fiveThousand !== newTables[tableId].pointSticks.fiveThousand ||
-           tournamentState.tables[openTable].pointSticks.oneThousand !== newTables[tableId].pointSticks.oneThousand ||
-           tournamentState.tables[openTable].pointSticks.fiveHundred !== newTables[tableId].pointSticks.fiveHundred ||
-           tournamentState.tables[openTable].pointSticks.oneHundred !== newTables[tableId].pointSticks.oneHundred;
+    return tournamentState.tables[tableId].setOwner !== newTables[tableId].setOwner ||
+           tournamentState.tables[tableId].matOwner !== newTables[tableId].matOwner ||
+           tournamentState.tables[tableId].notes !== newTables[tableId].notes ||
+           tournamentState.tables[tableId].pointSticks.tenThousand !== newTables[tableId].pointSticks.tenThousand ||
+           tournamentState.tables[tableId].pointSticks.fiveThousand !== newTables[tableId].pointSticks.fiveThousand ||
+           tournamentState.tables[tableId].pointSticks.oneThousand !== newTables[tableId].pointSticks.oneThousand ||
+           tournamentState.tables[tableId].pointSticks.fiveHundred !== newTables[tableId].pointSticks.fiveHundred ||
+           tournamentState.tables[tableId].pointSticks.oneHundred !== newTables[tableId].pointSticks.oneHundred;
   };
 
   const totalPoints = (({tenThousand, fiveThousand, oneThousand, fiveHundred, oneHundred}) => {
