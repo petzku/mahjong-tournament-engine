@@ -13,6 +13,11 @@ export type AddPlayersAction = {
   payload: string[]
 };
 
+export type AddSeatingTemplateAction = {
+  type: ActionTypes.AddSeatingTemplate,
+  payload: number[][]
+};
+
 export type AddTablesAction = {
   type: ActionTypes.AddTables,
   payload: Table[]
@@ -30,7 +35,8 @@ export type SetTournament = {
 
 type Action =
  EditTournamentInfoAction |
- AddPlayersAction | 
+ AddPlayersAction |
+ AddSeatingTemplateAction | 
  AddTablesAction | 
  AddGamesAction |
  SetTournament;

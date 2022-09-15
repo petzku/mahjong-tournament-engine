@@ -1,13 +1,14 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { State } from "./state";
+
 import TournamentInfoView from "./views/NewTournament/TournamentInfoEntry";
 import PlayerEntryView from "./views/NewTournament/PlayerEntry";
 import TableEntryView from "./views/NewTournament/TableEntry";
 import PostTournament from "./views/PostTournament";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Schedule from "./views/TournamentHub/Schedule";
 import Standings from "./views/TournamentHub/Standings";
 import PrintOuts from "./views/TournamentHub/PrintOuts";
-import { useSelector } from "react-redux";
-import { State } from "./state";
 import OfferStoredGame from "./views/OfferStoredGame";
 import Ceremony from "./views/PostTournament/Ceremony";
 import ReportCards from "./views/PostTournament/ReportCards";

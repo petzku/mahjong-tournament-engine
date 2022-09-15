@@ -41,6 +41,7 @@ export type Game = {
 export type Tournament = {
   info: GeneralInfo,
   playerNames: string[],
+  seatingTemplate: number[][],
   tables: Table[],
   games: Game[]
 };

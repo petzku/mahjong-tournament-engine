@@ -72,48 +72,33 @@ const PlayerEntryView = () => {
   };
 
   const createGamesData = (): Game[] => {
-    //Generate seating plan. Bad algorithm. TODO: To be replaced with templates.
-    const rounds = generateArray(tournamentState.info.rounds);
-    const tables = generateArray(tournamentState.playerNames.length/4);
+    const template = tournamentState.seatingTemplate;
 
-    const easts: number[][] = rounds.map((round: number): number[] => 
-      tables.map((table: number): number => (4*table+round)%tournamentState.playerNames.length)
-    );
-    const souths: number[][] = rounds.map((round: number): number[] => 
-      tables.map((table: number): number => (4*table+round+1)%tournamentState.playerNames.length)
-    );
-    const wests: number[][] = rounds.map((round: number): number[] => 
-      tables.map((table: number): number => (4*table+round+2)%tournamentState.playerNames.length)
-    );
-    const norths: number[][] = rounds.map((round: number): number[] => 
-      tables.map((table: number): number => (4*table+round+3)%tournamentState.playerNames.length)
-    );
-
-    return rounds.map((round: number): Game[] => 
-      tables.map((table: number): Game => ({
-        round: round,
-        table: table,
+    return generateArray(tournamentState.info.rounds).map((roundId: number): Game[] => (
+      generateArray(tournamentState.playerNames.length / 4).map((tableId: number): Game => ({
+        round: roundId,
+        table: tableId,
         finished: false,
         participants: [
           {
-            playerId: easts[round][table],
+            playerId: template[tableId*4+0][roundId],
             score: defaultScore
           },
           {
-            playerId: souths[round][table],
+            playerId: template[tableId*4+1][roundId],
             score: defaultScore
           },
           {
-            playerId: wests[round][table],
+            playerId: template[tableId*4+2][roundId],
             score: defaultScore
           },
           {
-            playerId: norths[round][table],
+            playerId: template[tableId*4+3][roundId],
             score: defaultScore
           }
         ]
       }))
-    ).reduce((combined: Game[], round: Game[]): Game[] => [...combined, ...round], []);
+    )).reduce((combined: Game[], round: Game[]): Game[] => [...combined, ...round], []);
   };
 
   return (

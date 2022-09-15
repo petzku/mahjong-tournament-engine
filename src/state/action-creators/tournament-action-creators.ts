@@ -5,6 +5,7 @@ import ActionTypes from "../action-types/tournament-action-types";
 import {
   EditTournamentInfoAction,
   AddPlayersAction,
+  AddSeatingTemplateAction,
   AddTablesAction,
   AddGamesAction,
   SetTournament
@@ -24,6 +25,15 @@ export const addPlayers = (players: string[]) => {
     dispatch({
       type: ActionTypes.AddPlayers,
       payload: players
+    });
+  };
+};
+
+export const addSeatingTemplate = (template: number[][]) => {
+  return (dispatch: Dispatch<AddSeatingTemplateAction>) => {
+    dispatch({
+      type: ActionTypes.AddSeatingTemplate,
+      payload: template
     });
   };
 };
