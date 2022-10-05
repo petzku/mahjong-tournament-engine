@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Hanchan from "../../../components/Hanchan";
+import Round from "./Round";
 import { Game, Tournament } from "../../../data-types/tournament-data-types";
 import { generateArray } from "../../../utils/generateArray";
 import { landscapeLayout } from "../../../utils/landscapeLayout";
@@ -18,6 +18,39 @@ const PrintFullSchedule = () => {
     <table className={styles.fullSchedule}>
       <thead>
         <tr>
+          <th colSpan={tournament.tables.length + 1}>
+            {tournament.info.title}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{null}</td>
+          {
+            tables.map((tableId: number) => (
+              <th colSpan={2}>
+                Table {tableId + 1}
+              </th>
+            ))
+          }
+        </tr>
+      </tbody>
+      {
+        rounds.map((roundId: number) => (
+          <Round
+            roundId={roundId}
+            games={tournament.games.filter((game: Game) => game.round === roundId)}
+            playerNames={tournament.playerNames}
+          />
+        ))
+      }
+    </table>
+  );
+
+  /* return (
+    <table className={styles.fullSchedule}>
+      <thead>
+        <tr>
           <th colSpan={1 + tournament.tables.length}>
             {tournament.info.title}
           </th>
@@ -32,10 +65,15 @@ const PrintFullSchedule = () => {
         </tr>
         {
           rounds.map((roundId: number) => (
-            <tr key={`round-tr-${roundId}`}>
-              <th>
-                {`Round ${roundId+1}`}
-              </th>
+            <tr
+              key={`round-tr-${roundId}`}
+              className={styles.round}>
+              {
+                roundId % 4 === 0 &&
+                <th>
+                  {`Round ${roundId+1}`}
+                </th>
+              }
               {
                 tables.map((tableId: number) => {
                   const game = tournament.games.find((game: Game): boolean => game.round === roundId && game.table === tableId);
@@ -43,7 +81,7 @@ const PrintFullSchedule = () => {
                   return (
                     game
                     ?
-                    <td key={`round-tr-${roundId}-table-td-${tableId}`}>
+                    <td className={styles.cell} key={`round-tr-${roundId}-table-td-${tableId}`}>
                       <Hanchan
                         east={tournament.playerNames[game.participants[0].playerId]}
                         south={tournament.playerNames[game.participants[1].playerId]}
@@ -64,7 +102,7 @@ const PrintFullSchedule = () => {
         }
       </tbody>
     </table>
-  );
+  ); */
 };
 
 export default PrintFullSchedule;

@@ -18,6 +18,7 @@ const PlayerEntryView = () => {
   const [showTemplateHelp, setShowTemplateHelp] = useState<boolean>(false);
   const [playersInput, setPlayersInput] = useState<string>("");
   const [duplicates, setDuplicates] = useState<string[]>([]);
+  const [randomize, setRandomize] = useState<boolean>(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
@@ -48,7 +49,14 @@ const PlayerEntryView = () => {
       }));
     }
 
-    addPlayers(players.sort((a: string, b: string) => Math.random() - 0.5));
+    if (randomize)
+    {
+      addPlayers(players.sort((a: string, b: string) => Math.random() - 0.5));
+    }
+    if (!randomize)
+    {
+      addPlayers(players);
+    }
     navigate(Routes.TableEntry);
   };
 
@@ -93,6 +101,15 @@ const PlayerEntryView = () => {
         !rightAmount &&
         <p>Must have a number of players that is divisible by 4.</p>
       }
+      <p>
+        <input
+          type={"checkbox"}
+          checked={randomize}
+          name={"randomize"}
+          onChange={() => setRandomize(!randomize)}
+        />
+        <label htmlFor={"randomize"}>Randomize the order of names.</label>
+      </p>
       <h2>Seating template</h2>
       <p>To use a seating template, upload one here: <input type="file" onChange={(e: ChangeEvent<HTMLInputElement>) => readTemplateFile(e.target.files)}/> <button onClick={() => setShowTemplateHelp(true)}>(help)</button></p>
       <p>If you don't upload a template, an algithmically generated seating will be used. Note that the current version of Mahjong Tournament Engine does not generate good seatings.</p>

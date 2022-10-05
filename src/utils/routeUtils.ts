@@ -6,6 +6,7 @@ export enum Routes {
   TableEntry = "/new/tables",
   Schedule = "/hub/schedule",
   Standings = "/hub/standings",
+  StandingsPopup = "/hub/standings/popup",
   PrintOuts = "/hub/printouts",
   EditPlayers = "/hub/editplayers",
   EditTables = "/hub/edittables",

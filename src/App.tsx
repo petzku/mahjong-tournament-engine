@@ -8,6 +8,7 @@ import TableEntryView from "./views/NewTournament/TableEntry";
 import PostTournament from "./views/PostTournament";
 import Schedule from "./views/TournamentHub/Schedule";
 import Standings from "./views/TournamentHub/Standings";
+import StandingsPopup from "./views/TournamentHub/Standings/StandingsPopup";
 import PrintOuts from "./views/TournamentHub/PrintOuts";
 import OfferStoredGame from "./views/OfferStoredGame";
 import Ceremony from "./views/PostTournament/Ceremony";
@@ -39,6 +40,7 @@ const App = () => {
                 <Route path={"scoreforms"} element={<PrintScoreForms/>}/>
                 <Route path={"fullschedule"} element={<PrintFullSchedule/>}/>
               </Route>
+              <Route path={"/hub/standings/popup"} element={<StandingsPopup/>}/>
               <Route path={"*"} element={<OfferStoredGame/>}/>
             </>
             :

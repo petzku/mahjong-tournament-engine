@@ -11,6 +11,7 @@ import { generateArray } from "../../../utils/generateArray";
 import HubTabs from "../HubTabs";
 import { useNavigate } from "react-router-dom";
 import { Routes } from "../../../utils/routeUtils";
+import download from "../../../utils/download";
 
 type ResultsCoordinate = {
   round: number,
@@ -36,6 +37,7 @@ const Schedule = () => {
   return (
     <div>
       <HubTabs/>
+      <button onClick={() => download(tournamentState)}>Download data file</button>
       <TextInput
         label={"Hilight"}
         value={hilight}
