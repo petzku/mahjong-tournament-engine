@@ -1,10 +1,5 @@
 .standingsPopup
 {
-  margin: 0 auto;
-}
-
-.cell
-{
-  padding-left: 5px;
-  padding-right: 5px;
+  display: flex;
+  justify-content: space-around;
 }
