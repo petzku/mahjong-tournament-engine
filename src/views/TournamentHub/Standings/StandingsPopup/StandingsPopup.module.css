@@ -17,3 +17,8 @@
   display: flex;
   align-items: flex-start;
 }
+
+.popupMessage input
+{
+  text-align: center;
+}

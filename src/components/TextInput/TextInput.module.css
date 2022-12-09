@@ -6,7 +6,20 @@
 
 .input
 {
-  border-radius: 3px;
+  outline: 0;
+  border-top-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 1px;
+  border-left-width: 0;
   font-size: 125%;
   width: 15em;
+  margin-bottom: 4px;
+  transition: border-bottom-width 0.2s, margin-bottom 0.2s;
+}
+
+.input:focus-visible
+{
+  outline: 0;
+  margin-bottom: 0;
+  border-bottom-width: 5px;
 }

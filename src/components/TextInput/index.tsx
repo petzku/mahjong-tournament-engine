@@ -4,6 +4,7 @@ import styles from "./TextInput.module.css";
 type TextInputProps = {
   className?: string,
   label?: string,
+  placeholder?: string,
   value: string,
   onChange: (newValue: string) => void,
   disabled?: boolean
@@ -17,6 +18,7 @@ const TextInput = (props: TextInputProps) => {
         <label className={styles.label}>{props.label}</label>
       }
       <input
+        placeholder={props.placeholder ? props.placeholder : ""}
         className={styles.input}
         disabled={props.disabled}
         type={"text"}
