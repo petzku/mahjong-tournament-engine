@@ -152,7 +152,7 @@ const EditResult = (props: AddFinishedGameProps) => {
   return (
     <Popup
       title={"Edit Results"}
-      cancelText={"Discard"}
+      cancelText={"Close without storing"}
       confirmText={"Store results"}
       onCancel={() => props.onFinish()}
       onConfirm={() => storeGame()}
