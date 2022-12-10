@@ -1,0 +1,10 @@
+.hubTabs
+{
+  display: flex;
+}
+
+.tab
+{
+  display: block;
+  margin: 0 20px;
+}
