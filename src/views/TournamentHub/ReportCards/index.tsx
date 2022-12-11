@@ -4,7 +4,7 @@ import PrintableIframe from "../../../components/PrintableIframe";
 import { State } from "../../../state";
 import { generateArray } from "../../../utils/generateArray";
 import { Routes } from "../../../utils/routeUtils";
-import PostTabs from "../PostTabs";
+import Ribbon from "../Ribbon";
 
 type Player = {
   playerName: string,
@@ -39,7 +39,7 @@ const ReportCards = () => {
 
   return (
     <div>
-      <PostTabs/>
+      <Ribbon/>
       <h2>Player report cards</h2>
       <p>You can print or export to PDF (requires a print-to-PDF thingy) sheets that have graphs of players' performance.</p>
 

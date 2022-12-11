@@ -7,17 +7,18 @@ export enum Routes {
   Schedule = "/hub/schedule",
   Standings = "/hub/standings",
   StandingsPopup = "/hub/standings/popup",
-  PrintOuts = "/hub/printouts",
-  EditPlayers = "/hub/editplayers",
-  EditTables = "/hub/edittables",
-  FullSchedule = "/print/fullschedule",
-  PrintPersonalSchedules = "/print/personalschedules",
-  PrintTableSigns = "/print/tablesigns",
-  PrintReportCards = "/print/reportcards",
-  PrintScoreForms = "/print/scoreforms",
+  PrintOuts = "/hub/print-outs",
+  EditPlayers = "/hub/edit-players",
+  EditTables = "/hub/edit-tables",
+  FinalResults = "/hub/final-results",
+  ReportCards = "/hub/report-cards",
+  FullSchedule = "/print/full-schedule",
+  PrintPersonalSchedules = "/print/personal-schedules",
+  PrintTableSigns = "/print/table-signs",
+  PrintReportCards = "/print/report-cards",
+  PrintScoreForms = "/print/score-forms",
   PostTournament = "/post",
   Ceremony = "/post/ceremony",
-  ReportCards = "/post/reportcards"
 };
 
 export type Route = Routes;

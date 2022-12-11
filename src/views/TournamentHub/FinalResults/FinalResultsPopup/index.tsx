@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { Standing, Tournament } from "../../../data-types/tournament-data-types";
-import { getStandings } from "../../../utils/getStandings";
+import { Standing, Tournament } from "../../../../data-types/tournament-data-types";
+import { getStandings } from "../../../../utils/getStandings";
 
 import Confetti from "react-confetti";
 
-import styles from "./Ceremony.module.css";
+import styles from "./FinalResultsPopup.module.css";
 import Name from "./Name";
 
-const Ceremony = () => {
+const FinalResultsPopup = () => {
   const tournament: Tournament = JSON.parse(localStorage.getItem("mahjong-tournament") as string);
 
   const [windowSize, setWindowSize] = useState<{width: number, height: number}>({
@@ -145,4 +145,4 @@ const Ceremony = () => {
   );
 };
 
-export default Ceremony;
+export default FinalResultsPopup;

@@ -1,6 +1,6 @@
 import PrintableIframe from "../../../components/PrintableIframe";
 import { Routes } from "../../../utils/routeUtils";
-import HubTabs from "../HubTabs";
+import Ribbon from "../Ribbon";
 
 const PlayerSchedules = () => {
   const print = (target: string) => {
@@ -13,7 +13,7 @@ const PlayerSchedules = () => {
 
   return (
     <div>
-      <HubTabs/>
+      <Ribbon/>
       <h1>Print-outs</h1>
       <p>Print-outs can be printed on paper or exported to PDF (requires a print-to-PDF thingy).</p>
       <h2>Full schedule</h2>

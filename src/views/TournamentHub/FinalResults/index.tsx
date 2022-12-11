@@ -1,23 +1,25 @@
-import { Routes } from "../../utils/routeUtils";
+import { Routes } from "../../../utils/routeUtils";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import PostTabs from "./PostTabs";
+/* import PostTabs from "./PostTabs"; */
+import Ribbon from "../Ribbon";
 
-const PostTournament = () => {
+const FinalResults = () => {
   const navigate = useNavigate();
-  const [ceremonyWindow, setCeremonyWindow] = useState<WindowProxy | null>(null);
+  const [finalResultsPopup, setFinalResultsPopup] = useState<WindowProxy | null>(null);
 
   const openWindow = () => {
-    setCeremonyWindow(window.open(
-      "/post/ceremony",
-      "ceremonyWindow",
+    setFinalResultsPopup(window.open(
+      "/hub/final-results/popup",
+      "finalResultsPopup",
       "width=500,height=500"
     ));
   };
 
   return (
     <div>
-      <PostTabs/>
+      {/* <PostTabs/> */}
+      <Ribbon/>
       <h1>Post-tournament</h1>
       <p>The tournament is finished. Click the button below to open a new video that will display the standings in a cool way, so you can display the final results on a big screen.</p>
 
@@ -31,11 +33,8 @@ const PostTournament = () => {
       <div>
         <button onClick={() => openWindow()}>Open final results window.</button>
       </div>
-      <div>
-        <button onClick={() => navigate(Routes.Schedule)}>Return to tournament hub.</button>
-      </div>
     </div>
   );
 }
 
-export default PostTournament;
+export default FinalResults;

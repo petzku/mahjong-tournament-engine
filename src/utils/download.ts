@@ -8,7 +8,7 @@ const download = (state: Tournament) => {
   const a = Object.assign(document.createElement("a"), {
     href,
     style: "display:none",
-    download:`${tournamentTitle}.json`}
+    download: `${tournamentTitle}.json`}
   );
   document.body.appendChild(a);
   a.click();

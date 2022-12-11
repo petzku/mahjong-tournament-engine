@@ -5,14 +5,11 @@ import { State } from "./state";
 import TournamentInfoView from "./views/NewTournament/TournamentInfoEntry";
 import PlayerEntryView from "./views/NewTournament/PlayerEntry";
 import TableEntryView from "./views/NewTournament/TableEntry";
-import PostTournament from "./views/PostTournament";
 import Schedule from "./views/TournamentHub/Schedule";
 import Standings from "./views/TournamentHub/Standings";
 import StandingsPopup from "./views/TournamentHub/Standings/StandingsPopup";
 import PrintOuts from "./views/TournamentHub/PrintOuts";
 import OfferStoredGame from "./views/OfferStoredGame";
-import Ceremony from "./views/PostTournament/Ceremony";
-import ReportCards from "./views/PostTournament/ReportCards";
 import EditPlayers from "./views/TournamentHub/EditPlayers";
 import PrintPersonalSchedules from "./views/Print/PrintPersonalSchedules";
 import PrintTableSigns from "./views/Print/PrintTableSigns";
@@ -20,6 +17,9 @@ import EditTables from "./views/TournamentHub/EditTables";
 import PrintReportCards from "./views/Print/PrintReportCards";
 import PrintScoreForms from "./views/Print/PrintScoreForms";
 import PrintFullSchedule from "./views/Print/PrintFullSchedule";
+import FinalResults from "./views/TournamentHub/FinalResults";
+import FinalResultsPopup from "./views/TournamentHub/FinalResults/FinalResultsPopup";
+import ReportCards from "./views/TournamentHub/ReportCards";
 
 const App = () => {
   const appState = useSelector((state: State) => state.app);
@@ -32,15 +32,15 @@ const App = () => {
             !appState.tournamentLoaded
             ?
             <>
-              <Route path={"/post/ceremony"} element={<Ceremony/>}/>
               <Route path={"/print"}>
-                <Route path={"tablesigns"} element={<PrintTableSigns/>}/>
-                <Route path={"personalschedules"} element={<PrintPersonalSchedules/>}/>
-                <Route path={"reportcards"} element={<PrintReportCards/>}/>
-                <Route path={"scoreforms"} element={<PrintScoreForms/>}/>
-                <Route path={"fullschedule"} element={<PrintFullSchedule/>}/>
+                <Route path={"table-signs"} element={<PrintTableSigns/>}/>
+                <Route path={"personal-schedules"} element={<PrintPersonalSchedules/>}/>
+                <Route path={"report-cards"} element={<PrintReportCards/>}/>
+                <Route path={"score-forms"} element={<PrintScoreForms/>}/>
+                <Route path={"full-schedule"} element={<PrintFullSchedule/>}/>
               </Route>
               <Route path={"/hub/standings/popup"} element={<StandingsPopup/>}/>
+              <Route path={"/hub/final-results/popup"} element={<FinalResultsPopup/>}/>
               <Route path={"*"} element={<OfferStoredGame/>}/>
             </>
             :
@@ -56,13 +56,11 @@ const App = () => {
                 <Route index element={<Schedule/>}/>
                 <Route path={"schedule"} element={<Schedule/>}/>
                 <Route path={"standings"} element={<Standings/>}/>
-                <Route path={"printouts"} element={<PrintOuts/>}/>
-                <Route path={"editplayers"} element={<EditPlayers/>}/>
-                <Route path={"edittables"} element={<EditTables/>}/>
-              </Route>
-              <Route path={"/post"}>
-                <Route index element={<PostTournament/>}/>
-                <Route path={"reportcards"} element={<ReportCards/>}/>
+                <Route path={"print-outs"} element={<PrintOuts/>}/>
+                <Route path={"edit-players"} element={<EditPlayers/>}/>
+                <Route path={"edit-tables"} element={<EditTables/>}/>
+                <Route path={"final-results"} element={<FinalResults/>}/>
+                <Route path={"report-cards"} element={<ReportCards/>}/>
               </Route>
             </>
           }
@@ -70,6 +68,6 @@ const App = () => {
       </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;

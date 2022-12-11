@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Popup from "../../../components/Popup";
 import TextInput from "../../../components/TextInput";
 import { State } from "../../../state";
-import HubTabs from "../HubTabs";
+import Ribbon from "../Ribbon";
 import { tournamentActionCreators } from "../../../state";
 import { bindActionCreators } from "redux";
 
@@ -36,7 +36,7 @@ const EditPlayers = () => {
 
   return (
     <div>
-      <HubTabs/>
+      <Ribbon/>
       {
         duplicates.length > 0 &&
         <Popup

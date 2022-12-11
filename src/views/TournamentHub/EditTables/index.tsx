@@ -7,7 +7,7 @@ import TextInput from "../../../components/TextInput";
 import { PointSticks, Table } from "../../../data-types/tournament-data-types";
 import { State, tournamentActionCreators } from "../../../state";
 import { formatPoints } from "../../../utils/formatPoints";
-import HubTabs from "../HubTabs";
+import Ribbon from "../Ribbon";
 
 const EditTables = () => {
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const EditTables = () => {
 
   return (
     <div>
-      <HubTabs/>
+      <Ribbon/>
       <h1>Edit tables</h1>
       <Dropdown
         label={"Table to edit"}

@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { State } from "../../../state";
-import HubTabs from "../HubTabs";
+import Ribbon from "../Ribbon";
 import Dropdown, {DropdownItem} from "../../../components/Dropdown";
 import StandingsTable from "../../../components/StandingsTable";
 import { generateArray } from "../../../utils/generateArray";
-import TextInput from "../../../components/TextInput";
 
 const Standings = () => {
   const tournamentState = useSelector((state: State) => state.tournament);
@@ -27,7 +26,7 @@ const Standings = () => {
 
   return (
     <div>
-      <HubTabs/>
+      <Ribbon/>
       <Dropdown
         label={"Show standings after round"}
         items={roundOptions}

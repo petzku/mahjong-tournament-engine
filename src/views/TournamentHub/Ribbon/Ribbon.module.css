@@ -1,0 +1,24 @@
+.ribbon
+{
+  display: flex;
+}
+
+.ribbonItem
+{
+  margin: 0 20px;
+}
+
+.link
+{
+
+}
+
+.enabled
+{
+
+}
+
+.disabled
+{
+
+}
