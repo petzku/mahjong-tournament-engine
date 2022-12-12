@@ -26,7 +26,6 @@ const Standings = () => {
 
   return (
     <div>
-      <Ribbon/>
       <Dropdown
         id={"roundSelection"}
         label={"Show standings after round"}

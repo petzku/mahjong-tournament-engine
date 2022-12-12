@@ -13,7 +13,6 @@ const PlayerSchedules = () => {
 
   return (
     <div>
-      <Ribbon/>
       <h1>Print-outs</h1>
       <p>Print-outs can be printed on paper or exported to PDF (requires a print-to-PDF thingy).</p>
       <h2>Full schedule</h2>

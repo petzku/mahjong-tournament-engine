@@ -18,8 +18,6 @@ const FinalResults = () => {
 
   return (
     <div>
-      {/* <PostTabs/> */}
-      <Ribbon/>
       <h1>Post-tournament</h1>
       <p>The tournament is finished. Click the button below to open a new video that will display the standings in a cool way, so you can display the final results on a big screen.</p>
 

@@ -8,7 +8,6 @@ import EditResult from "./EditResult";
 import Hanchan from "../../../components/Hanchan";
 
 import { generateArray } from "../../../utils/generateArray";
-import Ribbon from "../Ribbon";
 
 type ResultsCoordinate = {
   round: number,
@@ -31,7 +30,6 @@ const Schedule = () => {
 
   return (
     <div>
-      <Ribbon/>
       <TextInput
         label={"Hilight"}
         value={hilight}

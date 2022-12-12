@@ -39,7 +39,6 @@ const ReportCards = () => {
 
   return (
     <div>
-      <Ribbon/>
       <h2>Player report cards</h2>
       <p>You can print or export to PDF (requires a print-to-PDF thingy) sheets that have graphs of players' performance.</p>
 

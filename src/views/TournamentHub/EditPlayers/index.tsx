@@ -36,7 +36,6 @@ const EditPlayers = () => {
 
   return (
     <div>
-      <Ribbon/>
       {
         duplicates.length > 0 &&
         <Popup

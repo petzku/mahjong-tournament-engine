@@ -56,7 +56,6 @@ const EditTables = () => {
 
   return (
     <div>
-      <Ribbon/>
       <h1>Edit tables</h1>
       <Dropdown
         label={"Table to edit"}
