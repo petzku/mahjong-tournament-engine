@@ -28,6 +28,7 @@ const Standings = () => {
     <div>
       <Ribbon/>
       <Dropdown
+        id={"roundSelection"}
         label={"Show standings after round"}
         items={roundOptions}
         value={afterRound}

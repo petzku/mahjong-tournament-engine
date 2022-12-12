@@ -5,6 +5,7 @@ export type DropdownItem = {
 
 type DropdownProps = {
   className?: string,
+  id: string,
   label: string,
   value: number,
   items: DropdownItem[],
@@ -14,8 +15,9 @@ type DropdownProps = {
 const Dropdown = (props: DropdownProps) => {
   return (
     <div className={`${props.className ? props.className : ""}`}>
-      <label>{props.label}</label>
+      <label htmlFor={props.id}>{props.label}</label>
       <select
+        id={props.id}
         value={props.value}
         onChange={(e) => props.onChange(+e.target.value)}>
         {

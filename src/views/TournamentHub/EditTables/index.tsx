@@ -60,6 +60,7 @@ const EditTables = () => {
       <h1>Edit tables</h1>
       <Dropdown
         label={"Table to edit"}
+        id={"tableSelection"}
         items={tableOptions}
         value={openTable}
         onChange={(newValue): void => setOpenTable(newValue)}

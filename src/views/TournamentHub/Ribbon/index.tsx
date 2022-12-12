@@ -4,50 +4,35 @@ import styles from "./Ribbon.module.css";
 import { useSelector } from "react-redux";
 import { State } from "../../../state/reducers";
 import download from "../../../utils/download";
-import { Game } from "../../../data-types/tournament-data-types";
 
 const Ribbon = () => {
   const tournamentState = useSelector((state: State) => state.tournament);
   
-  const tournamentFinished = !tournamentState.games.some((game: Game): boolean => !game.finished);
-  
   return (
     <div className={styles.ribbon}>
       <div className={styles.ribbonItem}>
-        <Link className={`${styles.link} ${styles.enabled}`} to={Routes.Schedule}>Full schedule</Link>
+        <Link className={styles.link} to={Routes.Schedule}>Full schedule</Link>
       </div>
       <div className={styles.ribbonItem}>
-        <Link className={`${styles.link} ${styles.enabled}`} to={Routes.Standings}>Standings</Link>
+        <Link className={styles.link} to={Routes.Standings}>Standings</Link>
       </div>
       <div className={styles.ribbonItem}>
-        <Link className={`${styles.link} ${styles.enabled}`} to={Routes.EditPlayers}>Edit players</Link>
+        <Link className={styles.link} to={Routes.EditPlayers}>Edit players</Link>
       </div>
       <div className={styles.ribbonItem}>
-        <Link className={`${styles.link} ${styles.enabled}`} to={Routes.EditTables}>Edit tables</Link>
+        <Link className={styles.link} to={Routes.EditTables}>Edit tables</Link>
       </div>
       <div className={styles.ribbonItem}>
-        <Link className={`${styles.link} ${styles.enabled}`} to={Routes.PrintOuts}>Print-outs</Link>
+        <Link className={styles.link} to={Routes.PrintOuts}>Print-outs</Link>
       </div>
       <div className={styles.ribbonItem}>
-        {
-          tournamentFinished
-          ?
-          <Link className={`${styles.link} ${styles.enabled}`} to={Routes.FinalResults}>Final results</Link>
-          :
-          <span className={`${styles.link} ${styles.disabled}`}>Final results</span>
-        }
+        <Link className={styles.link} to={Routes.FinalResults}>Final results</Link>
       </div>
       <div className={styles.ribbonItem}>
-        {
-          tournamentFinished
-          ?
-          <Link className={`${styles.link} ${styles.enabled}`} to={Routes.ReportCards}>Report cards</Link>
-          :
-          <span className={`${styles.link} ${styles.disabled}`}>Report cards</span>
-        }
+        <Link className={styles.link} to={Routes.ReportCards}>Report cards</Link>
       </div>
       <div className={styles.ribbonItem}>
-        <span className={`${styles.link} ${styles.enabled}`} onClick={() => download(tournamentState)}>Download file</span>
+        <span className={styles.link} onClick={() => download(tournamentState)}>Download file</span>
       </div>
     </div>
   );

@@ -11,9 +11,8 @@
   border-right-width: 0;
   border-bottom-width: 1px;
   border-left-width: 0;
-  font-size: 125%;
   width: 15em;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   transition: border-bottom-width 0.2s, margin-bottom 0.2s;
 }
 
@@ -21,5 +20,5 @@
 {
   outline: 0;
   margin-bottom: 0;
-  border-bottom-width: 5px;
+  border-bottom-width: 3px;
 }
