@@ -1,0 +1,20 @@
+.seatingTable
+{
+  overflow-x: scroll;
+}
+
+.table
+{
+  white-space: nowrap;
+}
+
+.sticky
+{
+  position: sticky;
+  left: 0;
+  margin-left: 0;
+  padding-left: 0;
+  text-align: left;
+  background: #fff;
+  z-index: 1;
+}

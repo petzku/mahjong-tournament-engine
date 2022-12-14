@@ -47,7 +47,7 @@ const PlayerEntryView = () => {
   const saveAndContinue = (): void => {
     addTables(tables);
     addGames(createGamesData());
-    navigate(Routes.Schedule);
+    navigate(Routes.Overview);
   };
 
   useEffect(() => {

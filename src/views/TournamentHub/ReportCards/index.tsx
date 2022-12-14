@@ -4,7 +4,6 @@ import PrintableIframe from "../../../components/PrintableIframe";
 import { State } from "../../../state";
 import { generateArray } from "../../../utils/generateArray";
 import { Routes } from "../../../utils/routeUtils";
-import Ribbon from "../Ribbon";
 
 type Player = {
   playerName: string,

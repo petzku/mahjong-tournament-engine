@@ -5,7 +5,7 @@ import { State } from "./state";
 import TournamentInfoView from "./views/NewTournament/TournamentInfoEntry";
 import PlayerEntryView from "./views/NewTournament/PlayerEntry";
 import TableEntryView from "./views/NewTournament/TableEntry";
-import Schedule from "./views/TournamentHub/Schedule";
+import Overview from "./views/TournamentHub/Overview";
 import Standings from "./views/TournamentHub/Standings";
 import StandingsPopup from "./views/TournamentHub/Standings/StandingsPopup";
 import PrintOuts from "./views/TournamentHub/PrintOuts";
@@ -28,7 +28,7 @@ const App = () => {
   if (!appState.tournamentLoaded)
   {
     return (
-      <div className={"mahjong-tournament-engine"}>
+      <div className={"mahjongTournamentEngine"}>
         <BrowserRouter>
           <Routes>
             <Route path={"/print"}>
@@ -48,7 +48,7 @@ const App = () => {
   }
 
   return (
-    <div className={"mahjong-tournament-engine"}>
+    <div className={"mahjongTournamentEngine"}>
       <BrowserRouter>
         <Ribbon/>
         <Routes>
@@ -60,8 +60,8 @@ const App = () => {
             <Route path={"tables"} element={<TableEntryView/>}/>
           </Route>
           <Route path={"/hub"}>
-            <Route index element={<Schedule/>}/>
-            <Route path={"schedule"} element={<Schedule/>}/>
+            <Route index element={<Overview/>}/>
+            <Route path={"overview"} element={<Overview/>}/>
             <Route path={"standings"} element={<Standings/>}/>
             <Route path={"print-outs"} element={<PrintOuts/>}/>
             <Route path={"edit-players"} element={<EditPlayers/>}/>

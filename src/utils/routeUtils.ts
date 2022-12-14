@@ -4,7 +4,7 @@ export enum Routes {
   TournamentInfoEntry = "/new/basic",
   PlayerEntry = "/new/players",
   TableEntry = "/new/tables",
-  Schedule = "/hub/schedule",
+  Overview = "/hub/overview",
   Standings = "/hub/standings",
   StandingsPopup = "/hub/standings/popup",
   PrintOuts = "/hub/print-outs",
@@ -27,7 +27,7 @@ export const findRoute = (loaded: Tournament): Route => {
   //If the loaded tournament has names and tables, take the app to tournament hub.
   if (loaded.playerNames.length > 0 && loaded.tables.length > 0)
   {
-    return Routes.Schedule;
+    return Routes.Overview;
   }
 
   //If the loaded tournament has names but no tables, take the app to table entry phase.

@@ -11,7 +11,7 @@ const Ribbon = () => {
   return (
     <div className={styles.ribbon}>
       <div className={styles.ribbonItem}>
-        <Link className={styles.link} to={Routes.Schedule}>Full schedule</Link>
+        <Link className={styles.link} to={Routes.Overview}>Overview</Link>
       </div>
       <div className={styles.ribbonItem}>
         <Link className={styles.link} to={Routes.Standings}>Standings</Link>
