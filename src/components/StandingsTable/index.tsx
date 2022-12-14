@@ -31,12 +31,12 @@ const StandingsTable = (props: StandingsProps) => {
     return previousPlacement - currentPlacement;
   });
 
-  const columnSplitLimit = props.split ? 24 : playerCount;
-  const playersPerColumn = props.split ? 16 : playerCount;
-  const columns = (props.split && playerCount >= columnSplitLimit) ? Math.ceil(playerCount/playersPerColumn) : 1;
+  const columnSplitLimit = 24;
+  const playersPerColumn = 16;
+  const columns = (playerCount >= columnSplitLimit) ? Math.ceil(playerCount/playersPerColumn) : 1;
   
   return (
-    <div className={props.className}>
+    <div className={styles.standings}>
       {
         generateArray(columns).map((columnId: number) => (
           <table

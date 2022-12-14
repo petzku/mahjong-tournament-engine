@@ -16,8 +16,6 @@ const StandingsPopup = () => {
       <header className={styles.header}>Standings after round {afterRound + 1}</header>
       <div className={styles.standingsPopup}>
         <StandingsTable
-          className={styles.splitStandings}
-          split={true}
           tournament={tournament}
           afterRound={afterRound}
         />

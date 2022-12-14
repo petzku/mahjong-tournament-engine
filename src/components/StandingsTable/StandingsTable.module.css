@@ -1,3 +1,9 @@
+.standings
+{
+  display: flex;
+  align-items: flex-start;
+}
+
 .standingsTable
 {
   margin: 0 2vw;

@@ -12,12 +12,6 @@
   justify-content: space-around;
 }
 
-.splitStandings
-{
-  display: flex;
-  align-items: flex-start;
-}
-
 .popupMessage input
 {
   text-align: center;
