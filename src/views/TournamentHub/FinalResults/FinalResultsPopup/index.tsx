@@ -6,6 +6,7 @@ import Confetti from "react-confetti";
 
 import styles from "./FinalResultsPopup.module.css";
 import Name from "./Name";
+import { generateArray } from "../../../../utils/generateArray";
 
 const FinalResultsPopup = () => {
   const tournament: Tournament = JSON.parse(localStorage.getItem("mahjong-tournament") as string);
@@ -70,9 +71,12 @@ const FinalResultsPopup = () => {
     </table>
   );
 
-  const standings = getStandings({tournament: tournament, atRound: tournament.info.rounds});
+  const standings = getStandings({tournament: tournament, afterRound: tournament.info.rounds});
 
-  const topHalfCount = Math.round((standings.length - 5) / 2);
+  const playerCount = tournament.playerNames.length;
+  const columnSplitLimit = 16;
+  const playersPerColumn = 16;
+  const columns = playerCount-5 > columnSplitLimit ? Math.ceil((playerCount - 5)/playersPerColumn) : 1;
 
   return (
     <div className={styles.backdrop}>
@@ -106,40 +110,28 @@ const FinalResultsPopup = () => {
         </div>
       </div>
       <div className={`${styles.columns} ${styles.bottomPlayers}`}>
-        <div>
-          <table>
-            <tbody>
-              {
-                standings.filter((_: Standing, rank: number): boolean => rank >= 5 && rank < 5+topHalfCount).map((standing: Standing, rank: number) => (
-                  <Name
-                    key={`standing-${rank}`}
-                    position={rank + 6}
-                    name={tournament.playerNames[standing.playerId]}
-                    points={standing.points}
-                    revealed={revealed[rank + 5]}
-                  />
-                ))
-              }
-            </tbody>
-          </table>
-        </div>
-        <div>
-        <table>
-            <tbody>
-              {
-                standings.filter((_: Standing, rank: number): boolean => rank >= 5+topHalfCount).map((standing: Standing, rank: number) => (
-                  <Name
-                    key={`standing-${rank}`}
-                    position={rank + 6 + Math.round((standings.length - 5)/2)}
-                    name={tournament.playerNames[standing.playerId]}
-                    points={standing.points}
-                    revealed={revealed[rank + 5 + Math.round((standings.length - 5)/2)]}
-                  />
-                ))
-              }
-            </tbody>
-          </table>
-        </div>
+        {
+          generateArray(columns).map((columnId: number) => (
+            <table
+              key={`final-results-column-${columnId}`}>
+              <tbody>
+                {
+                  standings
+                    .filter((_: Standing, rank: number ) => columnId*playersPerColumn+5 <= rank && rank < columnId*playersPerColumn+playersPerColumn+5)
+                    .map((standing: Standing, rank: number) => (
+                      <Name
+                        key={`standing-${standing.playerId}`}
+                        position={columnId*playersPerColumn + rank + 6}
+                        name={tournament.playerNames[standing.playerId]}
+                        points={standing.points}
+                        revealed={revealed[columnId*playersPerColumn + rank + 5]}
+                      />
+                    ))
+                }
+              </tbody>
+            </table>
+          ))
+        }
       </div>
     </div>
   );

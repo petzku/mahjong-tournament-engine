@@ -24,7 +24,7 @@ const RankingEvolution = (props: RankingEvolutionProps) => {
   const ranking = useMemo(() => generateArray(props.tournament.info.rounds).map((round: number) => (
     // 2) Get standings for current round.
     // 3) Reformat standings into recharts data format.
-    getStandings({tournament: props.tournament, atRound: round}).reduce((carry: any, current: Standing, _: number, array: Standing[]) => ({
+    getStandings({tournament: props.tournament, afterRound: round}).reduce((carry: any, current: Standing, _: number, array: Standing[]) => ({
         ...carry,
         [`player${current.playerId}`]: 1 + array.findIndex((standing: Standing): boolean => standing.playerId === current.playerId)
       }

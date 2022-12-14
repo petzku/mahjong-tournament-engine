@@ -13,25 +13,26 @@
 {
   display: flex;
   justify-content: space-evenly;
-  margin: 5vh;
+  margin: 3vh;
+  align-items: flex-start;
 }
 
 .bottomPlayers
 {
-  font-size: 200%;
+  font-size: 150%;
 }
 
 .fourthFifth
 {
-  font-size: 350%;
+  font-size: 200%;
 }
 
 .silverBronze
 {
-  font-size: 450%;
+  font-size: 300%;
 }
 
 .gold
 {
-  font-size: 700%;
+  font-size: 500%;
 }

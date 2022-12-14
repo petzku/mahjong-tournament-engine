@@ -17,7 +17,7 @@ const StandingsTable = (props: StandingsProps) => {
   const playerCount = props.tournament.playerNames.length;
 
   const everyRound = useMemo(() => generateArray(props.tournament.info.rounds).map((round: number) => 
-    getStandings({tournament: props.tournament, atRound: round})
+    getStandings({tournament: props.tournament, afterRound: round})
   ), []);
 
   const comparisons = generateArray(playerCount).map((playerId: number) => {
@@ -33,7 +33,7 @@ const StandingsTable = (props: StandingsProps) => {
 
   const columnSplitLimit = 24;
   const playersPerColumn = 16;
-  const columns = (playerCount >= columnSplitLimit) ? Math.ceil(playerCount/playersPerColumn) : 1;
+  const columns = playerCount >= columnSplitLimit ? Math.ceil(playerCount/playersPerColumn) : 1;
   
   return (
     <div className={styles.standings}>
@@ -52,9 +52,11 @@ const StandingsTable = (props: StandingsProps) => {
             </thead>
             <tbody>
               {
-                everyRound[props.afterRound].filter((_: Standing, standingId: number) => columnId*playersPerColumn <= standingId && standingId < columnId*playersPerColumn+playersPerColumn).map((standing: Standing, index: number) => (
+                everyRound[props.afterRound]
+                  .filter((_: Standing, rank: number) => columnId*playersPerColumn <= rank && rank < columnId*playersPerColumn+playersPerColumn)
+                  .map((standing: Standing, rank: number) => (
                   <tr key={`player-standing-${standing.playerId}`}>
-                    <td className={styles.cell}>{columnId*playersPerColumn + index + 1}.</td>
+                    <td className={styles.cell}>{columnId*playersPerColumn + rank + 1}.</td>
                     <td className={styles.cell}>{props.tournament.playerNames[standing.playerId]}</td>
                     <td className={styles.cell}>{formatPoints({points: standing.points, sign: true})}</td>
                     {
