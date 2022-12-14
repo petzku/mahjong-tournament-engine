@@ -1,16 +1,29 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { State } from "../../../state";
-import Ribbon from "../Ribbon";
 import Dropdown, {DropdownItem} from "../../../components/Dropdown";
 import StandingsTable from "../../../components/StandingsTable";
 import { generateArray } from "../../../utils/generateArray";
+import { Game, Tournament } from "../../../data-types/tournament-data-types";
+
 
 const Standings = () => {
-  const tournamentState = useSelector((state: State) => state.tournament);
-  const [afterRound, setAfterRound] = useState<number>(tournamentState.info.rounds - 1);
-  const [standingsWindow, setStandingsWindow] = useState<WindowProxy | null>(null);
+  const getLastFinishedRound = (tournament: Tournament): number => {
+    const getGamesOfRound = (roundId: number) => tournamentState.games.filter((game: Game): boolean => game.round === roundId);
+    const isRoundUnfinished = (roundId: number) => getGamesOfRound(roundId).some((game: Game): boolean => !game.finished);
+    
+    const rounds = generateArray(tournamentState.info.rounds);
+    const firstUnfinishedRound = rounds.findIndex((roundId: number): boolean => isRoundUnfinished(roundId));
 
+    return (firstUnfinishedRound === -1 ? tournament.info.rounds : firstUnfinishedRound) - 1;
+  };
+
+  const [standingsWindow, setStandingsWindow] = useState<WindowProxy | null>(null);
+  const tournamentState = useSelector((state: State) => state.tournament);
+  
+  const [afterRound, setAfterRound] = useState<number>(getLastFinishedRound(tournamentState));
+
+console.log(getLastFinishedRound(tournamentState));
   const openWindow = () => {
     setStandingsWindow(window.open(
       `/hub/standings/popup?afterRound=${afterRound}`,
