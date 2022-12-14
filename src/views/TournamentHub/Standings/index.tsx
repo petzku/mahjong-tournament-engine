@@ -6,16 +6,20 @@ import StandingsTable from "../../../components/StandingsTable";
 import { generateArray } from "../../../utils/generateArray";
 import { Game, Tournament } from "../../../data-types/tournament-data-types";
 
-
 const Standings = () => {
   const getLastFinishedRound = (tournament: Tournament): number => {
-    const getGamesOfRound = (roundId: number) => tournamentState.games.filter((game: Game): boolean => game.round === roundId);
+    const getGamesOfRound = (roundId: number) => tournamentState.games.filter((game: Game) => game.round === roundId);
     const isRoundUnfinished = (roundId: number) => getGamesOfRound(roundId).some((game: Game): boolean => !game.finished);
     
     const rounds = generateArray(tournamentState.info.rounds);
     const firstUnfinishedRound = rounds.findIndex((roundId: number): boolean => isRoundUnfinished(roundId));
+    
+    if (firstUnfinishedRound === 0)
+    {
+      return 0;
+    }
 
-    return (firstUnfinishedRound === -1 ? tournament.info.rounds : firstUnfinishedRound) - 1;
+    return (firstUnfinishedRound === -1 ? tournament.info.rounds : firstUnfinishedRound) - 1;    
   };
 
   const [standingsWindow, setStandingsWindow] = useState<WindowProxy | null>(null);
@@ -23,7 +27,6 @@ const Standings = () => {
   
   const [afterRound, setAfterRound] = useState<number>(getLastFinishedRound(tournamentState));
 
-console.log(getLastFinishedRound(tournamentState));
   const openWindow = () => {
     setStandingsWindow(window.open(
       `/hub/standings/popup?afterRound=${afterRound}`,
