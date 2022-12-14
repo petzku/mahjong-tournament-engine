@@ -7,7 +7,8 @@ type HanchanProps = {
   north: string,
   finished: boolean,
   onClick: () => void,
-  hilight: string
+  hilight: string,
+  clickable: boolean
 };
 
 const Hanchan = (props: HanchanProps) => {
@@ -27,7 +28,10 @@ const Hanchan = (props: HanchanProps) => {
 
   return (
     <div className={hanchanClassName}>
-      <div className={styles.clickable} onClick={() => props.onClick()}>{null}</div>
+      {
+        props.clickable &&
+        <div className={styles.clickable} onClick={() => props.onClick()}>{null}</div>
+      }
       <table>
         <tbody>
           <tr>

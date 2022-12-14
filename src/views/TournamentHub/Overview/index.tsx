@@ -7,6 +7,7 @@ import EditResult from "./EditResult";
 import Hanchan from "../../../components/Hanchan";
 import { generateArray } from "../../../utils/generateArray";
 import styles from "./Overview.module.css";
+import Toggle from "../../../components/Toggle";
 
 type ResultsCoordinate = {
   round: number,
@@ -21,6 +22,7 @@ const notEditingResults: ResultsCoordinate = {
 const Overview = () => {
   const [editingResults, setEditingResults] = useState<ResultsCoordinate>(notEditingResults);
   const [hilight, setHilight] = useState<string>("");
+  const [resultsEnterMode, setResultsEnterMode] = useState<boolean>(true);
 
   const tournamentState = useSelector((state: State) => state.tournament);
 
@@ -33,6 +35,12 @@ const Overview = () => {
         label={"Hilight"}
         value={hilight}
         onChange={(newValue: string): void => setHilight(newValue)}
+      />
+      <Toggle
+        false={"Selection mode"}
+        true={"Results enter mode"}
+        value={resultsEnterMode}
+        onSwitch={() => setResultsEnterMode(!resultsEnterMode)}
       />
       <div className={styles.seatingTable}>
         <table className={styles.table}>
@@ -63,6 +71,7 @@ const Overview = () => {
                             finished={game.finished}
                             hilight={hilight}
                             onClick={() => setEditingResults({round: roundId, table: tableId})}
+                            clickable={resultsEnterMode}
                           />
                         </td>
                         :
