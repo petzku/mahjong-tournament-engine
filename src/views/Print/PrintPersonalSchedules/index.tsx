@@ -23,7 +23,7 @@ const PrintPlayerSchedules = () => {
   return (
     <div>
       {
-        generateArray(Math.ceil(Math.cbrt(tournament.playerNames.length))).map((page: number) => (
+        generateArray(Math.ceil(tournament.playerNames.length/9)).map((page: number) => (
           <div
             key={`page-${page}`}
             className={styles.page}>
