@@ -28,7 +28,9 @@ const PrintFullSchedule = () => {
           <td>{null}</td>
           {
             tables.map((tableId: number) => (
-              <th colSpan={2}>
+              <th
+                key={`table-th-${tableId}`}
+                colSpan={2}>
                 Table {tableId + 1}
               </th>
             ))
@@ -38,6 +40,7 @@ const PrintFullSchedule = () => {
       {
         rounds.map((roundId: number) => (
           <Round
+            key={`round-tr-${roundId}`}
             roundId={roundId}
             games={tournament.games.filter((game: Game) => game.round === roundId)}
             playerNames={tournament.playerNames}

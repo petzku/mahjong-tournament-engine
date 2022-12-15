@@ -31,17 +31,19 @@ const Overview = () => {
 
   return (
     <div>
-      <TextInput
-        label={"Hilight"}
-        value={hilight}
-        onChange={(newValue: string): void => setHilight(newValue)}
-      />
-      <Toggle
-        false={"Selection mode"}
-        true={"Results enter mode"}
-        value={resultsEnterMode}
-        onSwitch={() => setResultsEnterMode(!resultsEnterMode)}
-      />
+      <div className={styles.toolbar}>
+        <TextInput
+          label={"Hilight"}
+          value={hilight}
+          onChange={(newValue: string): void => setHilight(newValue)}
+        />
+        <Toggle
+          false={"Selection mode"}
+          true={"Results enter mode"}
+          value={resultsEnterMode}
+          onSwitch={() => setResultsEnterMode(!resultsEnterMode)}
+        />
+      </div>
       <div className={styles.seatingTable}>
         <table className={styles.table}>
           <tbody>

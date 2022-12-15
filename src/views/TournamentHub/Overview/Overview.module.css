@@ -18,3 +18,9 @@
   background: #fff;
   z-index: 1;
 }
+
+.toolbar
+{
+  display: flex;
+  align-items: center;
+}
