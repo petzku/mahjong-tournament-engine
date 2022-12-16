@@ -33,7 +33,7 @@ const PrintReportCards = () => {
           <div className={styles.card} key={`reportcard-${player.playerId}`}>
             <h1 className={styles.title}>{tournament.info.title}</h1>
             <h2 className={styles.title}>Report card for player {player.playerName}</h2>
-            <p className={styles.subtitle}>Created with mahjong-tournament-engine 0.2 by Pauli Marttinen</p>
+            <p className={styles.subtitle}>Created with mahjong-tournament-engine 0.1.1 by Pauli Marttinen</p>
             <div className={styles.columns}>
               <div>
                 <RankingEvolution
