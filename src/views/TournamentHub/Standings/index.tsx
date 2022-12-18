@@ -5,6 +5,7 @@ import Dropdown, {DropdownItem} from "../../../components/Dropdown";
 import StandingsTable from "../../../components/StandingsTable";
 import { generateArray } from "../../../utils/generateArray";
 import { Game, Tournament } from "../../../data-types/tournament-data-types";
+import Toggle from "../../../components/Toggle";
 
 const Standings = () => {
   const getLastFinishedRound = (tournament: Tournament): number => {
@@ -24,12 +25,13 @@ const Standings = () => {
 
   const [standingsWindow, setStandingsWindow] = useState<WindowProxy | null>(null);
   const tournamentState = useSelector((state: State) => state.tournament);
-  
+    
   const [afterRound, setAfterRound] = useState<number>(getLastFinishedRound(tournamentState));
+  const [plainText, setPlainText] = useState<boolean>(false);
 
   const openWindow = () => {
     setStandingsWindow(window.open(
-      `/hub/standings/popup?afterRound=${afterRound}`,
+      `/hub/standings/popup?afterRound=${afterRound}&plainText=${plainText.toString()}`,
       "standingsWindow",
       "width=500,height=500"
     ));
@@ -42,6 +44,12 @@ const Standings = () => {
 
   return (
     <div>
+      <Toggle
+        true={"Plain text"}
+        false={"Formatted table"}
+        value={plainText}
+        onSwitch={() => setPlainText(!plainText)}
+      />
       <Dropdown
         id={"roundSelection"}
         label={"Show standings after round"}
@@ -53,6 +61,7 @@ const Standings = () => {
       <StandingsTable
         tournament={tournamentState}
         afterRound={afterRound}
+        plainText={plainText}
       />
     </div>
   );

@@ -9,6 +9,7 @@ import styles from "./StandingsTable.module.css";
 type StandingsProps = {
   className?: string,
   split?: boolean,
+  plainText?: boolean,
   tournament: Tournament,
   afterRound: number
 };
@@ -34,7 +35,22 @@ const StandingsTable = (props: StandingsProps) => {
   const columnSplitLimit = 24;
   const playersPerColumn = 16;
   const columns = playerCount >= columnSplitLimit ? Math.ceil(playerCount/playersPerColumn) : 1;
-  
+
+  if (props.plainText)
+  {
+    return (
+      <div>
+        <pre>
+          {
+            everyRound[props.tournament.info.rounds - 1].map((standing: Standing, rank: number) => (
+              `${rank + 1}.\t${props.tournament.playerNames[standing.playerId]}\t${formatPoints({points: standing.points, sign: true})}\n`
+            ))
+          }
+        </pre>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.standings}>
       {
