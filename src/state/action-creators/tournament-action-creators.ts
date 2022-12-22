@@ -1,12 +1,11 @@
 import {Dispatch} from "redux";
 
-import { GeneralInfo, Table, Game, Tournament } from "../../data-types/tournament-data-types";
+import { GeneralInfo, Game, Tournament } from "../../data-types/tournament-data-types";
 import ActionTypes from "../action-types/tournament-action-types";
 import {
   EditTournamentInfoAction,
   AddPlayersAction,
   AddSeatingTemplateAction,
-  AddTablesAction,
   AddGamesAction,
   SetTournament
 } from "../actions/tournament-actions";
@@ -34,15 +33,6 @@ export const addSeatingTemplate = (template: number[][]) => {
     dispatch({
       type: ActionTypes.AddSeatingTemplate,
       payload: template
-    });
-  };
-};
-
-export const addTables = (tables: Table[]) => {
-  return (dispatch: Dispatch<AddTablesAction>) => {
-    dispatch({
-      type: ActionTypes.AddTables,
-      payload: tables
     });
   };
 };

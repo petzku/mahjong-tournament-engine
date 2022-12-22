@@ -1,6 +1,5 @@
 import PrintableIframe from "../../../components/PrintableIframe";
 import { Routes } from "../../../utils/routeUtils";
-import Ribbon from "../Ribbon";
 
 const PlayerSchedules = () => {
   const print = (target: string) => {
@@ -26,12 +25,6 @@ const PlayerSchedules = () => {
       <PrintableIframe
         id={"personalschedules"}
         src={Routes.PrintPersonalSchedules}
-      />
-      <h2>Table signs</h2>
-      <button onClick={(): void => print("tablesigns")}>Print table signs</button>
-      <PrintableIframe
-        id={"tablesigns"}
-        src={Routes.PrintTableSigns}
       />
       <h2>Table score forms</h2>
       <p>Hint: if your printer supports printing on both sides, select that option. Otherwise print odd-numbered pages first, then flip the sheets, and print even-numbered pages.</p>

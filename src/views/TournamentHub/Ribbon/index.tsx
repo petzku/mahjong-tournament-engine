@@ -20,9 +20,6 @@ const Ribbon = () => {
         <Link className={styles.link} to={Routes.EditPlayers}>Edit players</Link>
       </div>
       <div className={styles.ribbonItem}>
-        <Link className={styles.link} to={Routes.EditTables}>Edit tables</Link>
-      </div>
-      <div className={styles.ribbonItem}>
         <Link className={styles.link} to={Routes.PrintOuts}>Print-outs</Link>
       </div>
       <div className={styles.ribbonItem}>

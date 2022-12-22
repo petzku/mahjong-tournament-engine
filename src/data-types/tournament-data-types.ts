@@ -11,13 +11,6 @@ export type PointSticks = {
   oneHundred: number
 };
 
-export type Table = {
-  setOwner: string,
-  matOwner: string,
-  notes: string,
-  pointSticks: PointSticks
-};
-
 export type Score = {
   raw: number,
   uma: number,
@@ -42,7 +35,6 @@ export type Tournament = {
   info: GeneralInfo,
   playerNames: string[],
   seatingTemplate: number[][],
-  tables: Table[],
   games: Game[]
 };
 
@@ -63,26 +55,9 @@ export const isTournamentDataValid = (data: Tournament): boolean => {
     "playerNames" in data &&
     !data.playerNames.some((name: string): boolean => typeof name !== "string") &&
 
-    //Check that table data is ok
-    "tables" in data &&
-    (data.tables.length > 0 ? data.tables.length === data.playerNames.length / 4 : true) &&
-    !data.tables.some((table: Table): boolean => (
-      !("setOwner" in table) || typeof table.setOwner !== "string" ||
-      !("matOwner" in table) || typeof table.matOwner !== "string" ||
-      !("notes" in table) || typeof table.notes !== "string" ||
-      !("pointSticks" in table) ||
-      Object.keys(table).length !== 4 ||
-      !("tenThousand" in table.pointSticks) || typeof table.pointSticks.tenThousand !== "number" ||
-      !("fiveThousand" in table.pointSticks) || typeof table.pointSticks.fiveThousand !== "number" ||
-      !("oneThousand" in table.pointSticks) || typeof table.pointSticks.oneThousand !== "number" ||
-      !("fiveHundred" in table.pointSticks) || typeof table.pointSticks.fiveHundred !== "number" ||
-      !("oneHundred" in table.pointSticks) || typeof table.pointSticks.oneHundred !== "number" ||
-      Object.keys(table.pointSticks).length !== 5
-    )) &&
-
     //Check that game data is ok
     "games" in data &&
-    data.games.length === data.info.rounds * data.tables.length
+    data.games.length === data.info.rounds * (data.playerNames.length/4)
 
     /*TODO: check that
       -each round has every player exactly once

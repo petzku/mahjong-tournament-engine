@@ -9,7 +9,6 @@ export const initialState: Tournament = {
   },
   playerNames: [],
   seatingTemplate: [],
-  tables: [],
   games: []
 };
 
@@ -39,15 +38,6 @@ const reducer = (state: Tournament = initialState, action: Action): Tournament =
       const newState: Tournament = {
         ...state,
         seatingTemplate: action.payload
-      };
-      localStorage.setItem("mahjong-tournament", JSON.stringify(newState));
-      return newState;
-    }
-    case ActionTypes.AddTables:
-    {
-      const newState: Tournament = {
-        ...state,
-        tables: action.payload
       };
       localStorage.setItem("mahjong-tournament", JSON.stringify(newState));
       return newState;

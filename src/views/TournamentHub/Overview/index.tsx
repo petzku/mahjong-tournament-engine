@@ -77,7 +77,7 @@ const Overview = () => {
                           />
                         </td>
                         :
-                        <td>Game undefined</td>
+                        <td key={`round-tr-${roundId}-table-td-${tableId}`}>Game undefined</td>
                       );
                     })
                   }

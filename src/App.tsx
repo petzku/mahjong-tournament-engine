@@ -1,10 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { State } from "./state";
-
 import TournamentInfoView from "./views/NewTournament/TournamentInfoEntry";
 import PlayerEntryView from "./views/NewTournament/PlayerEntry";
-import TableEntryView from "./views/NewTournament/TableEntry";
 import Overview from "./views/TournamentHub/Overview";
 import Standings from "./views/TournamentHub/Standings";
 import StandingsPopup from "./views/TournamentHub/Standings/StandingsPopup";
@@ -12,8 +10,6 @@ import PrintOuts from "./views/TournamentHub/PrintOuts";
 import OfferStoredGame from "./views/OfferStoredGame";
 import EditPlayers from "./views/TournamentHub/EditPlayers";
 import PrintPersonalSchedules from "./views/Print/PrintPersonalSchedules";
-import PrintTableSigns from "./views/Print/PrintTableSigns";
-import EditTables from "./views/TournamentHub/EditTables";
 import PrintReportCards from "./views/Print/PrintReportCards";
 import PrintScoreForms from "./views/Print/PrintScoreForms";
 import PrintFullSchedule from "./views/Print/PrintFullSchedule";
@@ -32,7 +28,6 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path={"/print"}>
-              <Route path={"table-signs"} element={<PrintTableSigns/>}/>
               <Route path={"personal-schedules"} element={<PrintPersonalSchedules/>}/>
               <Route path={"report-cards"} element={<PrintReportCards/>}/>
               <Route path={"score-forms"} element={<PrintScoreForms/>}/>
@@ -57,7 +52,6 @@ const App = () => {
             <Route index element={<TournamentInfoView/>}/>
             <Route path={"basic"} element={<TournamentInfoView/>}/>
             <Route path={"players"} element={<PlayerEntryView/>}/>
-            <Route path={"tables"} element={<TableEntryView/>}/>
           </Route>
           <Route path={"/hub"}>
             <Route index element={<Overview/>}/>
@@ -65,7 +59,6 @@ const App = () => {
             <Route path={"standings"} element={<Standings/>}/>
             <Route path={"print-outs"} element={<PrintOuts/>}/>
             <Route path={"edit-players"} element={<EditPlayers/>}/>
-            <Route path={"edit-tables"} element={<EditTables/>}/>
             <Route path={"final-results"} element={<FinalResults/>}/>
             <Route path={"report-cards"} element={<ReportCards/>}/>
           </Route>

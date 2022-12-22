@@ -18,7 +18,7 @@ const PrintFullSchedule = () => {
     <table className={styles.fullSchedule}>
       <thead>
         <tr>
-          <th colSpan={tournament.tables.length + 1}>
+          <th colSpan={tables.length + 1}>
             {tournament.info.title}
           </th>
         </tr>
@@ -49,63 +49,6 @@ const PrintFullSchedule = () => {
       }
     </table>
   );
-
-  /* return (
-    <table className={styles.fullSchedule}>
-      <thead>
-        <tr>
-          <th colSpan={1 + tournament.tables.length}>
-            {tournament.info.title}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>{null}</th>
-          {
-            tables.map((tableId: number) => <th key={`table-th-${tableId}`}>{`Table ${tableId+1}`}</th>)
-          }
-        </tr>
-        {
-          rounds.map((roundId: number) => (
-            <tr
-              key={`round-tr-${roundId}`}
-              className={styles.round}>
-              {
-                roundId % 4 === 0 &&
-                <th>
-                  {`Round ${roundId+1}`}
-                </th>
-              }
-              {
-                tables.map((tableId: number) => {
-                  const game = tournament.games.find((game: Game): boolean => game.round === roundId && game.table === tableId);
-
-                  return (
-                    game
-                    ?
-                    <td className={styles.cell} key={`round-tr-${roundId}-table-td-${tableId}`}>
-                      <Hanchan
-                        east={tournament.playerNames[game.participants[0].playerId]}
-                        south={tournament.playerNames[game.participants[1].playerId]}
-                        west={tournament.playerNames[game.participants[2].playerId]}
-                        north={tournament.playerNames[game.participants[3].playerId]}
-                        finished={false}
-                        hilight={""}
-                        onClick={() => {}}
-                      />
-                    </td>
-                    :
-                    <td>Game undefined</td>
-                  );
-                })
-              }
-            </tr>
-          ))
-        }
-      </tbody>
-    </table>
-  ); */
 };
 
 export default PrintFullSchedule;
