@@ -1,0 +1,22 @@
+.entrance
+{
+	display: flex;
+	justify-content: space-around;
+}
+
+.button
+{
+	display: block;
+	width: 20vw;
+	padding: 20px;
+}
+
+.buttonContainer
+{
+	margin: 20px;
+}
+
+.loadFile
+{
+	display: none;
+}

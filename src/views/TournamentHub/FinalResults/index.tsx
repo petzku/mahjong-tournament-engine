@@ -1,11 +1,7 @@
-import { Routes } from "../../../utils/routeUtils";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-/* import PostTabs from "./PostTabs"; */
-import Ribbon from "../Ribbon";
+import Button from "../../../components/Button";
 
 const FinalResults = () => {
-  const navigate = useNavigate();
   const [finalResultsPopup, setFinalResultsPopup] = useState<WindowProxy | null>(null);
 
   const openWindow = () => {
@@ -29,7 +25,10 @@ const FinalResults = () => {
       </ul>
 
       <div>
-        <button onClick={() => openWindow()}>Open final results window.</button>
+				<Button
+					label={"Open final results window."}
+					onClick={() => openWindow()}
+				/>
       </div>
     </div>
   );

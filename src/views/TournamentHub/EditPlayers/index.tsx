@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Popup from "../../../components/Popup";
 import TextInput from "../../../components/TextInput";
 import { State } from "../../../state";
-import Ribbon from "../Ribbon";
 import { tournamentActionCreators } from "../../../state";
 import { bindActionCreators } from "redux";
+import Button from "../../../components/Button";
 
 const EditPlayers = () => {
   const dispatch = useDispatch();
@@ -85,7 +85,10 @@ const EditPlayers = () => {
           }
         </tbody>
       </table>
-      <button onClick={(): void => saveNames()}>Save new names</button>
+			<Button
+				label={"Save new names"}
+				onClick={() => saveNames()}
+			/>
     </div>
   )
 };

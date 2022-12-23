@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
+import Button from "../../../components/Button";
 import PrintableIframe from "../../../components/PrintableIframe";
 import { State } from "../../../state";
 import { generateArray } from "../../../utils/generateArray";
@@ -42,8 +43,14 @@ const ReportCards = () => {
       <p>You can print or export to PDF (requires a print-to-PDF thingy) sheets that have graphs of players' performance.</p>
 
       <p>Select players whose report cards you want to print.</p>
-      <button onClick={() => setPlayerIds(generateArray(tournamentState.playerNames.length))}>Select all</button>
-      <button onClick={() => setPlayerIds([])}>Deselect all</button>
+			<Button
+				label={"Select all"}
+				onClick={() => setPlayerIds(generateArray(tournamentState.playerNames.length))}
+			/>
+			<Button
+				label={"Deselect all"}
+				onClick={() => setPlayerIds([])}
+			/>
       {
         alphabetizedPlayers.map((player: Player) => (
           <div key={`player-${player.playerId}`}>
@@ -60,7 +67,10 @@ const ReportCards = () => {
           </div>
         ))
       }
-      <button onClick={() => print()} disabled={playerIds.length === 0}>Print</button>
+			<Button
+				label={"Print"}
+				onClick={() => print()}
+			/>
       <PrintableIframe
         id={"reportcards"}
         src={`${Routes.PrintReportCards}?players=${playerIds.join(",")}`}

@@ -7,7 +7,7 @@ import Overview from "./views/TournamentHub/Overview";
 import Standings from "./views/TournamentHub/Standings";
 import StandingsPopup from "./views/TournamentHub/Standings/StandingsPopup";
 import PrintOuts from "./views/TournamentHub/PrintOuts";
-import OfferStoredGame from "./views/OfferStoredGame";
+import Entrance from "./views/Entrance";
 import EditPlayers from "./views/TournamentHub/EditPlayers";
 import PrintPersonalSchedules from "./views/Print/PrintPersonalSchedules";
 import PrintReportCards from "./views/Print/PrintReportCards";
@@ -35,7 +35,7 @@ const App = () => {
             </Route>
             <Route path={"/hub/standings/popup"} element={<StandingsPopup/>}/>
             <Route path={"/hub/final-results/popup"} element={<FinalResultsPopup/>}/>
-            <Route path={"*"} element={<OfferStoredGame/>}/>
+            <Route path={"*"} element={<Entrance/>}/>
           </Routes>
         </BrowserRouter>
       </div>
