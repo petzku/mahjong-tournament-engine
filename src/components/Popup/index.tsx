@@ -1,3 +1,4 @@
+import Button from "../Button";
 import styles from "./Popup.module.css";
 
 type PopupProps = {
@@ -25,17 +26,18 @@ const Popup = (props: PopupProps) => {
 				<div className={styles.buttons}>
 					{
 						!props.cancelHidden &&
-						<button onClick={() => props.onCancel()}>
-							{props.cancelText}
-						</button>
+						<Button
+							label={props.cancelText}
+							onClick={() => props.onCancel()}
+						/>
 					}
 					{
-					!props.confirmHidden &&
-					<button
-						disabled={props.confirmDisabled}
-						onClick={() => props.onConfirm()}>
-						{props.confirmText}
-					</button>
+						!props.confirmHidden &&
+						<Button
+							label={props.confirmText}
+							onClick={() => props.onConfirm()}
+							disabled={props.confirmDisabled}
+						/>
 					}
 				</div>
 			</div>

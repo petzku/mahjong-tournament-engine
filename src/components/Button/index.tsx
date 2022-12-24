@@ -4,14 +4,15 @@ type ButtonProps = {
 	className?: string,
 	label: string,
 	subLabel?: string,
+	disabled?: boolean,
 	onClick: () => void
 };
 
 const Button = (props: ButtonProps) => {
 	return (
 		<button
-			className={`${styles.button} ${props.className ? props.className : ""}`}
-			onClick={props.onClick}>
+			className={`${styles.button} ${props.disabled ? styles.disabled : ""} ${props.className ? props.className : ""}`}
+			onClick={!props.disabled ? props.onClick : () => {}}>
 			<strong className={styles.mainLabel}>
 				{props.label}
 			</strong>

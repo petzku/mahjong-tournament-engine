@@ -1,9 +1,10 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import readXlsxFile from "read-excel-file";
 import { Row } from "read-excel-file/types";
 import { bindActionCreators } from "redux";
+import Button from "../../../components/Button";
 import Popup from "../../../components/Popup";
 import { Game, Score } from "../../../data-types/tournament-data-types";
 import { State, tournamentActionCreators } from "../../../state";
@@ -31,6 +32,7 @@ const PlayerEntryView = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const {addGames, addPlayers, addSeatingTemplate} = bindActionCreators(tournamentActionCreators, dispatch)
+	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	const players: string[] = playersInput.split("\n").filter(name => name !== "");
 
@@ -90,6 +92,16 @@ const PlayerEntryView = () => {
 		navigate(Routes.Overview);
 	};
 
+	const openFileSelection = () => {
+		if (fileInputRef !== null && fileInputRef.current !== null)
+		{
+			fileInputRef.current.click();
+		}
+	};
+
+	const fileInputOnChange = (e: ChangeEvent<HTMLInputElement>) =>
+		readTemplateFile(e.target.files);
+
 	const readTemplateFile = (files: FileList | null) => {
 		if (files === null || files.length === 0)
 		{
@@ -136,29 +148,48 @@ const PlayerEntryView = () => {
 					type={"checkbox"}
 					checked={randomize}
 					name={"randomize"}
+					id={"randomize"}
 					onChange={() => setRandomize(!randomize)}
 				/>
 				<label htmlFor={"randomize"}>Randomize the order of names.</label>
 			</p>
 			<h2>Seating template</h2>
-		<p>To use a seating template, upload one here:
-			<input type="file" onChange={(e: ChangeEvent<HTMLInputElement>) => readTemplateFile(e.target.files)}/>
-			<button onClick={() => setShowTemplateHelp(true)}>(help)</button>
-		</p>
-		<p>If you don't upload a template, an algithmically generated seating will be used. Note that the current version of Mahjong Tournament Engine does not generate good seatings.</p>
-		<p>
-			<button
-				disabled={!rightAmount}
-				onClick={() => save()}>
-				Save
-			</button>
-		</p>
-		{
-			showTemplateHelp &&
-			<TemplateHelp
-				onClose={() => setShowTemplateHelp(false)}
-			/>
-		}
+			<p>To use a seating template, upload one here:
+				<Button
+					label={"Choose file"}
+					onClick={() => openFileSelection()}
+				/>
+				<Button
+					label="(help)"
+					onClick={() => setShowTemplateHelp(true)}
+				/>
+			</p>
+			<p>If you don't upload a template, an algithmically generated seating will be used. Note that the current version of Mahjong Tournament Engine does not generate good seatings.</p>
+			<p>
+				<Button
+					label={"Save players"}
+					onClick={() => save()}
+					disabled={!rightAmount}
+				/>
+				{/* <button
+					disabled={!rightAmount}
+					onClick={() => save()}>
+					Save
+				</button> */}
+			</p>
+			<div className={styles.fileInput}>
+				<input
+					type="file"
+					onChange={fileInputOnChange}
+					ref={fileInputRef}
+				/>
+			</div>
+			{
+				showTemplateHelp &&
+				<TemplateHelp
+					onClose={() => setShowTemplateHelp(false)}
+				/>
+			}
 		</div>
 	);
 };

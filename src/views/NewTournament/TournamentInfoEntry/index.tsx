@@ -1,46 +1,30 @@
-import { ChangeEvent, useState } from "react";
-import { GeneralInfo, Tournament } from "../../../data-types/tournament-data-types";
+import { useState } from "react";
+import { GeneralInfo } from "../../../data-types/tournament-data-types";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { tournamentActionCreators, appActionCreators } from "../../../state";
+import { tournamentActionCreators } from "../../../state";
 import TextInput from "../../../components/TextInput";
 import NumberInput from "../../../components/NumberInput";
 import { initialState } from "../../../state/reducers/tournamentReducer";
-import { findRoute, Routes } from "../../../utils/routeUtils";
+import { Routes } from "../../../utils/routeUtils";
 import { useNavigate } from "react-router-dom";
+import Button from "../../../components/Button";
+import styles from "./TournamentInfoEntry.module.css";
 
 const TournamentInfoView = () => {
 	const navigate = useNavigate();
 	const [currentInfo, setCurrentInfo] = useState<GeneralInfo>(initialState.info);
 	const dispatch = useDispatch();
 
-	const {setTournament, editTournamentInfo} = bindActionCreators(tournamentActionCreators, dispatch);
-	const {markTournamentLoaded} = bindActionCreators(appActionCreators, dispatch);
+	const {editTournamentInfo} = bindActionCreators(tournamentActionCreators, dispatch);
 
 	const onSave = (): void => {
 		editTournamentInfo(currentInfo);
 		navigate(Routes.PlayerEntry);
 	};
 
-	const readFile = (files: FileList | null): void => {
-		if (files === null || files.length === 0)
-		{
-			return;
-		}
-
-		const fileReader = new FileReader();
-		fileReader.onload = () => {
-			const tournament: Tournament = JSON.parse(fileReader.result as string);
-			const view = findRoute(tournament);
-			setTournament(tournament);
-			markTournamentLoaded(true);
-			navigate(view);
-		};
-		fileReader.readAsText(files[0]);
-	};
-
 	return (
-		<div>
+		<div className={styles.tournamentInfoEntry}>
 			<p>Start new tournament</p>
 			<TextInput
 				label={"Tournament title"}
@@ -53,7 +37,10 @@ const TournamentInfoView = () => {
 				onChange={(newValue: number): void => setCurrentInfo({...currentInfo, rounds: newValue})}
 				steps={[1]}
 			/>
-			<button onClick={() => onSave()}>Ready</button>
+			<Button
+				label={"Ready"}
+				onClick={() => onSave()}
+			/>
 		</div>
 	);
 };

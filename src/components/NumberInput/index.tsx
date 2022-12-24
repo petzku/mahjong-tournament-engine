@@ -1,3 +1,5 @@
+import Button from "../Button";
+import TextInput from "../TextInput";
 import styles from "./NumberInput.module.css";
 
 type NumberInputProps = {
@@ -5,43 +7,43 @@ type NumberInputProps = {
 	label: string,
 	value: number,
 	onChange: (newValue: number) => void,
-	steps: number[],
-	disabled?: boolean
+	steps: number[]
 };
 
 const NumberInput = (props: NumberInputProps) => {
 	return (
-		<div className={`${props.className ? props.className : ""} ${props.disabled ? "disabled" : ""}`}>
+		<div className={`${props.className ? props.className : ""}`}>
 			<label className={styles.label}>{props.label}</label>
-			{
-				props.steps.map((step: number, index: number) => (
-					<button
-						className={styles.button}
-						disabled={props.disabled}
-						key={`numberinput-${props.label}-minus-${index}`}
-						onClick={() => props.onChange(props.value - props.steps[props.steps.length - 1 - index])}>
-						-{props.steps[props.steps.length - 1 - index]}
-					</button>
-				))
-			}
-			<input
-				className={styles.input}
-				disabled={props.disabled}
-				type={"text"}
-				value={props.value.toString()}
-				readOnly={true}
-			/>
-			{
-				props.steps.map((step: number, index: number) => (
-					<button
-						className={styles.button}
-						disabled={props.disabled}
-						key={`numberinput-${props.label}-plus-${index}`}
-						onClick={() => props.onChange(props.value + step)}>
-						+{step}
-					</button>
-				))
-			}
+			<div className={styles.numberInput}>
+				<div>
+					{
+						props.steps.map((step: number, index: number) => (
+							<Button
+								key={`numberinput-${props.label}-minus-${index}`}
+								label={`-${props.steps[props.steps.length - 1 - index]}`}
+								onClick={() => props.onChange(props.value - props.steps[props.steps.length - 1 - index])}
+							/>
+						))
+					}
+				</div>
+				<TextInput
+					className={styles.input}
+					value={props.value.toString()}
+					onChange={(_) => {}}
+					disabled={true}
+				/>
+				<div>
+					{
+						props.steps.map((step: number, index: number) => (
+							<Button
+								key={`numberinput-${props.label}-plus-${index}`}
+								label={`+${step}`}
+								onClick={() => props.onChange(props.value + step)}
+							/>
+						))
+					}
+				</div>
+			</div>
 		</div>
 	);
 };

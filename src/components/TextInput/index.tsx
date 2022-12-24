@@ -12,7 +12,7 @@ type TextInputProps = {
 
 const TextInput = (props: TextInputProps) => {
 	return (
-		<div className={`${props.className ? props.className : ""} ${props.disabled ? "disabled" : ""}`}>
+		<div className={`${props.className ? props.className : ""} ${props.disabled ? styles.disabled : ""}`}>
 			{
 				props.label &&
 				<label className={styles.label}>{props.label}</label>

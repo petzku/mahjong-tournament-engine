@@ -21,7 +21,7 @@
 	display: block;
 }
 
-.subLabel
+.disabled
 {
-	
+	opacity: 0.5;
 }

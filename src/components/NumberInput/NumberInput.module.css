@@ -4,13 +4,13 @@
 	font-weight: bold;
 }
 
-.input
+.numberInput
 {
-	border-radius: 3px;
-	width: 5em;
+	display: flex;
 }
 
-.button
+.input
 {
-	border-radius: 3px;
+	flex-grow: 1;
+	text-align: center;
 }
