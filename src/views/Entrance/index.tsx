@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import styles from "./Entrance.module.css";
 import { findRoute, Routes } from "../../utils/routeUtils";
-import { ChangeEvent, useRef } from "react";
+import React, { ChangeEvent, useRef } from "react";
+import download from "../../utils/download";
 
 const Entrance = () => {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ const Entrance = () => {
 	const fileInputOnChange = (e: ChangeEvent<HTMLInputElement>) =>
 		loadFromFile(e.target.files);
 
-  const loadFromFile = (files: FileList | null): void => {
+  const loadFromFile = (files: FileList | null) => {
     if (files === null || files.length === 0)
     {
       return;
@@ -78,6 +79,10 @@ const Entrance = () => {
     fileReader.readAsText(files[0]);
   };
 
+	const saveTournamentToFile = () => {
+		download(JSON.parse(localStorage.getItem("mahjong-tournament") as string));
+	};
+
   return (
     <div className={styles.entrance}>
 			<div>
@@ -91,21 +96,31 @@ const Entrance = () => {
 				</div>
 				<div className={styles.buttonContainer}>
 					<Button
-						className={`${styles.button} ${styles.spacing}`}
+						className={styles.button}
 						label={"Open tournament file"}
 						onClick={() => openFileSelection()}
 					/>
 				</div>
 				{
 					offerStoredGame &&
-					<div className={styles.buttonContainer}>
-						<Button
-							className={`${styles.button} ${styles.spacing}`}
-							label={"Load tournament from memory"}
-							subLabel={"There seems to be a tournament stored in browser storage."}
-							onClick={() => loadFromLocalStorage()}
-						/>
-					</div>
+					<React.Fragment>
+						<div className={styles.buttonContainer}>
+							<Button
+								className={styles.button}
+								label={"Load tournament from memory"}
+								subLabel={"There seems to be a tournament stored in browser storage."}
+								onClick={() => loadFromLocalStorage()}
+							/>
+						</div>
+						<div className={styles.buttonContainer}>
+							<Button
+								className={styles.button}
+								label={"Save tournament to file"}
+								subLabel={"The tournament stored in browser storage."}
+								onClick={() => saveTournamentToFile()}
+							/>
+						</div>
+					</React.Fragment>
 				}
 			</div>
 			<div className={styles.loadFile}>
