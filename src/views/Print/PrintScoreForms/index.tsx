@@ -4,36 +4,36 @@ import HanchanScoreForm, {Form} from "./HanchanScoreForm";
 import styles from "./PrintScoreForms.module.css";
 
 const PrintScoreForms = () => {
-  const tournament: Tournament = JSON.parse(localStorage.getItem("mahjong-tournament") as string);
-  
-  const pages: Form[][] = curlArray(tournament.games.map((game: Game): Form => ({
-    eastPlayer: tournament.playerNames[game.participants[0].playerId],
-    southPlayer: tournament.playerNames[game.participants[1].playerId],
-    westPlayer: tournament.playerNames[game.participants[2].playerId],
-    northPlayer: tournament.playerNames[game.participants[3].playerId],
-    table: game.table + 1,
-    round: game.round + 1
-  })), 4);
+	const tournament: Tournament = JSON.parse(localStorage.getItem("mahjong-tournament") as string);
 
-   return (
-    <div>
-      {
-        pages.map((page: Form[], pageNumber: number) => (
-          <div className={styles.page} key={`tsf-page-${pageNumber}`}>
-            <header className={styles.header}>{tournament.info.title}</header>
-            {
-              page.map((form: Form, formNumber: number) => (
-                <HanchanScoreForm
-                  key={`tsf-page-${pageNumber}-form-${formNumber}`}
-                  form={form}
-                />
-              ))
-            }
-          </div>
-        ))
-      }
-    </div>
-  );
+	const pages: Form[][] = curlArray(tournament.games.map((game: Game): Form => ({
+		eastPlayer: tournament.playerNames[game.participants[0].playerId],
+		southPlayer: tournament.playerNames[game.participants[1].playerId],
+		westPlayer: tournament.playerNames[game.participants[2].playerId],
+		northPlayer: tournament.playerNames[game.participants[3].playerId],
+		table: game.table + 1,
+		round: game.round + 1
+	})), 4);
+
+	return (
+		<div>
+			{
+				pages.map((page: Form[], pageNumber: number) => (
+					<div className={styles.page} key={`tsf-page-${pageNumber}`}>
+						<header className={styles.header}>{tournament.info.title}</header>
+						{
+							page.map((form: Form, formNumber: number) => (
+								<HanchanScoreForm
+									key={`tsf-page-${pageNumber}-form-${formNumber}`}
+									form={form}
+								/>
+							))
+						}
+					</div>
+				))
+			}
+		</div>
+	);
 };
 
 export default PrintScoreForms;

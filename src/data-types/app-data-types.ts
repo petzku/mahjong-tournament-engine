@@ -1,3 +1,3 @@
 export type App = {
-  tournamentLoaded: boolean
+	tournamentLoaded: boolean
 };

@@ -1,24 +1,24 @@
 .label
 {
-  display: block;
-  font-weight: bold;
+	display: block;
+	font-weight: bold;
 }
 
 .input
 {
-  outline: 0;
-  border-top-width: 0;
-  border-right-width: 0;
-  border-bottom-width: 1px;
-  border-left-width: 0;
-  width: 15em;
-  margin-bottom: 2px;
-  transition: border-bottom-width 0.2s, margin-bottom 0.2s;
+	outline: 0;
+	border-top-width: 0;
+	border-right-width: 0;
+	border-bottom-width: 1px;
+	border-left-width: 0;
+	width: 15em;
+	margin-bottom: 2px;
+	transition: border-bottom-width 0.2s, margin-bottom 0.2s;
 }
 
 .input:focus-visible
 {
-  outline: 0;
-  margin-bottom: 0;
-  border-bottom-width: 3px;
+	outline: 0;
+	margin-bottom: 0;
+	border-bottom-width: 3px;
 }

@@ -1,16 +1,16 @@
 .label
 {
-  display: block;
-  font-weight: bold;
+	display: block;
+	font-weight: bold;
 }
 
 .input
 {
-  border-radius: 3px;
-  width: 5em;
+	border-radius: 3px;
+	width: 5em;
 }
 
 .button
 {
-  border-radius: 3px;
+	border-radius: 3px;
 }

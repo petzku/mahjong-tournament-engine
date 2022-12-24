@@ -1,26 +1,26 @@
 .seatingTable
 {
-  overflow-x: scroll;
+	overflow-x: scroll;
 }
 
 .table
 {
-  white-space: nowrap;
+	white-space: nowrap;
 }
 
 .sticky
 {
-  position: sticky;
-  left: 0;
-  margin-left: 0;
-  padding-left: 0;
-  text-align: left;
-  background: #fff;
-  z-index: 1;
+	position: sticky;
+	left: 0;
+	margin-left: 0;
+	padding-left: 0;
+	text-align: left;
+	background: #fff;
+	z-index: 1;
 }
 
 .toolbar
 {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }

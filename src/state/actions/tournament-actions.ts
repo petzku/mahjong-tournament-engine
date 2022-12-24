@@ -3,35 +3,35 @@ import {GeneralInfo, Tournament} from "../../data-types/tournament-data-types";
 import {Game} from "../../data-types/tournament-data-types";
 
 export type EditTournamentInfoAction = {
-  type: ActionTypes.EditTournamentInfo,
-  payload: GeneralInfo
+	type: ActionTypes.EditTournamentInfo,
+	payload: GeneralInfo
 };
 
 export type AddPlayersAction = {
-  type: ActionTypes.AddPlayers,
-  payload: string[]
+	type: ActionTypes.AddPlayers,
+	payload: string[]
 };
 
 export type AddSeatingTemplateAction = {
-  type: ActionTypes.AddSeatingTemplate,
-  payload: number[][]
+	type: ActionTypes.AddSeatingTemplate,
+	payload: number[][]
 };
 
 export type AddGamesAction = {
-  type: ActionTypes.AddGames,
-  payload: Game[]
+	type: ActionTypes.AddGames,
+	payload: Game[]
 };
 
 export type SetTournament = {
-  type: ActionTypes.SetTournament,
-  payload: Tournament
+	type: ActionTypes.SetTournament,
+	payload: Tournament
 };
 
 type Action =
- EditTournamentInfoAction |
- AddPlayersAction |
- AddSeatingTemplateAction | 
- AddGamesAction |
- SetTournament;
+	EditTournamentInfoAction |
+	AddPlayersAction |
+	AddSeatingTemplateAction | 
+	AddGamesAction |
+	SetTournament;
 
 export default Action;
