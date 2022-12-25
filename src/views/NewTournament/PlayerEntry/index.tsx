@@ -139,7 +139,7 @@ const PlayerEntryView = () => {
 				<label htmlFor={"randomize"}>Randomize the order of names.</label>
 			</p>
 			<h2>Seating template</h2>
-			<p>To use a seating template, upload one here:
+			<div>To use a seating template, upload one here:
 				<FileUpload
 					label={"Choose file"}
 					onUpload={(content) => readTemplateFile(content)}
@@ -148,7 +148,7 @@ const PlayerEntryView = () => {
 					label="(help)"
 					onClick={() => setShowTemplateHelp(true)}
 				/>
-			</p>
+			</div>
 			<p>If you don't upload a template, an algithmically generated seating will be used. Note that the current version of Mahjong Tournament Engine does not generate good seatings.</p>
 			<p>
 				<Button
