@@ -75,7 +75,7 @@ const StandingsTable = (props: StandingsProps) => {
 									<td className={styles.cell}>{columnId*playersPerColumn + rank + 1}.</td>
 									<td className={styles.cell}>{props.tournament.playerNames[standing.playerId]}</td>
 									<td className={styles.cell}>{formatPoints({points: standing.points, sign: true})}</td>
-									x{
+									{
 										comparisons[standing.playerId] !== 0
 										?
 										<Comparison change={comparisons[standing.playerId]}/>
