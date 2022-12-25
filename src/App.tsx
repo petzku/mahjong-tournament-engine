@@ -20,6 +20,7 @@ import Ribbon from "./views/TournamentHub/Ribbon";
 
 const App = () => {
 	const appState = useSelector((state: State) => state.app);
+	const tournamentState = useSelector((state: State) => state.tournament);
 
 	if (!appState.tournamentLoaded)
 	{
@@ -42,17 +43,29 @@ const App = () => {
 		);
 	}
 
+	if (tournamentState.playerNames.length === 0)
+	{
+		return (
+			<div className={"mahjongTournamentEngine"}>
+				<BrowserRouter>
+					<Routes>
+						<Route index element={<TournamentInfoView/>}/>
+						<Route path={"/new"}>
+							<Route index element={<TournamentInfoView/>}/>
+							<Route path={"basic"} element={<TournamentInfoView/>}/>
+							<Route path={"players"} element={<PlayerEntryView/>}/>
+						</Route>
+					</Routes>
+				</BrowserRouter>
+			</div>
+		);
+	}
+
 	return (
 		<div className={"mahjongTournamentEngine"}>
 			<BrowserRouter>
 				<Ribbon/>
 				<Routes>
-					<Route index element={<TournamentInfoView/>}/>
-					<Route path={"/new"}>
-						<Route index element={<TournamentInfoView/>}/>
-						<Route path={"basic"} element={<TournamentInfoView/>}/>
-						<Route path={"players"} element={<PlayerEntryView/>}/>
-					</Route>
 					<Route path={"/hub"}>
 						<Route index element={<Overview/>}/>
 						<Route path={"overview"} element={<Overview/>}/>
