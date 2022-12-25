@@ -92,7 +92,9 @@ const PlayerEntryView = () => {
 		navigate(Routes.Overview);
 	};
 
-	const readTemplateFile = (files: FileList) => {
+	const readTemplateFile = (files: FileList | null) => {
+		if (files === null) return;
+
 		readXlsxFile(files[0]).then((excelRows: Row[]) => {
 			setCustomSeatingTemplate(convertTemplate(excelRows));
 		});

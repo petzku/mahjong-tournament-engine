@@ -1,5 +1,5 @@
 import { formatPoints } from "../../utils/formatPoints";
-
+import { KeyboardEvent } from "react";
 import styles from "./PointInput.module.css";
 
 export type PointInputType = {
@@ -20,7 +20,7 @@ type PointInputProps = {
 };
 
 const PointInput = (props: PointInputProps) => {
-	const onKeyDown = (e: any) => {
+	const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
 		switch (e.key)
 		{
 			case "+":
@@ -80,7 +80,7 @@ const PointInput = (props: PointInputProps) => {
 				className={styles.pointInput}
 				type={"text"}
 				value={displayValue}
-				onKeyDown={(e) => onKeyDown(e)}
+				onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => onKeyDown(e)}
 				onChange={() => {}}
 				tabIndex={props.tabIndex}
 			/>

@@ -52,7 +52,9 @@ const Entrance = () => {
 		navigate(view);
 	};
 
-	const loadFromFile = (files: FileList) => {
+	const loadFromFile = (files: FileList | null) => {
+		if (files === null) return;
+		
 		const fileReader = new FileReader();
 		fileReader.onload = () => {
 			const tournament: Tournament = JSON.parse(fileReader.result as string);
