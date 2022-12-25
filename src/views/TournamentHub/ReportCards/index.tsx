@@ -29,14 +29,6 @@ const ReportCards = () => {
 		setPlayerIds([...playerIds, toggledPlayerId].sort((a: number, b: number) => a-b));
 	};
 
-	const print = () => {
-		const iframe = document.getElementById("reportcards") as HTMLIFrameElement;
-		if (iframe !== null && "contentWindow" in iframe)
-		{
-			iframe?.contentWindow?.print();
-		}
-	};
-
 	return (
 		<div>
 			<h2>Player report cards</h2>
@@ -67,11 +59,8 @@ const ReportCards = () => {
 					</div>
 				))
 			}
-			<Button
-				label={"Print"}
-				onClick={() => print()}
-			/>
 			<PrintableIframe
+				label={"Print"}
 				id={"reportcards"}
 				src={`${Routes.PrintReportCards}?players=${playerIds.join(",")}`}
 			/>
