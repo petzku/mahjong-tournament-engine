@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useRef } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import readXlsxFile from "read-excel-file";
@@ -14,6 +14,7 @@ import { generateSeating } from "../../../utils/generateSeating";
 import { Routes } from "../../../utils/routeUtils";
 import styles from "./PlayerEntryView.module.css";
 import TemplateHelp from "./TemplateHelp";
+import FileUpload from "../../../components/FileUpload";
 
 const defaultScore: Score = {
 	raw: 0,
@@ -32,7 +33,6 @@ const PlayerEntryView = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const {addGames, addPlayers, addSeatingTemplate} = bindActionCreators(tournamentActionCreators, dispatch)
-	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	const players: string[] = playersInput.split("\n").filter(name => name !== "");
 
@@ -92,22 +92,7 @@ const PlayerEntryView = () => {
 		navigate(Routes.Overview);
 	};
 
-	const openFileSelection = () => {
-		if (fileInputRef !== null && fileInputRef.current !== null)
-		{
-			fileInputRef.current.click();
-		}
-	};
-
-	const fileInputOnChange = (e: ChangeEvent<HTMLInputElement>) =>
-		readTemplateFile(e.target.files);
-
-	const readTemplateFile = (files: FileList | null) => {
-		if (files === null || files.length === 0)
-		{
-			return;
-		}
-
+	const readTemplateFile = (files: FileList) => {
 		readXlsxFile(files[0]).then((excelRows: Row[]) => {
 			setCustomSeatingTemplate(convertTemplate(excelRows));
 		});
@@ -155,9 +140,9 @@ const PlayerEntryView = () => {
 			</p>
 			<h2>Seating template</h2>
 			<p>To use a seating template, upload one here:
-				<Button
+				<FileUpload
 					label={"Choose file"}
-					onClick={() => openFileSelection()}
+					onUpload={(content) => readTemplateFile(content)}
 				/>
 				<Button
 					label="(help)"
@@ -171,19 +156,7 @@ const PlayerEntryView = () => {
 					onClick={() => save()}
 					disabled={!rightAmount}
 				/>
-				{/* <button
-					disabled={!rightAmount}
-					onClick={() => save()}>
-					Save
-				</button> */}
 			</p>
-			<div className={styles.fileInput}>
-				<input
-					type="file"
-					onChange={fileInputOnChange}
-					ref={fileInputRef}
-				/>
-			</div>
 			{
 				showTemplateHelp &&
 				<TemplateHelp
