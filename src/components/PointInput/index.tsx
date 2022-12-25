@@ -1,15 +1,9 @@
 import { formatPoints } from "../../utils/formatPoints";
 import { KeyboardEvent } from "react";
 import styles from "./PointInput.module.css";
-
-export type PointInputType = {
-	positive: boolean,
-	value: number
-};
-
-export const getNumericValue = (value: PointInputType): number => {
-	return value.value * (value.positive ? 1 : -1);
-};
+import onKeyDown from "./utils/onKeyDown";
+import { PointInputType } from "../../data-types/tournament-data-types";
+import { getNumericValue } from "../../utils/getNumericValue";
 
 type PointInputProps = {
 	value: PointInputType,
@@ -20,51 +14,6 @@ type PointInputProps = {
 };
 
 const PointInput = (props: PointInputProps) => {
-	const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-		switch (e.key)
-		{
-			case "+":
-				if (props.unflippable)
-				{
-					break;
-				}
-				props.onChange({positive: true, value: props.value.value});
-				break;
-			case "-":
-				if (props.unflippable)
-				{
-					break;
-				}
-				props.onChange({positive: false, value: props.value.value});
-				break;
-			case "Backspace":
-				if (props.short)
-				{
-					props.onChange({positive: props.value.positive, value: Math.floor(props.value.value/1000)*100});
-					break;
-				}
-				props.onChange({positive: props.value.positive, value: Math.floor(props.value.value/10)});
-				break;
-			case "0":
-			case "1":
-			case "2":
-			case "3":
-			case "4":
-			case "5":
-			case "6":
-			case "7":
-			case "8":
-			case "9":
-				if (props.short)
-				{
-					props.onChange({positive: props.value.positive, value: props.value.value*10+(+e.key*100)});
-					break;
-				}
-				props.onChange({positive: props.value.positive, value: props.value.value*10+(+e.key)});
-				break;
-		}
-	};
-
 	const sign = props.value.positive ? "+" : "-";
 
 	const displayValue =
@@ -80,7 +29,12 @@ const PointInput = (props: PointInputProps) => {
 				className={styles.pointInput}
 				type={"text"}
 				value={displayValue}
-				onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => onKeyDown(e)}
+				onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => props.onChange(onKeyDown({
+					e: e,
+					unflippable: props.unflippable,
+					short: props.short,
+					value: props.value
+				}))}
 				onChange={() => {}}
 				tabIndex={props.tabIndex}
 			/>

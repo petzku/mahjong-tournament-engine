@@ -43,6 +43,11 @@ export type Standing = {
 	points: number
 };
 
+export type PointInputType = {
+	positive: boolean,
+	value: number
+};
+
 export const isTournamentDataValid = (data: Tournament): boolean => {
 	return (
 		//Check that general tournament info is intact

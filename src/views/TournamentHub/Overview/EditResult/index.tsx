@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-
-import PointInput, {PointInputType, getNumericValue} from "../../../../components/PointInput";
+import PointInput from "../../../../components/PointInput";
 import Popup from "../../../../components/Popup";
 import Toggle from "../../../../components/Toggle";
-
 import { tournamentActionCreators, State } from "../../../../state";
-import { Game, Score } from "../../../../data-types/tournament-data-types";
+import { Game, PointInputType, Score } from "../../../../data-types/tournament-data-types";
 import {formatPoints} from "../../../../utils/formatPoints";
+import { getNumericValue } from "../../../../utils/getNumericValue";
 
 type AddFinishedGameProps = {
 	round: number,
