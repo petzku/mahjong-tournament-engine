@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import StandingsTable from "../../../../components/StandingsTable";
+import StandingsDisplay from "../../../../components/Standings";
 import TextInput from "../../../../components/TextInput";
 import { Tournament } from "../../../../data-types/tournament-data-types";
 import styles from "./StandingsPopup.module.css";
@@ -16,7 +16,7 @@ const StandingsPopup = () => {
 		<div>
 			<header className={styles.header}>Standings after round {afterRound + 1}</header>
 			<div className={styles.standingsPopup}>
-				<StandingsTable
+				<StandingsDisplay
 					tournament={tournament}
 					afterRound={afterRound}
 					plainText={plainText}

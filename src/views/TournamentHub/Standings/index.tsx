@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { State } from "../../../state";
 import Dropdown, {DropdownItem} from "../../../components/Dropdown";
-import StandingsTable from "../../../components/StandingsTable";
+import StandingsDisplay from "../../../components/Standings";
 import { generateArray } from "../../../utils/generateArray";
 import { Game, Tournament } from "../../../data-types/tournament-data-types";
 import Toggle from "../../../components/Toggle";
@@ -62,7 +62,7 @@ const Standings = () => {
 				label={"Open in popup"}
 				onClick={() => openWindow()}
 			/>
-			<StandingsTable
+			<StandingsDisplay
 				tournament={tournamentState}
 				afterRound={afterRound}
 				plainText={plainText}
