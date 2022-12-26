@@ -35,7 +35,6 @@ const TournamentInfoView = () => {
 				label={"Rounds"}
 				value={currentInfo.rounds}
 				onChange={(newValue: number): void => setCurrentInfo({...currentInfo, rounds: newValue})}
-				steps={[1]}
 			/>
 			<Button
 				label={"Ready"}

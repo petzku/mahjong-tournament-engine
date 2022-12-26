@@ -1,11 +1,10 @@
 import { useMemo } from "react";
-import { Standing, Tournament } from "../../../data-types/tournament-data-types";
-import { formatPoints } from "../../../utils/formatPoints";
+import { Tournament } from "../../../data-types/tournament-data-types";
 import { generateArray } from "../../../utils/generateArray";
-import Comparison from "../../Comparison";
 import styles from "./Table.module.css";
 import getStandingsEveryRound from "../utils/getStandingsEveryRound";
 import getComparisons from "../utils/getComparisons";
+import Column from "./Column";
 
 type StandingsProps = {
 	className?: string,
@@ -36,39 +35,15 @@ const Table = (props: StandingsProps) => {
 	return (
 		<div className={styles.standings}>
 			{
-				generateArray(columns).map((columnId: number) => (
-					<table
-						key={`standings-column-${columnId}`}
-						className={styles.standingsTable}>
-						<thead>
-							<tr>
-								<th>Pos.</th>
-								<th>Player</th>
-								<th>Total</th>
-								<th>{null}</th>
-							</tr>
-							</thead>
-						<tbody>
-						{
-							standingsEveryRound[props.afterRound]
-								.filter((_: Standing, rank: number) => columnId*playersPerColumn <= rank && rank < columnId*playersPerColumn+playersPerColumn)
-								.map((standing: Standing, rank: number) => (
-								<tr key={`player-standing-${standing.playerId}`}>
-									<td className={styles.cell}>{columnId*playersPerColumn + rank + 1}.</td>
-									<td className={styles.cell}>{props.tournament.playerNames[standing.playerId]}</td>
-									<td className={styles.cell}>{formatPoints({points: standing.points, sign: true})}</td>
-									{
-										comparisons[standing.playerId] !== 0
-										?
-										<Comparison change={comparisons[standing.playerId]}/>
-										:
-										<td>{null}</td>
-									}
-								</tr>
-							))
-						}
-						</tbody>
-					</table>
+				generateArray(columns).map((columnIndex: number) => (
+					<Column
+						key={`standings-column-${columnIndex}`}
+						standings={standingsEveryRound[props.afterRound]}
+						tournament={props.tournament}
+						columnIndex={columnIndex}
+						playersPerColumn={playersPerColumn}
+						comparisons={comparisons}
+					/>	
 				))
 			}
 		</div>

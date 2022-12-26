@@ -11,14 +11,17 @@ type TextInputProps = {
 };
 
 const TextInput = (props: TextInputProps) => {
+	const className = `${props.className ? props.className : ""} ${props.disabled ? styles.disabled : ""}`;
+	const placeholder = props.placeholder ? props.placeholder : "";
+	
 	return (
-		<div className={`${props.className ? props.className : ""} ${props.disabled ? styles.disabled : ""}`}>
+		<div className={className}>
 			{
 				props.label &&
 				<label className={styles.label}>{props.label}</label>
 			}
 			<input
-				placeholder={props.placeholder ? props.placeholder : ""}
+				placeholder={placeholder}
 				className={styles.input}
 				disabled={props.disabled}
 				type={"text"}

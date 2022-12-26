@@ -14,6 +14,9 @@ type PopupProps = {
 }
 
 const Popup = (props: PopupProps) => {
+	const showCancel = !props.cancelHidden;
+	const showConfirm = !props.confirmHidden;
+
 	return (
 		<div className={styles.backdrop}>
 			<div className={styles.popup}>
@@ -25,14 +28,14 @@ const Popup = (props: PopupProps) => {
 				</div>
 				<div className={styles.buttons}>
 					{
-						!props.cancelHidden &&
+						showCancel &&
 						<Button
 							label={props.cancelText}
 							onClick={() => props.onCancel()}
 						/>
 					}
 					{
-						!props.confirmHidden &&
+						showConfirm &&
 						<Button
 							label={props.confirmText}
 							onClick={() => props.onConfirm()}

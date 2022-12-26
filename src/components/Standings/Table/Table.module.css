@@ -3,14 +3,3 @@
 	display: flex;
 	align-items: flex-start;
 }
-
-.standingsTable
-{
-	margin: 0 2vw;
-}
-
-.cell
-{
-	padding-left: 5px;
-	padding-right: 5px;
-}

@@ -8,15 +8,18 @@ type ToggleProps = {
 };
 
 const Toggle = (props: ToggleProps) => {
+	const trueClassName = `${styles.option} ${props.value ? styles.selected : ""}`;
+	const falseClassName = `${styles.option} ${!props.value ? styles.selected : ""}`;
+
 	return (
 		<div>
 			<label
-				className={`${styles.option} ${props.value ? styles.selected : ""}`}
+				className={trueClassName}
 				onClick={() => props.onSwitch()}>
 				{props.true}
 			</label>
 			<label
-				className={`${styles.option} ${!props.value ? styles.selected : ""}`}
+				className={falseClassName}
 				onClick={() => props.onSwitch()}>
 				{props.false}
 			</label>

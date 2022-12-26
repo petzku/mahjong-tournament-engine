@@ -1,4 +1,5 @@
 import Button from "../Button";
+import print from "./utils/print";
 import styles from "./PrintableIframe.module.css";
 
 type PrintableIframeProps = {
@@ -9,14 +10,6 @@ type PrintableIframeProps = {
 };
 
 const PrintableIframe = (props: PrintableIframeProps) => {
-	const print = (target: string) => {
-		const iframe = document.getElementById(target) as HTMLIFrameElement;
-		if (iframe !== null && "contentWindow" in iframe)
-		{
-			iframe?.contentWindow?.print();
-		}
-	};
-
 	return (
 		<div>
 			<Button
