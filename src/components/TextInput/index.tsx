@@ -23,7 +23,7 @@ const TextInput = (props: TextInputProps) => {
 				disabled={props.disabled}
 				type={"text"}
 				value={props.value}
-				onChange={(e: ChangeEvent<HTMLInputElement>): void => props.onChange(e.target.value)}
+				onChange={(e: ChangeEvent<HTMLInputElement>) => props.onChange(e.target.value)}
 			/>
 		</div>
 	);
