@@ -4,8 +4,8 @@ import Positions from "./Positions";
 import CumulativePoints from "./CumulativePoints";
 import Games from "./Games";
 import Statistics from "./Statistics";
-import { Tournament } from "../../../data-types/tournament-data-types";
 import { useSearchParams } from "react-router-dom";
+import useTournament from "../../../utils/hooks/useTournament";
 
 type Player = {
 	playerId: number,
@@ -13,7 +13,7 @@ type Player = {
 };
 
 const PrintReportCards = () => {
-	const tournament: Tournament = JSON.parse(localStorage.getItem("mahjong-tournament") as string);
+	const tournament = useTournament();
 
 	const [searchParams, setSearchParams] = useSearchParams();
 

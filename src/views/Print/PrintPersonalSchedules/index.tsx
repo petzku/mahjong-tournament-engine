@@ -1,5 +1,6 @@
-import { Game, Seat, Tournament } from "../../../data-types/tournament-data-types";
+import { Game, Seat } from "../../../data-types/tournament-data-types";
 import { generateArray } from "../../../utils/generateArray";
+import useTournament from "../../../utils/hooks/useTournament";
 
 import styles from "./PrintPersonalSchedules.module.css";
 
@@ -10,7 +11,7 @@ type Placement = {
 };
 
 const PrintPlayerSchedules = () => {
-	const tournament: Tournament = JSON.parse(localStorage.getItem("mahjong-tournament") as string);
+	const tournament = useTournament();
 
 	const getPlacements = (playerId: number) => tournament.games.filter((game: Game): boolean => (
 		game.participants.some((participant: Seat): boolean => participant.playerId === playerId)

@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import Round from "./Round";
-import { Game, Tournament } from "../../../data-types/tournament-data-types";
+import { Game } from "../../../data-types/tournament-data-types";
 import { generateArray } from "../../../utils/generateArray";
 import { landscapeLayout } from "../../../utils/landscapeLayout";
 import styles from "./PrintFullSchedule.module.css";
+import useTournament from "../../../utils/hooks/useTournament";
 
 const PrintFullSchedule = () => {
-	const tournament: Tournament = JSON.parse(localStorage.getItem("mahjong-tournament") as string);
+	const tournament = useTournament();
 
 	const rounds = generateArray(tournament.info.rounds);
 	const tables = generateArray(tournament.playerNames.length/4);

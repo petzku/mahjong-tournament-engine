@@ -1,12 +1,11 @@
 import { Routes } from "../../../utils/routeUtils";
 import { Link } from "react-router-dom";
 import styles from "./Ribbon.module.css";
-import { useSelector } from "react-redux";
-import { State } from "../../../state/reducers";
 import download from "../../../utils/download";
+import useTournament from "../../../utils/hooks/useTournament";
 
 const Ribbon = () => {
-	const tournamentState = useSelector((state: State) => state.tournament);
+	const tournament = useTournament();
 
 	return (
 		<div className={styles.ribbon}>
@@ -29,7 +28,7 @@ const Ribbon = () => {
 				<Link className={styles.link} to={Routes.ReportCards}>Report cards</Link>
 			</div>
 			<div className={styles.ribbonItem}>
-				<span className={styles.link} onClick={() => download(tournamentState)}>Download file</span>
+				<span className={styles.link} onClick={() => download(tournament)}>Download file</span>
 			</div>
 		</div>
 	);

@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { State } from "./state";
+import useTournament from "./utils/hooks/useTournament";
+import useAppState from "./utils/hooks/useAppState";
 import TournamentInfoView from "./views/NewTournament/TournamentInfoEntry";
 import PlayerEntryView from "./views/NewTournament/PlayerEntry";
 import Overview from "./views/TournamentHub/Overview";
@@ -19,8 +19,8 @@ import ReportCards from "./views/TournamentHub/ReportCards";
 import Ribbon from "./views/TournamentHub/Ribbon";
 
 const App = () => {
-	const appState = useSelector((state: State) => state.app);
-	const tournamentState = useSelector((state: State) => state.tournament);
+	const appState = useAppState();
+	const tournament = useTournament();
 
 	if (!appState.tournamentLoaded)
 	{
@@ -43,7 +43,7 @@ const App = () => {
 		);
 	}
 
-	if (tournamentState.playerNames.length === 0)
+	if (tournament.playerNames.length === 0)
 	{
 		return (
 			<div className={"mahjongTournamentEngine"}>

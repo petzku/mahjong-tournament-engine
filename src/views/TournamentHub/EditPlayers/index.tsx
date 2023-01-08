@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Popup from "../../../components/Popup";
 import TextInput from "../../../components/TextInput";
-import { State } from "../../../state";
 import { tournamentActionCreators } from "../../../state";
 import { bindActionCreators } from "redux";
 import Button from "../../../components/Button";
+import useTournament from "../../../utils/hooks/useTournament";
 
 const EditPlayers = () => {
 	const dispatch = useDispatch();
-	const tournamentState = useSelector((state: State) => state.tournament);
+	const tournamentState = useTournament();
 
 	const {addPlayers} = bindActionCreators(tournamentActionCreators, dispatch)
 

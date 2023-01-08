@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { Standing, Tournament } from "../../../../data-types/tournament-data-types";
+import { Standing } from "../../../../data-types/tournament-data-types";
 import { getStandings } from "../../../../utils/getStandings";
-
 import Confetti from "react-confetti";
-
 import styles from "./FinalResultsPopup.module.css";
 import Name from "./Name";
 import { generateArray } from "../../../../utils/generateArray";
+import useTournament from "../../../../utils/hooks/useTournament";
 
 const FinalResultsPopup = () => {
-	const tournament: Tournament = JSON.parse(localStorage.getItem("mahjong-tournament") as string);
+	const tournament = useTournament();
 
 	const [windowSize, setWindowSize] = useState<{width: number, height: number}>({
 		width: window.innerWidth,

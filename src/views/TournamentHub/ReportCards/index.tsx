@@ -1,9 +1,8 @@
 import { useMemo, useState } from "react";
-import { useSelector } from "react-redux";
 import Button from "../../../components/Button";
 import PrintableIframe from "../../../components/PrintableIframe";
-import { State } from "../../../state";
 import { generateArray } from "../../../utils/generateArray";
+import useTournament from "../../../utils/hooks/useTournament";
 import { Routes } from "../../../utils/routeUtils";
 
 type Player = {
@@ -12,10 +11,10 @@ type Player = {
 };
 
 const ReportCards = () => {
-	const tournamentState = useSelector((state: State) => state.tournament);
+	const tournament = useTournament();
 
 	const [playerIds, setPlayerIds] = useState<number[]>([]);
-	const alphabetizedPlayers: Player[] = useMemo(() => tournamentState.playerNames.map((playerName: string, playerId: number): Player => ({
+	const alphabetizedPlayers: Player[] = useMemo(() => tournament.playerNames.map((playerName: string, playerId: number): Player => ({
 		playerName: playerName,
 		playerId: playerId
 	})).sort((a: Player, b: Player) => a.playerName > b.playerName ? 1 : -1), [])
@@ -37,7 +36,7 @@ const ReportCards = () => {
 			<p>Select players whose report cards you want to print.</p>
 			<Button
 				label={"Select all"}
-				onClick={() => setPlayerIds(generateArray(tournamentState.playerNames.length))}
+				onClick={() => setPlayerIds(generateArray(tournament.playerNames.length))}
 			/>
 			<Button
 				label={"Deselect all"}

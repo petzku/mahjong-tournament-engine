@@ -1,10 +1,11 @@
 import { Game, Tournament } from "../../../data-types/tournament-data-types";
 import curlArray from "../../../utils/curlArray";
+import useTournament from "../../../utils/hooks/useTournament";
 import HanchanScoreForm, {Form} from "./HanchanScoreForm";
 import styles from "./PrintScoreForms.module.css";
 
 const PrintScoreForms = () => {
-	const tournament: Tournament = JSON.parse(localStorage.getItem("mahjong-tournament") as string);
+	const tournament = useTournament();
 
 	const pages: Form[][] = curlArray(tournament.games.map((game: Game): Form => ({
 		eastPlayer: tournament.playerNames[game.participants[0].playerId],

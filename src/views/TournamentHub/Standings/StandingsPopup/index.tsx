@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import StandingsDisplay from "../../../../components/Standings";
 import TextInput from "../../../../components/TextInput";
-import { Tournament } from "../../../../data-types/tournament-data-types";
+import useTournament from "../../../../utils/hooks/useTournament";
 import styles from "./StandingsPopup.module.css";
 
 const StandingsPopup = () => {
@@ -10,7 +10,7 @@ const StandingsPopup = () => {
 	const afterRound = parseInt(searchParams.get("afterRound") as string);
 	const plainText = searchParams.get("plainText") !== null && searchParams.get("plainText") === "true";
 	const [message, setMessage] = useState<string>("");
-	const tournament: Tournament = JSON.parse(localStorage.getItem("mahjong-tournament") as string);
+	const tournament = useTournament();
 
 	return (
 		<div>

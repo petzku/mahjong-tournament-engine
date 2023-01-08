@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import PointInput from "../../../../components/PointInput";
 import Popup from "../../../../components/Popup";
 import Toggle from "../../../../components/Toggle";
-import { tournamentActionCreators, State } from "../../../../state";
+import { tournamentActionCreators } from "../../../../state";
 import { Game, PointInputType, Score } from "../../../../data-types/tournament-data-types";
 import {formatPoints} from "../../../../utils/formatPoints";
 import { getNumericValue } from "../../../../utils/getNumericValue";
+import useTournament from "../../../../utils/hooks/useTournament";
 
 type AddFinishedGameProps = {
 	round: number,
@@ -18,8 +19,8 @@ type AddFinishedGameProps = {
 type PointState = [PointInputType, PointInputType, PointInputType, PointInputType];
 
 const EditResult = (props: AddFinishedGameProps) => {
-	const tournamentState = useSelector((state: State) => state.tournament);
-	const editedGame = tournamentState.games.find((game: Game): boolean => (game.round === props.round && game.table === props.table));
+	const tournament = useTournament();
+	const editedGame = tournament.games.find((game: Game): boolean => (game.round === props.round && game.table === props.table));
 
 	const [score, setScore] = useState<PointState>([
 		{
@@ -80,7 +81,7 @@ const EditResult = (props: AddFinishedGameProps) => {
 	const dispatch = useDispatch();
 	const {addGames} = bindActionCreators(tournamentActionCreators, dispatch);
 
-	const getPlayerName = (playerId: number): string => tournamentState.playerNames[playerId];
+	const getPlayerName = (playerId: number): string => tournament.playerNames[playerId];
 
 	const getScoreSum = (): number => {
 		const east = getNumericValue(score[0]);
@@ -136,7 +137,7 @@ const EditResult = (props: AddFinishedGameProps) => {
 				]
 			};
 
-			const updatedGames = tournamentState.games.map((game: Game) => (
+			const updatedGames = tournament.games.map((game: Game) => (
 				game.round === props.round && game.table === props.table ? gameData : game
 			));
 

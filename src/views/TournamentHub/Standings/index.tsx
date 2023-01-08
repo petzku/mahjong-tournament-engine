@@ -7,13 +7,14 @@ import { generateArray } from "../../../utils/generateArray";
 import { Game, Tournament } from "../../../data-types/tournament-data-types";
 import Toggle from "../../../components/Toggle";
 import Button from "../../../components/Button";
+import useTournament from "../../../utils/hooks/useTournament";
 
 const Standings = () => {
 	const getLastFinishedRound = (tournament: Tournament): number => {
-		const getGamesOfRound = (roundId: number) => tournamentState.games.filter((game: Game) => game.round === roundId);
+		const getGamesOfRound = (roundId: number) => tournament.games.filter((game: Game) => game.round === roundId);
 		const isRoundUnfinished = (roundId: number) => getGamesOfRound(roundId).some((game: Game): boolean => !game.finished);
 
-		const rounds = generateArray(tournamentState.info.rounds);
+		const rounds = generateArray(tournament.info.rounds);
 		const firstUnfinishedRound = rounds.findIndex((roundId: number): boolean => isRoundUnfinished(roundId));
 
 		if (firstUnfinishedRound === 0)
@@ -25,9 +26,9 @@ const Standings = () => {
 	};
 
 	const [standingsWindow, setStandingsWindow] = useState<WindowProxy | null>(null);
-	const tournamentState = useSelector((state: State) => state.tournament);
+	const tournament = useTournament();
 
-	const [afterRound, setAfterRound] = useState<number>(getLastFinishedRound(tournamentState));
+	const [afterRound, setAfterRound] = useState<number>(getLastFinishedRound(tournament));
 	const [plainText, setPlainText] = useState<boolean>(false);
 
 	const openWindow = () => {
@@ -38,7 +39,7 @@ const Standings = () => {
 		));
 	};
 
-	const roundOptions = generateArray(tournamentState.info.rounds).map((roundId: number): DropdownItem => ({
+	const roundOptions = generateArray(tournament.info.rounds).map((roundId: number): DropdownItem => ({
 		value: roundId,
 		text: `Round ${roundId + 1}`
 	}));
@@ -63,7 +64,7 @@ const Standings = () => {
 				onClick={() => openWindow()}
 			/>
 			<StandingsDisplay
-				tournament={tournamentState}
+				tournament={tournament}
 				afterRound={afterRound}
 				plainText={plainText}
 			/>
