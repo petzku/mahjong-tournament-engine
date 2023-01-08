@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import useTournament from "./utils/hooks/useTournament";
 import useAppState from "./utils/hooks/useAppState";
-import TournamentInfoView from "./views/NewTournament/TournamentInfoEntry";
-import PlayerEntryView from "./views/NewTournament/PlayerEntry";
+import TournametInfoEntry from "./views/NewTournament/TournamentInfoEntry";
+import PlayerEntry from "./views/NewTournament/PlayerEntry";
 import Overview from "./views/TournamentHub/Overview";
 import Standings from "./views/TournamentHub/Standings";
 import StandingsPopup from "./views/TournamentHub/Standings/StandingsPopup";
@@ -49,11 +49,11 @@ const App = () => {
 			<div className={"mahjongTournamentEngine"}>
 				<BrowserRouter>
 					<Routes>
-						<Route index element={<TournamentInfoView/>}/>
+						<Route index element={<TournametInfoEntry/>}/>
 						<Route path={"/new"}>
-							<Route index element={<TournamentInfoView/>}/>
-							<Route path={"basic"} element={<TournamentInfoView/>}/>
-							<Route path={"players"} element={<PlayerEntryView/>}/>
+							<Route index element={<TournametInfoEntry/>}/>
+							<Route path={"basic"} element={<TournametInfoEntry/>}/>
+							<Route path={"players"} element={<PlayerEntry/>}/>
 						</Route>
 					</Routes>
 				</BrowserRouter>
