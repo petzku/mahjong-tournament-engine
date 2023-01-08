@@ -1,10 +1,9 @@
-import { Standing, Tournament } from "../../../../data-types/tournament-data-types";
+import { Standing } from "../../../../data-types/tournament-data-types";
 import styles from "./Column.module.css";
 import Row from "./Row/Row";
 
 type ColumnProps = {
 	standings: Standing[],
-	tournament: Tournament,
 	columnIndex: number,
 	playersPerColumn: number,
 	comparisons: number[]
@@ -32,9 +31,9 @@ const Column = (props: ColumnProps) => {
 				standings
 					.map((standing: Standing, rank: number) => (
 						<Row
+							key={`standings-row-${rank}`}
 							standing={standing}
 							rank={rangeMin + rank + 1}
-							tournament={props.tournament}
 							comparison={props.comparisons[standing.playerId]}
 						/>
 				))

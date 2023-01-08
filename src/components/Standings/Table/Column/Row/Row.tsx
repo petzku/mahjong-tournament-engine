@@ -1,17 +1,18 @@
-import { Standing, Tournament } from "../../../../../data-types/tournament-data-types";
+import { Standing } from "../../../../../data-types/tournament-data-types";
 import { formatPoints } from "../../../../../utils/formatPoints";
+import useTournament from "../../../../../utils/hooks/useTournament";
 import Comparison from "./Comparison";
 import styles from "./Row.module.css";
 
 type RowProps = {
 	standing: Standing,
 	rank: number,
-	tournament: Tournament
 	comparison: number
 };
 
 const Row = (props: RowProps) => {
-	const playerName = props.tournament.playerNames[props.standing.playerId];
+	const tournament = useTournament();
+	const playerName = tournament.playerNames[props.standing.playerId];
 	const points = formatPoints({points: props.standing.points, sign: true});
 
 	return (

@@ -62,7 +62,6 @@ const Standings = () => {
 				onClick={() => openWindow()}
 			/>
 			<StandingsDisplay
-				tournament={tournament}
 				afterRound={afterRound}
 				plainText={plainText}
 			/>

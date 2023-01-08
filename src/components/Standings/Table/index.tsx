@@ -1,21 +1,21 @@
 import { useMemo } from "react";
-import { Tournament } from "../../../data-types/tournament-data-types";
 import { generateArray } from "../../../utils/generateArray";
 import styles from "./Table.module.css";
 import getStandingsEveryRound from "../utils/getStandingsEveryRound";
 import getComparisons from "../utils/getComparisons";
 import Column from "./Column";
+import useTournament from "../../../utils/hooks/useTournament";
 
 type StandingsProps = {
 	className?: string,
-	tournament: Tournament,
 	afterRound: number
 };
 
 const Table = (props: StandingsProps) => {
-	const playerCount = props.tournament.playerNames.length;
+	const tournament = useTournament();
+	const playerCount = tournament.playerNames.length;
 
-	const standingsEveryRound = useMemo(() => getStandingsEveryRound(props.tournament), []);
+	const standingsEveryRound = useMemo(() => getStandingsEveryRound(tournament), []);
 
 	const comparisons = getComparisons({
 		standings: standingsEveryRound,
@@ -39,7 +39,6 @@ const Table = (props: StandingsProps) => {
 					<Column
 						key={`standings-column-${columnIndex}`}
 						standings={standingsEveryRound[props.afterRound]}
-						tournament={props.tournament}
 						columnIndex={columnIndex}
 						playersPerColumn={playersPerColumn}
 						comparisons={comparisons}

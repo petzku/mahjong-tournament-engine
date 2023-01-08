@@ -1,11 +1,9 @@
-import { Tournament } from "../../data-types/tournament-data-types";
 import PlainText from "./PlainText";
 import Table from "./Table";
 
 type StandingsProps = {
 	className?: string,
 	plainText?: boolean,
-	tournament: Tournament,
 	afterRound: number
 };
 
@@ -15,7 +13,6 @@ const Standings = (props: StandingsProps) => {
 		return (
 			<PlainText
 				className={props.className}
-				tournament={props.tournament}
 				afterRound={props.afterRound}
 			/>
 		);
@@ -24,7 +21,6 @@ const Standings = (props: StandingsProps) => {
 	return (
 		<Table
 			className={props.className}
-			tournament={props.tournament}
 			afterRound={props.afterRound}
 		/>
 	);
