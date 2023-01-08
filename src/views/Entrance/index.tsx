@@ -9,6 +9,7 @@ import { findRoute, Routes } from "../../utils/routeUtils";
 import React from "react";
 import download from "../../utils/download";
 import FileUpload from "../../components/FileUpload";
+import shouldOfferStoredGame from "./utils/shouldOfferStoredGame";
 
 const Entrance = () => {
 	const navigate = useNavigate();
@@ -17,26 +18,7 @@ const Entrance = () => {
 	const { markTournamentLoaded } = bindActionCreators(appActionCreators, dispatch);
 	const { setTournament } = bindActionCreators(tournamentActionCreators, dispatch);
 
-	const offerStoredGame = (() => {
-		if (localStorage.getItem("mahjong-tournament") !== null)
-		{
-			const readFromLocalStorage: string = localStorage.getItem("mahjong-tournament") as string;
-
-			try
-			{
-				const possibleTournamentState: Tournament = JSON.parse(readFromLocalStorage);
-
-				return isTournamentDataValid(possibleTournamentState);
-			}
-			catch (e)
-			{
-				console.log("error", e);
-				return false;
-			}
-		}
-
-		return false;
-	})();
+	const offerStoredGame = shouldOfferStoredGame();
 
 	const startNewTournament = () => {
 		localStorage.removeItem("mahjong-tournament");
