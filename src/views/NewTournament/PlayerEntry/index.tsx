@@ -15,6 +15,7 @@ import { Routes } from "../../../utils/routeUtils";
 import styles from "./PlayerEntryView.module.css";
 import TemplateHelp from "./TemplateHelp";
 import FileUpload from "../../../components/FileUpload";
+import useTournament from "../../../utils/hooks/useTournament";
 
 const defaultScore: Score = {
 	raw: 0,
@@ -23,7 +24,7 @@ const defaultScore: Score = {
 }
 
 const PlayerEntryView = () => {
-	const tournamentState = useSelector((state: State) => state.tournament);
+	const tournament = useTournament();
 
 	const [showTemplateHelp, setShowTemplateHelp] = useState<boolean>(false);
 	const [playersInput, setPlayersInput] = useState<string>("");
@@ -39,7 +40,7 @@ const PlayerEntryView = () => {
 	const rightAmount = players.length > 0 && players.length % 4 === 0;
 
 	const createGamesData = (seatingTemplate: number[][]): Game[] => {
-		return generateArray(tournamentState.info.rounds).map((roundId: number): Game[] => (
+		return generateArray(tournament.info.rounds).map((roundId: number): Game[] => (
 			generateArray(players.length / 4).map((tableId: number): Game => ({
 				round: roundId,
 				table: tableId,
@@ -70,7 +71,7 @@ const PlayerEntryView = () => {
 		customSeatingTemplate === null
 		?
 		generateSeating({
-			roundCount: tournamentState.info.rounds,
+			roundCount: tournament.info.rounds,
 			tableCount: players.length / 4,
 			playerCount: players.length
 		})

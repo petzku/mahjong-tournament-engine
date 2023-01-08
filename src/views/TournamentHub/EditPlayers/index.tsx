@@ -9,17 +9,15 @@ import useTournament from "../../../utils/hooks/useTournament";
 
 const EditPlayers = () => {
 	const dispatch = useDispatch();
-	const tournamentState = useTournament();
+	const tournament = useTournament();
 
 	const {addPlayers} = bindActionCreators(tournamentActionCreators, dispatch)
 
-	const [newNames, setNewNames] = useState<string[]>([...tournamentState.playerNames])
+	const [newNames, setNewNames] = useState<string[]>([...tournament.playerNames])
 	const [duplicates, setDuplicates] = useState<string[]>([]);
 
 	const changeName = (params: {newName: string, playerId: number}): void => {
-		const newNewNames = [...newNames];
-		newNewNames[params.playerId] = params.newName;
-		setNewNames(newNewNames);
+		setNewNames(newNames.map((oldName: string, index: number) => index === params.playerId ? params.newName : oldName))
 	};
 
 	const saveNames = (): void => {
@@ -62,7 +60,7 @@ const EditPlayers = () => {
 						<th>{null}</th>
 					</tr>
 					{
-						tournamentState.playerNames.map((name: string, playerId: number) => (
+						tournament.playerNames.map((name: string, playerId: number) => (
 							<tr key={`editname-${playerId}`}>
 								<td>
 									{name}
