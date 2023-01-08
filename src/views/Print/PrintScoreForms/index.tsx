@@ -1,4 +1,4 @@
-import { Game, Tournament } from "../../../data-types/tournament-data-types";
+import { Game } from "../../../data-types/tournament-data-types";
 import curlArray from "../../../utils/curlArray";
 import useTournament from "../../../utils/hooks/useTournament";
 import HanchanScoreForm, {Form} from "./HanchanScoreForm";

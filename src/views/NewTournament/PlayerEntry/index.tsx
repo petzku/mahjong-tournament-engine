@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import readXlsxFile from "read-excel-file";
 import { Row } from "read-excel-file/types";
@@ -7,7 +7,7 @@ import { bindActionCreators } from "redux";
 import Button from "../../../components/Button";
 import Popup from "../../../components/Popup";
 import { Game, Score } from "../../../data-types/tournament-data-types";
-import { State, tournamentActionCreators } from "../../../state";
+import { tournamentActionCreators } from "../../../state";
 import { convertTemplate } from "../../../utils/convertTemplate";
 import { generateArray } from "../../../utils/generateArray";
 import { generateSeating } from "../../../utils/generateSeating";

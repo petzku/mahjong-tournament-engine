@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { tournamentActionCreators, appActionCreators } from "../../state";
-import { isTournamentDataValid, Tournament } from "../../data-types/tournament-data-types";
+import { Tournament } from "../../data-types/tournament-data-types";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import styles from "./Entrance.module.css";

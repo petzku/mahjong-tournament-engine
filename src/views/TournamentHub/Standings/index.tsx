@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { State } from "../../../state";
 import Dropdown, {DropdownItem} from "../../../components/Dropdown";
 import StandingsDisplay from "../../../components/Standings";
 import { generateArray } from "../../../utils/generateArray";
