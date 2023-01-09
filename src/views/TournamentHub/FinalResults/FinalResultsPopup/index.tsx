@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { Standing } from "../../../../data-types/tournament-data-types";
-import { getStandings } from "../../../../utils/getStandings";
 import Confetti from "react-confetti";
 import styles from "./FinalResultsPopup.module.css";
 import Name from "./Name";
 import { generateArray } from "../../../../utils/generateArray";
 import useTournament from "../../../../utils/hooks/useTournament";
+import useStandings from "../../../../utils/hooks/useStandigs";
 
 const FinalResultsPopup = () => {
 	const tournament = useTournament();
+	const standings = useStandings()[tournament.info.rounds - 1];
 
 	const [windowSize, setWindowSize] = useState<{width: number, height: number}>({
 		width: window.innerWidth,
@@ -69,8 +70,6 @@ const FinalResultsPopup = () => {
 			</tbody>
 		</table>
 	);
-
-	const standings = getStandings({tournament: tournament, afterRound: tournament.info.rounds});
 
 	const playerCount = tournament.playerNames.length;
 	const columnSplitLimit = 16;

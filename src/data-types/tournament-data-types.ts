@@ -39,8 +39,10 @@ export type Tournament = {
 };
 
 export type Standing = {
+	rank: number,
 	playerId: number,
-	points: number
+	points: number,
+	change: number
 };
 
 export type PointInputType = {

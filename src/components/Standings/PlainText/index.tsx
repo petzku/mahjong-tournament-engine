@@ -1,8 +1,7 @@
-import { useMemo } from "react";
 import { Standing } from "../../../data-types/tournament-data-types";
 import { formatPoints } from "../../../utils/formatPoints";
+import useStandings from "../../../utils/hooks/useStandigs";
 import useTournament from "../../../utils/hooks/useTournament";
-import getStandingsEveryRound from "../utils/getStandingsEveryRound";
 
 type StandingsProps = {
 	className?: string,
@@ -11,13 +10,13 @@ type StandingsProps = {
 
 const PlainText = (props: StandingsProps) => {
 	const tournament = useTournament();
-	const standingsEveryRound = useMemo(() => getStandingsEveryRound(tournament), []);
+	const standings = useStandings();
 
 	return (
 		<div>
 			<pre>
 				{
-					standingsEveryRound[tournament.info.rounds - 1].map((standing: Standing, rank: number) => (
+					standings[tournament.info.rounds - 1].map((standing: Standing, rank: number) => (
 						`${rank + 1}.\t${tournament.playerNames[standing.playerId]}\t${formatPoints({points: standing.points, sign: true})}\n`
 					))
 				}

@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { Standing, Tournament } from "../../../../data-types/tournament-data-types";
 import { generateArray } from "../../../../utils/generateArray";
-import { getStandings } from "../../../../utils/getStandings";
 import {
 	LineChart,
 	Line,
@@ -9,6 +8,7 @@ import {
 	YAxis,
 	CartesianGrid
 } from "recharts";
+import useStandings from "../../../../utils/hooks/useStandigs";
 
 type RankingEvolutionProps = {
 	tournament: Tournament,
@@ -16,6 +16,8 @@ type RankingEvolutionProps = {
 };
 
 const RankingEvolution = (props: RankingEvolutionProps) => {
+	const standings = useStandings();
+
 	// Data format for recharts: Array of objects for each round. Object contains round label ("name") and 
 	//  properties of each line's value for that line.
 
@@ -23,7 +25,7 @@ const RankingEvolution = (props: RankingEvolutionProps) => {
 	const ranking = useMemo(() => generateArray(props.tournament.info.rounds).map((round: number) => (
 		// 2) Get standings for current round.
 		// 3) Reformat standings into recharts data format.
-		getStandings({tournament: props.tournament, afterRound: round}).reduce((carry: any, current: Standing, _: number, array: Standing[]) => ({
+		standings[round].reduce((carry: any, current: Standing, _: number, array: Standing[]) => ({
 				...carry,
 				[`player${current.playerId}`]: 1 + array.findIndex((standing: Standing): boolean => standing.playerId === current.playerId)
 			}

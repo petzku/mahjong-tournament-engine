@@ -1,19 +1,19 @@
 import { Standing } from "../../../../data-types/tournament-data-types";
+import useStandings from "../../../../utils/hooks/useStandigs";
 import styles from "./Column.module.css";
 import Row from "./Row/Row";
 
 type ColumnProps = {
-	standings: Standing[],
 	columnIndex: number,
 	playersPerColumn: number,
-	comparisons: number[]
+	afterRound: number
 };
 
 const Column = (props: ColumnProps) => {
 	const rangeMin = props.columnIndex*props.playersPerColumn;
 	const rangeMax = props.columnIndex*props.playersPerColumn+props.playersPerColumn;
-	const standings = props.standings
-		.filter((_: Standing, rank: number) => rangeMin <= rank && rank < rangeMax);
+	const standings = useStandings()[props.afterRound]
+		.filter((_: Standing, standingIndex: number) => rangeMin <= standingIndex && standingIndex < rangeMax);
 
 	return (
 		<table
@@ -33,8 +33,6 @@ const Column = (props: ColumnProps) => {
 						<Row
 							key={`standings-row-${rank}`}
 							standing={standing}
-							rank={rangeMin + rank + 1}
-							comparison={props.comparisons[standing.playerId]}
 						/>
 				))
 			}

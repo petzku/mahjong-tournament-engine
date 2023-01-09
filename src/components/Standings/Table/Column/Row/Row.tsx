@@ -5,9 +5,7 @@ import Comparison from "./Comparison";
 import styles from "./Row.module.css";
 
 type RowProps = {
-	standing: Standing,
-	rank: number,
-	comparison: number
+	standing: Standing
 };
 
 const Row = (props: RowProps) => {
@@ -17,13 +15,13 @@ const Row = (props: RowProps) => {
 
 	return (
 		<tr key={`player-standing-${props.standing.playerId}`}>
-			<td className={styles.cell}>{props.rank}.</td>
+			<td className={styles.cell}>{props.standing.rank}.</td>
 			<td className={styles.cell}>{playerName}</td>
 			<td className={styles.cell}>{points}</td>
 			{
-				props.comparison !== 0
+				props.standing.change !== 0
 				?
-				<Comparison change={props.comparison}/>
+				<Comparison change={props.standing.change}/>
 				:
 				<td>{null}</td>
 			}
