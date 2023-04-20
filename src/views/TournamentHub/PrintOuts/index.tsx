@@ -19,13 +19,19 @@ const PlayerSchedules = () => {
 				id={"personal-schedules"}
 				src={Routes.PrintPersonalSchedules}
 			/>
-			<h2>Table score forms (NYI)</h2>
+			<h2>Table score forms</h2>
 			<p>Hint: if your printer supports printing on both sides, select that option. Otherwise print odd-numbered pages first, then flip the sheets, and print even-numbered pages.</p>
 			<PrintableIframe
 				label={"Print score forms"}
-				subLabel={"(not yet implemented)"}
-				id={"score-forms"}
+				subLabel={"With names"}
+				id={"score-forms-names"}
 				src={Routes.PrintScoreForms}
+			/>
+			<PrintableIframe
+				label={"Print score forms"}
+				subLabel={"Without names"}
+				id={"score-forms-nameless"}
+				src={`${Routes.PrintScoreForms}?nameless=true`}
 			/>
 		</div>
 	);

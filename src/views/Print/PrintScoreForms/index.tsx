@@ -14,7 +14,7 @@ const PrintScoreForms = () => {
 		northPlayer: tournament.playerNames[game.participants[3].playerId],
 		table: game.table + 1,
 		round: game.round + 1
-	})), 4);
+	})).sort((a: Form, b: Form) => a.table !== b.table ? a.table - b.table : a.round - b.round), 2);
 
 	return (
 		<div>

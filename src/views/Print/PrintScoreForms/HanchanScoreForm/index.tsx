@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router-dom";
 import styles from "./HanchanScoreForm.module.css";
 
 export type Form = {
@@ -14,6 +15,10 @@ type HanchanScoreFormProps = {
 };
 
 const HanchanScoreForm = (props: HanchanScoreFormProps) => {
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const nameless = searchParams.get("nameless") === "true";
+	
 	return (
 		<table className={styles.form}>
 			<thead>
@@ -23,31 +28,31 @@ const HanchanScoreForm = (props: HanchanScoreFormProps) => {
 			</thead>
 			<tbody>
 				<tr>
-					<th className={styles.cell}>{null}</th>
+					<th className={`${styles.cell} ${styles.nameCell}`}>{null}</th>
 					<th className={styles.cell}>Raw</th>
 					<th className={styles.cell}>Uma</th>
 					<th className={styles.cell}>Penalty</th>
 				</tr>
 				<tr>
-					<td className={styles.cell}>{props.form.eastPlayer}</td>
+					<td className={`${styles.cell} ${styles.nameCell}`}>東 {nameless ? "" : props.form.eastPlayer}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 				</tr>
 				<tr>
-					<td className={styles.cell}>{props.form.southPlayer}</td>
+					<td className={`${styles.cell} ${styles.nameCell}`}>南 {nameless ? "" : props.form.southPlayer}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 				</tr>
 				<tr>
-					<td className={styles.cell}>{props.form.westPlayer}</td>
+					<td className={`${styles.cell} ${styles.nameCell}`}>西 {nameless ? "" : props.form.westPlayer}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 				</tr>
 				<tr>
-					<td className={styles.cell}>{props.form.northPlayer}</td>
+					<td className={`${styles.cell} ${styles.nameCell}`}>北 {nameless ? "" : props.form.northPlayer}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
