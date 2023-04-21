@@ -11,7 +11,7 @@ const useTournament = (): Tournament => {
 	if (appState.tournamentLoaded) return tournamentFromState;
 
 	const tournamentFromLocalStorage = JSON.parse(localStorage.getItem("mahjong-tournament") as string);
-	if (isTournamentDataValid(tournamentFromLocalStorage)) return tournamentFromLocalStorage;
+	if (!!tournamentFromLocalStorage && isTournamentDataValid(tournamentFromLocalStorage)) return tournamentFromLocalStorage;
 
 	return initialState;
 };
