@@ -21,38 +21,41 @@ const HanchanScoreForm = (props: HanchanScoreFormProps) => {
 	
 	return (
 		<table className={styles.form}>
+			<caption className={styles.caption}>Table {props.form.table} - Hanchan {props.form.round}</caption>
 			<thead>
 				<tr>
-					<th colSpan={4}>Table {props.form.table} - Hanchan {props.form.round}</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th className={`${styles.cell} ${styles.nameCell}`}>{null}</th>
+					<th className={styles.windCell}>{null}</th>
+					<th className={styles.cell}>Name</th>
 					<th className={styles.cell}>Raw</th>
 					<th className={styles.cell}>Uma</th>
 					<th className={styles.cell}>Penalty</th>
 				</tr>
+			</thead>
+			<tbody>
 				<tr>
-					<td className={`${styles.cell} ${styles.nameCell}`}>東 {nameless ? "" : props.form.eastPlayer}</td>
+					<td className={styles.windCell}>東</td>
+					<td className={styles.cell}>{nameless ? "" : props.form.eastPlayer}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 				</tr>
 				<tr>
-					<td className={`${styles.cell} ${styles.nameCell}`}>南 {nameless ? "" : props.form.southPlayer}</td>
+					<td className={styles.windCell}>南</td>
+					<td className={styles.cell}>{nameless ? "" : props.form.southPlayer}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 				</tr>
 				<tr>
-					<td className={`${styles.cell} ${styles.nameCell}`}>西 {nameless ? "" : props.form.westPlayer}</td>
+					<td className={styles.windCell}>西</td>
+					<td className={styles.cell}>{nameless ? "" : props.form.westPlayer}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 				</tr>
 				<tr>
-					<td className={`${styles.cell} ${styles.nameCell}`}>北 {nameless ? "" : props.form.northPlayer}</td>
+					<td className={styles.windCell}>北</td>
+					<td className={styles.cell}>{nameless ? "" : props.form.northPlayer}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
