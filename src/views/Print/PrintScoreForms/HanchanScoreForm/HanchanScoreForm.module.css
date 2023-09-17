@@ -20,6 +20,12 @@
 	width: auto;
 }
 
+.nameCell
+{
+	text-align: center;
+	vertical-align: top;
+}
+
 .windCell
 {
 	width: 2em;

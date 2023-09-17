@@ -34,28 +34,28 @@ const HanchanScoreForm = (props: HanchanScoreFormProps) => {
 			<tbody>
 				<tr>
 					<td className={styles.windCell}>東</td>
-					<td className={styles.cell}>{nameless ? "" : props.form.eastPlayer}</td>
+					<td className={`${styles.cell} ${styles.nameCell}`}>{nameless ? "" : props.form.eastPlayer}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 				</tr>
 				<tr>
 					<td className={styles.windCell}>南</td>
-					<td className={styles.cell}>{nameless ? "" : props.form.southPlayer}</td>
+					<td className={`${styles.cell} ${styles.nameCell}`}>{nameless ? "" : props.form.southPlayer}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 				</tr>
 				<tr>
 					<td className={styles.windCell}>西</td>
-					<td className={styles.cell}>{nameless ? "" : props.form.westPlayer}</td>
+					<td className={`${styles.cell} ${styles.nameCell}`}>{nameless ? "" : props.form.westPlayer}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 				</tr>
 				<tr>
 					<td className={styles.windCell}>北</td>
-					<td className={styles.cell}>{nameless ? "" : props.form.northPlayer}</td>
+					<td className={`${styles.cell} ${styles.nameCell}`}>{nameless ? "" : props.form.northPlayer}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
 					<td className={styles.cell}>{null}</td>
