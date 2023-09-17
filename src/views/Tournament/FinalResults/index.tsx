@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Button from "../../../components/Button";
+import { Routes } from "../../../utils/routeUtils";
 
 const FinalResults = () => {
 	const [finalResultsPopup, setFinalResultsPopup] = useState<WindowProxy | null>(null);
 
 	const openWindow = () => {
 		setFinalResultsPopup(window.open(
-			"/hub/final-results/popup",
+			Routes.FinalResultsPopup,
 			"finalResultsPopup",
 			"width=500,height=500"
 		));
@@ -15,7 +16,7 @@ const FinalResults = () => {
 	return (
 		<div>
 			<h1>Post-tournament</h1>
-			<p>The tournament is finished. Click the button below to open a new video that will display the standings in a cool way, so you can display the final results on a big screen.</p>
+			<p>Click the button below to open a new video that will display the standings in a cool animated fashion, so you can display the final results on a big screen.</p>
 
 			<p>Instructions:</p>
 			<ul>

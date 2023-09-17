@@ -6,6 +6,7 @@ import { Game, Tournament } from "../../../data-types/tournament-data-types";
 import Toggle from "../../../components/Toggle";
 import Button from "../../../components/Button";
 import useTournament from "../../../utils/hooks/useTournament";
+import { Routes } from "../../../utils/routeUtils";
 
 const Standings = () => {
 	const getLastFinishedRound = (tournament: Tournament): number => {
@@ -31,7 +32,7 @@ const Standings = () => {
 
 	const openWindow = () => {
 		setStandingsWindow(window.open(
-			`/hub/standings/popup?afterRound=${afterRound}&plainText=${plainText.toString()}`,
+			`${Routes.StandingsPopup}?afterRound=${afterRound}&plainText=${plainText.toString()}`,
 			"standingsWindow",
 			"width=500,height=500"
 		));

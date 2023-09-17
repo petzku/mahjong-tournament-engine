@@ -3,20 +3,20 @@ import useTournament from "./utils/hooks/useTournament";
 import useAppState from "./utils/hooks/useAppState";
 import TournametInfoEntry from "./views/NewTournament/TournamentInfoEntry";
 import PlayerEntry from "./views/NewTournament/PlayerEntry";
-import Overview from "./views/TournamentHub/Overview";
-import Standings from "./views/TournamentHub/Standings";
-import StandingsPopup from "./views/TournamentHub/Standings/StandingsPopup";
-import PrintOuts from "./views/TournamentHub/PrintOuts";
+import Overview from "./views/Tournament/Overview";
+import Standings from "./views/Tournament/Standings";
+import StandingsPopup from "./views/Tournament/Standings/StandingsPopup";
+import PrintOuts from "./views/Tournament/PrintOuts";
 import Entrance from "./views/Entrance";
-import EditPlayers from "./views/TournamentHub/EditPlayers";
+import EditPlayers from "./views/Tournament/EditPlayers";
 import PrintPersonalSchedules from "./views/Print/PrintPersonalSchedules";
 import PrintReportCards from "./views/Print/PrintReportCards";
 import PrintScoreForms from "./views/Print/PrintScoreForms";
 import PrintFullSchedule from "./views/Print/PrintFullSchedule";
-import FinalResults from "./views/TournamentHub/FinalResults";
-import FinalResultsPopup from "./views/TournamentHub/FinalResults/FinalResultsPopup";
-import ReportCards from "./views/TournamentHub/ReportCards";
-import Ribbon from "./views/TournamentHub/Ribbon";
+import FinalResults from "./views/Tournament/FinalResults";
+import FinalResultsPopup from "./views/Tournament/FinalResults/FinalResultsPopup";
+import ReportCards from "./views/Tournament/ReportCards";
+import Ribbon from "./views/Tournament/Ribbon";
 
 const App = () => {
 	const appState = useAppState();
@@ -34,8 +34,8 @@ const App = () => {
 							<Route path={"score-forms"} element={<PrintScoreForms/>}/>
 							<Route path={"full-schedule"} element={<PrintFullSchedule/>}/>
 						</Route>
-						<Route path={"/hub/standings/popup"} element={<StandingsPopup/>}/>
-						<Route path={"/hub/final-results/popup"} element={<FinalResultsPopup/>}/>
+						<Route path={"/tournament/standings/popup"} element={<StandingsPopup/>}/>
+						<Route path={"/tournament/final-results/popup"} element={<FinalResultsPopup/>}/>
 						<Route path={"*"} element={<Entrance/>}/>
 					</Routes>
 				</BrowserRouter>
@@ -66,7 +66,7 @@ const App = () => {
 			<BrowserRouter>
 				<Ribbon/>
 				<Routes>
-					<Route path={"/hub"}>
+					<Route path={"/tournament"}>
 						<Route index element={<Overview/>}/>
 						<Route path={"overview"} element={<Overview/>}/>
 						<Route path={"standings"} element={<Standings/>}/>

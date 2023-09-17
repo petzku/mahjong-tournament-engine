@@ -3,25 +3,24 @@ import { Tournament } from "../data-types/tournament-data-types";
 export enum Routes {
 	TournamentInfoEntry = "/new/basic",
 	PlayerEntry = "/new/players",
-	Overview = "/hub/overview",
-	Standings = "/hub/standings",
-	StandingsPopup = "/hub/standings/popup",
-	PrintOuts = "/hub/print-outs",
-	EditPlayers = "/hub/edit-players",
-	FinalResults = "/hub/final-results",
-	ReportCards = "/hub/report-cards",
+	Overview = "/tournament/overview",
+	Standings = "/tournament/standings",
+	StandingsPopup = "/tournament/standings/popup",
+	PrintOuts = "/tournament/print-outs",
+	EditPlayers = "/tournament/edit-players",
+	FinalResults = "/tournament/final-results",
+	FinalResultsPopup = "/tournament/final-results/popup",
+	ReportCards = "/tournament/report-cards",
 	FullSchedule = "/print/full-schedule",
 	PrintPersonalSchedules = "/print/personal-schedules",
 	PrintReportCards = "/print/report-cards",
 	PrintScoreForms = "/print/score-forms",
-	PostTournament = "/post",
-	Ceremony = "/post/ceremony",
 };
 
 export type Route = Routes;
 
 export const findRoute = (loaded: Tournament): Route => {
-	//If the loaded tournament has names, take the app to tournament hub.
+	//If the loaded tournament has names, take the app to tournament page.
 	if (loaded.playerNames.length > 0)
 	{
 		return Routes.Overview;
