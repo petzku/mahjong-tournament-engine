@@ -1,9 +1,10 @@
 import { useMemo, useState } from "react";
-import Button from "../../../components/Button";
-import PrintableIframe from "../../../components/PrintableIframe";
-import { generateArray } from "../../../utils/generateArray";
-import useTournament from "../../../utils/hooks/useTournament";
-import { Routes } from "../../../utils/routeUtils";
+import Button from "../../../../components/Button";
+import PrintableIframe from "../../../../components/PrintableIframe";
+import { generateArray } from "../../../../utils/generateArray";
+import useTournament from "../../../../utils/hooks/useTournament";
+import { Routes } from "../../../../utils/routeUtils";
+import alphabetizer from "../../../../utils/alphabetizer";
 
 type Player = {
 	playerName: string,
@@ -14,11 +15,14 @@ const ReportCards = () => {
 	const tournament = useTournament();
 
 	const [playerIds, setPlayerIds] = useState<number[]>([]);
-	const alphabetizedPlayers: Player[] = useMemo(() => tournament.playerNames.map((playerName: string, playerId: number): Player => ({
-		playerName: playerName,
-		playerId: playerId
-	})).sort((a: Player, b: Player) => a.playerName > b.playerName ? 1 : -1), [])
 
+	const playerOptions: Player[] = useMemo(() => [...tournament.playerNames]
+		.sort(alphabetizer)
+		.map((playerName: string) => ({
+			playerName: playerName,
+			playerId: tournament.playerNames.indexOf(playerName)
+		})), []);
+		
 	const togglePlayer = (toggledPlayerId: number) => {
 		if (playerIds.some((playerId: number) => playerId === toggledPlayerId))
 		{
@@ -43,7 +47,7 @@ const ReportCards = () => {
 				onClick={() => setPlayerIds([])}
 			/>
 			{
-				alphabetizedPlayers.map((player: Player) => (
+				playerOptions.map((player: Player) => (
 					<div key={`player-${player.playerId}`}>
 						<input
 							type={"checkbox"}

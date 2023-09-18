@@ -1,16 +1,19 @@
 import { useMemo } from "react";
-import { Game, Score, Seat, Tournament } from "../../../../data-types/tournament-data-types";
-import { formatPoints } from "../../../../utils/formatPoints";
+import { Game, Score, Seat, Tournament } from "../../../data-types/tournament-data-types";
+import { formatPoints } from "../../../utils/formatPoints";
 
 import styles from "./Games.module.css";
+import useTournament from "../../../utils/hooks/useTournament";
 
 type GamesProps = {
-	tournament: Tournament,
-	playerId: number
+	playerId: number,
+	anonymize: boolean
 };
 
 const Games = (props: GamesProps) => {
-	const games = useMemo(() => props.tournament.games
+	const tournament = useTournament();
+
+	const games = useMemo(() => tournament.games
 		//Find the games where the selected player was in.
 		.filter((game: Game): boolean => game.participants.some((seat: Seat): boolean => seat.playerId === props.playerId))
 		//Make sure they're sorted in round order
@@ -23,7 +26,13 @@ const Games = (props: GamesProps) => {
 		//If fetching name for the selected player's seat, return player's name.
 		if (params.game.participants[params.seatNumber].playerId === props.playerId)
 		{
-			return <span>{props.tournament.playerNames[props.playerId]}</span>;
+			return <span>{tournament.playerNames[props.playerId]}</span>;
+		}
+
+		//If names need not be anonymized
+		if (!props.anonymize)
+		{
+			return <span>{tournament.playerNames[params.game.participants[params.seatNumber].playerId]}</span>
 		}
 
 		//Otherwise return "shimocha", "toimen" or "kamicha" for the other seats appropriately.

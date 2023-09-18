@@ -25,7 +25,7 @@ const Ribbon = () => {
 				<Link className={styles.link} to={Routes.FinalResults}>Final results</Link>
 			</div>
 			<div className={styles.ribbonItem}>
-				<Link className={styles.link} to={Routes.ReportCards}>Report cards</Link>
+				<Link className={styles.link} to={Routes.PlayerPerformance}>Player performance</Link>
 			</div>
 			<div className={styles.ribbonItem}>
 				<span className={styles.link} onClick={() => download(tournament)}>Download file</span>

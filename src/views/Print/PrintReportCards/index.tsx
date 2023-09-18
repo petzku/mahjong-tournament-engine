@@ -1,11 +1,8 @@
-import styles from "./PrintReportCards.module.css";
-import RankingEvolution from "./RankingEvolution";
-import Positions from "./Positions";
-import CumulativePoints from "./CumulativePoints";
-import Games from "./Games";
-import Statistics from "./Statistics";
+import Performance from "../../../components/Performance";
 import { useSearchParams } from "react-router-dom";
 import useTournament from "../../../utils/hooks/useTournament";
+import alphabetizer from "../../../utils/alphabetizer";
+import styles from "./PrintReportCards.module.css";
 
 type Player = {
 	playerId: number,
@@ -18,50 +15,32 @@ const PrintReportCards = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const playerIdsParam = searchParams.get("players");
-	const players: Player[] = playerIdsParam !== null ? playerIdsParam.split(",").map((playerId: string) => ({
-		playerId: +playerId,
-		playerName: tournament.playerNames[+playerId]
-	})) : [{
-		playerId: 0,
-		playerName: tournament.playerNames[0]
-	}];
+
+	const players: number[] =
+		playerIdsParam === null
+		?
+		[0]
+		:
+		playerIdsParam
+			.split(",")
+			.map((playerId: string) => tournament.playerNames[+playerId])
+			.sort(alphabetizer)
+			.map((playerName: string) => tournament.playerNames.indexOf(playerName))
 
 	return (
 		<div>
 			{
-				players.map((player: Player) => (
-					<div className={styles.card} key={`reportcard-${player.playerId}`}>
+				players.map((playerId: number) => (
+					<div
+						key={`player-performance-${playerId}`}
+						className={styles.card}>
 						<h1 className={styles.title}>{tournament.info.title}</h1>
-						<h2 className={styles.title}>Report card for player {player.playerName}</h2>
+						<h2 className={styles.title}>Report card for player {tournament.playerNames[playerId]}</h2>
 						<p className={styles.subtitle}>Created with mahjong-tournament-engine 0.1.1 by Pauli Marttinen</p>
-						<div className={styles.columns}>
-							<div>
-								<RankingEvolution
-									tournament={tournament}
-									playerId={player.playerId}
-								/>
-								<Positions
-									tournament={tournament}
-									playerId={player.playerId}
-								/>
-								<CumulativePoints
-									tournament={tournament}
-									playerId={player.playerId}
-								/>
-							</div>
-							<div className={styles.games}>
-								<Games
-									tournament={tournament}
-									playerId={player.playerId}
-								/>
-							</div>
-						</div>
-						<div>
-							<Statistics
-								playerId={player.playerId}
-								games={tournament.games}
-							/>
-						</div>
+						<Performance
+							anonymize={true}
+							playerId={playerId}
+						/>
 					</div>
 				))
 			}

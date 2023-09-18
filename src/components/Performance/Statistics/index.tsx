@@ -1,7 +1,8 @@
 import { useMemo } from "react";
-import { Game, Score, Seat } from "../../../../data-types/tournament-data-types";
-import { formatPoints } from "../../../../utils/formatPoints";
+import { Game, Score, Seat } from "../../../data-types/tournament-data-types";
+import { formatPoints } from "../../../utils/formatPoints";
 import styles from "./Statistics.module.css";
+import useTournament from "../../../utils/hooks/useTournament";
 
 type PointStatistics = {
 	highestSingle: number,
@@ -42,14 +43,15 @@ const initialStatistics: StatisticsType = {
 };
 
 type StatisticsProps = {
-	playerId: number,
-	games: Game[]
+	playerId: number
 }
 
 const Statistics = (props: StatisticsProps) => {
+	const games = useTournament().games;
+
 	const getTotal = (score: Score): number => score.raw + score.uma + score.penalty;
 
-	const statistics: StatisticsType = useMemo(() => props.games.reduce((carry: StatisticsType, game: Game): StatisticsType => {
+	const statistics: StatisticsType = useMemo(() => games.reduce((carry: StatisticsType, game: Game): StatisticsType => {
 		//If the player wasn't part of this game, skip this game.
 		if (!game.participants.some((seat: Seat): boolean => seat.playerId === props.playerId))
 		{

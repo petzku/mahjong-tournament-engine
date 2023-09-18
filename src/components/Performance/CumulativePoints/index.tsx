@@ -1,7 +1,6 @@
 import { useMemo } from "react";
-import { Game, Score, Seat, Tournament } from "../../../../data-types/tournament-data-types";
-import { generateArray } from "../../../../utils/generateArray";
-
+import { Game, Score, Seat, Tournament } from "../../../data-types/tournament-data-types";
+import { generateArray } from "../../../utils/generateArray";
 import {
 	LineChart,
 	Line,
@@ -10,16 +9,17 @@ import {
 	CartesianGrid,
 	Legend
 } from "recharts";
+import useTournament from "../../../utils/hooks/useTournament";
 
 type CumulativePointsProps = {
-	tournament: Tournament,
 	playerId: number
 };
 
 const CumulativePoints = (props: CumulativePointsProps) => {
+	const tournament = useTournament();
 	//For cumulative points chart, reduce game of that round and earlier rounds into a score sum.
-	const cumulativePoints = useMemo(() => generateArray(props.tournament.info.rounds).map((round: number): Score => (
-		props.tournament.games.reduce((carry: Score, game: Game): Score => {
+	const cumulativePoints = useMemo(() => generateArray(tournament.info.rounds).map((round: number): Score => (
+		tournament.games.reduce((carry: Score, game: Game): Score => {
 			const seat = game.participants.findIndex((seat: Seat): boolean => seat.playerId === props.playerId);
 
 			//Skip the games that the player didn't play in, and games that aren't in the range of round

@@ -15,7 +15,7 @@ import PrintScoreForms from "./views/Print/PrintScoreForms";
 import PrintFullSchedule from "./views/Print/PrintFullSchedule";
 import FinalResults from "./views/Tournament/FinalResults";
 import FinalResultsPopup from "./views/Tournament/FinalResults/FinalResultsPopup";
-import ReportCards from "./views/Tournament/ReportCards";
+import PlayerPerformance from "./views/Tournament/PlayerPerformance";
 import Ribbon from "./views/Tournament/Ribbon";
 
 const App = () => {
@@ -73,7 +73,7 @@ const App = () => {
 						<Route path={"print-outs"} element={<PrintOuts/>}/>
 						<Route path={"edit-players"} element={<EditPlayers/>}/>
 						<Route path={"final-results"} element={<FinalResults/>}/>
-						<Route path={"report-cards"} element={<ReportCards/>}/>
+						<Route path={"player-performance"} element={<PlayerPerformance/>}/>
 					</Route>
 				</Routes>
 			</BrowserRouter>

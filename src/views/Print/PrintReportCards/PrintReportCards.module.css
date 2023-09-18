@@ -8,19 +8,3 @@
 {
 	text-align: center;
 }
-
-.columns
-{
-	display: flex;
-}
-
-.games
-{
-	margin-left: 2em;
-}
-
-.subtitle
-{
-	font-variant: small-caps;
-	text-align: center;
-}
