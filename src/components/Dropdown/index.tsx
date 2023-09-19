@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
 export type DropdownItem = {
-	value: any,
+	value: number,
 	text: string
 };
 

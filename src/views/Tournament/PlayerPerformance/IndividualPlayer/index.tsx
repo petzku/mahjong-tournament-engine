@@ -1,14 +1,15 @@
 import { useMemo, useState } from "react";
-import Dropdown, {DropdownItem} from "../../../../components/Dropdown";
+import SelectionList, {SelectionListItem} from "../../../../components/SelectionList";
 import useTournament from "../../../../utils/hooks/useTournament";
 import alphabetizer from "../../../../utils/alphabetizer";
 import Performance from "../../../../components/Performance";
+import styles from "./IndividualPlayer.module.css";
 
 const IndividualPlayer = () => {
 	const tournament = useTournament();
 	const [selectedPlayer, setSelectedPlayer] = useState<number>(0);
 
-	const playerOptions: DropdownItem[] = useMemo(() => [...tournament.playerNames]
+	const playerOptions: SelectionListItem[] = useMemo(() => [...tournament.playerNames]
 		.sort(alphabetizer)
 		.map((playerName: string) => ({
 			text: playerName,
@@ -16,13 +17,13 @@ const IndividualPlayer = () => {
 		})), []);
 
 	return (
-		<div>
-			<Dropdown
-				id={"individual-player-dropdown"}
+		<div className={styles.individualPlayer}>
+			<SelectionList
+				id={"individual-player"}
 				label={"See player"}
 				value={selectedPlayer}
 				items={playerOptions}
-				onChange={(newValue) => setSelectedPlayer(newValue)}
+				onChange={(newValue: number) => setSelectedPlayer(newValue)}
 			/>
 			<Performance
 				anonymize={false}
