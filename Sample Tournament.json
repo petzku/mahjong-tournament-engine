@@ -1,7 +1,8 @@
 {
   "info": {
     "title": "Tenpai Summer Chapmionship 2022",
-    "rounds": 8
+    "rounds": 8,
+    "startingPoints": 30000
   },
   "playerNames": [
     "Aaro Laine",

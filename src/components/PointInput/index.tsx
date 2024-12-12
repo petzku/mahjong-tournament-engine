@@ -11,10 +11,11 @@ type PointInputProps = {
 	unflippable?: boolean,
 	tabIndex?: number
 	short: boolean
+	hidePlus?: boolean
 };
 
 const PointInput = (props: PointInputProps) => {
-	const sign = props.value.positive ? "+" : "-";
+	const sign = props.value.positive ? (props.hidePlus ? "" : "+") : "-";
 
 	const displayValue =
 		props.short

@@ -34,7 +34,14 @@ const TournamentInfoView = () => {
 			<NumberInput
 				label={"Rounds"}
 				value={currentInfo.rounds}
+				buttons={true}
 				onChange={(newValue: number): void => setCurrentInfo({...currentInfo, rounds: newValue})}
+			/>
+			<NumberInput
+				label={"Starting points"}
+				value={currentInfo.startingPoints}
+				buttons={false}
+				onChange={(newValue: number): void => setCurrentInfo({...currentInfo, startingPoints: newValue})}
 			/>
 			<Button
 				label={"Ready"}

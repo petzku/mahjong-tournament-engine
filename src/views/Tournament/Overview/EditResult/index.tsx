@@ -22,22 +22,22 @@ const EditResult = (props: AddFinishedGameProps) => {
 	const tournament = useTournament();
 	const editedGame = tournament.games.find((game: Game): boolean => (game.round === props.round && game.table === props.table));
 
-	const [score, setScore] = useState<PointState>([
+	const [sticks, setSticks] = useState<PointState>([
 		{
-			positive: editedGame ? editedGame.participants[0].score.raw >= 0 : true,
-			value: Math.abs(editedGame ? editedGame.participants[0].score.raw : 0)
+			positive: editedGame ? (editedGame.participants[0].score.raw + tournament.info.startingPoints) >= 0 : true,
+			value: Math.abs(editedGame ? (editedGame.participants[0].score.raw + tournament.info.startingPoints) : tournament.info.startingPoints)
 		},
 		{
-			positive: editedGame ? editedGame.participants[1].score.raw >= 0 : true,
-			value: Math.abs(editedGame ? editedGame.participants[1].score.raw : 0)
+			positive: editedGame ? (editedGame.participants[1].score.raw + tournament.info.startingPoints) >= 0 : true,
+			value: Math.abs(editedGame ? (editedGame.participants[1].score.raw + tournament.info.startingPoints) : tournament.info.startingPoints)
 		},
 		{
-			positive: editedGame ? editedGame.participants[2].score.raw >= 0 : true,
-			value: Math.abs(editedGame ? editedGame.participants[2].score.raw : 0)
+			positive: editedGame ? (editedGame.participants[2].score.raw + tournament.info.startingPoints) >= 0 : true,
+			value: Math.abs(editedGame ? (editedGame.participants[2].score.raw + tournament.info.startingPoints) : tournament.info.startingPoints)
 		},
 		{
-			positive: editedGame ? editedGame.participants[3].score.raw >= 0 : true,
-			value: Math.abs(editedGame ? editedGame.participants[3].score.raw : 0)
+			positive: editedGame ? (editedGame.participants[3].score.raw + tournament.info.startingPoints) >= 0 : true,
+			value: Math.abs(editedGame ? (editedGame.participants[3].score.raw + tournament.info.startingPoints) : tournament.info.startingPoints)
 		}
 	]);
 	const [uma, setUma] = useState<PointState>([
@@ -83,11 +83,11 @@ const EditResult = (props: AddFinishedGameProps) => {
 
 	const getPlayerName = (playerId: number): string => tournament.playerNames[playerId];
 
-	const getScoreSum = (): number => {
-		const east = getNumericValue(score[0]);
-		const south = getNumericValue(score[1]);
-		const west = getNumericValue(score[2]);
-		const north = getNumericValue(score[3]);
+	const getSticksSum = (): number => {
+		const east = getNumericValue(sticks[0]);
+		const south = getNumericValue(sticks[1]);
+		const west = getNumericValue(sticks[2]);
+		const north = getNumericValue(sticks[3]);
 		return east + south + west + north;
 	};
 
@@ -100,7 +100,7 @@ const EditResult = (props: AddFinishedGameProps) => {
 	};
 
 	const getScoreForPlayer = (seatId: number): Score => ({
-		raw: getNumericValue(score[seatId]),
+		raw: getNumericValue(sticks[seatId]) - tournament.info.startingPoints,
 		uma: getNumericValue(uma[seatId]),
 		penalty: getNumericValue(penalty[seatId])
 	});
@@ -147,7 +147,7 @@ const EditResult = (props: AddFinishedGameProps) => {
 		}
 	};
 
-	const totalsOk = !safeMode || (getScoreSum() === 0 && getUmaSum() === 0);
+	const totalsOk = !safeMode || (getSticksSum() === 4 * tournament.info.startingPoints && getUmaSum() === 0);
 
 	return (
 		<Popup
@@ -175,7 +175,7 @@ const EditResult = (props: AddFinishedGameProps) => {
 						<tbody>
 							<tr>
 								<th colSpan={2}>Player</th>
-								<th>Raw points</th>
+								<th>Sticks</th>
 								<th>Uma</th>
 								<th>Penalty</th>
 								<th>Final</th>
@@ -185,10 +185,11 @@ const EditResult = (props: AddFinishedGameProps) => {
 								<td>{getPlayerName(editedGame?.participants[0].playerId)}</td>
 								<td>
 									<PointInput
-										value={score[0]}
-										onChange={(newValue: PointInputType) => setScore([newValue, score[1], score[2], score[3]])}
+										value={sticks[0]}
+										onChange={(newValue: PointInputType) => setSticks([newValue, sticks[1], sticks[2], sticks[3]])}
 										tabIndex={1}
 										short={safeMode}
+										hidePlus={true}
 									/>
 								</td>
 								<td>
@@ -215,10 +216,11 @@ const EditResult = (props: AddFinishedGameProps) => {
 								<td>{getPlayerName(editedGame?.participants[1].playerId)}</td>
 								<td>
 									<PointInput
-										value={score[1]}
-										onChange={(newValue: PointInputType) => setScore([score[0], newValue, score[2], score[3]])}
+										value={sticks[1]}
+										onChange={(newValue: PointInputType) => setSticks([sticks[0], newValue, sticks[2], sticks[3]])}
 										tabIndex={2}
 										short={safeMode}
+										hidePlus={true}
 									/>
 								</td>
 								<td>
@@ -245,10 +247,11 @@ const EditResult = (props: AddFinishedGameProps) => {
 								<td>{getPlayerName(editedGame?.participants[2].playerId)}</td>
 								<td>
 									<PointInput
-										value={score[2]}
-										onChange={(newValue: PointInputType) => setScore([score[0], score[1], newValue, score[3]])}
+										value={sticks[2]}
+										onChange={(newValue: PointInputType) => setSticks([sticks[0], sticks[1], newValue, sticks[3]])}
 										tabIndex={3}
 										short={safeMode}
+										hidePlus={true}
 									/>
 								</td>
 								<td>
@@ -275,10 +278,11 @@ const EditResult = (props: AddFinishedGameProps) => {
 								<td>{getPlayerName(editedGame?.participants[3].playerId)}</td>
 								<td>
 									<PointInput
-										value={score[3]}
-										onChange={(newValue: PointInputType) => setScore([score[0], score[1], score[2], newValue])}
+										value={sticks[3]}
+										onChange={(newValue: PointInputType) => setSticks([sticks[0], sticks[1], sticks[2], newValue])}
 										tabIndex={4}
 										short={safeMode}
+										hidePlus={true}
 									/>
 								</td>
 								<td>
@@ -304,7 +308,7 @@ const EditResult = (props: AddFinishedGameProps) => {
 						<tfoot>
 							<tr>
 								<td colSpan={2}>{null}</td>
-								<td>Sum: {safeMode ? formatPoints({points: getScoreSum(), sign: true}) : getScoreSum()}</td>
+								<td>Sum: {safeMode ? formatPoints({points: getSticksSum(), sign: false}) : getSticksSum()}</td>
 								<td>Sum: {safeMode ? formatPoints({points: getUmaSum(), sign: true}) : getUmaSum()}</td>
 								<td colSpan={2}>{null}</td>
 							</tr>
