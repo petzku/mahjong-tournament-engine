@@ -7,6 +7,7 @@ type NumberInputProps = {
 	label: string,
 	value: number,
 	onChange: (newValue: number) => void
+	buttons: boolean
 };
 
 const NumberInput = (props: NumberInputProps) => {
@@ -17,24 +18,36 @@ const NumberInput = (props: NumberInputProps) => {
 			<label className={styles.label}>
 				{props.label}
 			</label>
-			<div className={styles.numberInput}>
-				<Button
-					key={`numberinput-${props.label}-minus}`}
-					label={"-1"}
-					onClick={() => props.onChange(props.value - 1)}
-				/>
-				<TextInput
-					className={styles.input}
-					value={props.value.toString()}
-					onChange={(_) => {}}
-					disabled={true}
-				/>
-				<Button
-					key={`numberinput-${props.label}-plus`}
-					label={"+1"}
-					onClick={() => props.onChange(props.value + 1)}
-				/>
-			</div>
+			{
+				props.buttons ?
+					<div className={styles.numberInput}>
+						<Button
+							key={`numberinput-${props.label}-minus}`}
+							label={"-1"}
+							onClick={() => props.onChange(props.value - 1)}
+						/>
+						<TextInput
+							className={styles.input}
+							value={props.value.toString()}
+							onChange={(_) => {}}
+							disabled={true}
+						/>
+						<Button
+							key={`numberinput-${props.label}-plus`}
+							label={"+1"}
+							onClick={() => props.onChange(props.value + 1)}
+						/>
+					</div>
+				:
+				<div className={styles.numberInput}>
+					<TextInput
+						className={styles.input}
+						value={props.value.toString()}
+						onChange={(newValue: string): void => { if (!isNaN(Number(newValue))) props.onChange(Number(newValue)) }}
+						disabled={false}
+					/>
+				</div>
+			}
 		</div>
 	);
 };

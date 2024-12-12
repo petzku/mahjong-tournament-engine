@@ -5,7 +5,8 @@ import ActionTypes from "../action-types/tournament-action-types";
 export const initialState: Tournament = {
 	info: {
 		title: "",
-		rounds: 8
+		rounds: 8,
+		startingPoints: 30000
 	},
 	playerNames: [],
 	seatingTemplate: [],

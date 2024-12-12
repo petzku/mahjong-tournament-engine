@@ -1,6 +1,7 @@
 export type GeneralInfo = {
 	title: string,
-	rounds: number
+	rounds: number,
+	startingPoints: number
 };
 
 export type PointSticks = {
