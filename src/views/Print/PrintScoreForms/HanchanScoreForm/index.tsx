@@ -26,7 +26,7 @@ const HanchanScoreForm = (props: HanchanScoreFormProps) => {
 				<tr>
 					<th className={styles.windCell}>{null}</th>
 					<th className={styles.cell}>Name</th>
-					<th className={styles.cell}>Raw</th>
+					<th className={styles.cell}>Sticks</th>
 					<th className={styles.cell}>Uma</th>
 					<th className={styles.cell}>Penalty</th>
 				</tr>
